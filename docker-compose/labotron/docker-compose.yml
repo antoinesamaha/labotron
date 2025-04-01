@@ -1,5 +1,5 @@
 services:
   labotron-web:
-    image: labotron-web-app
+    image: labotronservice
     ports:
       - "9090:80"
