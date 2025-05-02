@@ -70,6 +70,21 @@
 			<scope>compile</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.30</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.comm</groupId>
+			<artifactId>comm</artifactId>
+			<scope>system</scope>
+			<version>0.0.1-SNAPSHOT</version>
+			<systemPath>/resources/jar/comm.jar</systemPath>
+		</dependency>
+
 	</dependencies>
 
 	<build>
