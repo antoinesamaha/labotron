@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:focui/main.dart';
 
-import 'package:focui/src/settings/settings_controller.dart';
-import 'package:focui/src/settings/settings_service.dart';
-import 'package:focui/src/app.dart';
-import 'package:focui/src/auth/login_page.dart';
+import 'package:focui/src/menu/menu.dart';
+import 'package:focui/src/settings/config.dart';
 
 void main() async {
+  Config.appName = "Labotron";
+  Config.appIcon = Icons.local_hospital;
+  Config.menuItems = const [
+    Menu("Instruments", "/instruments"),
+    Menu("Test groups", "/test_groups"),
+    Menu("Entities", "/entities"),
+  ];
   neoFocMain();
   // Set up the SettingsController, which will glue user settings to multiple
   // Flutter Widgets.
