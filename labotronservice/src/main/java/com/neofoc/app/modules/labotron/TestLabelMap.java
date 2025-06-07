@@ -6,6 +6,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Entity
+@Cacheable
 @Table(name="test_label_map" )
 @Data
 public class TestLabelMap implements Serializable {

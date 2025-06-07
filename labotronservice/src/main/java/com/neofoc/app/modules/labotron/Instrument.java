@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-//@Cacheable
+@Cacheable
 @Table(name="instrument" )
 @Data
 public class Instrument implements Serializable {
