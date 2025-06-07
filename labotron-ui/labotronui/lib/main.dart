@@ -8,9 +8,11 @@ void main() async {
   Config.appName = "Labotron";
   Config.appIcon = Icons.local_hospital;
   Config.menuItems = const [
-    Menu("Instruments", "/instruments"),
-    Menu("Test groups", "/test_groups"),
-    Menu("Entities", "/entities"),
+    Menu("Pools", "/pools", "pool"),
+    Menu("Samples", "/labotron_samples", "labotron_sample"),
+    Menu("Instruments", "/instruments", "instrument"),
+    Menu("Test groups", "/test_groups", "test_group"),
+    Menu("Entities", "/entities", "Entity"),
   ];
   neoFocMain();
   // Set up the SettingsController, which will glue user settings to multiple

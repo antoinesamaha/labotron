@@ -13,7 +13,7 @@ dependencies:
   flutter:
     sdk: flutter
   http: ^1.2.0
-  flutter_form_builder: ^9.0.0
+  flutter_form_builder: ^10.0.1
   focui:
     path: ../../../neofoc/foc-ui/focui/
 
@@ -21,7 +21,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^2.0.0
+  flutter_lints: ^5.0.0
 
 flutter:
   uses-material-design: true
@@ -32,3 +32,4 @@ flutter:
   assets:
     # Add assets from the images directory to the application.
     - assets/images/
+    - assets/images/logo.png    
