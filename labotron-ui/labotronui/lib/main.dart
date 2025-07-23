@@ -8,12 +8,17 @@ void main() async {
   Config.appName = "Labotron";
   Config.appIcon = Icons.local_hospital;
   Config.menuItems = const [
-    Menu("Pools", "/pools", "pool"),
-    Menu("Samples", "/labotron_samples", "labotron_sample"),
-    Menu("Instruments", "/instruments", "instrument"),
-    Menu("Test groups", "/test_groups", "test_group"),
-    Menu("Entities", "/entities", "Entity"),
+    Menu(Icons.science, "Instruments", "/instruments", "instrument"),
+    Menu(Icons.science, "TestLabelMaps", "/test_label_maps", "test_label_map"),
+    Menu(Icons.group, "App Groups", "/app_groups", "app_group"),
+    Menu(Icons.message, "Messages", "/lab_messages", "lab_message"),
+    Menu(Icons.flutter_dash, "Samples", "/lab_samples", "lab_sample"),
+    Menu(Icons.label, "Tests", "/lab_tests", "lab_test"),
+    Menu(Icons.grade, "Groups", "/test_groups", "test_group"),
+    Menu(Icons.flag, "Entities", "/entities", "Entity"),
+    Menu(Icons.flag, "Sample Json", "/samplejson", "Sample JSON"),
   ];
+
   neoFocMain();
   // Set up the SettingsController, which will glue user settings to multiple
   // Flutter Widgets.

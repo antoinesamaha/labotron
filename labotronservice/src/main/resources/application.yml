@@ -2,7 +2,7 @@ server:
   port: 8099
 spring:
   datasource:
-    url: ${DATASOURCE_URL:jdbc:postgresql://localhost:5432/neofocapp}
+    url: ${DATASOURCE_URL:jdbc:postgresql://localhost:5432/labotron}
     username: ${DATASOURCE_USERNAME:postgres}
     password: ${DATASOURCE_PASSWORD:123456}
     

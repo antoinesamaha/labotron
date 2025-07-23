@@ -3,30 +3,46 @@ package com.neofoc.app.modules.labotron;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.io.Serializable;
-
 @Entity
 @Cacheable
-@Table(name="test_label_map" )
+@Table(name = "test_label_map")
 @Data
-public class TestLabelMap implements Serializable {
+public class TestLabelMap {
 
-	//--- ENTITY PRIMARY KEY
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	protected long       id ;
-	protected String     lisTestLabel ;
-	protected String     instrumentTestCode ;
-	protected String     descrip ;
-	protected Integer    dayPriority ;
-	protected Integer    nightPriority ;
-	protected Integer    holidayPriority ;
-	protected Boolean    calculated ;
-	protected Boolean    onHold ;
+	private Integer id;
 
-	@ManyToOne
-	protected TestGroup  testGroup ;
+	@Column(nullable = false, length = 30)
+	private String lisTestLabel;
 
-	@ManyToOne
-	protected Instrument instrument ;
+	@Column(nullable = false, length = 15)
+	private String instrumentTestCode;
+
+	@Column(nullable = false, length = 25)
+	private String descrip;
+
+	@ManyToOne(optional = false)
+	@JoinColumn(nullable = false)
+	private Instrument instrument;
+
+	@Column(nullable = false)
+	private Integer dayPriority;
+
+	@Column(nullable = false)
+	private Integer nightPriority;
+
+	@Column(nullable = false)
+	private Integer holidayPriority;
+
+	@Column(nullable = false)
+	private Integer calculated;
+
+	@Column(nullable = false)
+	private Integer onHold;
+
+	@ManyToOne(optional = false)
+	@JoinColumn(nullable = false)
+	private TestGroup testGroup;
+
 }
