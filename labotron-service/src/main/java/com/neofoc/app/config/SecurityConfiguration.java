@@ -32,6 +32,7 @@ public class SecurityConfiguration {
         FilterRegistrationBean<JwtAuthenticationFilter> registrationBean = new FilterRegistrationBean<>();
         registrationBean.setFilter(new JwtAuthenticationFilter());
         registrationBean.addUrlPatterns("/foc/obj/**");
+        registrationBean.addUrlPatterns("/api/**");
         registrationBean.setOrder(1);
         registrationBean.setName("JwtAuthenticationFilter");
 
@@ -43,6 +44,12 @@ public class SecurityConfiguration {
 
     public void configure(HttpSecurity httpSecurity, MvcRequestMatcher.Builder mvc) throws Exception {
         httpSecurity
+                .csrf(csrf -> csrf
+                                // either fully disable:
+                                .disable()
+                        // OR ignore only specific endpoints:
+                        // .ignoringRequestMatchers(new AntPathRequestMatcher("/foc/auth/**"))
+                )
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 mvc.pattern("/v2/api-docs"),
@@ -55,7 +62,8 @@ public class SecurityConfiguration {
                                 mvc.pattern("/foc/auth/login"),
                                 mvc.pattern("/meta/entities"),
                                 //ALERT: Activate that filter to enable JWT authentication
-                                mvc.pattern("/foc/obj/**")
+                                mvc.pattern("/foc/obj/**"),
+                                mvc.pattern("/api/**")
 //                                mvc.pattern("/swagger-ui.html"),
 //                                mvc.pattern("/swagger-ui/**"),
 //                                mvc.pattern("/webjars/**"),
@@ -79,10 +87,9 @@ public class SecurityConfiguration {
 //                                mvc.pattern("/application-settings"),
 //                                mvc.pattern(Constants.NOTIFICATION_ENDPOINT)
 //                        ).permitAll()
-                        .requestMatchers(
-//                                mvc.pattern("/api/gamailDocuments/**"),
-                                mvc.pattern("/XXX/foc/obj/**")
-                        ).authenticated()
+//                        .requestMatchers(
+//                                mvc.pattern("/XXX/foc/obj/**")
+//                        ).authenticated()
                 );
     }
 

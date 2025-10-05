@@ -14,11 +14,12 @@ import com.foc.property.FBoolean;
 import com.foc.property.FDouble;
 import com.foc.property.FString;
 import com.foc.util.FocMath;
+import com.neofoc.app.modules.labotron.LabTest_FocObject;
 
 /**
  * @author 01Barmaja
  */
-public class FocLabTest extends FocObject {
+public class FocLabTest extends LabTest_FocObject {
 
 	public static final String TABLE_NAME          = "L3TEST"     ;
 
@@ -64,7 +65,7 @@ public class FocLabTest extends FocObject {
 	public static final double VALUE_NULL = -99999;
 
 	public FocLabTest(String label) {
-		this(new FocConstructor(Globals.getApp().getFocDescByName("FocLabTest"), null, null));
+		this(new FocConstructor(Globals.getApp().getFocDescByName("lab_test"), null, null));
 		newFocProperties();
 		initFocProperties(label);
 	}
@@ -100,6 +101,7 @@ public class FocLabTest extends FocObject {
 	}
 
 	public int getStatus() {
+		super.getStatus();
 		//return getPropertyMultiChoice("status");
 		return -1; // TODO: Implement this method properly
 	}

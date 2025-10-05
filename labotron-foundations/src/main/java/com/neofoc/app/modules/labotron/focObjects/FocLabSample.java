@@ -47,13 +47,13 @@ public class FocLabSample extends FocObject {
     private String tubePosition = "";
 
     private void initFocProperties(String id) {
-        setPropertyString("id", id);
-        setPropertyMultiChoice("liquid_type", -1);
+        setPropertyString("sample_id", id);
+        setPropertyInteger("liquide_type", -1);
         setPropertyDate("entry_date", Globals.getApp().getSystemDate());
     }
 
     public FocLabSample(String id) {
-        this(new FocConstructor(Globals.getApp().getFocDescByName("FocLabSample"), null, null));
+        this(new FocConstructor(Globals.getApp().getFocDescByName("lab_sample"), null, null));
         newFocProperties();
         initFocProperties(id);
         setEntryDate(Globals.getApp().getSystemDate());
@@ -118,8 +118,16 @@ public class FocLabSample extends FocObject {
         return getPropertyList("test_list");
     }
 
+    public String getSampleId(){
+        return getPropertyString("sample_id");
+    }
+
+    public void setSampleId(String sampleId){
+        setPropertyString("sample_id", sampleId);
+    }
+
     public FocList getTestList() {
-        FList list = (FList) getFocPropertyByName("test_list");
+        FList list = (FList) getFocPropertyByName("lab_test_LIST");
         FocList focList = (list != null) ? list.getList() : null;
         if (focList != null) {
             focList.loadIfNotLoadedFromDB();
@@ -146,6 +154,7 @@ public class FocLabSample extends FocObject {
         FocList focList = getTestList();
         if (focList != null) {
             test = (FocLabTest) focList.newEmptyItem();
+            focList.add(test);
         }
         return test;
     }
@@ -370,12 +379,12 @@ public class FocLabSample extends FocObject {
     }
 
     public int getLiquidType() {
-        FMultipleChoice liqType = (FMultipleChoice) getFocPropertyByName("liquid_type");
+        FInt liqType = (FInt) getFocPropertyByName("liquide_type");
         return (liqType != null) ? liqType.getInteger() : null;
     }
 
     public void setLiquidType(int liquidType) {
-        FInt liqType = (FInt) getFocPropertyByName("liquid_type");
+        FInt liqType = (FInt) getFocPropertyByName("liquide_type");
         if (liqType != null) {
             liqType.setInteger(liquidType);
         }

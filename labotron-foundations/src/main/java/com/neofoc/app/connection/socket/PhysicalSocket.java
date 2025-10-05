@@ -29,6 +29,11 @@ public class PhysicalSocket extends BServer {
         }
     }
 
+    // Add to PhysicalSocket class
+    public boolean isConnected() {
+        return clientSocket != null && clientSocket.isConnected() && !clientSocket.isClosed();
+    }
+
     @Override
     public boolean openSocket() {
         boolean error = super.openSocket();

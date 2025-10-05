@@ -49,6 +49,10 @@ public class L3SerialPort {
         }
     }
 
+    public boolean isConnected() {
+        return serialPort != null && serialPort.isConnected();
+    }
+
     public boolean isSynchronousMessage() {
         return synchronousMessage;
     }

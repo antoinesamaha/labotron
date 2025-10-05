@@ -40,7 +40,7 @@ public class AstmDriver extends DriverSerialPort {
 	 */
 	public void init(FocInstrument instrument, Properties props) throws Exception {
 		if (L3ConfigInfo.getDebugMode()) {
-			Globals.getDisplayManager().popupMessage("01BARMAJA you are in Debug MODE !!!!");
+			Globals.logString("Debug MODE Active");
 			// RESPONSE_TIMEOUT = 1000 * 60 * 5 ;
 		}
 		initDriverReceiver();
@@ -56,7 +56,7 @@ public class AstmDriver extends DriverSerialPort {
 	public AstmParams getAstmParams() {
 		return astmParams;
 	}
-	
+
 	@Override
 	protected boolean releaseWhenReceiveENQ(){
 		return getAstmParams().isReleaseWhenReceivedENQ() && !getL3SerialPort().isSynchronousMessage();

@@ -15,6 +15,8 @@ public interface SerialPortInterface {
 
     void closeConnection();
 
+    boolean isConnected();
+
     boolean isSerialPortNull();
 
     void addEventListener(SerialPortEventListener serialPortListener) throws Exception;

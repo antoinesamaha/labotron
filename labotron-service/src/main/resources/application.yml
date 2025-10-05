@@ -22,6 +22,12 @@ spring:
       org:
         hibernate:
     show-sql: true
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
 app:
   name: SiVis
 security:
@@ -29,6 +35,13 @@ security:
     enabled: false   
 management:
   security:
-    enabled: false  
+    enabled: false
+
+labotron:
+  connector:
+    enabled: true
+    lis-2-labotron-queue: lis-2-labotron
+    labotron-2-lis-queue: labotron-2-lis
+
 
   

@@ -7,7 +7,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.neofoc.app", "com.neofoc.springboot", "com.neofoc.app.modules.labotron"})
+@ComponentScan(basePackages = {"com.neofoc.app", "com.neofoc.app.controller", "com.neofoc.springboot", "com.neofoc.app.modules.labotron"})
 public class LabotronApplication extends SpringBootServletInitializer {
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {

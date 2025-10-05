@@ -200,15 +200,15 @@ public class AstmReceiver implements L3SerialPortListener {
 
 		Globals.logDebug("- Parsed sample ID : " + orderLineReader.getSampleId());
 		if (sample != null) {
-			Globals.logDebug("- Current sample ID : " + sample.getId());
+			Globals.logDebug("- Current sample ID : " + sample.getSampleId());
 
 			// if(sample != null && sample.getId() != null &&
 			// orderLineReader.getSampleId() != null ){
-			if (sample.getId().compareTo(orderLineReader.getSampleId()) != 0) {
+			if (sample.getSampleId().compareTo(orderLineReader.getSampleId()) != 0) {
 				sample = null;
 				sample = message.findSample(orderLineReader.getSampleId());
 				if (sample != null) {
-					Globals.logDebug("- Found sample ID : " + sample.getId());
+					Globals.logDebug("- Found sample ID : " + sample.getSampleId());
 				} else {
 					Globals.logDebug("- sample ID Not Found ");
 				}

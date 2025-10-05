@@ -34,6 +34,14 @@ public class SocketPort implements SerialPortInterface {
         return physicalSocket;
     }
 
+    public boolean isConnected() {
+        if (physicalSocket == null) {
+            return false;
+        }
+
+        return physicalSocket.isConnected();
+    }
+
     public PhysicalSocket getPhysicalSocketReceiPhysicalSocket() {
         return physicalSocketReceptionOnly;
     }

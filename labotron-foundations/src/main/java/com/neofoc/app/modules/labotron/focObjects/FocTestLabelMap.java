@@ -96,11 +96,11 @@ public class FocTestLabelMap extends FocObject {
     // oooooooooooooooooooooooooooooooooo
 
     public String getLisTestLabel() {
-        return getPropertyString("list_test_label");
+        return getPropertyString("lis_test_label");
     }
 
     public void setLisTestLabel(String name) {
-        setPropertyString("list_test_label", name);
+        setPropertyString("lis_test_label", name);
     }
 
     public FocInstrument getInstrument() {

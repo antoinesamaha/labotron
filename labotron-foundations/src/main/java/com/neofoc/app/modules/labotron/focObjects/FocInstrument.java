@@ -4,6 +4,7 @@ import com.foc.ConfigInfo;
 import com.foc.Globals;
 import com.foc.IExitListener;
 import com.foc.desc.FocConstructor;
+import com.foc.desc.FocDesc;
 import com.foc.desc.FocObjectGeneral;
 import com.foc.list.FocLinkForeignKey;
 import com.foc.list.FocList;
@@ -13,6 +14,8 @@ import com.neofoc.app.driver.IDriver;
 import com.neofoc.app.driver.MessageListener;
 import com.neofoc.app.exceptions.L3Exception;
 import com.neofoc.app.modules.labotron.TestLabelMap;
+import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 
 import javax.comm.SerialPort;
 import java.awt.*;
@@ -161,7 +164,7 @@ public class FocInstrument extends FocObjectGeneral implements Runnable, Message
 //                in.close();
 //            }
             tempProperties.put("serialPort.name",
-                    getPropertyString("serial_port_name"));
+                    getPropertyString("com_port"));
 
 //            FMultipleChoice multiProp = (FMultipleChoice) getFocProperty(InstrumentDesc.FLD_SERIAL_BAUDE_RATE);
 //            tempProperties.put("serialPort.baudrate", multiProp.getString());
@@ -582,20 +585,24 @@ public class FocInstrument extends FocObjectGeneral implements Runnable, Message
     public IDriver getDriver() throws Exception {
         if (driver == null) {
             String driverClassName = getPropertyString("driver_class_name");
-            Class driverClass = (Class) (DriverFactory.getInstance()
-                    .getDriver(driverClassName));
-            if (driverClass == null) {
-                throw new L3Exception("Driver not found. Driver class name = ("
-                        + driverClassName + ")");
+
+            // Direct instantiation using reflection
+            try {
+                // Load the class using the class name
+                Class<?> driverClass = Class.forName(driverClassName);
+
+                // Create a new instance of the class
+                IDriver tempDriver = (IDriver) driverClass.getDeclaredConstructor().newInstance();
+
+                if (tempDriver != null) {
+                    tempDriver.init(this, getProperties());
+                    driver = tempDriver;
+                }
+            } catch (ClassNotFoundException e) {
+                throw new Exception("Driver class not found: " + driverClassName, e);
+            } catch (Exception e) {
+                throw new Exception("Failed to instantiate driver: " + driverClassName, e);
             }
-            // The TempDriver is very important
-            // In case an exception occures before the end of that function,
-            // the driver would still = null, and this is what we want.
-            IDriver tempDriver = (IDriver) driverClass.newInstance();
-            if (tempDriver != null) {
-                tempDriver.init(this, getProperties());
-            }
-            driver = tempDriver;
         }
         return driver;
     }
@@ -629,17 +636,17 @@ public class FocInstrument extends FocObjectGeneral implements Runnable, Message
 //    }
 
     public FocList getSupportedTestList() {
-//        if (supportedTestList == null) {
-//            FocLinkForeignKey link = new FocLinkForeignKey(
-//                    Globals.getApp().getFocDescByName("TestLabelMap"), TestLabelMapDesc.FLD_INSTRUMENT,
-//                    true);
-//            supportedTestList = new FocList(this, link, null);
-//            supportedTestList.setFatherSubject(this);
-//        }
-//        supportedTestList.loadIfNotLoadedFromDB();
-//
-//        return supportedTestList;
-        return null;
+        if (supportedTestList == null) {
+            FocDesc slaveDesc = Globals.getApp().getFocDescByName("test_label_map");
+            int fieldId = slaveDesc.getFieldIDByName("instrument");
+            FocLinkForeignKey link = new FocLinkForeignKey(
+                    Globals.getApp().getFocDescByName("test_label_map"), fieldId, true);
+            supportedTestList = new FocList(this, link, null);
+            supportedTestList.setFatherSubject(this);
+        }
+        supportedTestList.loadIfNotLoadedFromDB();
+
+        return supportedTestList;
     }
 
     // For archive
@@ -657,4 +664,17 @@ public class FocInstrument extends FocObjectGeneral implements Runnable, Message
         }
     }
 
+
+
+    // -----------------------------------------------------------------
+    // -----------------------------------------------------------------
+    // -----------------------------------------------------------------
+
+//    private SimpleMessageListenerContainer container;
+//    private final ConnectionFactory connectionFactory;
+//
+//    public void switchOn() throws Exception {
+//
+//    }
 }
+

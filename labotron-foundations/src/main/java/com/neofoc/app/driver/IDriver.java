@@ -22,6 +22,8 @@ public interface IDriver {
 
     void connect() throws Exception;
 
+    boolean isConnected();
+
     void disconnect();
 
     void send(L3Message message) throws Exception;

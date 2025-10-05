@@ -110,6 +110,10 @@ public abstract class DriverSerialPort extends Driver {
 		}
 	}
 
+	public boolean isConnected() {
+		return l3SerialPort != null && l3SerialPort.isConnected();
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 

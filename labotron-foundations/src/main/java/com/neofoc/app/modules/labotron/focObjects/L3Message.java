@@ -7,64 +7,62 @@ import java.util.Iterator;
 
 public class L3Message {
 	private String instrumentCode = null;
-//	private ArrayList<LabSample> sampleList = null;
+	private ArrayList<FocLabSample> sampleList = null;
 
 	public L3Message() {
 
 	}
 
 	public void dispose() {
-//		if (sampleList != null) {
-//			Iterator iter = sampleIterator();
-//			while (iter != null && iter.hasNext()) {
-//				LabSample sam = (LabSample) iter.next();
-//				sam.dispose();
-//			}
-//			sampleList.clear();
-//			sampleList = null;
-//		}
+		if (sampleList != null) {
+			Iterator iter = sampleIterator();
+			while (iter != null && iter.hasNext()) {
+				FocLabSample sam = (FocLabSample) iter.next();
+				sam.dispose();
+			}
+			sampleList.clear();
+			sampleList = null;
+		}
 	}
 
 	public void addSample(FocLabSample sam) {// set the status of the sample to
 											// available in db
-//		if (sampleList == null) {
-//			sampleList = new ArrayList<LabSample>();
-//		}
-//		sampleList.add(sam);
+		if (sampleList == null) {
+			sampleList = new ArrayList<FocLabSample>();
+		}
+		sampleList.add(sam);
 	}
 
 	public void removeSample(LabSample sam) {
-//		if (sampleList != null) {
-//			sampleList.remove(sam);
-//		}
+		if (sampleList != null) {
+			sampleList.remove(sam);
+		}
 	}
 
 	public int getNumberOfSamples() {
-//		return sampleList != null ? sampleList.size() : 0;
-		return 0;
+		return sampleList != null ? sampleList.size() : 0;
 	}
 
-	public Iterator<LabSample> sampleIterator() {
-//		return sampleList != null ? sampleList.iterator() : null;
-		return null;
+	public Iterator<FocLabSample> sampleIterator() {
+		return sampleList != null ? sampleList.iterator() : null;
 	}
 
 	public FocLabSample getSample(int position) {
 		FocLabSample sample = null;
-//		if (sampleList != null && position < getNumberOfSamples()) {
-//			sample = sampleList.get(position);
-//		}
+		if (sampleList != null && position < getNumberOfSamples()) {
+			sample = sampleList.get(position);
+		}
 		return sample;
 	}
 
 	public FocLabSample findSample(String sampleID) {
 		FocLabSample sample = null;
-//		for (int i = 0; i < getNumberOfSamples() && sample == null; i++) {
-//			LabSample spl = getSample(i);
-//			if (spl != null && spl.getId().compareTo(sampleID) == 0) {
-//				sample = spl;
-//			}
-//		}
+		for (int i = 0; i < getNumberOfSamples() && sample == null; i++) {
+			FocLabSample spl = getSample(i);
+			if (spl != null && spl.getId().compareTo(sampleID) == 0) {
+				sample = spl;
+			}
+		}
 		return sample;
 	}
 
@@ -203,11 +201,11 @@ public class L3Message {
 		StringBuffer buffer = new StringBuffer();
 
 		buffer.append("Message:");
-//		Iterator sIter = sampleIterator();
-//		while (sIter != null && sIter.hasNext()) {
-//			FocLabSample sam = (FocLabSample) sIter.next();
-//			buffer.append(sam.toStringBuffer());
-//		}
+		Iterator sIter = sampleIterator();
+		while (sIter != null && sIter.hasNext()) {
+			FocLabSample sam = (FocLabSample) sIter.next();
+			buffer.append(sam.toStringBuffer());
+		}
 
 		return buffer;
 	}

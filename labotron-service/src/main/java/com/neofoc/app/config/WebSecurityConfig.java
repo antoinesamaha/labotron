@@ -11,6 +11,10 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.security.web.context.SecurityContextHolderFilter;
+import org.springframework.security.web.debug.DebugFilter;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -18,6 +22,8 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = false)
 public class WebSecurityConfig {
+
+    private static final Logger logger = LoggerFactory.getLogger(WebSecurityConfig.class);
 
     @Autowired
     SecurityConfiguration securityConfig;
@@ -28,22 +34,26 @@ public class WebSecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity,MvcRequestMatcher.Builder mvc) throws Exception{
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity, MvcRequestMatcher.Builder mvc) throws Exception {
+        logger.info("Configuring security filter chain");
+
         // Enable CORS and disable CSRF
-        httpSecurity = httpSecurity.cors(withDefaults()).csrf(csrf -> csrf.disable());
+        httpSecurity = httpSecurity
+                .cors(withDefaults())
+                .csrf(csrf -> csrf.disable());
 
         // Set session management to stateless
         httpSecurity = httpSecurity
                 .sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
-        securityConfig.configure(httpSecurity, mvc);
-        // httpSecurity.anonymous(an->an.disable());
-        // Add JWT token filter
-//        httpSecurity.addFilterBefore(gamailAuthFilter, UsernamePasswordAuthenticationFilter.class);
-//        httpSecurity.addFilterAfter(profileCheckFilter, GamailAuthFilter.class);
+        // Explicitly permit the login endpoint before other configurations
+        httpSecurity.authorizeHttpRequests(auth -> auth
+                .requestMatchers(mvc.pattern("/foc/auth/login")).permitAll());
 
-        //ALERT: Activate that filter to enable JWT authentication
-//        httpSecurity.addFilter(jwtAuthenticationFilter);
+        // Apply remaining configuration
+        securityConfig.configure(httpSecurity, mvc);
+
+        logger.info("Security filter chain configured successfully");
         return httpSecurity.build();
     }
 }
