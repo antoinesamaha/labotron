@@ -1,12 +1,8 @@
 package com.neofoc.app.controller;
 
-import com.foc.Globals;
 import com.foc.desc.FocDesc;
 import com.foc.list.FocList;
-import com.neofoc.app.model.dto.InstrumentStartDTO;
 import com.neofoc.app.modules.labotron.focObjects.FocInstrument;
-import com.neofoc.app.service.InstrumentReceiverListener;
-import com.neofoc.app.service.RabbitMQListenerService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -21,30 +17,49 @@ import java.io.IOException;
 @Slf4j
 public class InstrumentController {
 
-    private final RabbitMQListenerService rabbitMQListenerService;
-
-    public InstrumentController(RabbitMQListenerService rabbitMQListenerService) {
-        this.rabbitMQListenerService = rabbitMQListenerService;
+    public InstrumentController() {
     }
 
-    @PostMapping("start")
-    protected ResponseEntity<String> doPost(HttpServletRequest request, @RequestBody InstrumentStartDTO instrumentStartDTO)
+    @PostMapping("refreshStartedFlag")
+    protected ResponseEntity<String> refreshStartedFlag(HttpServletRequest request)
             throws ServletException, IOException {
 
-        long instrumentId = instrumentStartDTO.getInstrumentId();
-        FocDesc focDesc = Globals.getApp().getFocDescByName("instrument");
+        FocInstrument.refreshStartedFlagForAllInstruments();
+
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("{instrumentId}/start")
+    protected ResponseEntity<String> start(HttpServletRequest request, @PathVariable long instrumentId)
+            throws ServletException, IOException {
+
+        FocDesc focDesc = FocInstrument.getFocDesc();
         FocList list = focDesc.getFocList();
         FocInstrument instrument = (FocInstrument) list.searchByReference(instrumentId);
 
         try {
-            instrument.getDriver();// To create the driver if not available yet
-            rabbitMQListenerService.startInstrumentListener(instrument);
-            instrument.addMessageListener(new InstrumentReceiverListener(instrument));
-            instrument.getDriver().connect();
+            instrument.switchOn();
         } catch (Exception e) {
             log.error("Error starting instrument driver connect and RabbitMQ listener: {}", e.getMessage(), e);
         }
 
-        return ResponseEntity.ok().build();
+        return instrument != null && instrument.getStarted() ? ResponseEntity.ok().build() : ResponseEntity.status(500).body("Failed to connect to instrument");
+    }
+
+    @PostMapping("{instrumentId}/stop")
+    protected ResponseEntity<String> stop(HttpServletRequest request, @PathVariable long instrumentId)
+            throws ServletException, IOException {
+
+        FocDesc focDesc = FocInstrument.getFocDesc();
+        FocList list = focDesc.getFocList();
+        FocInstrument instrument = (FocInstrument) list.searchByReference(instrumentId);
+
+        try {
+            instrument.switchOff();
+        } catch (Exception e) {
+            log.error("Error starting instrument driver connect and RabbitMQ listener: {}", e.getMessage(), e);
+        }
+
+        return instrument != null && !instrument.getStarted() ? ResponseEntity.ok().build() : ResponseEntity.status(500).body("Failed to connect to instrument");
     }
 }

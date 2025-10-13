@@ -1,11 +1,14 @@
 package com.neofoc.app.service.impl;
 
 import com.foc.Globals;
+import com.foc.desc.FocConstructor;
 import com.foc.desc.FocDesc;
 import com.foc.list.FocList;
 import com.neofoc.app.model.dto.SampleFromLisDTO;
 import com.neofoc.app.model.dto.TestFromLisDTO;
 import com.neofoc.app.modules.labotron.focObjects.FocInstrument;
+import com.neofoc.app.modules.labotron.focObjects.FocLabSample;
+import com.neofoc.app.modules.labotron.focObjects.FocLabTest;
 import com.neofoc.app.modules.labotron.focObjects.FocTestLabelMap;
 import com.neofoc.app.service.CommunicationLogService;
 import com.neofoc.app.service.ConnectorService;
@@ -14,6 +17,10 @@ import com.neofoc.app.service.RabbitMQSendingService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -84,6 +91,7 @@ public class ConnectorServiceImpl implements ConnectorService {
             log.info("Instrument {} has {} tests", entry.getKey(), entry.getValue().getTests().size());
         }
 
+        saveToDB(instrumentToSampleMap);
         sendToDrivers(instrumentToSampleMap);
     }
 
@@ -109,4 +117,54 @@ public class ConnectorServiceImpl implements ConnectorService {
         }
     }
 
+    public void saveToDB(HashMap<String, SampleFromLisDTO> instrumentToSampleMap) {
+        FocList instrumentList = FocInstrument.getFocDesc().getFocList();
+
+        FocLabSample labSample = new FocLabSample(new FocConstructor(Globals.getApp().getFocDescByName("lab_sample")));
+        labSample.setCreated(true);
+        boolean sampleInitialised = false;
+        // Implement database saving logic here
+        for (Map.Entry<String, SampleFromLisDTO> entry : instrumentToSampleMap.entrySet()) {
+            String instrumentCode = entry.getKey();
+            SampleFromLisDTO sampleForInstrument = entry.getValue();
+
+            if (!sampleInitialised) {
+                labSample.setSampleId(sampleForInstrument.getSampleId());
+                labSample.setLiquidType(sampleForInstrument.getSampleType());
+                labSample.setPatientId(sampleForInstrument.getPatientId());
+                labSample.setFirstName(sampleForInstrument.getFirstName());
+                labSample.setLastName(sampleForInstrument.getLastName());
+                labSample.setMiddleName(sampleForInstrument.getMiddleInitial());
+                labSample.setDateOfBirth(sampleForInstrument.getDateOfBirth());
+                labSample.setSex(sampleForInstrument.getSex());
+                labSample.setEntryDateTime(sampleForInstrument.getCollectionDate());
+                labSample.setOrigin(sampleForInstrument.getOrigin());
+                sampleInitialised = true;
+            }
+
+            FocList testList = labSample.getTestList();
+            for (TestFromLisDTO testFromLis : sampleForInstrument.getTests()) {
+                FocLabTest focLabTest = (FocLabTest) testList.newEmptyItem();
+                focLabTest.setCreated(true);
+                focLabTest.setLabel(testFromLis.getTestCode());
+                //focLabTest.setLabSample(labSample);
+                focLabTest.setDescrip(testFromLis.getTestDesc());
+
+                FocInstrument instrument = (FocInstrument) instrumentList.searchByPropertyStringValue("code", testFromLis.getInstrumentCode());
+                //focLabTest.setDispatchInstrument(instrument);
+                focLabTest.setStatus(FocLabTest.TEST_STATUS_AVAILABLE_IN_L3);
+                focLabTest.setValue(0);
+                focLabTest.setUnitLabel("");
+                focLabTest.setNotes("");
+                testList.add(focLabTest);
+            }
+
+            // Here you would implement the actual DB saving logic
+            log.info("Saving sample ID {} with {} tests for instrument {} to the database", sampleForInstrument.getSampleId(), sampleForInstrument.getTests().size(), instrumentCode);
+
+            // For demonstration, we just log the action
+            // In a real implementation, you would call the appropriate DAO/service method to save the data
+        }
+        labSample.validate(true);
+    }
 }

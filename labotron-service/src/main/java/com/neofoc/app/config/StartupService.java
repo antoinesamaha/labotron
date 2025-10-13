@@ -1,5 +1,7 @@
 package com.neofoc.app.config;
 
+import com.foc.desc.FocDesc;
+import com.neofoc.app.modules.labotron.focObjects.FocInstrument;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
@@ -20,6 +22,8 @@ public class StartupService {//} implements ApplicationRunner {
     @Order(2)
     public void runAfterStartup() {
         rabbitAdmin.createInstrumentQueues();
+        FocInstrument.applyStartedFlagForAllInstruments();
+//        FocInstrument.refreshStartedFlagForAllInstruments();
     }
 
 }

@@ -8,7 +8,7 @@ import com.neofoc.app.modules.labotron.focObjects.FocLabSample;
 import com.neofoc.app.modules.labotron.focObjects.FocLabTest;
 import com.neofoc.app.modules.labotron.focObjects.L3Message;
 
-import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 
 public class CobasInfinityFrameCreator extends Cobas501FrameCreator {
@@ -66,7 +66,7 @@ public class CobasInfinityFrameCreator extends Cobas501FrameCreator {
 				//20160129-E
 				
 				//E-PatientID-20151123
-				if (sam.getSexe().compareTo("F") == 0) {
+				if (sam.getSex().compareTo("F") == 0) {
 					frame.append2Data("F||||||");
 				} else {
 					frame.append2Data("M||||||");
@@ -74,8 +74,8 @@ public class CobasInfinityFrameCreator extends Cobas501FrameCreator {
 
 				//Putting the DOB not the AGE
 				if(sam.getDateOfBirth() != null){
-					SimpleDateFormat sdfDOB = new SimpleDateFormat("yyyyMMdd");
-					String dobString = sdfDOB.format(sam.getDateOfBirth());
+					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+					String dobString = sam.getDateOfBirth().format(formatter);
 					frame.append2Data(dobString);
 				}
 				//---------------------------
@@ -158,14 +158,13 @@ public class CobasInfinityFrameCreator extends Cobas501FrameCreator {
 				frame.append2Data(priority);//R or S
 				frame.append2Data("||");
 
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-				if (sam.getEntryDate().getTime() < 24 * 60 * 60 * 1000) {
+				DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+				if (sam.getEntryDateTime().getYear() == 1970) {
 					Globals.logString("!!!!!!!!!    Entry date < 1 day    !!!!!!!!!!!"
-							+ sam.getEntryDate().getTime());
-					frame.append2Data(sdf.format(Globals.getApp()
-							.getSystemDate()));
+							+ sam.getEntryDateTime());
+					frame.append2Data(dateTimeFormatter.format(Globals.getApp().getSystemDate().toLocalDate().atStartOfDay()));
 				} else {
-					frame.append2Data(sdf.format(sam.getEntryDate()));
+					frame.append2Data(sam.getEntryDateTime().format(dateTimeFormatter));
 				}
 
 				frame.append2Data("|");

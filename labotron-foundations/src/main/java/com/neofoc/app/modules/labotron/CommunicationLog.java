@@ -35,16 +35,6 @@ public class CommunicationLog {
 
     @Column(nullable = false, length = 200)
     private Integer communicationPoint;
-    /*
-1: Received LIS 2 Connector
-2: Sent Connector 2 Driver
-3: Received Connector 2 Driver
-4: Sent Driver Instrument
-5- Received Instrument Driver
-6- Sent Driver Connector
-7- Received Driver Connector
-8- Sent Connector 2 LIS
-     */
 
     @Column(nullable = false, length = 50)
     private String direction; // Received, Sent

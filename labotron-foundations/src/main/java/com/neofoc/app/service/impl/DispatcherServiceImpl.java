@@ -125,7 +125,7 @@ public class DispatcherServiceImpl implements DispatcherService {
 
         if (suggestedInstrumentCode != null) {
             testMap = oneTestDispatcher.findTestLabelMapForInstrument(suggestedInstrumentCode);
-            if (testMap != null && !testMap.getInstrument().isOnHold()) {
+            if (testMap != null && !testMap.getInstrument().getOnHold()) {
                 return testMap;
             }
         }

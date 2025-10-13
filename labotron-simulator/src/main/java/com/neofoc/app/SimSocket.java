@@ -1,9 +1,7 @@
 package com.neofoc.app;
 
-import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -12,21 +10,41 @@ public class SimSocket {
 
     String host = "localhost";
     int port = 12345;         // Replace with the target port
+    boolean connected = false;
 
+    SimulatorMain sim;
     Socket socket;
 
-    SimSocket(int port) {
+    SimSocket(SimulatorMain sim, int port) {
         this.port = port;
-        open();
+        this.sim = sim;
     }
 
     public void open() {
-        try {
-            socket = new Socket(host, port);
-        } catch (Exception e) {
-            System.out.println("Error opening socket: " + e.getMessage());
-            e.printStackTrace();
-        }
+        new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                // Keep trying to connect every 2 seconds until successful and change the phase
+                //while (sim.phase.compareTo(Phase.OPENING_SOCKET) <= 0) {
+                while (true) {
+                    try {
+                        //if (!connected) {
+                        if (!connected || socket == null || !socket.isConnected()) {
+                            socket = new Socket(host, port);
+                            connected = true;
+                            sim.phase = Phase.RECEIVING_SAMPLES;
+                        }
+                    } catch (Exception e) {
+                        connected = false;
+                        System.out.println("Error opening socket: " + e.getMessage());
+                        e.printStackTrace();
+                    }
+
+                    sim.sleep(2000);
+                }
+            }
+        }).start();
     }
 
     public void send(String message) {
@@ -37,6 +55,7 @@ public class SimSocket {
             writer.flush(); // Ensure the data is sent immediately
             System.out.println("Message sent: " + message);
         } catch (Exception e) {
+            connected = false;
             e.printStackTrace();
         }
     }
@@ -68,6 +87,7 @@ public class SimSocket {
             }
             return message;
         } catch (Exception e) {
+            connected = false;
             System.out.println("Error receiving message: " + e.getMessage());
             e.printStackTrace();
             return null;

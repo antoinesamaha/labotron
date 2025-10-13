@@ -23,12 +23,18 @@ public class RabbitMQSendingService {
     private final CommunicationLogService communicationLogService;
     private final RabbitMQConfig rabbitMQConfig;
 
-    public void sendToLis(String message) {
-        rabbitTemplate.convertAndSend(rabbitMQConfig.send2LisQueue().getName(), message);
+    public void sendToLis(String sampleId, String message) {
+        rabbitTemplate.convertAndSend(rabbitMQConfig.getConnector2LisQueue().getName(), message);
+        communicationLogService.log(CommunicationLogService.SENT_CONNECTOR_2_LIS, null, null, sampleId, message);
+    }
+
+    public void sendToConnector(String sampleId, String message) {
+        rabbitTemplate.convertAndSend(rabbitMQConfig.getDriver2ConnectorQueue().getName(), message);
+        communicationLogService.log(CommunicationLogService.SENT_DRIVER_2_CONNECTOR, null, null, sampleId, message);
     }
 
     public void sendToDriver(FocInstrument instrument, String instrumentCode, String sampleId, Object message) throws Exception {
-        Queue queue = labotronRabbitAdmin.getSendingQueueForInstrument(instrumentCode);
+        Queue queue = labotronRabbitAdmin.getDriver2InstrumentQueue(instrumentCode);
         String json = objectMapper.writeValueAsString(message);
         String msgId = UUID.randomUUID().toString();
 

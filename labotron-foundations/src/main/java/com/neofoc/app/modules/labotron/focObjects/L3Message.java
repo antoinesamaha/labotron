@@ -59,7 +59,7 @@ public class L3Message {
 		FocLabSample sample = null;
 		for (int i = 0; i < getNumberOfSamples() && sample == null; i++) {
 			FocLabSample spl = getSample(i);
-			if (spl != null && spl.getId().compareTo(sampleID) == 0) {
+			if (spl != null && spl.getSampleId().compareTo(sampleID) == 0) {
 				sample = spl;
 			}
 		}

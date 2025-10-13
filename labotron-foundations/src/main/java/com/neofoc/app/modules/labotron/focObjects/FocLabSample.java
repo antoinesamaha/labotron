@@ -5,21 +5,27 @@ import com.foc.db.SQLFilter;
 import com.foc.desc.FocConstructor;
 import com.foc.desc.FocDesc;
 import com.foc.desc.FocObject;
+import com.foc.focDataSourceDB.db.SQLSelectExistance;
+import com.foc.focDataSourceDB.db.SQLSelectFindReferenceForWhereExpression;
 import com.foc.gui.FPanel;
+import com.foc.list.FocLinkSimple;
 import com.foc.list.FocList;
 import com.foc.list.FocListElement;
 import com.foc.list.FocListIterator;
 import com.foc.property.*;
+import com.neofoc.app.modules.labotron.LabSample_FocObject;
 
 import java.awt.*;
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Iterator;
 
 /**
  * @author 01Barmaja
  */
-public class FocLabSample extends FocObject {
+public class FocLabSample extends LabSample_FocObject {
     public static final int LIQUID_TYPE_EMPTY = -1;
     public static final int LIQUID_TYPE_SERUM = 1;
     public static final int LIQUID_TYPE_URIN = 2;
@@ -47,23 +53,20 @@ public class FocLabSample extends FocObject {
     private String tubePosition = "";
 
     private void initFocProperties(String id) {
-        setPropertyString("sample_id", id);
-        setPropertyInteger("liquide_type", -1);
-        setPropertyDate("entry_date", Globals.getApp().getSystemDate());
+        setSampleId(id);
+        setLiquidType(-1);
+        setEntryDateTime(LocalDateTime.now());
     }
 
     public FocLabSample(String id) {
-        this(new FocConstructor(Globals.getApp().getFocDescByName("lab_sample"), null, null));
-        newFocProperties();
+        super();
         initFocProperties(id);
-        setEntryDate(Globals.getApp().getSystemDate());
     }
 
     public FocLabSample(FocConstructor constr) {
         super(constr);
-        newFocProperties();
         initFocProperties("");
-        setEntryDate(Globals.getApp().getSystemDate());
+        setEntryDateTime(LocalDateTime.now());
     }
 
     public void dispose() {
@@ -89,29 +92,48 @@ public class FocLabSample extends FocObject {
         testList.setLoaded(true);
     }
 
-    public boolean existInDB() {
-//        SQLSelectExistance selectExistance = new SQLSelectExistance(FocLabSample.getFocDesc(), new StringBuffer(L3SampleDesc.FNAME_ID + "=" + getId()));
-//        selectExistance.execute();
-//        boolean exists = selectExistance.getExist() == SQLSelectExistance.EXIST_YES;
-//        selectExistance.dispose();
-//        return exists;
-        return false;
+    public void setLiquidType(String liquidType) {
+        switch (liquidType){
+            case LIQUID_TYPE_EMPTY_TITLE:
+                setLiquidType(LIQUID_TYPE_EMPTY);
+                break;
+            case LIQUID_TYPE_SERUM_TITLE:
+                setLiquidType(LIQUID_TYPE_SERUM);
+                break;
+            case LIQUID_TYPE_URIN_TITLE:
+                setLiquidType(LIQUID_TYPE_URIN);
+                break;
+            case LIQUID_TYPE_CSF_TITLE:
+                setLiquidType(LIQUID_TYPE_CSF);
+                break;
+            case LIQUID_TYPE_BODY_FLUID_TITLE:
+                setLiquidType(LIQUID_TYPE_BODY_FLUID);
+                break;
+            case LIQUID_TYPE_STOOL_TITLE:
+                setLiquidType(LIQUID_TYPE_STOOL);
+                break;
+            case LIQUID_TYPE_SUPERNATENT_TITLE:
+                setLiquidType(LIQUID_TYPE_SUPERNATENT);
+                break;
+            case LIQUID_TYPE_OTHERS_TITLE:
+                setLiquidType(LIQUID_TYPE_OTHERS);
+                break;
+            default:
+                Globals.logString("FocLabSample.setLiquidType: Unknown liquid type: " + liquidType);
+        }
     }
 
-    public static FocLabSample newDBSample(String id) {
-//        FocLabSample sample = null;
-//        FocList list = new FocList(L3SampleDesc.getFocLinkSimple());
-//        SQLFilter sqlFilter = list.getFilter();
-//        sqlFilter.putAdditionalWhere("SMPL_ID", L3SampleDesc.FNAME_ID + "=" + id);
-//        list.loadIfNotLoadedFromDB();
-//
-//        if (list.size() == 1) {
-//            sample = (FocLabSample) list.getFocObject(0);
-//            list.remove(sample);
-//        }
-//        list.dispose();
-//        return sample;
-        return null;
+    public static long findReferenceForSampleId(String sampleId) {
+        SQLSelectFindReferenceForWhereExpression selectExistance = new SQLSelectFindReferenceForWhereExpression(FocLabSample.getFocDesc(), "sample_id" + "=" + sampleId);
+        selectExistance.execute();
+        return selectExistance.getReference();
+    }
+
+    public static FocLabSample loadForSampleId(String sampleId) {
+        FocList list = new FocList(new FocLinkSimple(getFocDesc()));
+        list.getFilter().putAdditionalWhere("SAMPLE_ID", "sample_id" + "=" + sampleId);
+        list.loadIfNotLoadedFromDB();
+        return list != null ? (FocLabSample) list.getFocObject(0) : null;
     }
 
     public FocList getTestListWithoutLoad() {
@@ -193,16 +215,16 @@ public class FocLabSample extends FocObject {
     }
 
     public void copyWithoutTests(FocLabSample sample) {
-        setId(sample.getId());
+        setSampleId(sample.getSampleId());
         setPatientId(sample.getPatientId());
         setOrigin(sample.getOrigin());
         setLastName(sample.getLastName());
         setFirstName(sample.getFirstName());
-        setMiddleInitial(sample.getMiddleInitial());
-        setSexe(sample.getSexe());
+        setMiddleName(sample.getMiddleName());
+        setSex(sample.getSex());
         setAge(sample.getAge());
         setLiquidType(sample.getLiquidType());
-        setEntryDate(sample.getEntryDate());
+        setEntryDateTime(sample.getEntryDateTime());
         setDateOfBirth(sample.getDateOfBirth());
     }
 
@@ -244,11 +266,11 @@ public class FocLabSample extends FocObject {
     public void refreshSampleFrom(FocLabSample sample) {
         //setReference(sample.getReference().getInteger());
         copyTestsFrom(sample);
-        if (sample.isOkToBeSent()) {
-            setOkToBeSent(sample.isOkToBeSent());
+        if (sample.getOkToBeSent()) {
+            setOkToBeSent(sample.getOkToBeSent());
         }
-        if (sample.isResultConfirmed()) {
-            setResultConfirmed(sample.isResultConfirmed());
+        if (sample.getResultConfirmed()) {
+            setResultConfirmed(sample.getResultConfirmed());
         }
         if (getReference() != null) backup();
     }
@@ -300,7 +322,7 @@ public class FocLabSample extends FocObject {
 
     public StringBuffer toStringBuffer() {
         StringBuffer buff = new StringBuffer();
-        buff.append(getId() + " liq:" + getLiquidType() + "PatientId=" + getPatientId() + " FirstName=" + getFirstName() + " MidInitial=" + getMiddleInitial() + " LastName=" + getLastName() + " Sexe" + getSexe() + " Origin=" + getOrigin() + "\n");
+        buff.append(getId() + " liq:" + getLiquidType() + "PatientId=" + getPatientId() + " FirstName=" + getFirstName() + " MidName=" + getMiddleName() + " LastName=" + getLastName() + " Sex" + getSex() + " Origin=" + getOrigin() + "\n");
         int i = 0;
         Iterator iter = testIterator();
         while (iter != null && iter.hasNext()) {
@@ -312,177 +334,61 @@ public class FocLabSample extends FocObject {
         return buff;
     }
 
-    public long getDateAndTime() {
-//        return getPropertyDate("entry_date");
-        return -1; // Placeholder, as the original code does not implement this method
-    }
-
-    public void setDateAndTime(long dateAndTime) {
-//        setPropertyDate(L3SampleDesc.FLD_ENTRY_DATE, new Date(dateAndTime));
-    }
-
-    public String getId() {
-//        FString id = (FString) getFocProperty(L3SampleDesc.FLD_ID);
-//        return (id != null) ? id.getString() : "";
-        return "NOT_FILLED";
-    }
-
-    public void setId(String id) {
-//        FString valId = (FString) getFocProperty(L3SampleDesc.FLD_ID);
-//        if (valId != null) {
-//            valId.setString(id);
-//        }
-    }
-
-    public String getPatientId() {
-        FString patientId = (FString) getFocPropertyByName("PATIENT_ID");
-        return patientId != null ? patientId.getString() : "";
-    }
-
-    public void setPatientId(String patientId) {
-        FString patientIdProp = (FString) getFocPropertyByName("PATIENT_ID");
-        if (patientIdProp != null) {
-            patientIdProp.setString(patientId);
-        }
-    }
-
-    public String getOrigin() {
-        FString origin = (FString) getFocPropertyByName("origin");
-        return origin != null ? origin.getString() : "";
-    }
-
-    public void setOrigin(String origin) {
-        FString originProp = (FString) getFocPropertyByName("origin");
-        if (originProp != null) {
-            originProp.setString(origin);
-        }
-    }
-
-    public int getAge() {
-        return getPropertyInteger("age");
-    }
-
-    public void setAge(int age) {
-        setPropertyInteger("age", age);
-    }
-
-    public String getSexe() {
-        FString sexe = (FString) getFocPropertyByName("sexe");
-        return sexe != null ? sexe.getString() : "";
-    }
-
-    public void setSexe(String sexe) {
-        FString sexeProp = (FString) getFocPropertyByName("sexe");
-        if (sexeProp != null) {
-            sexeProp.setString(sexe);
-        }
-    }
-
-    public int getLiquidType() {
-        FInt liqType = (FInt) getFocPropertyByName("liquide_type");
-        return (liqType != null) ? liqType.getInteger() : null;
-    }
-
-    public void setLiquidType(int liquidType) {
-        FInt liqType = (FInt) getFocPropertyByName("liquide_type");
-        if (liqType != null) {
-            liqType.setInteger(liquidType);
-        }
-    }
-
-    public void setLiquidType(String liquidType) {
-        FMultipleChoice liqType = (FMultipleChoice) getFocPropertyByName("liquid_type");
-        if (liqType != null) {
-            liqType.setString(liquidType);
-        }
-    }
-
-    public String getFirstName() {
-        FString fName = (FString) getFocPropertyByName("first_name");
-        return (fName != null) ? fName.getString() : "";
-    }
-
-    public void setFirstName(String firstName) {
-        FString fName = (FString) getFocPropertyByName("first_name");
-        if (fName != null) {
-            fName.setString(firstName);
-        }
-    }
-
-    public String getLastName() {
-        FString lName = (FString) getFocPropertyByName("last_name");
-        return (lName != null) ? lName.getString() : "";
-    }
-
-    public void setLastName(String lastName) {
-        FString lName = (FString) getFocPropertyByName("last_name");
-        if (lName != null) {
-            lName.setString(lastName);
-        }
-    }
-
-    public String getMiddleInitial() {
-        FString mid = (FString) getFocPropertyByName("middle_initial");
-        return (mid != null) ? mid.getString() : "";
-    }
-
     public void setMiddleInitial(String middleInitial) {
-        FString mid = (FString) getFocPropertyByName("middle_initial");
-        if (mid != null) {
-            if (middleInitial == null || middleInitial.compareTo("null") == 0) {
-                middleInitial = "";
-            }
-            mid.setString(middleInitial);
+        if (middleInitial == null || middleInitial.compareTo("null") == 0) {
+            super.setMiddleName("");
+        } else {
+            super.setMiddleName(middleInitial);
         }
     }
 
-    public boolean isResultConfirmed() {
-        FBoolean confirmed = (FBoolean) getFocPropertyByName("result_confirmed");
-        return (confirmed != null) ? confirmed.getBoolean() : null;
-    }
+//    public boolean isResultConfirmed() {
+//        FBoolean confirmed = (FBoolean) getFocPropertyByName("result_confirmed");
+//        return (confirmed != null) ? confirmed.getBoolean() : null;
+//    }
+//
+//    public void setResultConfirmed(boolean confirmed) {
+//        FBoolean c = (FBoolean) getFocPropertyByName("result_confirmed");
+//        if (c != null) {
+//            c.setBoolean(confirmed);
+//        }
+//    }
+//
+//    public boolean isOkToBeSent() {
+//        FBoolean ok = (FBoolean) getFocPropertyByName("ok_to_be_sent");
+//        return (ok != null) ? ok.getBoolean() : null;
+//    }
+//
+//    public void setOkToBeSent(boolean ok) {
+//        FBoolean o = (FBoolean) getFocPropertyByName("ok_to_be_sent");
+//        if (o != null) {
+//            o.setBoolean(ok);
+//        }
+//    }
 
-    public void setResultConfirmed(boolean confirmed) {
-        FBoolean c = (FBoolean) getFocPropertyByName("result_confirmed");
-        if (c != null) {
-            c.setBoolean(confirmed);
-        }
-    }
+//    public Date getEntryDate() {
+//        FDateTime date = (FDateTime) getFocPropertyByName("entry_date");
+//        return (date != null) ? date.getDate() : null;
+//    }
+//
+//    public void setEntryDate(Date d) {
+//        FDateTime date = (FDateTime) getFocPropertyByName("entry_date");
+//        if (date != null) {
+//            date.setDate(d);
+//        }
+//    }
 
-    public boolean isOkToBeSent() {
-        FBoolean ok = (FBoolean) getFocPropertyByName("ok_to_be_sent");
-        return (ok != null) ? ok.getBoolean() : null;
-    }
+//    public Date getDateOfBirth() {
+//        FDateTime date = (FDateTime) getFocPropertyByName("date_of_birth");
+//        return (date != null) ? date.getDate() : null;
+//    }
 
-    public void setOkToBeSent(boolean ok) {
-        FBoolean o = (FBoolean) getFocPropertyByName("ok_to_be_sent");
-        if (o != null) {
-            o.setBoolean(ok);
-        }
-    }
-
-    public Date getEntryDate() {
-        FDateTime date = (FDateTime) getFocPropertyByName("entry_date");
-        return (date != null) ? date.getDate() : null;
-    }
-
-    public void setEntryDate(Date d) {
-        FDateTime date = (FDateTime) getFocPropertyByName("entry_date");
-        if (date != null) {
-            date.setDate(d);
-        }
-    }
-
-    public Date getDateOfBirth() {
-        FDateTime date = (FDateTime) getFocPropertyByName("date_of_birth");
-        return (date != null) ? date.getDate() : null;
-    }
-
-    public void setDateOfBirth(Date d) {
-        FDateTime date = (FDateTime) getFocPropertyByName("date_of_birth");
-        if (date != null) {
-            date.setDate(d);
-        }
-    }
+//    public void setDateOfBirth(Date d) {
+//        FDateTime date = (FDateTime) getFocPropertyByName("date_of_birth");
+//        if (date != null) {
+//            date.setDate(d);
+//        }
+//    }
 
     //ooooooooooooooooooooooooooooooooooo
     // oooooooooooooooooooooooooooooooooo

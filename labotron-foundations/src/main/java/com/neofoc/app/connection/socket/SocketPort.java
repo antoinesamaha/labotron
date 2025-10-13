@@ -93,11 +93,11 @@ public class SocketPort implements SerialPortInterface {
     public void closeConnection() {
         if (physicalSocket != null) {
             physicalSocket.closeSocket();
-            physicalSocket = null;
+            //physicalSocket = null;
         }
         if (physicalSocketReceptionOnly != null) {
             physicalSocketReceptionOnly.closeSocket();
-            physicalSocketReceptionOnly = null;
+            //physicalSocketReceptionOnly = null;
         }
     }
 

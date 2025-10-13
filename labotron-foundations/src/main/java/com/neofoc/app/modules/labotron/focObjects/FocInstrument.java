@@ -5,26 +5,20 @@ import com.foc.Globals;
 import com.foc.IExitListener;
 import com.foc.desc.FocConstructor;
 import com.foc.desc.FocDesc;
-import com.foc.desc.FocObjectGeneral;
 import com.foc.list.FocLinkForeignKey;
 import com.foc.list.FocList;
-import com.neofoc.app.connection.basicsocket.BServiceInterface;
-import com.neofoc.app.driver.DriverFactory;
 import com.neofoc.app.driver.IDriver;
 import com.neofoc.app.driver.MessageListener;
-import com.neofoc.app.exceptions.L3Exception;
-import com.neofoc.app.modules.labotron.TestLabelMap;
-import org.springframework.amqp.rabbit.connection.ConnectionFactory;
-import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
+import com.neofoc.app.modules.labotron.Instrument_FocObject;
+import com.neofoc.app.service.InstrumentReceiverListener;
+import com.neofoc.app.service.RabbitMQListenerService;
+import com.neofoc.app.utils.SpringContextUtil;
 
-import javax.comm.SerialPort;
-import java.awt.*;
 import java.io.File;
 import java.io.FileInputStream;
-import java.util.Iterator;
 import java.util.Properties;
 
-public class FocInstrument extends FocObjectGeneral implements Runnable, MessageListener,
+public class FocInstrument extends Instrument_FocObject implements Runnable, MessageListener,
         IExitListener {
     private IDriver driver = null;
     private Thread senderThread = null;
@@ -129,6 +123,43 @@ public class FocInstrument extends FocObjectGeneral implements Runnable, Message
         super.dispose();
     }
 
+    public static void applyStartedFlagForAllInstruments() {
+        FocDesc focDesc = getFocDesc();
+        focDesc.getFocList().loadIfNotLoadedFromDB();
+        for (int i = 0; i < focDesc.getFocList().size(); i++) {
+            FocInstrument instrument = (FocInstrument) focDesc.getFocList().getFocObject(i);
+            try {
+                if (instrument.getStarted()) {
+                    if (!instrument.getOnHold()){
+                        instrument.switchOn();
+                    } else {
+                        instrument.refreshStartedFlag();
+                    }
+                }
+            } catch (Exception e) {
+                Globals.logString("Error applying started flag " + instrument.getStarted() + " instrument " + instrument.getCode());
+                Globals.logException(e);
+            }
+        }
+    }
+
+    public static void refreshStartedFlagForAllInstruments() {
+        FocDesc focDesc = getFocDesc();
+        focDesc.getFocList().loadIfNotLoadedFromDB();
+        for (int i = 0; i < focDesc.getFocList().size(); i++) {
+            FocInstrument instrument = (FocInstrument) focDesc.getFocList().getFocObject(i);
+            try {
+                instrument.refreshStartedFlag();
+                //                if (instrument.getStarted()) {
+                //                    instrument.switchOn();
+                //                }
+            } catch (Exception e) {
+                Globals.logString("Error starting instrument driver connect and RabbitMQ listener: " + e.getMessage());
+                Globals.logException(e);
+            }
+        }
+    }
+
     private boolean isResendAllPendingTests() {
         boolean resend = false;
         try {
@@ -138,10 +169,6 @@ public class FocInstrument extends FocObjectGeneral implements Runnable, Message
             Globals.logException(e);
         }
         return resend;
-    }
-
-    public boolean isOnHold() {
-        return getPropertyBoolean("on_hold");
     }
 
     public void setAutoRefresh(boolean auto) {
@@ -515,14 +542,6 @@ public class FocInstrument extends FocObjectGeneral implements Runnable, Message
         setPropertyString("driver_class_name", clName);
     }
 
-    public boolean isConnected() {
-        return getPropertyBoolean("connected");
-    }
-
-    public void setConnected(boolean connected) {
-        setPropertyBoolean("connected", connected);
-    }
-
     public int getMode() {
         return getPropertyInteger("mode");
     }
@@ -549,20 +568,14 @@ public class FocInstrument extends FocObjectGeneral implements Runnable, Message
 //        }
     }
 
-    public void refreshConnected() {
-//        FocDesc focDesc = getThisFocDesc();
-//        if (focDesc != null /* && isConnected() != connected */) {
-//            // setConnected(connected);
-//            SQLFilter filter = new SQLFilter(this,
-//                    SQLFilter.FILTER_ON_IDENTIFIER);
-//            SQLSelect sqlSelect = new SQLSelect(this, Instrument.getFocDesc(),
-//                    filter);
-//            sqlSelect.addQueryField(FField.REF_FIELD_ID);
-//            sqlSelect.addQueryField(InstrumentDesc.FLD_CONNECTED);
-//            sqlSelect.execute();
-//            adjustColor(this, InstrumentDesc.FLD_LAUNCHED,
-//                    InstrumentDesc.FLD_CONNECTED, InstrumentDesc.FLD_ON_HOLD);
-//        }
+    public void refreshStartedFlag() throws Exception{
+        if (getDriver() != null && getDriver().isConnected()) {
+            setStarted(true);
+        } else {
+            setStarted(false);
+        }
+
+        validate(false);
     }
 
     public void refreshLaunched() {
@@ -605,6 +618,26 @@ public class FocInstrument extends FocObjectGeneral implements Runnable, Message
             }
         }
         return driver;
+    }
+
+    public void switchOn() throws Exception {
+        if (getDriver() != null) {// To create the driver if not available yet
+            RabbitMQListenerService rabbitMQListenerService = SpringContextUtil.getBean(RabbitMQListenerService.class);
+            rabbitMQListenerService.startInstrumentListener(this);
+            addMessageListener(new InstrumentReceiverListener(this));
+            getDriver().connect();
+            refreshStartedFlag();
+        }
+    }
+
+    public void switchOff() throws Exception {
+        if (getDriver() != null) {// To create the driver if not available yet
+            RabbitMQListenerService rabbitMQListenerService = SpringContextUtil.getBean(RabbitMQListenerService.class);
+            rabbitMQListenerService.stopInstrumentListener(this);
+            removeMessageListener(new InstrumentReceiverListener(this));
+            getDriver().disconnect();
+            refreshStartedFlag();
+        }
     }
 
 //    public L3SampleTestJoinFilter getSampleListToSend() {

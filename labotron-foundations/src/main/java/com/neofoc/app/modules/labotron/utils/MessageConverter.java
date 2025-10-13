@@ -105,7 +105,7 @@ public class MessageConverter {
             }
 
             // Add the test to the sample
-            FocList testList = sample.getPropertyList("lab_test_LIST");
+            FocList testList = sample.getTestList();
 
             // Add tests
             if (rootNode.has("tests") && rootNode.get("tests").isArray()) {

@@ -111,7 +111,7 @@ public class Cobas501FrameCreator extends AstmFrameCreator {
 		frame.append2Data(AstmFrame.FIELD_SEPERATOR);
 		frame.append2Data(String.valueOf(1));
 		frame.append2Data(AstmFrame.FIELD_SEPERATOR);
-		frame.append2Data(sam.getId(), 15);
+		frame.append2Data(sam.getSampleId(), 15);
 		frame.append2Data(AstmFrame.FIELD_SEPERATOR);
 		// DIFF frame.append2Data(specimen, 15);
 		frame.append2Data(AstmFrame.FIELD_SEPERATOR);
@@ -192,7 +192,7 @@ public class Cobas501FrameCreator extends AstmFrameCreator {
 				//20160129-E
 				
 				//E-PatientID-20151123
-				if (sam.getSexe().compareTo("F") == 0) {
+				if (sam.getSex().compareTo("F") == 0) {
 					frame.append2Data("F||||||");
 				} else {
 					frame.append2Data("M||||||");
@@ -260,13 +260,13 @@ public class Cobas501FrameCreator extends AstmFrameCreator {
 				frame.append2Data("|R||");
 
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-				if (sam.getEntryDate().getTime() < 24 * 60 * 60 * 1000) {
+				if (sam.getEntryDateTime().getYear() == 1970) {
 					Globals.logString("!!!!!!!!!    Entry date < 1 day    !!!!!!!!!!!"
-							+ sam.getEntryDate().getTime());
+							+ sam.getEntryDateTime());
 					frame.append2Data(sdf.format(Globals.getApp()
 							.getSystemDate()));
 				} else {
-					frame.append2Data(sdf.format(sam.getEntryDate()));
+					frame.append2Data(sdf.format(sam.getEntryDateTime()));
 				}
 
 				// frame.append2Data("||||N||||1||||||||||O");

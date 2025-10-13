@@ -66,13 +66,11 @@ public class FocLabTest extends LabTest_FocObject {
 
 	public FocLabTest(String label) {
 		this(new FocConstructor(Globals.getApp().getFocDescByName("lab_test"), null, null));
-		newFocProperties();
 		initFocProperties(label);
 	}
 
 	public FocLabTest(FocConstructor constr) {
 		super(constr);
-		newFocProperties();
 		initFocProperties("");
 	}
 
@@ -82,18 +80,6 @@ public class FocLabTest extends LabTest_FocObject {
 
 	public void dispose() {
 		super.dispose();
-	}
-
-	public FocInstrument getInstrument() {
-		return (FocInstrument) getPropertyObject("dispatch_instrument");
-	}
-
-	public void setInstrument(FocInstrument instrument) {
-		setPropertyObject("dispatch_instrument", instrument);
-	}
-
-	public void setStatus(int status) {
-		setPropertyMultiChoice("status", status);
 	}
 
 	public void setBlocked(boolean blocked) {

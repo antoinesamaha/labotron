@@ -8,6 +8,7 @@ import com.neofoc.app.modules.labotron.focObjects.FocLabTest;
 import com.neofoc.app.modules.labotron.focObjects.L3Message;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -161,11 +162,11 @@ public class AstmFrameCreator {
         frame.append2Data(instrCode, testCodeLength);
     }
 
-    public AstmFrame newOrderFrame(FocInstrument instrument, int sequence, int sequence_num, String specimen, String testId, Date collectionDate) throws Exception {
+    public AstmFrame newOrderFrame(FocInstrument instrument, int sequence, int sequence_num, String specimen, String testId, LocalDateTime collectionDate) throws Exception {
         return newOrderFrame(instrument, sequence, sequence_num, specimen, testId, null, collectionDate, null, null, null);
     }
 
-    public AstmFrame newOrderFrame(FocInstrument instrument, int sequence, int sequence_num, String specimen, String testId, ArrayList<String> testArrayList, Date collectionDate, String priority, String rackNumber, String tubePosition) throws Exception {
+    public AstmFrame newOrderFrame(FocInstrument instrument, int sequence, int sequence_num, String specimen, String testId, ArrayList<String> testArrayList, LocalDateTime collectionDate, String priority, String rackNumber, String tubePosition) throws Exception {
         AstmFrame frame = new AstmFrame(instrument, sequence, AstmFrame.FRAME_TYPE_ORDER);
 
         frame.append2Data(AstmFrame.FIELD_SEPERATOR);
@@ -199,7 +200,7 @@ public class AstmFrameCreator {
         }
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-        if (collectionDate.getTime() < 24 * 60 * 60 * 1000) {
+        if (collectionDate.getYear() == 1970) {
             frame.append2Data(sdf.format(Globals.getApp().getSystemDate()));
         } else {
             frame.append2Data(sdf.format(collectionDate));
@@ -275,7 +276,7 @@ public class AstmFrameCreator {
                 }
             }
 
-            AstmFrame frame = newOrderFrame(driver.getInstrument(), getNextSequence(), testSequence, sam.getId(), null, profilesArray, sam.getEntryDate(), urgent ? "S" : "R", null, null);
+            AstmFrame frame = newOrderFrame(driver.getInstrument(), getNextSequence(), testSequence, sam.getSampleId(), null, profilesArray, sam.getEntryDateTime(), urgent ? "S" : "R", null, null);
             driver.addFrame(frame);
         } else {
             Iterator tIter = sam.testIterator();
@@ -283,7 +284,7 @@ public class AstmFrameCreator {
                 FocLabTest test = (FocLabTest) tIter.next();
                 if (test != null) {
                     // Order Frame
-                    AstmFrame frame = newOrderFrame(driver.getInstrument(), getNextSequence(), testSequence, sam.getId(), test.getLabel(), null, sam.getEntryDate(), test.getPriority(), null, null);
+                    AstmFrame frame = newOrderFrame(driver.getInstrument(), getNextSequence(), testSequence, sam.getSampleId(), test.getLabel(), null, sam.getEntryDateTime(), test.getPriority(), null, null);
                     driver.addFrame(frame);
                     // ---------------
                     if (fromDriver == false) {
@@ -329,7 +330,7 @@ public class AstmFrameCreator {
             FocLabSample sam = (FocLabSample) sIter.next();
             if (sam != null) {
 
-                frame = newPatientFrame(driver.getInstrument(), getNextSequence(), sampleSequence, sam.getId(), sam.getPatientId(), sam.getFirstName(), sam.getLastName(), sam.getMiddleInitial(), sam.getDateOfBirth(), sam.getAge(), sam.getSexe());
+                frame = newPatientFrame(driver.getInstrument(), getNextSequence(), sampleSequence, sam.getSampleId(), sam.getPatientId(), sam.getFirstName(), sam.getLastName(), sam.getMiddleName(), java.sql.Date.valueOf(sam.getDateOfBirth()), sam.getAge(), sam.getSex());
                 driver.addFrame(frame);
 
                 scanSampleTestsAndBuildFrames(driver, sam, fromDriver);

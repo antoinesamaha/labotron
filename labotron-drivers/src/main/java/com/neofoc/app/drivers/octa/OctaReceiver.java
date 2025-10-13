@@ -198,7 +198,7 @@ public class OctaReceiver implements L3SerialPortListener {
                 @Override
                 public boolean treatElement(FocListElement element, FocObject focObj) {
                     FocLabTest test = (FocLabTest) focObj;
-                    if (test.getInstrument().getReference().getInteger() == instrument.getReference().getInteger()) {
+                    if (test.getDispatchInstrument().getReferenceInt() == instrument.getReference().getInteger()) {
                         test.updateStatus(FocLabTest.TEST_STATUS_ANALYSING);
                     }
                     return false;

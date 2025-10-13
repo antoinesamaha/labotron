@@ -4,6 +4,7 @@ import com.foc.Globals;
 import com.foc.desc.FocDesc;
 import com.foc.list.FocList;
 import com.neofoc.app.modules.labotron.focObjects.FocInstrument;
+import lombok.Getter;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
@@ -15,8 +16,9 @@ import java.util.Map;
 @Component
 public class LabotronRabbitAdmin extends RabbitAdmin {
 
-    private Map<String, Queue> sendingQueues = new HashMap<>();
-    private Map<String, Queue> receivingQueues = new HashMap<>();
+    private final Map<String, Queue> driver2InstrumentQueues = new HashMap<>();
+//    @Getter
+//    private Queue driver2ConnectorQueue;
 
     public LabotronRabbitAdmin(ConnectionFactory connectionFactory, LabotronProperties labotronProperties) {
         super(connectionFactory);
@@ -35,32 +37,27 @@ public class LabotronRabbitAdmin extends RabbitAdmin {
 
             // Create send queue (Labotron to Instrument)
             Queue sendQueue = new Queue(
-                    "labotron.to." + instrumentCode,
+                    "connector-2-" + instrumentCode,
                     true,   // durable
                     false,  // not exclusive
                     false   // not auto-delete
             );
-            sendingQueues.put(instrumentCode, sendQueue);
+            driver2InstrumentQueues.put(instrumentCode, sendQueue);
             declareQueue(sendQueue);
-
-            // Create receive queue (Instrument to Labotron)
-            Queue receiveQueue = new Queue(
-                    instrumentCode + ".to.labotron",
-                    true,   // durable
-                    false,  // not exclusive
-                    false   // not auto-delete
-            );
-            receivingQueues.put(instrumentCode, receiveQueue);
-            declareQueue(receiveQueue);
         }
+
+//        // Create receive queue (Instrument to Labotron)
+//        driver2ConnectorQueue = new Queue(
+//                "drivers.to.connector",
+//                true,   // durable
+//                false,  // not exclusive
+//                false   // not auto-delete
+//        );
+//        declareQueue(driver2ConnectorQueue);
     }
 
-    public Queue getSendingQueueForInstrument(String instrumentCode) {
-        return sendingQueues.get(instrumentCode);
-    }
-
-    public Queue getReceivingQueueForInstrument(String instrumentCode) {
-        return receivingQueues.get(instrumentCode);
+    public Queue getDriver2InstrumentQueue(String instrumentCode) {
+        return driver2InstrumentQueues.get(instrumentCode);
     }
 
 }

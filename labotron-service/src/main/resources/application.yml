@@ -39,9 +39,9 @@ management:
 
 labotron:
   connector:
-    enabled: true
-    lis-2-labotron-queue: lis-2-labotron
-    labotron-2-lis-queue: labotron-2-lis
+    lis-2-connector-queue: lis-2-connector
+    connector-2-lis-queue: connector-2-lis
+    driver-2-connector-queue: driver-2-connector
 
 
   

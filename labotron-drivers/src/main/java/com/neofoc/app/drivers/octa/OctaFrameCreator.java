@@ -7,6 +7,8 @@ import com.neofoc.app.modules.labotron.focObjects.FocLabSample;
 import com.neofoc.app.modules.labotron.focObjects.L3Message;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -38,7 +40,11 @@ public class OctaFrameCreator extends AstmFrameCreator {
         return sb.toString();
     }
 
-    public int computeAge(Date dateOfBirth) {
+    public int computeAge(LocalDate dateOfBirthLocalDateTime) {
+        Date dateOfBirth = dateOfBirthLocalDateTime != null ? java.sql.Date.valueOf(dateOfBirthLocalDateTime) : null;
+        if (dateOfBirth == null) {
+            return 0;
+        }
         Calendar today = Calendar.getInstance();
         Calendar birthDate = Calendar.getInstance();
         birthDate.setTime(dateOfBirth);
@@ -78,11 +84,11 @@ public class OctaFrameCreator extends AstmFrameCreator {
                 messageToSend.append(AstmFrame.STX);
                 messageToSend.append("@");
                 messageToSend.append("0000");
-                messageToSend.append(appendSpacesAlignedRight(sample.getId().trim(), 15));
-                String patientName = sample.getMiddleInitial() != null && sample.getMiddleInitial().length() > 0 ? sample.getFirstName().trim() + " " + sample.getMiddleInitial().trim() + " " + sample.getLastName().trim() : sample.getFirstName().trim() + " " +  sample.getLastName().trim();
+                messageToSend.append(appendSpacesAlignedRight(sample.getSampleId().trim(), 15));
+                String patientName = sample.getMiddleName() != null && !sample.getMiddleName().isEmpty() ? sample.getFirstName().trim() + " " + sample.getMiddleName().trim() + " " + sample.getLastName().trim() : sample.getFirstName().trim() + " " +  sample.getLastName().trim();
                 messageToSend.append(appendSpacesAlignedRight(patientName, 30));
                 messageToSend.append(sdf.format(sample.getDateOfBirth()));
-                messageToSend.append(appendSpacesAlignedRight(sample.getSexe(), 1));
+                messageToSend.append(appendSpacesAlignedRight(sample.getSex(), 1));
 
                 //Age
                 int age = computeAge(sample.getDateOfBirth());
@@ -91,7 +97,7 @@ public class OctaFrameCreator extends AstmFrameCreator {
 
                 //Department
                 messageToSend.append(appendSpacesAlignedLeft("HSGLABS", 20));
-                messageToSend.append(sdf.format(sample.getDateAndTime()));
+                messageToSend.append(sdf.format(sample.getEntryDateTime()));
                 //Concentration
                 messageToSend.append("078.5");
                 messageToSend.append("FREE FIELD 1                  "); // 30 spaces

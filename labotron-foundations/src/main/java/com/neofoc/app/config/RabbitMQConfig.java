@@ -16,13 +16,18 @@ public class RabbitMQConfig {
     }
 
     @Bean
-    public Queue send2LisQueue() {
-        return new Queue(labotronProperties.getConnector().getLabotron2LisQueue(), true, false, false);
+    public Queue getConnector2LisQueue() {
+        return new Queue(labotronProperties.getConnector().getConnector2LisQueue(), true, false, false);
     }
 
     @Bean
-    public Queue receiveFromLisQueue() {//Only for creation
-        return new Queue(labotronProperties.getConnector().getLis2LabotronQueue(), true, false, false);  // (name, durable, exclusive, auto-delete)
+    public Queue getDriver2ConnectorQueue() {
+        return new Queue(labotronProperties.getConnector().getDriver2ConnectorQueue(), true, false, false);
+    }
+
+    @Bean
+    public Queue getLis2ConnectorQueue() {//Only for creation
+        return new Queue(labotronProperties.getConnector().getLis2ConnectorQueue(), true, false, false);  // (name, durable, exclusive, auto-delete)
     }
 
 }

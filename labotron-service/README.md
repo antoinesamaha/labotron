@@ -38,26 +38,23 @@
 ### Example message
 ```
 {
-    "sampleId": "111",
+    "sampleId": "5565802",
     "sampleType": "Urin",
     "patientId": "999",
     "firstName": "Samir",
     "lastName": "Salloum",
     "middleInitial": "Melhem",
-    "dateOfBirth": "23/05/2002",
+    "sampleType": "Urin",
+    "patientId": "999",
+    "firstName": "Samir",
+    "lastName": "Salloum",
+    "middleInitial": "Melhem",
+    "dateOfBirth": "2005-10-08",
     "sex": "Male",
-    "currentDateTime": "08/08/2025 15:00:00",
-    "collectionDate": "08/08/2025",
+    "currentDateTime": "2025-10-08 15:00:00",
+    "collectionDate": "2025-10-08 15:00:00",
     "origin": "lab",
     "tests": [
-        {
-            "testCode": "HbA1c",
-            "testDesc": "HbA1c test"
-        },
-        {
-            "testCode": "HbA1c_2",
-            "testDesc": "HbA1c test"
-        },
         {
             "testCode": "INF01",
             "testDesc": "Infinity test"

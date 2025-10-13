@@ -8,11 +8,9 @@ import com.neofoc.app.modules.labotron.utils.MessageConverter;
 import com.neofoc.app.utils.SpringContextUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.AcknowledgeMode;
-import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.amqp.rabbit.listener.api.ChannelAwareMessageListener;
-import com.rabbitmq.client.Channel;
 import java.io.IOException;
 
 @Slf4j
@@ -64,6 +62,7 @@ public class RabbitMQInstrumentListenerContainer {
                             log.error("Driver not connected for instrument {}", instrument.getCode());
                         }
                         channel.basicNack(message.getMessageProperties().getDeliveryTag(), false, true);
+                        Thread.sleep(5000);
                         return;
                     }
 
@@ -100,5 +99,12 @@ public class RabbitMQInstrumentListenerContainer {
         if (container != null) {
             container.stop();
         }
+    }
+
+    public boolean isListening() {
+        if (container != null) {
+            return container.isActive();
+        }
+        return false;
     }
 }
