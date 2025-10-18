@@ -1,11 +1,10 @@
-focAPI/target/**
-focShared/target/**
-neofoc/target/**
-neofoc-datasource/target/**
-neofoc-officelink/target/**
-neofoc-parent/target/**
-neofoc-spring-boot-starter/target/**
+labotron-service/target/**
+labotron-foundations/target/**
+labotron-drivers/target/**
+labotron-simulator/target/**
 
+docker-compose/labotron/logs/**
+docker-compose/labotron/rabbitmq/**
 
 # Created by https://www.toptal.com/developers/gitignore/api/java,intellij
 # Edit at https://www.toptal.com/developers/gitignore?templates=java,intellij

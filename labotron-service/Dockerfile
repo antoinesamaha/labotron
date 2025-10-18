@@ -4,7 +4,7 @@ FROM tomcat:9.0-jdk17
 RUN rm -rf /usr/local/tomcat/webapps/*
 
 # Copy your WAR file to Tomcat
-COPY target/labotronservice-*.war /usr/local/tomcat/webapps/ROOT.war
+COPY target/labotron-service-*.war /usr/local/tomcat/webapps/ROOT.war
 
 # Optional: Configure Tomcat
 ENV CATALINA_OPTS="-Xms512m -Xmx4096m -Dspring.profiles.active=prod"
