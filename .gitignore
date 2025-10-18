@@ -6,6 +6,8 @@ labotron-simulator/target/**
 docker-compose/labotron/logs/**
 docker-compose/labotron/rabbitmq/**
 
+labotron-ui/.vscode
+
 # Created by https://www.toptal.com/developers/gitignore/api/java,intellij
 # Edit at https://www.toptal.com/developers/gitignore?templates=java,intellij
 
