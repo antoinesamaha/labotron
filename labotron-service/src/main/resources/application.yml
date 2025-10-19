@@ -43,5 +43,61 @@ labotron:
     connector-2-lis-queue: connector-2-lis
     driver-2-connector-queue: driver-2-connector
 
+neofoc:
+  jdbc:
+  #  drivers: oracle.jdbc.OracleDriver
+  #  url: jdbc:oracle:thin:@localhost:1521:XE
+  #  password: 1234
+  #  username: FENIX_CI_UNIT
+  #  keepFocObjectArrayInFocDesc: 1
 
-  
+    drivers: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/labotron
+    username: postgres
+    password: 123456
+
+  focWebServerClassName: siren.fenix.ci.main.FenixCIWebServer
+  dataSourceClass: b01.focDataSourceDB.FocDataSource_DB
+  cloudStorageClass: com.foc.cloudStorage.FocCloudStorage_LocalDisc
+  focDataServletURL: http://127.0.0.1:8888/focData
+
+  #unitDevMode=0
+  #unitAllowed=1
+  #devMode=1
+
+  log:
+    dir: /home/antoin/tmp/log
+    ConsoleActive: 1
+    fileActive: 1
+    popupExceptionDialog: 1
+    details: 1
+    dbRequest: 1
+    dbSelect: 1
+    debug: 1
+    memoryUsage: 1
+
+  debug:
+    showStatusColumn=0
+
+  report:
+    fileFullPath: c:kjhdfksh
+  perf:
+    active: 0
+
+  createAdminUserIfNotExist: 1
+  adaptDataModelAtStartup: 0
+  adaptEnabled: 1
+  adaptConstraints: 1
+  adaptIndexesEnabled: 1
+
+  encriptedPassword: BpBRe8tbntbFHPovSYXCCg
+
+  userLogin: FOCADMIN
+  password: FOCADMIN
+
+  reportingLayout:
+    wordExport: 1
+    emailSend: 1
+  offsetCount:
+    SejelEntry: 3
+

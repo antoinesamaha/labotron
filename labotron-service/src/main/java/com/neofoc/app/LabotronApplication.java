@@ -11,7 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
 public class LabotronApplication extends SpringBootServletInitializer {
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-		return builder.sources(SpringApplication.class);
+		return builder.sources(LabotronApplication.class);
 	}
 
 	public static void main(String[] args) {
