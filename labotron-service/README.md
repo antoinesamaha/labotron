@@ -1,11 +1,14 @@
 # Deployment
-create a folder labotron under opt
-```dockerfile
+Create a folder labotron under opt
+
+```
 cd /opt
 sudo mkdir labotron
 sudo chown administrator:administrator labotron
 ```
+
 Install java 21
+
 ```
 sudo apt update 
 sudo apt istall -y openjdk-21-jdk
@@ -21,6 +24,23 @@ export M2_HOME=/opt/maven
 export MAVEN_HOME=/opt/maven
 export PATH=${M2_HOME}/bin:${PATH}
 source ~/.bashrc
+```
+
+Install the comm.jar
+```
+cd /labotron/labotron-service/src/main/resources/jar
+./installJar.sh
+```
+
+You might need to give execution rights to the user
+```
+sudo chmod u+x installJar.sh
+```
+
+Build the backend image
+```
+cd /opt/labotron/labotron-service
+docker build -t labotron-service:latest .
 ```
 
 # Messages Exchanged with LIS
