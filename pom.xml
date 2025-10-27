@@ -110,9 +110,9 @@
 		<dependency>
 			<groupId>javax.comm</groupId>
 			<artifactId>comm</artifactId>
-			<scope>system</scope>
+			<!-- scope>system</scope -->
 			<version>0.0.1-SNAPSHOT</version>
-			<systemPath>/resources/jar/comm.jar</systemPath>
+			<!-- systemPath>/resources/jar/comm.jar</systemPath -->
 		</dependency>
 
 		<dependency>

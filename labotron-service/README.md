@@ -1,3 +1,28 @@
+# Deployment
+create a folder labotron under opt
+```dockerfile
+cd /opt
+sudo mkdir labotron
+sudo chown administrator:administrator labotron
+```
+Install java 21
+```
+sudo apt update 
+sudo apt istall -y openjdk-21-jdk
+```
+
+Install maven
+
+```
+wget https://archive.apache.org/dist/maven/maven-3/3.8.8/binaries/apache-maven-3.8.8-bin.tar.gz
+sudo tar -xvzf apache-maven-3.8.8-bin.tar.gz -C /opt
+nano ~/.bashrc
+export M2_HOME=/opt/maven
+export MAVEN_HOME=/opt/maven
+export PATH=${M2_HOME}/bin:${PATH}
+source ~/.bashrc
+```
+
 # Messages Exchanged with LIS
 
 ## LIS Sending Sample to Labotron
