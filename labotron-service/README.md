@@ -43,6 +43,35 @@ cd /opt/labotron/labotron-service
 docker build -t labotron-service:latest .
 ```
 
+Installing Flutter
+
+Prerequisits
+```
+sudo apt update -y
+sudo apt install -y git curl unzip xz-utils zip libglu1-mesa
+```
+
+Installing Flutter itself
+get on the home directory then run the following commands
+```
+git clone https://github.com/flutter/flutter.git -b stable
+export PATH="$PATH:$HOME/flutter/bin"
+flutter doctor
+```
+
+For a permanent config of the PATH variable, add the export line to the ~/.bashrc file.
+```
+nano ~/.bashrc
+OR
+vi ~/.bashrc
+```
+
+```
+export PATH="$PATH:$HOME/flutter/bin"
+```
+
+
+
 # Messages Exchanged with LIS
 
 ## LIS Sending Sample to Labotron

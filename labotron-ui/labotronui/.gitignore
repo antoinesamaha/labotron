@@ -132,7 +132,7 @@ coverage/
 linux/
 macos/
 windows/
-web/
+# web/
 
 # Keep asset files, but ignore temporary/processed files
 assets/
