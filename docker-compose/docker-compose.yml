@@ -86,14 +86,14 @@ services:
         condition: service_healthy
 
   # Flutter Web Frontend
-#  labotron-web:
-#    image: ${LABOTRON_WEB_IMAGE}
-#    container_name: labotron-web
-#    ports:
-#      - "${LABOTRON_WEB_PORT}:80"  # Frontend on standard HTTP port
-#    environment:
-#      - API_BASE_URL=http://labotron-api:8080  # Internal network URL
-#    restart: always
+  labotron-web:
+    image: ${LABOTRON_WEB_IMAGE}
+    container_name: labotron-web
+    ports:
+      - "${LABOTRON_WEB_PORT}:80"  # Frontend on standard HTTP port
+    environment:
+      - API_BASE_URL=http://labotron-api:8080  # Internal network URL
+    restart: always
 
 # Named volumes for proper permissions
 volumes:
