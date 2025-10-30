@@ -1,0 +1,42 @@
+{
+  "layout": "column",
+  "spacing": 1,
+  "persistencePanel": false,
+  "fields": [   
+    {
+      "type": "data_table",
+      "name": "data_table_communication_log_list",
+      "label": "Communication Logs",
+      "title": "Communication Logs",
+      "columns": [
+        {
+          "key": "date_time",
+          "label": "Timestamp",
+          "numeric": false
+        },
+        {
+          "key": "sample_id",
+          "label": "Sample",
+          "numeric": false
+        },
+        {
+          "key": "sender",
+          "label": "Sender",
+          "numeric": false
+        },
+        {
+          "key": "receiver",
+          "label": "Receiver",
+          "numeric": false
+        },
+        {
+          "key": "communication_point",
+          "label": "Pt",
+          "numeric": true
+        }
+      ]
+    }    
+  ]
+}
+
+

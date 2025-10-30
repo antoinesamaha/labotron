@@ -1,0 +1,61 @@
+{
+  "layout": "column",
+  "spacing": 16,
+  "persistencePanel": true,
+  "fields": [   
+    {
+      "type": "section",
+      "name": "section",
+      "label": "section",
+      "title": "Sample",
+      "layout": "column",
+      "spacing": 16,      
+      "fields": [
+        {
+          "type": "text",
+          "name": "date_time",
+          "label": "Date Time",
+          "required": true
+        },
+        {
+          "type": "text",
+          "name": "instrument_id",
+          "label": "Instrument ID",
+          "required": true
+        },
+        {
+          "type": "text",
+          "name": "sample_id",
+          "label": "Sample Id",
+          "required": false
+        },
+        {
+          "type": "text",
+          "name": "sender",
+          "label": "Sender",
+          "required": false
+        },
+        {
+          "type": "text",
+          "name": "receiver",
+          "label": "Receiver",
+          "required": false
+        },
+        {
+          "type": "text",
+          "name": "direction",
+          "label": "Direction",
+          "required": false
+        },
+        {
+          "type": "text",
+          "name": "json_content",
+          "label": "Content",
+          "required": false
+        }
+      ]
+    }    
+  ]
+}
+
+

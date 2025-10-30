@@ -135,14 +135,14 @@ windows/
 # web/
 
 # Keep asset files, but ignore temporary/processed files
-assets/
-!assets/*.png
-!assets/*.jpg
-!assets/*.svg
-!assets/*.json
-!assets/fonts/
-!assets/images/
-!assets/sounds/
+# assets/
+# !assets/*.png
+# !assets/*.jpg
+# !assets/*.svg
+# !assets/*.json
+# !assets/fonts/
+# !assets/images/
+# !assets/sounds/
 
 # Ignore specific temporary files
 assets/temp/

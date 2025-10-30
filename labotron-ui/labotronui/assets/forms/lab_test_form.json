@@ -1,0 +1,37 @@
+{
+  "layout": "column",
+  "spacing": 16,
+  "persistencePanel": true,
+  "fields": [   
+    {
+      "type": "section",
+      "name": "section",
+      "label": "section",
+      "title": "Sample",
+      "layout": "column",
+      "spacing": 16,      
+      "fields": [
+        {
+          "type": "text",
+          "name": "instrument_id",
+          "label": "Instrument ID",
+          "required": true
+        },
+        {
+          "type": "text",
+          "name": "label",
+          "label": "Label",
+          "required": true
+        },
+        {
+          "type": "text",
+          "name": "descrip",
+          "label": "Description",
+          "required": false
+        }
+      ]
+    }    
+  ]
+}
+
+

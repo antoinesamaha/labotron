@@ -1,0 +1,42 @@
+{
+  "layout": "column",
+  "spacing": 1,
+  "persistencePanel": false,
+  "fields": [   
+    {
+      "type": "data_table",
+      "name": "data_table_sample_list",
+      "label": "Samples",
+      "title": "Samples",
+      "columns": [
+        {
+          "key": "sample_id",
+          "label": "Sample ID",
+          "numeric": false
+        },
+        {
+          "key": "patient_id",
+          "label": "Patient ID",
+          "numeric": false
+        },
+        {
+          "key": "first_name",
+          "label": "First name",
+          "numeric": false
+        },
+        {
+          "key": "last_name",
+          "label": "Last name",
+          "numeric": false
+        },
+        {
+          "key": "sex",
+          "label": "Gender",
+          "numeric": false
+        }
+      ]
+    }    
+  ]
+}
+
+
