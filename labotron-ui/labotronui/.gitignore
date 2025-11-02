@@ -4,6 +4,11 @@ build/
 pubspec.lock        # keep if you want exact dependency versions frozen; omit if not
 .generated/
 coverage/
+
+# Generated files from templates (use generate-dev-files.sh to create)
+web/env.js
+web/index.html
+
 # IDE
 .vscode/
 .idea/

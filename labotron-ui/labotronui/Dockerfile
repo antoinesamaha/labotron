@@ -26,12 +26,15 @@ COPY --from=build /workspace/labotron/labotron-ui/labotronui/build/web /usr/shar
 
 # Copy templates for environment variable substitution
 COPY --from=build /workspace/labotron/labotron-ui/labotronui/web/env.js.template /usr/share/nginx/html/env.js.template
+COPY --from=build /workspace/labotron/labotron-ui/labotronui/web/index.html.template /usr/share/nginx/html/index.html.template
 
 # Create entrypoint script for environment substitution
 RUN echo '#!/bin/sh' > /docker-entrypoint.d/10-substitute-env.sh && \
     echo 'echo "Substituting environment variables..."' >> /docker-entrypoint.d/10-substitute-env.sh && \
     echo 'echo "API_URL: $API_URL"' >> /docker-entrypoint.d/10-substitute-env.sh && \
+    echo 'echo "API_URL_HTTPS: $API_URL_HTTPS"' >> /docker-entrypoint.d/10-substitute-env.sh && \
     echo 'envsubst < /usr/share/nginx/html/env.js.template > /usr/share/nginx/html/env.js' >> /docker-entrypoint.d/10-substitute-env.sh && \
+    echo 'envsubst < /usr/share/nginx/html/index.html.template > /usr/share/nginx/html/index.html' >> /docker-entrypoint.d/10-substitute-env.sh && \
     echo 'echo "Environment substitution completed"' >> /docker-entrypoint.d/10-substitute-env.sh && \
     chmod +x /docker-entrypoint.d/10-substitute-env.sh
 
