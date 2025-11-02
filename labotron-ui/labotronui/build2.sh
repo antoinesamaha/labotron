@@ -1,1 +1,1 @@
-docker build --no-cache -t labotron-web .
+docker build -t labotron-web . --no-cache

@@ -4,7 +4,7 @@ import 'package:focui/src/entities/foc_entity_feature/foc_service.dart';
 import 'package:focui/src/app_constants.dart';
 
 class InstrumentService {
-  static const String _baseUrl = '${AppConstants.apiUrl}/api/instrument';
+  static String _baseUrl = '${AppConstants.apiUrl}/api/instrument';
 
   /// Headers for API requests
   Map<String, String> get _headers {

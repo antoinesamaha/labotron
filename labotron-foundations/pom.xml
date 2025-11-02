@@ -10,7 +10,6 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-	<groupId>com.neofoc</groupId>
 	<artifactId>labotron-foundations</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>labotron-foundations</name>

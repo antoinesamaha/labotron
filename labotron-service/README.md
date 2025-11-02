@@ -40,6 +40,7 @@ sudo chmod u+x installJar.sh
 Build the backend image
 ```
 cd /opt/labotron/labotron-service
+mvn clean install
 docker build -t labotron-service:latest .
 ```
 
@@ -70,6 +71,23 @@ vi ~/.bashrc
 export PATH="$PATH:$HOME/flutter/bin"
 ```
 
+To build the image run these 2 scripts 
+```
+./build1.sh
+./build2.sh
+```
+
+The go to the docker-compose directory and run
+```
+docker-compose up -d
+```
+
+this will spin up the labotron service and the flutter web app as well as the postgres and rabbitmq containers
+
+run this command to verify
+```
+docker ps
+```
 
 
 # Messages Exchanged with LIS
