@@ -1,6 +1,7 @@
 package com.neofoc.app.config;
 
 import com.neofoc.springboot.config.JwtAuthenticationFilter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,10 +16,14 @@ import java.util.Collections;
 @Configuration
 public class SecurityConfiguration {
 
+    @Value("${cors.allowed-origin}")
+    private String allowedOrigin;
+
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Collections.singletonList("*"));
+        configuration.setAllowedOriginPatterns(Collections.singletonList(allowedOrigin));
+        configuration.setAllowCredentials(true);
         configuration.setAllowedMethods(Collections.singletonList("*"));
         configuration.setAllowedHeaders(Collections.singletonList("*"));
         configuration.setExposedHeaders(Collections.singletonList("*"));

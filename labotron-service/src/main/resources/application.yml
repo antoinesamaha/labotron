@@ -1,5 +1,7 @@
 server:
   port: 8099
+cors:
+  allowed-origin: ${CORS_ALLOWED_ORIGIN:http://localhost:*}
 spring:
   datasource:
     url: ${DATASOURCE_URL:jdbc:postgresql://localhost:5432/labotron}

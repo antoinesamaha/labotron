@@ -9,6 +9,9 @@ coverage/
 web/env.js
 web/index.html
 
+# Local environment configuration
+.env
+
 # IDE
 .vscode/
 .idea/

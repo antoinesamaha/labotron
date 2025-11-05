@@ -55,45 +55,45 @@ services:
       timeout: 5s
       retries: 5
 
-  labotron-service:
-    container_name: labotron-service  
-    image: ${LABOTRON_SERVICE_IMAGE}
-    ports:
-      - "${LABOTRON_SERVICE_PORT}:8080"
-    environment:
-#      - SPRING_PROFILES_ACTIVE=prod   # Spring profile
-      - JAVA_OPTS=-Xmx4092m -Xms256m   # JVM memory limits
-      - DATASOURCE_URL
-      - DATASOURCE_USERNAME
-      - DATASOURCE_PASSWORD
-      - DATASOURCE_DRIVERS
-      - RABBITMQ_HOST
-      - RABBITMQ_PORT=5672
-      - RABBITMQ_USERNAME
-      - RABBITMQ_PASSWORD
-    restart: unless-stopped
-    volumes:
-      - ./logs:/usr/local/tomcat/logs # Persist logs
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-    depends_on:
-      postgres:
-        condition: service_healthy
-      rabbitmq:
-        condition: service_healthy
+#  labotron-service:
+#    container_name: labotron-service
+#    image: ${LABOTRON_SERVICE_IMAGE}
+#    ports:
+#      - "${LABOTRON_SERVICE_PORT}:8080"
+#    environment:
+##      - SPRING_PROFILES_ACTIVE=prod   # Spring profile
+#      - JAVA_OPTS=-Xmx4092m -Xms256m   # JVM memory limits
+#      - DATASOURCE_URL
+#      - DATASOURCE_USERNAME
+#      - DATASOURCE_PASSWORD
+#      - DATASOURCE_DRIVERS
+#      - RABBITMQ_HOST
+#      - RABBITMQ_PORT=5672
+#      - RABBITMQ_USERNAME
+#      - RABBITMQ_PASSWORD
+#    restart: unless-stopped
+#    volumes:
+#      - ./logs:/usr/local/tomcat/logs # Persist logs
+#    healthcheck:
+#      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+#      interval: 30s
+#      timeout: 10s
+#      retries: 3
+#    depends_on:
+#      postgres:
+#        condition: service_healthy
+#      rabbitmq:
+#        condition: service_healthy
 
   # Flutter Web Frontend
-  labotron-web:
-    image: ${LABOTRON_WEB_IMAGE}
-    container_name: labotron-web
-    ports:
-      - "${LABOTRON_WEB_PORT}:80"  # Frontend on standard HTTP port
-    environment:
-      - API_URL
-    restart: always
+#  labotron-web:
+#    image: ${LABOTRON_WEB_IMAGE}
+#    container_name: labotron-web
+#    ports:
+#      - "${LABOTRON_WEB_PORT}:80"  # Frontend on standard HTTP port
+#    environment:
+#      - API_URL
+#    restart: always
 
 # Named volumes for proper permissions
 volumes:
