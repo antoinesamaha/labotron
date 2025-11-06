@@ -59,9 +59,9 @@ neofoc:
   #  keepFocObjectArrayInFocDesc: 1
 
     drivers: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/labotron
-    username: postgres
-    password: 123456
+    url: ${DATASOURCE_URL:jdbc:postgresql://localhost:5432/labotron}
+    username: ${DATASOURCE_USERNAME:postgres}
+    password: ${DATASOURCE_PASSWORD:123456}
 
 #  focWebServerClassName: siren.fenix.ci.main.FenixCIWebServer
 #  dataSourceClass: b01.focDataSourceDB.FocDataSource_DB
