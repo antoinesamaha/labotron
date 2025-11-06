@@ -24,9 +24,8 @@ public class SecurityConfiguration {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOriginPatterns(Collections.singletonList(allowedOrigin));
         configuration.setAllowCredentials(true);
-        configuration.setAllowedMethods(Collections.singletonList("*"));
-        configuration.setAllowedHeaders(Collections.singletonList("*"));
-        configuration.setExposedHeaders(Collections.singletonList("*"));
+        configuration.setAllowedMethods(List.of("GET","POST","PUT","DELETE","OPTIONS","PATCH"));
+        configuration.setAllowedHeaders(List.of("Authorization","Content-Type","Accept"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
@@ -56,6 +55,7 @@ public class SecurityConfiguration {
                         // .ignoringRequestMatchers(new AntPathRequestMatcher("/foc/auth/**"))
                 )
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers(
                                 mvc.pattern("/v2/api-docs"),
                                 mvc.pattern("/v3/api-docs/**"),
@@ -66,35 +66,9 @@ public class SecurityConfiguration {
                                 mvc.pattern("/configuration/security"),
                                 mvc.pattern("/foc/auth/login"),
                                 mvc.pattern("/meta/entities"),
-                                //ALERT: Activate that filter to enable JWT authentication
                                 mvc.pattern("/foc/obj/**"),
                                 mvc.pattern("/api/**")
-//                                mvc.pattern("/swagger-ui.html"),
-//                                mvc.pattern("/swagger-ui/**"),
-//                                mvc.pattern("/webjars/**"),
-//                                mvc.pattern("/api/event/all"),
-//                                mvc.pattern("/api/event/filter"),
-//                                mvc.pattern("/api/eventComment/all"),
-//                                mvc.pattern("/api/eventComment/all/detailed"),
-//                                mvc.pattern("/api/eventComment/event/**"),
-//                                mvc.pattern("/api/eventComment/all/with-like/**"),
-//                                mvc.pattern("/api/userProfile/register"),
-//                                mvc.pattern("/api/event/all/with-like/**"),
-//                                mvc.pattern("/api/eventAccessibility"),
-//                                mvc.pattern("/api/eventCategory"),
-//                                mvc.pattern("/api/location"),
-//                                mvc.pattern("/api/publishStatus")
                         ).permitAll()
-//                        .requestMatchers(
-//                                mvc.pattern("/public/**"),
-//                                mvc.pattern("/v1/otp/verify"),
-//                                mvc.pattern("/v1/otp/generate"),
-//                                mvc.pattern("/application-settings"),
-//                                mvc.pattern(Constants.NOTIFICATION_ENDPOINT)
-//                        ).permitAll()
-//                        .requestMatchers(
-//                                mvc.pattern("/XXX/foc/obj/**")
-//                        ).authenticated()
                 );
     }
 
