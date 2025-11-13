@@ -3,28 +3,28 @@ package com.neofoc.app.drivers.yumizenP8000;
 import com.neofoc.app.drivers.astm.FrameReader;
 
 //Patient line reader
-public class SPMLineReader extends FrameReader{
-	
-	private String sampleId = null;
-	
-	public SPMLineReader(){
-		super('|', '^');
-	}
+public class SPMLineReader extends FrameReader {
 
-	public void reset() {
-		sampleId = null;
-	}
-	
-	/*
-		SPM|1|201604163002||EDTA||||MAIN LAB
-	 */
-	public void readToken(String token, int fieldPos, int compPos) {
-		com.foc.Globals.logDetail(" fieldPos:"+fieldPos+" compPos:"+compPos+" token:"+token);
-		
-		if(fieldPos == 2 && compPos==0) sampleId = new String(token);
-	}
+    private String sampleId = null;
 
-	public String getSampleID() {
-		return sampleId != null ? sampleId : "";
-	}
+    public SPMLineReader() {
+        super('|', '^');
+    }
+
+    public void reset() {
+        sampleId = null;
+    }
+
+    /*
+        SPM|1|201604163002||EDTA||||MAIN LAB
+     */
+    public void readToken(String token, int fieldPos, int compPos) {
+        com.foc.Globals.logDetail(" fieldPos:" + fieldPos + " compPos:" + compPos + " token:" + token);
+
+        if (fieldPos == 2 && compPos == 0) sampleId = new String(token);
+    }
+
+    public String getSampleID() {
+        return sampleId != null ? sampleId : "";
+    }
 }
