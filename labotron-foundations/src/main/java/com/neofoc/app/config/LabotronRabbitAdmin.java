@@ -24,6 +24,16 @@ public class LabotronRabbitAdmin extends RabbitAdmin {
         super(connectionFactory);
     }
 
+    private boolean doCreateQueue(FocInstrument instrument) {
+        boolean inquiryBased = false;
+        try {
+            inquiryBased = instrument.getDriver().isInquiryBased();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return !inquiryBased;
+    }
+
     public void createInstrumentQueues() {
         FocDesc instrumentDesc = Globals.getApp().getFocDescByName("instrument");
         // Load all instruments from the database
@@ -33,17 +43,19 @@ public class LabotronRabbitAdmin extends RabbitAdmin {
         for (int i=0; i<instruments.size(); i++) {
             FocInstrument instrument = (FocInstrument) instruments.getFocObject(i);
 
-            String instrumentCode = instrument.getCode();
+            if (doCreateQueue(instrument)) {
+                String instrumentCode = instrument.getCode();
 
-            // Create send queue (Labotron to Instrument)
-            Queue sendQueue = new Queue(
-                    "connector-2-" + instrumentCode,
-                    true,   // durable
-                    false,  // not exclusive
-                    false   // not auto-delete
-            );
-            driver2InstrumentQueues.put(instrumentCode, sendQueue);
-            declareQueue(sendQueue);
+                // Create send queue (Labotron to Instrument)
+                Queue sendQueue = new Queue(
+                        "connector-2-" + instrumentCode,
+                        true,   // durable
+                        false,  // not exclusive
+                        false   // not auto-delete
+                );
+                driver2InstrumentQueues.put(instrumentCode, sendQueue);
+                declareQueue(sendQueue);
+            }
         }
 
 //        // Create receive queue (Instrument to Labotron)

@@ -66,7 +66,7 @@ public abstract class DriverSerialPort extends Driver {
 			FocList listOfTests = instr.getSupportedTestList();
 			for (int i = 0; i < listOfTests.size(); i++) {
 				FocTestLabelMap testMap = (FocTestLabelMap) listOfTests.getFocObject(i);
-				if (testMap.isCalculated()) {
+				if (testMap.getCalculated() == 1) {
 					mapLis2Inst.remove(testMap.getLisTestLabel());
 				}
 			}

@@ -1,5 +1,7 @@
 package com.neofoc.app;
 
+import com.neofoc.app.impl.ISimulator;
+
 import java.io.FileWriter;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -11,37 +13,64 @@ public class SimSocket {
     String host = "localhost";
     int port = 12345;         // Replace with the target port
     boolean connected = false;
+    boolean sendingMode = false;
 
-    SimulatorMain sim;
-    Socket socket;
+    ISimulator sim;
+    public Socket socket;
 
-    SimSocket(SimulatorMain sim, int port) {
+    public SimSocket(ISimulator sim, int port) {
         this.port = port;
         this.sim = sim;
     }
 
-    public void open() {
-        new Thread(new Runnable() {
+    public void setSendingMode(boolean sendingMode) {
+        this.sendingMode = sendingMode;
+    }
 
+    public boolean isSendingMode() {
+        return this.sendingMode;
+    }
+
+    public void open() {
+        while (!connected) {
+            try {
+                //if (!connected) {
+                if (socket == null || !socket.isConnected()) {
+                    socket = new Socket(host, port);
+                    connected = true;
+                    System.out.println("Socket connected");
+                }
+            } catch (Exception e) {
+                connected = false;
+                System.out.println("Error opening socket: " + e.getMessage());
+                e.printStackTrace();
+            }
+            sim.sleep(500);
+        }
+
+        new Thread(new Runnable() {
             @Override
             public void run() {
                 // Keep trying to connect every 2 seconds until successful and change the phase
                 //while (sim.phase.compareTo(Phase.OPENING_SOCKET) <= 0) {
                 while (true) {
-                    try {
-                        //if (!connected) {
-                        if (!connected || socket == null || !socket.isConnected()) {
-                            socket = new Socket(host, port);
-                            connected = true;
-                            sim.phase = Phase.RECEIVING_SAMPLES;
+                    if (connected && socket != null && socket.isConnected()) {
+                        // If not in sending mode I keep bouncing back ACK to anything received except EOT
+                        if (!isSendingMode()) {
+                            String receivedString = receive();
+                            if (receivedString != null && !receivedString.isEmpty() && receivedString.charAt(0) != Constants.EOT) {
+                                sim.sleep(1000);
+                                send(""+Constants.ACK);
+                            } else {
+                                System.out.println("Socket no need to send ACK");
+                            }
+                        } else {
+                            System.out.println("Socket in sending mode");
                         }
-                    } catch (Exception e) {
-                        connected = false;
-                        System.out.println("Error opening socket: " + e.getMessage());
-                        e.printStackTrace();
+                    } else {
+                        System.out.println("Socket not connected!!!");
                     }
-
-                    sim.sleep(2000);
+                    sim.sleep(1000);
                 }
             }
         }).start();
@@ -53,7 +82,18 @@ public class SimSocket {
             PrintWriter writer = new PrintWriter(output, true);
             writer.print(message); // Changed from println() to print()
             writer.flush(); // Ensure the data is sent immediately
-            System.out.println("Message sent: " + message);
+
+            String logMessage = message;
+            if (message.length() == 1 && message.charAt(0) == Constants.ENQ) {
+                logMessage = "ENQ";
+            } else if (message.length() == 1 && message.charAt(0) == Constants.ACK) {
+                logMessage = "ACK";
+            } else if (message.length() == 1 && message.charAt(0) == Constants.NACK) {
+                logMessage = "NACK";
+            } else if (message.length() == 1 && message.charAt(0) == Constants.EOT) {
+                logMessage = "EOT";
+            }
+            System.out.println("Message sent: " + logMessage);
         } catch (Exception e) {
             connected = false;
             e.printStackTrace();
@@ -83,7 +123,17 @@ public class SimSocket {
 
             String message = receivedData.toString();
             if (!message.isEmpty()) {
-                System.out.println("Message received: " + message);
+                String logMessage = message;
+                if (message.length() == 1 && message.charAt(0) == Constants.ENQ) {
+                    logMessage = "ENQ";
+                } else if (message.length() == 1 && message.charAt(0) == Constants.ACK) {
+                    logMessage = "ACK";
+                } else if (message.length() == 1 && message.charAt(0) == Constants.NACK) {
+                    logMessage = "NACK";
+                } else if (message.length() == 1 && message.charAt(0) == Constants.EOT) {
+                    logMessage = "EOT";
+                }
+                System.out.println("Message received: " + logMessage);
             }
             return message;
         } catch (Exception e) {

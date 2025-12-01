@@ -123,7 +123,11 @@ public class AstmReceiver implements L3SerialPortListener {
 	public AstmDriver getDriver() {
 		return driver;
 	}
-	
+
+	public InformationInquiryReader getInformationEnquiryReader() {
+		return informationEnquiryReader;
+	}
+
 	public void setResultLineReader(ResultLineReader resultLineReader) {
 		this.resultLineReader = resultLineReader;
 	}
@@ -450,7 +454,7 @@ public class AstmReceiver implements L3SerialPortListener {
 				&&  informationEnquiryReader != null
 				&& 	informationEnquiryReader.getSampleId() != null
 				&& !informationEnquiryReader.getSampleId().isEmpty()
-				&&  informationEnquiryReader.getSampleIdAttrib().equals("B")
+				//&&  informationEnquiryReader.getSampleIdAttrib().equals("B")
 				) {
 			Globals.logString("Calling sendASampleAnsweringInquiry : "+informationEnquiryReader.getRackNumber() +" "+ informationEnquiryReader.getTubePosition() +" "+ informationEnquiryReader.getSampleId());
 			FocInstrument instrument = driver.getInstrument();

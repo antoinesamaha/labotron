@@ -9,6 +9,7 @@ import com.neofoc.app.modules.labotron.focObjects.L3Message;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -203,7 +204,9 @@ public class AstmFrameCreator {
         if (collectionDate.getYear() == 1970) {
             frame.append2Data(sdf.format(Globals.getApp().getSystemDate()));
         } else {
-            frame.append2Data(sdf.format(collectionDate));
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+            String formattedDate = collectionDate.format(formatter);
+            frame.append2Data(formattedDate);
         }
 
         for (int i = 0; i < 4; i++) {

@@ -8,6 +8,7 @@ import com.foc.db.SQLFilter;
 import com.foc.desc.FocConstructor;
 import com.foc.desc.FocDesc;
 import com.foc.desc.FocObject;
+import com.foc.focDataSourceDB.db.SQLUpdate;
 import com.foc.gui.FPanel;
 import com.foc.list.FocList;
 import com.foc.property.FBoolean;
@@ -24,6 +25,7 @@ public class FocLabTest extends LabTest_FocObject {
 	public static final String TABLE_NAME          = "L3TEST"     ;
 
 	public static final String FNAME_SAMPLE_PREFIX = "SAMPLE_"    ;
+	public static final String FNAME_LABEL         = "LABEL"      ;
 	public static final String FNAME_VALUE         = "VALUE"      ;
 	public static final String FNAME_VALUE_NOTES   = "NOTES"      ;
 	public static final String FNAME_RESULT_OK     = "RESULT_OK"  ;
@@ -86,12 +88,6 @@ public class FocLabTest extends LabTest_FocObject {
 		setPropertyBoolean("blocked", blocked);
 	}
 
-	public int getStatus() {
-		super.getStatus();
-		//return getPropertyMultiChoice("status");
-		return -1; // TODO: Implement this method properly
-	}
-
 	public boolean isBlocked() {
 		return getPropertyBoolean("blocked");
 	}
@@ -107,14 +103,14 @@ public class FocLabTest extends LabTest_FocObject {
 		return getPropertyString("message");
 	}
 
-	public void updateStatus(int status) {
-//		FocDesc focDesc = getThisFocDesc();
-//		if (focDesc != null) {
-//			setStatus(status);
-//			SQLUpdate sqlUpdate = new SQLUpdate(focDesc, this);
-//			sqlUpdate.addQueryField(L3TestDesc.FLD_STATUS);
-//			sqlUpdate.execute();
-//		}
+	public void updateStatus(int status) throws Exception {
+		FocDesc focDesc = getThisFocDesc();
+		if (focDesc != null) {
+			setStatus(status);
+			SQLUpdate sqlUpdate = new SQLUpdate(focDesc, this);
+			sqlUpdate.addQueryField(focDesc.getFieldIDByName(FNAME_STATUS));
+			sqlUpdate.execute();
+		}
 		// backup();
 	}
 

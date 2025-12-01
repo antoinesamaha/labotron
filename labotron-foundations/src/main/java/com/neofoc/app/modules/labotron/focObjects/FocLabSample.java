@@ -131,7 +131,7 @@ public class FocLabSample extends LabSample_FocObject {
 
     public static FocLabSample loadForSampleId(String sampleId) {
         FocList list = new FocList(new FocLinkSimple(getFocDesc()));
-        list.getFilter().putAdditionalWhere("SAMPLE_ID", "sample_id" + "=" + sampleId);
+        list.getFilter().putAdditionalWhere("SAMPLE_ID", "sample_id" + "='" + sampleId + "'");
         list.loadIfNotLoadedFromDB();
         return list != null ? (FocLabSample) list.getFocObject(0) : null;
     }
@@ -186,7 +186,11 @@ public class FocLabSample extends LabSample_FocObject {
             @Override
             public boolean treatElement(FocListElement element, FocObject focObj) {
                 FocLabTest test = (FocLabTest) focObj;
-                test.updateStatus(status);
+                try {
+                    test.updateStatus(status);
+                } catch (Exception e) {
+                    Globals.logException(e);
+                }
                 return false;
             }
         });

@@ -10,12 +10,16 @@ import com.foc.list.FocList;
 import com.neofoc.app.driver.IDriver;
 import com.neofoc.app.driver.MessageListener;
 import com.neofoc.app.modules.labotron.Instrument_FocObject;
+import com.neofoc.app.modules.labotron.LabSample;
+import com.neofoc.app.modules.labotron.LabTest;
 import com.neofoc.app.service.InstrumentReceiverListener;
 import com.neofoc.app.service.RabbitMQListenerService;
 import com.neofoc.app.utils.SpringContextUtil;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Properties;
 
 public class FocInstrument extends Instrument_FocObject implements Runnable, MessageListener,
@@ -256,13 +260,13 @@ public class FocInstrument extends Instrument_FocObject implements Runnable, Mes
     }
 
     private void send(L3Message message) throws Exception {
-//        logString("Message before send:" + message.toStringBuffer());
-//        driver.send(message);
-//        Iterator sampleIterator = message.sampleIterator();
-//        while (sampleIterator.hasNext()) {
-//            ((FocLabSample) sampleIterator.next())
-//                    .updateStatusForTests(FocLabTestDesc.TEST_STATUS_ANALYSING);
-//        }
+        logString("Message before send:" + message.toStringBuffer());
+        driver.send(message);
+        Iterator sampleIterator = message.sampleIterator();
+        while (sampleIterator.hasNext()) {
+            ((FocLabSample) sampleIterator.next())
+                    .updateStatusForTests(FocLabTest.TEST_STATUS_ANALYSING);
+        }
     }
 
     public void addMessageListener(MessageListener listener) {
@@ -384,7 +388,37 @@ public class FocInstrument extends Instrument_FocObject implements Runnable, Mes
     }
 
     public void sendASampleAnsweringInquiry(String rackNumber, String tubePosition, String sampleId) {
-//        logString("Instrument : sendASampleAnsweringInquiry 1 sample : "+sampleId);
+        logString("Instrument : sendASampleAnsweringInquiry 1 sample : "+sampleId);
+        FocLabSample focLabSample = FocLabSample.loadForSampleId(sampleId);
+
+        if (focLabSample != null) {
+            FocList testList = focLabSample.getTestList();
+            testList.loadIfNotLoadedFromDB();
+
+            ArrayList<FocLabTest> testArray = new ArrayList<>();
+            for (int i = 0; i < testList.size(); i++) {
+                FocLabTest test = (FocLabTest) testList.getFocObject(i);
+                if (test.getDispatchInstrument() != null
+                        && test.getDispatchInstrument().getId() == getId()
+                        && test.getStatus() == FocLabTest.TEST_STATUS_AVAILABLE_IN_L3) {
+                    testArray.add(test);
+                }
+            }
+
+            if (testArray.size() > 0) {
+                if (!driver.reserve()) {
+                    L3Message message = new L3Message();
+                    message.addSample(focLabSample);
+
+                    try {
+                        send(message);
+                    } catch (Exception e) {
+                        Globals.logException(e);
+                    }
+                }
+            }
+        }
+
 //        L3SampleTestJoinFilter filter = getSampleListToSendAfterEnquiry(sampleId);
 //        filter.setActive(true);
 //
@@ -622,8 +656,11 @@ public class FocInstrument extends Instrument_FocObject implements Runnable, Mes
 
     public void switchOn() throws Exception {
         if (getDriver() != null) {// To create the driver if not available yet
-            RabbitMQListenerService rabbitMQListenerService = SpringContextUtil.getBean(RabbitMQListenerService.class);
-            rabbitMQListenerService.startInstrumentListener(this);
+            // If Inquiry based we don't need the queue because the sending of the orders is triggered by the instrument itself
+            if (!getDriver().isInquiryBased()) {
+                RabbitMQListenerService rabbitMQListenerService = SpringContextUtil.getBean(RabbitMQListenerService.class);
+                rabbitMQListenerService.startInstrumentListener(this);
+            }
             addMessageListener(new InstrumentReceiverListener(this));
             getDriver().connect();
             refreshStartedFlag();

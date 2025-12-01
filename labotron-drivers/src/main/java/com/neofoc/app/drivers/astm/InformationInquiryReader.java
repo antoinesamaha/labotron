@@ -1,5 +1,11 @@
 package com.neofoc.app.drivers.astm;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class InformationInquiryReader extends FrameReader{
 
 	private String rackNumber     = "";
@@ -7,12 +13,12 @@ public class InformationInquiryReader extends FrameReader{
 	private String sampleId       = "";
 	private String sampleIdAttrib = "";
 	
-	private static final int FLD_SAMPLE_LOCATION_AND_ID = 2;
+	private int FLD_SAMPLE_LOCATION_AND_ID = 2;
 	
-	private static final int CMP_RACK_NBR            = 0;
-	private static final int CMP_TUBE_POS            = 1;
-	private static final int CMP_SAMPLE_ID           = 2;
-	private static final int CMP_SAMPLE_ID_ATTRIBUTE = 3;
+	private int CMP_RACK_NBR            = 0;
+	private int CMP_TUBE_POS            = 1;
+	private int CMP_SAMPLE_ID           = 2;
+	private int CMP_SAMPLE_ID_ATTRIBUTE = 3;
 	
 	public InformationInquiryReader(){
 		super('|', '^');

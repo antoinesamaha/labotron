@@ -1,4 +1,4 @@
-package com.neofoc.app.drivers.octa;
+package com.neofoc.app.drivers.alegria;
 
 import com.foc.Globals;
 import com.foc.desc.FocObject;
@@ -14,9 +14,9 @@ import com.neofoc.app.modules.labotron.focObjects.L3Message;
 
 import java.util.Iterator;
 
-public class OctaReceiver implements L3SerialPortListener {
+public class AlegriaReceiver implements L3SerialPortListener {
 
-    private OctaDriver driver;
+    private AlegriaDriver driver;
     private L3Message messageSentAsOrderToInstrument;
 
     private static final int[] PROGRAM_CODE = {2, 1};
@@ -34,7 +34,8 @@ public class OctaReceiver implements L3SerialPortListener {
 
     private static final int[] INQUIRY__PATIENT_ID = {3, 15};
 
-    public OctaReceiver(OctaDriver driver) {
+    public AlegriaReceiver(AlegriaDriver driver) {
+
         this.driver = driver;
     }
 
@@ -50,7 +51,7 @@ public class OctaReceiver implements L3SerialPortListener {
         }
     }
 
-    private void extractDataFromFrame(OctaFrame frame) {
+    private void extractDataFromFrame(AstmFrame frame) {
         // This method should parse the frame and extract the relevant information
         // based on the defined indices.
         // For now, we will just log the received frame.
@@ -58,7 +59,7 @@ public class OctaReceiver implements L3SerialPortListener {
         if (       frame.getDataWithFrame().length() > 2
                 && frame.getDataWithFrame().charAt(0) == AstmFrame.STX
                 && (   frame.getDataWithFrame().charAt(frame.getDataWithFrame().length() - 1) == AstmFrame.ETX
-                    || frame.getDataWithFrame().charAt(frame.getDataWithFrame().length() - 1) == AstmFrame.EOT)
+                || frame.getDataWithFrame().charAt(frame.getDataWithFrame().length() - 1) == AstmFrame.EOT)
         ) {
             StringBuffer data = new StringBuffer(frame.getDataWithFrame().substring(1, frame.getDataWithFrame().length() - 1));
             frame.setData(data);
@@ -73,6 +74,16 @@ public class OctaReceiver implements L3SerialPortListener {
                 }else if (data.charAt(0) == AstmFrame.NACK) {
                     frame.setType(AstmFrame.FRAME_TYPE_NACK);
                 }
+            }
+        } else if (frame.getDataWithFrame().length() == 1) {
+            if (frame.getDataWithFrame().charAt(0) == AstmFrame.ENQ) {
+                frame.setType(AstmFrame.FRAME_TYPE_ENQ);
+            } else if(frame.getDataWithFrame().charAt(0) == AstmFrame.EOT) {
+                frame.setType(AstmFrame.FRAME_TYPE_EOT);
+            } else if(frame.getDataWithFrame().charAt(0) == AstmFrame.ACK) {
+                frame.setType(AstmFrame.FRAME_TYPE_ACK);
+            } else if(frame.getDataWithFrame().charAt(0) == AstmFrame.NACK) {
+                frame.setType(AstmFrame.FRAME_TYPE_NACK);
             }
         }
     }
@@ -98,7 +109,7 @@ public class OctaReceiver implements L3SerialPortListener {
         return value;
     }
 
-    protected boolean treatResultFrame(OctaFrame frame) {
+    protected boolean treatResultFrame(AlegriaFrame frame) {
         boolean error = false;
         StringBuffer data = frame.getData();
 
@@ -156,7 +167,7 @@ public class OctaReceiver implements L3SerialPortListener {
         return error;
     }
 
-    public void respondToInquiryIfNecessary(OctaFrame frame) {
+    public void respondToInquiryIfNecessary(AstmFrame frame) {
         boolean error = false;
 
         final FocInstrument instrument = driver.getInstrument();
@@ -213,15 +224,15 @@ public class OctaReceiver implements L3SerialPortListener {
 
     @Override
     public void received(L3Frame l3Frame) {
-        OctaFrame frame = (OctaFrame) l3Frame;
+        AlegriaFrame frame = (AlegriaFrame) l3Frame;
 
         extractDataFromFrame(frame);
-        if (frame.getType() == OctaFrame.FRAME_TYPE_RESULT) {
-            boolean error = treatResultFrame((OctaFrame) frame);
-            String answer = OctaFrame.ACK_FRAME;
+        if (frame.getType() == AlegriaFrame.FRAME_TYPE_RESULT) {
+            boolean error = treatResultFrame((AlegriaFrame) frame);
+            String answer = AlegriaFrame.ACK_FRAME;
             if (error) {
                 Globals.logString("Prepare NACK answer");
-                answer = OctaFrame.NACK_FRAME;
+                answer = AlegriaFrame.NACK_FRAME;
             }
 
             try {
@@ -230,7 +241,7 @@ public class OctaReceiver implements L3SerialPortListener {
                 Globals.logString("Exception while Sending answer");
                 Globals.logException(e);
             }
-        } else if (frame.getType() == OctaFrame.FRAME_TYPE_INFORMATION_INQUIRY) {
+        } else if (frame.getType() == AlegriaFrame.FRAME_TYPE_INFORMATION_INQUIRY) {
             Globals.logString("Received Information Inquiry Frame");
             respondToInquiryIfNecessary(frame);
         } else if (frame.getType() == AstmFrame.FRAME_TYPE_ACK) {
@@ -242,6 +253,8 @@ public class OctaReceiver implements L3SerialPortListener {
         } else if (frame.getType() == AstmFrame.FRAME_TYPE_NACK) {
             dispose_MessageSentAsOrderToInstrument();
             Globals.logString("Received NACK Frame");
+        } else if (frame.getType() == AstmFrame.FRAME_TYPE_ENQ) {
+            Globals.logString("Received ENQ Frame");
         } else {
             Globals.logString("Received Unknown Frame Type: " + frame.getType());
         }

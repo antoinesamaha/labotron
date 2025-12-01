@@ -91,11 +91,11 @@ public class ConnectorServiceImpl implements ConnectorService {
             log.info("Instrument {} has {} tests", entry.getKey(), entry.getValue().getTests().size());
         }
 
-        saveToDB(instrumentToSampleMap);
-        sendToDrivers(instrumentToSampleMap);
+        FocLabSample focLabSample = saveToDB(instrumentToSampleMap);
+        sendToDrivers(instrumentToSampleMap, focLabSample);
     }
 
-    public void sendToDrivers(HashMap<String, SampleFromLisDTO> instrumentToSampleMap) {
+    public void sendToDrivers(HashMap<String, SampleFromLisDTO> instrumentToSampleMap, FocLabSample focLabSample) {
         for (Map.Entry<String, SampleFromLisDTO> entry : instrumentToSampleMap.entrySet()) {
             String instrumentCode = entry.getKey();
             SampleFromLisDTO sampleForInstrument = entry.getValue();
@@ -108,7 +108,13 @@ public class ConnectorServiceImpl implements ConnectorService {
                 FocList list = focDesc.getFocList();
                 list.loadIfNotLoadedFromDB();
                 FocInstrument instrument = (FocInstrument) list.searchByPropertyStringValue("code", instrumentCode);
-                rabbitMQSendingService.sendToDriver(instrument, instrumentCode, sampleForInstrument.getSampleId(), sampleForInstrument);
+
+                //Only if the driver is not Inquiry based we send to the queue. Because Inquiry means we only send to the instrument upon a request
+                //From the Instrument through the socket
+                if (!instrument.getDriver().isInquiryBased()) {
+                    rabbitMQSendingService.sendToDriver(instrument, instrumentCode, sampleForInstrument.getSampleId(), sampleForInstrument);
+                }
+
             } catch (Exception e) {
                 log.error("Failed to send to instrument {}: {}", instrumentCode, e.getMessage(), e);
             }
@@ -117,7 +123,7 @@ public class ConnectorServiceImpl implements ConnectorService {
         }
     }
 
-    public void saveToDB(HashMap<String, SampleFromLisDTO> instrumentToSampleMap) {
+    public FocLabSample saveToDB(HashMap<String, SampleFromLisDTO> instrumentToSampleMap) {
         FocList instrumentList = FocInstrument.getFocDesc().getFocList();
 
         FocLabSample labSample = new FocLabSample(new FocConstructor(Globals.getApp().getFocDescByName("lab_sample")));
@@ -147,11 +153,12 @@ public class ConnectorServiceImpl implements ConnectorService {
                 FocLabTest focLabTest = (FocLabTest) testList.newEmptyItem();
                 focLabTest.setCreated(true);
                 focLabTest.setLabel(testFromLis.getTestCode());
+                focLabTest.setDispatchInstrument((FocInstrument) instrumentList.searchByPropertyStringValue("code", instrumentCode));
                 //focLabTest.setLabSample(labSample);
                 focLabTest.setDescrip(testFromLis.getTestDesc());
 
                 FocInstrument instrument = (FocInstrument) instrumentList.searchByPropertyStringValue("code", testFromLis.getInstrumentCode());
-                //focLabTest.setDispatchInstrument(instrument);
+                focLabTest.setDispatchInstrument(instrument);
                 focLabTest.setStatus(FocLabTest.TEST_STATUS_AVAILABLE_IN_L3);
                 focLabTest.setValue(0);
                 focLabTest.setUnitLabel("");
@@ -166,5 +173,6 @@ public class ConnectorServiceImpl implements ConnectorService {
             // In a real implementation, you would call the appropriate DAO/service method to save the data
         }
         labSample.validate(true);
+        return labSample;
     }
 }
