@@ -1,19 +1,23 @@
 package com.neofoc.app.drivers.astm;
 
 import com.neofoc.app.modules.labotron.focObjects.FocLabTest;
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
 public class OrderLineReader extends FrameReader{
 
 	private String sampleId = null;
 	private String testLabel = null; 
 	
-	private static final int POS_ORDER_SEQUENCE  		= 1;
-	private static final int POS_ORDER_SPECIMEN_ID      = 2;
-	private static final int POS_ORDER_SPECIMEN 		= 3;
-	private static final int POS_ORDER_TEST_ID   		= 4;
+	private int POS_ORDER_SEQUENCE  	= 1;
+	private int POS_ORDER_SPECIMEN_ID   = 2;
+	private int POS_ORDER_SPECIMEN 		= 3;
+	private int POS_ORDER_TEST_ID   	= 4;
 
-	private static final int COMP_SPECIMEN    = 0;
-	private static final int COMP_TEST_ID     = 3;
+	private int COMP_SPECIMEN    = 0;
+	private int COMP_TEST_ID     = 3;
 
 	private int pos_Field_OrderSpecimenID     = -1;
 	private int pos_Component_OrderSpecimenID = -1;

@@ -1,9 +1,7 @@
 package com.neofoc.app.drivers.alegria;
 
 import com.foc.Globals;
-import com.neofoc.app.drivers.astm.AstmDriver;
-import com.neofoc.app.drivers.astm.AstmReceiver;
-import com.neofoc.app.drivers.astm.InformationInquiryReader;
+import com.neofoc.app.drivers.astm.*;
 import com.neofoc.app.drivers.octa.OctaFrame;
 import com.neofoc.app.modules.labotron.focObjects.FocInstrument;
 
@@ -52,6 +50,11 @@ public class AlegriaDriver extends AstmDriver {
         InformationInquiryReader informationEnquiryReader = receiver.getInformationEnquiryReader();
         informationEnquiryReader.setCMP_SAMPLE_ID(1);
         informationEnquiryReader.setCMP_TUBE_POS(-1);
+
+        PatientLineReader patientLineReader = receiver.getPatientLineReader();
+        patientLineReader.setPOS_PATIENT_NAME(2);
+        patientLineReader.setPOS_PATIENT_ID(0);
+
         //setDriverReceiver(new AlegriaReceiver(this));
     }
 }

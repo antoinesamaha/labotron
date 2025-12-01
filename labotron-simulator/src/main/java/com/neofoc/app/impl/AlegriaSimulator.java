@@ -41,7 +41,7 @@ public class AlegriaSimulator extends AbstractSimulator {
         String[] frames = {
                 "1H|\\^&",
                 "2P|1|SAMPLE01|123123123",
-                "3O|2|SAMPLE01||^^^SS-B|R|||||||||N||||||||||||||F|",
+                "3O|2|5586677||^^^SS-B|R|||||||||N||||||||||||||F|",
                 "4R|3|^^^SS-B|< 5|U/ml|3.5 to 4.5|||F||admin|20230208093130|20230208162848||",
                 "5L|1|N"
         };

@@ -11,14 +11,14 @@ public class ResultLineReader extends FrameReader{
 	private char resultType = 'P';
 	private boolean doRead = true;
 	
-	private static final int FLD_SEQUENCE_NUMBER    = 1;
-	private static final int FLD_UNIVERSAL_TEST_ID  = 2;
-	protected static final int FLD_DATA_VALUE       = 3;
-	private static final int FLD_UNITS              = 4;
-	protected static final int FLD_ALARM_CODE       = 6;
+	private int FLD_SEQUENCE_NUMBER    = 1;
+	private int FLD_UNIVERSAL_TEST_ID  = 2;
+	protected int FLD_DATA_VALUE       = 3;
+	private int FLD_UNITS              = 4;
+	protected int FLD_ALARM_CODE       = 6;
 	
 	//FLD_UNIVERSAL_TEST_ID
-  private static final int CMP_ASSAY_NUMBER       = 3;
+  private int CMP_ASSAY_NUMBER       = 3;
 	//private static final int CMP_RESULT_TYPE        = 7;
 	
 	public ResultLineReader(AstmDriver driver){

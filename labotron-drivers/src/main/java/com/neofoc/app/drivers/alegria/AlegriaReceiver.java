@@ -4,9 +4,9 @@ import com.foc.Globals;
 import com.foc.desc.FocObject;
 import com.foc.list.FocListElement;
 import com.foc.list.FocListIterator;
-import com.neofoc.app.connection.L3SerialPortListener;
 import com.neofoc.app.driver.L3Frame;
 import com.neofoc.app.drivers.astm.AstmFrame;
+import com.neofoc.app.drivers.astm.AstmReceiver;
 import com.neofoc.app.modules.labotron.focObjects.FocInstrument;
 import com.neofoc.app.modules.labotron.focObjects.FocLabSample;
 import com.neofoc.app.modules.labotron.focObjects.FocLabTest;
@@ -14,7 +14,7 @@ import com.neofoc.app.modules.labotron.focObjects.L3Message;
 
 import java.util.Iterator;
 
-public class AlegriaReceiver implements L3SerialPortListener {
+public class AlegriaReceiver extends AstmReceiver {
 
     private AlegriaDriver driver;
     private L3Message messageSentAsOrderToInstrument;
@@ -35,11 +35,12 @@ public class AlegriaReceiver implements L3SerialPortListener {
     private static final int[] INQUIRY__PATIENT_ID = {3, 15};
 
     public AlegriaReceiver(AlegriaDriver driver) {
-
-        this.driver = driver;
+        super(driver);
     }
 
+    /*
     public void dispose() {
+        super.dispose();
         dispose_MessageSentAsOrderToInstrument();
         driver = null;
     }
@@ -176,25 +177,8 @@ public class AlegriaReceiver implements L3SerialPortListener {
 
         Globals.logString("Calling sendASampleAnsweringInquiry : "+sampleId);
         if (instrument != null && !driver.reserve()) {
-//            try {
-//                AlegriaFrameCreator creator = new AlegriaFrameCreator();
-//                driver.getL3SerialPort().send(creator.buildAckFrame());
-//
-//                //Loading the L3Message to send
-//                L3SampleTestJoinFilter filter = instrument.getSampleListToSendAfterEnquiry(sampleId);
-//                filter.setActive(true);
-//                instrument.logString("Loading FocLabSample to Send : " + sampleId);
-//                messageSentAsOrderToInstrument = filter.convertToMessage();
-//
-//                String orderFrame = creator.buildOrderFrame(instrument, messageSentAsOrderToInstrument);
-//                driver.getL3SerialPort().send(orderFrame);
-//
-//                driver.release();
-//            } catch (Exception e) {
-//                messageSentAsOrderToInstrument = null;
-//                Globals.logString("Exception while answering inquiry");
-//                Globals.logException(e);
-//            }
+
+
         }
 
     }
@@ -260,5 +244,5 @@ public class AlegriaReceiver implements L3SerialPortListener {
         }
 
     }
-
+    */
 }

@@ -10,12 +10,16 @@ import com.neofoc.app.modules.labotron.focObjects.FocInstrument;
 import com.neofoc.app.modules.labotron.focObjects.FocLabSample;
 import com.neofoc.app.modules.labotron.focObjects.FocLabTest;
 import com.neofoc.app.modules.labotron.focObjects.L3Message;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.StringTokenizer;
 
 /**
  * @author 01Barmaja
  */
+@Getter
+@Setter
 public class AstmReceiver implements L3SerialPortListener {
 	protected AstmDriver driver = null;
 	protected L3Message message = null;
@@ -221,6 +225,7 @@ public class AstmReceiver implements L3SerialPortListener {
 		}
 		if (sample == null) {
 			sample = new FocLabSample(orderLineReader.getSampleId());
+			sample.setPatientId(patientLineReader.getPatientId());
 			sample.setFirstName(patientLineReader.getFirstName());
 			sample.setLastName(patientLineReader.getLastName());
 			sample.setMiddleInitial(patientLineReader.getMidInitial());
