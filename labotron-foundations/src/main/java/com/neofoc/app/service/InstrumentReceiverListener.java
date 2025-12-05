@@ -149,7 +149,7 @@ public class InstrumentReceiverListener implements MessageListener {
                 }
                 testDB.setResultOk(test.getResultOk());
                 testDB.setValue(test.getValue());
-                //testDB.setActualInstrument(instrument);
+                testDB.setActualInstrument(instrument);
                 testDB.setUnitLabel(test.getUnitLabel());
             }
         }

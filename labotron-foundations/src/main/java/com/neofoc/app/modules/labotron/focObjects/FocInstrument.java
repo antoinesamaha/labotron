@@ -388,97 +388,86 @@ public class FocInstrument extends Instrument_FocObject implements Runnable, Mes
     }
 
     public void sendASampleAnsweringInquiry(String rackNumber, String tubePosition, String sampleId) {
-        logString("Instrument : sendASampleAnsweringInquiry 1 sample : "+sampleId);
-        FocLabSample focLabSample = FocLabSample.loadForSampleId(sampleId);
+        // Run the existing logic asynchronously in its own thread
+        Thread t = new Thread(() -> {
+            try {
+                logString("Instrument : sendASampleAnsweringInquiry 1 sample : "+sampleId);
+                FocLabSample focLabSample = FocLabSample.loadForSampleId(sampleId);
 
-        if (focLabSample != null) {
-            FocList testList = focLabSample.getTestList();
-            testList.loadIfNotLoadedFromDB();
+                if (focLabSample != null) {
+                    FocList testList = focLabSample.getTestList();
+                    testList.loadIfNotLoadedFromDB();
 
-            ArrayList<FocLabTest> testArray = new ArrayList<>();
-            for (int i = 0; i < testList.size(); i++) {
-                FocLabTest test = (FocLabTest) testList.getFocObject(i);
-                if (test.getDispatchInstrument() != null
-                        && test.getDispatchInstrument().getId() == getId()
-                        && test.getStatus() == FocLabTest.TEST_STATUS_AVAILABLE_IN_L3) {
-                    testArray.add(test);
-                }
-            }
+                    ArrayList<FocLabTest> testArray = new ArrayList<>();
+                    for (int i = 0; i < testList.size(); i++) {
+                        FocLabTest test = (FocLabTest) testList.getFocObject(i);
+                        if (test.getDispatchInstrument() != null
+                                && test.getDispatchInstrument().getId() == getId()
+                                && test.getStatus() == FocLabTest.TEST_STATUS_AVAILABLE_IN_L3) {
+                            testArray.add(test);
+                        }
+                    }
 
-            if (testArray.size() > 0) {
-                if (!driver.reserve()) {
-                    L3Message message = new L3Message();
-                    message.addSample(focLabSample);
+                    if (testArray.size() > 0) {
+                        try {
+                            if (!driver.reserve()) {
+                                L3Message message = new L3Message();
+                                // Optionally set rack/tube info on the sample if needed
+                                // focLabSample.setRackNumber(rackNumber);
+                                // focLabSample.setTubePosition(tubePosition);
+                                message.addSample(focLabSample);
 
-                    try {
-                        send(message);
-                    } catch (Exception e) {
-                        Globals.logException(e);
+                                send(message);
+                            }
+                        } catch (Exception e) {
+                            Globals.logException(e);
+                        } finally {
+                            try {
+                                if (driver != null) driver.release();
+                            } catch (Exception e) {
+                                Globals.logException(e);
+                            }
+                        }
                     }
                 }
+            } catch (Exception e) {
+                Globals.logException(e);
             }
-        }
+        }, "SendSampleInquiry-" + getCode() + "-" + sampleId);
+        t.setDaemon(true);
+        t.start();
 
-//        L3SampleTestJoinFilter filter = getSampleListToSendAfterEnquiry(sampleId);
-//        filter.setActive(true);
-//
-//        logString("Instrument : sendASampleAnsweringInquiry 2 ");
-//
-//        L3Message messageReadyToSend = filter.convertToMessage();
-//        int size = messageReadyToSend != null ? messageReadyToSend.getNumberOfSamples() : 0;
-//
-//        logString("Instrument : sendASampleAnsweringInquiry 3 size : " +size);
-//
-//        if (size > 0) {
-//            logString("Instrument : sendASampleAnsweringInquiry 4 nbrSamples : " +messageReadyToSend.getNumberOfSamples());
-//            for (int i = 0; i < messageReadyToSend.getNumberOfSamples(); i++) {
-//                L3Sample sample = messageReadyToSend.getSample(i);
-//                sample.setRackNumber(rackNumber);
-//                sample.setTubePosition(tubePosition);
-//
-//                L3SampleTestJoinFilter pendingList = getSampleTestList_PendingTestsToBeResentWithNewTests();
-//                pendingList.setSampleID(sample.getId());
-//                pendingList.setActive(true);
-//                pendingList.addAllTestsToSameSample(sample);
-//
-//                logString("Instrument : sendASampleAnsweringInquiry 5 ");
-//
-//                if (!driver.reserve()) {
-//                    L3Message message = new L3Message();
-//                    // sample.updateStatus(L3SampleDesc.SAMPLE_STATUS_SENDING_TO_INSTRUMENT);
-//                    message.addSample(sample);// we have to test the
-//                    // status of the sample;
-//                    // if it is blocked we
-//                    // dont add
-//                    try {
-//                        logString("Instrument : sendASampleAnsweringInquiry 6 - Sending ");
-//                        send(message);
-//                        logString("Instrument : sendASampleAnsweringInquiry 7 - Send done");
-//                        i++;
-//                    } catch (L3TryLaterException e) {
-//                        logString("L3TryLaterException Driver suspended comunication.");
-//                        //driverSaidToTryLater = true;
-//                    } catch (L3InstrumentDoesNotRespondTryLaterException e) {
-//                        logString("L3InstrumentDoesNotRespondTryLaterException Driver not responding");
-//                        logString(e.getMessage());
-//                        //driverSaidToTryLater = true;
-//                    } catch (Exception e) {
-//                        i++;
-//                        logException(e);
-//                        sample.updateBlockedForTests(true);
-//                        sample.updateStatusForTests(L3TestDesc.TEST_STATUS_RESULT_AVAILABLE);
-//                        sample.updateNotificationMessageForTests("WHEN SEND TO INST:"
-//                                + e.getMessage());
-//                    }
-//                    driver.release();
-//                }
-//            }
-//        }
-//
-//        if (filter != null) {
-//            filter.dispose();
-//            filter = null;
-//        }
+        // Previous synchronous implementation retained below for reference
+        //        logString("Instrument : sendASampleAnsweringInquiry 1 sample : "+sampleId);
+        //        FocLabSample focLabSample = FocLabSample.loadForSampleId(sampleId);
+        //
+        //        if (focLabSample != null) {
+        //            FocList testList = focLabSample.getTestList();
+        //            testList.loadIfNotLoadedFromDB();
+        //
+        //            ArrayList<FocLabTest> testArray = new ArrayList<>();
+        //            for (int i = 0; i < testList.size(); i++) {
+        //                FocLabTest test = (FocLabTest) testList.getFocObject(i);
+        //                if (test.getDispatchInstrument() != null
+        //                        && test.getDispatchInstrument().getId() == getId()
+        //                        && test.getStatus() == FocLabTest.TEST_STATUS_AVAILABLE_IN_L3) {
+        //                    testArray.add(test);
+        //                }
+        //            }
+        //
+        //            if (testArray.size() > 0) {
+        //                if (!driver.reserve()) {
+        //                    L3Message message = new L3Message();
+        //                    message.addSample(focLabSample);
+        //
+        //                    try {
+        //                        send(message);
+        //                    } catch (Exception e) {
+        //                        Globals.logException(e);
+        //                    }
+        //                }
+        //            }
+        //        }
     }
 
 
@@ -675,6 +664,14 @@ public class FocInstrument extends Instrument_FocObject implements Runnable, Mes
             getDriver().disconnect();
             refreshStartedFlag();
         }
+    }
+
+    public int getDlyForTimeOut() {
+        int dly = super.getDlyForTimeOut();
+        if (dly <= 0) {
+            dly = DELAY_DRIVER_TIME_OUT_FOR_RESPONSE;
+        }
+        return dly;
     }
 
 //    public L3SampleTestJoinFilter getSampleListToSend() {

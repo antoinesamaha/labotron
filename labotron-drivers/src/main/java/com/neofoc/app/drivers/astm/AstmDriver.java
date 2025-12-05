@@ -97,7 +97,7 @@ public class AstmDriver extends DriverSerialPort {
 			}
 		}
 
-		int timeOutDelay = getInstrument().getPropertyInteger("delay_driver_time_out_for_response");
+		int timeOutDelay = getInstrument().getDlyForTimeOut();
 
 		int i = 0;
 		int numberOfFailures = 0;

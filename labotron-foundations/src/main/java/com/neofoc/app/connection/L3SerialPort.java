@@ -246,10 +246,10 @@ public class L3SerialPort {
                 outputStream.write(strOut.getBytes());
                 Globals.logString("After Sending with timeout");
             }
-            if (isLogBufferDetails())
+            //if (isLogBufferDetails())
                 Globals.logString("Wait :" + this.toString());
             wait(timeOutMilliseconds);
-            if (isLogBufferDetails())
+            //if (isLogBufferDetails())
                 Globals.logString("Wait Out:" + this.toString());
             synchronousMessage = false;
             if (newAnswerAvailable) {

@@ -14,9 +14,9 @@ public class AlegriaSimulator extends AbstractSimulator {
         //These 3 calls will run in 3 parallel threads
         socket.open();
 
-//        sendingInquiry();
-//        sleep(10000);
-        sendingResults();
+        sendingInquiry();
+        sleep(120000);
+//        sendingResults();
 
 //        socket.close();
     }
