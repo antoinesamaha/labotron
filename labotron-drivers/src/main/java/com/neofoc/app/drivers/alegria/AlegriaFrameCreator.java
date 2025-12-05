@@ -1,40 +1,22 @@
 package com.neofoc.app.drivers.alegria;
 
-import com.foc.Globals;
 import com.neofoc.app.driver.DriverSerialPort;
-import com.neofoc.app.drivers.astm.AstmDriver;
 import com.neofoc.app.drivers.astm.AstmFrame;
 import com.neofoc.app.drivers.astm.AstmFrameCreator;
-import com.neofoc.app.drivers.astm.AstmParams;
 import com.neofoc.app.modules.labotron.focObjects.FocInstrument;
-import com.neofoc.app.modules.labotron.focObjects.FocLabSample;
-import com.neofoc.app.modules.labotron.focObjects.L3Message;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 
 public class AlegriaFrameCreator extends AstmFrameCreator {
 
     /*
-        Actual frame example:
-
-        H|\^&
-        P|1|5586677|797979
-        O|1|5586677|^^^SS-B
-        O|2|5586677|^^^SS-A
-        L|1|N
-
         Documentation frame example:
         H|\^&
         P|1|SAMPLE01|123123123
         O|1|SAMPLE01||^^^SS-B
         L|1|N
-
      */
 
     public AstmFrame newHeaderFrame(FocInstrument instrument, int sequence) {
