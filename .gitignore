@@ -138,6 +138,9 @@ modules.xml
 # Log file
 *.log
 
+**/.env
+docker-compose/logs/*
+
 # BlueJ files
 *.ctxt
 

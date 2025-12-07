@@ -45,6 +45,8 @@ services:
       - "${RABBITMQ_PORT}:5672"
       - "${RABBITMQ_MGMT_PORT}:15672"
     environment:
+      RABBITMQ_NODENAME: rabbit@rabbitmq
+      RABBITMQ_ERLANG_COOKIE: "RABBITMQ_COOKIE"
       RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER:-guest}
       RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASS:-guest}
     volumes:

@@ -1,3 +1,23 @@
+# Docker settings
+
+Setting log rotation for docker daemon
+In the file:
+```
+/etc/docker/daemon.json
+```
+
+Add:
+
+```json
+{
+  "log-driver": "json-file",
+  "log-opts": {
+  "max-size": "50m",
+  "max-file": "5"
+  }
+}
+```
+
 # Deployment
 Create a folder labotron under opt
 
