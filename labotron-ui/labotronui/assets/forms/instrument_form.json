@@ -17,44 +17,48 @@
           "label": "Driver",
           "options": [
             {
+              "value": "com.neofoc.app.drivers.alegria.AlegriaDriver",
+              "label": "Alegria Driver"
+            },            
+            {
               "value": "b01.l3.drivers.horiba.pentraML.PentraMLDriver",
-              "label": "PentraMLDriver"
+              "label": "PentraML Driver"
             },
             {
               "value": "b01.l3.drivers.abbott.architect.ArchitectDriver",
-              "label": "ArchitectDriver"
+              "label": "Architect Driver"
             },
             {
               "value": "b01.l3.drivers.coulter.CoulterDriver",
-              "label": "CoulterDriver"
+              "label": "Coulter Driver"
             },
             {
               "value": "b01.l3.drivers.hitachi.elecsys2010.ElecsysDriver",
-              "label": "ElecsysDriver"
+              "label": "Elecsys Driver"
             },
             {
               "value": "b01.l3.drivers.abbott.modular.ModularDriver",
-              "label": "ModularDriver"
+              "label": "Modular Driver"
             },
             {
               "value": "com.neofoc.app.drivers.infinity.CobasInfinityDriver",
-              "label": "CobasInfinityDriver"
+              "label": "Cobas Infinity Driver"
             },
             {
               "value": "com.neofoc.app.drivers.dadeBehring.bcs.BCSDriver",
-              "label": "BCSDriver"
+              "label": "BCS Driver"
             },
             {
               "value": "com.neofoc.app.drivers.maglumi.MaglumiDriver",
-              "label": "MaglumiDriver"
+              "label": "Maglumi Driver"
             },
             {
               "value": "com.neofoc.app.drivers.octa.OctaDriver",
-              "label": "OctaDriver"
+              "label": "Octa Driver"
             },
             {
               "value": "b01.l3.drivers.horiba.yumizenP8000.YumizenP8000Driver",
-              "label": "YumizenP8000Driver"
+              "label": "YumizenP8000 Driver"
             }
           ],
           "required": true

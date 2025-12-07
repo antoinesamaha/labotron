@@ -13,7 +13,7 @@
           "key": "lis_test_label",
           "label": "LIS Code",
           "numeric": false
-        },
+        },        
         {
           "key": "instrument_test_code",
           "label": "Inst. Code",

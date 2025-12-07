@@ -39,8 +39,9 @@ sudo chmod u+x installJar.sh
 
 Build the backend image
 ```
-cd /opt/labotron/labotron-service
+cd /opt/labotron
 mvn clean install
+cd /opt/labotron/labotron-service
 docker build -t labotron-service:latest .
 ```
 
