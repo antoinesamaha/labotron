@@ -25,17 +25,17 @@ public class FocLabTest extends LabTest_FocObject {
 	public static final String TABLE_NAME          = "L3TEST"     ;
 
 	public static final String FNAME_SAMPLE_PREFIX = "SAMPLE_"    ;
-	public static final String FNAME_LABEL         = "LABEL"      ;
-	public static final String FNAME_VALUE         = "VALUE"      ;
-	public static final String FNAME_VALUE_NOTES   = "NOTES"      ;
-	public static final String FNAME_RESULT_OK     = "RESULT_OK"  ;
-	public static final String FNAME_STATUS        = "STATUS"     ;
-	public static final String FNAME_BLOCKED       = "BLOCKED"    ;
-	public static final String FNAME_MESSAGE       = "MESSAGE"    ;
-	public static final String FNAME_UNIT          = "UNIT_LABEL" ;
-	public static final String FNAME_ALARM         = "ALARM"      ;
-	public static final String FNAME_PRIORITY             = "PRIORITY"             ;
-	public static final String FNAME_VERIFICATION_PENDING = "VERIFICATION_PENDING" ;
+	public static final String FNAME_LABEL         = "label"      ;
+	public static final String FNAME_VALUE         = "value"      ;
+	public static final String FNAME_VALUE_NOTES   = "notes"      ;
+	public static final String FNAME_RESULT_OK     = "result_ok"  ;
+	public static final String FNAME_STATUS        = "status"     ;
+	public static final String FNAME_BLOCKED       = "blocked"    ;
+	public static final String FNAME_MESSAGE       = "message"    ;
+	public static final String FNAME_UNIT          = "unit_label" ;
+	public static final String FNAME_ALARM         = "alarm"      ;
+	public static final String FNAME_PRIORITY             = "priority"             ;
+	public static final String FNAME_VERIFICATION_PENDING = "verification_pending" ;
 
 	public static final int LEN_TEST_LABEL       = 15;
 	public static final int LEN_TEST_DESCRIPTION = 25;

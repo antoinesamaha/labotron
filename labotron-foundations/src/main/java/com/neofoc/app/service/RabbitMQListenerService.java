@@ -74,11 +74,17 @@ public class RabbitMQListenerService {
         String sampleId = null;
         String body = null;
         try {
+            while (!Globals.getApp().isStarted()) {
+                Thread.sleep(1000); // Simulate processing delay
+            }
+
             body = new String(message.getBody());
             log.info("Received: {}", body);
 
             // Parse JSON into DTO using the configured ObjectMapper
             SampleFromLisDTO sampleFromLis = objectMapper.readValue(body, SampleFromLisDTO.class);
+            sampleFromLis.splitPatientName();
+
             sampleId = sampleFromLis.getSampleId();
             Globals.logString("Parsed sample ID: " + sampleId);
             Globals.logString("Number of tests: " + String.valueOf(sampleFromLis.getTests().size()));

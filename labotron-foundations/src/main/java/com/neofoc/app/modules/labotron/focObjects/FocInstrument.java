@@ -418,6 +418,13 @@ public class FocInstrument extends Instrument_FocObject implements Runnable, Mes
                                 message.addSample(focLabSample);
 
                                 send(message);
+
+                                for (int i = 0; i < testArray.size(); i++) {
+                                    FocLabTest test = (FocLabTest) testArray.get(i);
+                                    if (test != null){
+                                        test.updateStatus(FocLabTest.TEST_STATUS_ANALYSING);
+                                    }
+                                }
                             }
                         } catch (Exception e) {
                             Globals.logException(e);
