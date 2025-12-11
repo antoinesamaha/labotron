@@ -87,7 +87,7 @@ public class RabbitMQListenerService {
 
             sampleId = sampleFromLis.getSampleId();
             Globals.logString("Parsed sample ID: " + sampleId);
-            Globals.logString("Number of tests: " + String.valueOf(sampleFromLis.getTests().size()));
+            Globals.logString("Number of tests: " + (sampleFromLis.getTests() != null ? String.valueOf(sampleFromLis.getTests().size()) : "NULL"));
 
             communicationLogService.log(communicationLogService.RECEIVED_LIS_2_CONNECTOR, null, null, sampleId, body);
 

@@ -14,8 +14,8 @@
     "middleInitial": "Melhem",
     "dateOfBirth": "2005-10-08",
     "sex": "Male",
-    "currentDateTime": "2025-11-23 15:00:00",
-    "collectionDate": "2025-11-23 15:00:00",
+    "currentDateTime": "2025-11-23",
+    "collectionDate": "2025-11-23",
     "origin": "lab",
     "tests": [
         {
@@ -34,9 +34,9 @@
 ```json
 {
     "P_SAMPLE_ID" : "5647687",
-    "CURRENT_DATE_TIME" : "04/12/2025 00:00:00",
+    "CURRENT_DATE_TIME" : "04/12/2025",
     "SAMPLE_TYPE" : "SER",
-    "COLLECTION_DATE" : "04/12/2025 00:00:00",
+    "COLLECTION_DATE" : "04/12/2025",
     "PATIENT_NAME" : "Said M Osman",
     "AGE" : "73",
     "GENDER" : "M",

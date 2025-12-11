@@ -4,11 +4,11 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Data;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Data
@@ -45,12 +45,14 @@ public class SampleFromLisDTO {
     private String sex;
 
     //@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+    //@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+    @JsonDeserialize(using = FlexibleLocalDateTimeDeserializer.class)
     @JsonProperty("CURRENT_DATE_TIME")
     private LocalDateTime currentDateTime;
 
     //@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+    //@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+    @JsonDeserialize(using = FlexibleLocalDateTimeDeserializer.class)
     @JsonProperty("COLLECTION_DATE")
     private LocalDateTime collectionDate;
 
@@ -106,6 +108,7 @@ public class SampleFromLisDTO {
             }
         }
     }
+
 }
 
 /*
