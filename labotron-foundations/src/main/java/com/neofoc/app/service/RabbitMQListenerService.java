@@ -83,7 +83,9 @@ public class RabbitMQListenerService {
 
             // Parse JSON into DTO using the configured ObjectMapper
             SampleFromLisDTO sampleFromLis = objectMapper.readValue(body, SampleFromLisDTO.class);
+            Globals.logString("Parse PATIENT_NAME: " + sampleFromLis.getPatientName());
             sampleFromLis.splitPatientName();
+            Globals.logString("Patient Name: " + sampleFromLis.getFirstName()+" "+sampleFromLis.getMiddleInitial()+" "+sampleFromLis.getLastName());
 
             sampleId = sampleFromLis.getSampleId();
             Globals.logString("Parsed sample ID: " + sampleId);
