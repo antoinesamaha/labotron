@@ -17,10 +17,6 @@ import com.neofoc.app.service.RabbitMQSendingService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -136,7 +132,8 @@ public class ConnectorServiceImpl implements ConnectorService {
 
             if (!sampleInitialised) {
                 labSample.setSampleId(sampleForInstrument.getSampleId());
-                labSample.setLiquidType(sampleForInstrument.getSampleType());
+                labSample.setLiquidTypeFromLIS(sampleForInstrument.getSampleType());
+                //labSample.setLiquidType(sampleForInstrument.getSampleType());
                 labSample.setPatientId(sampleForInstrument.getPatientId());
                 labSample.setFirstName(sampleForInstrument.getFirstName());
                 labSample.setLastName(sampleForInstrument.getLastName());

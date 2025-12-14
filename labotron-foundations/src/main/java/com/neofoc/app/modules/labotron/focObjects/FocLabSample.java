@@ -36,11 +36,11 @@ public class FocLabSample extends LabSample_FocObject {
     public static final int LIQUID_TYPE_OTHERS = 7;
 
     public static final String LIQUID_TYPE_EMPTY_TITLE = "-";
-    public static final String LIQUID_TYPE_SERUM_TITLE = "Serum";
-    public static final String LIQUID_TYPE_URIN_TITLE = "Urin";
+    public static final String LIQUID_TYPE_SERUM_TITLE = "SER";//"Serum";
+    public static final String LIQUID_TYPE_URIN_TITLE = "UR";//"Urin";
     public static final String LIQUID_TYPE_CSF_TITLE = "CSF";
-    public static final String LIQUID_TYPE_BODY_FLUID_TITLE = "Body fluid";
-    public static final String LIQUID_TYPE_STOOL_TITLE = "Stool";
+    public static final String LIQUID_TYPE_BODY_FLUID_TITLE = "BLDV";//"Body fluid";
+    public static final String LIQUID_TYPE_STOOL_TITLE = "STL";//"Stool";
     public static final String LIQUID_TYPE_SUPERNATENT_TITLE = "Suprnt";
     public static final String LIQUID_TYPE_OTHERS_TITLE = "Others";
 
@@ -91,6 +91,102 @@ public class FocLabSample extends LabSample_FocObject {
         FocList testList = getPropertyList("test_list");
         testList.setLoaded(true);
     }
+
+    public void setLiquidTypeFromLIS(String liquidType) {
+        if (liquidType.startsWith("ANY")) {
+            setLiquidType(LIQUID_TYPE_OTHERS);
+
+        } else if (liquidType.startsWith("BICE")) {
+            // blood on ice / chilled blood component → treat as serum/plasma bucket
+            setLiquidType(LIQUID_TYPE_SERUM);
+
+        } else if (liquidType.startsWith("BLDE")) {
+            // EDTA blood (whole blood) – no dedicated constant, best fallback
+            setLiquidType(LIQUID_TYPE_OTHERS);
+
+        } else if (liquidType.startsWith("BLDHEP")) {
+            // heparinized blood (whole blood) – no dedicated constant, best fallback
+            setLiquidType(LIQUID_TYPE_OTHERS);
+
+        } else if (liquidType.startsWith("BLDV")) {
+            setLiquidType(LIQUID_TYPE_BODY_FLUID);
+
+        } else if (liquidType.startsWith("BRTH")) {
+            // breath – no dedicated constant
+            setLiquidType(LIQUID_TYPE_OTHERS);
+
+        } else if (liquidType.startsWith("B.S.Dar")) {
+            // likely blood spot / dried blood (or similar) – no dedicated constant
+            setLiquidType(LIQUID_TYPE_OTHERS);
+
+        } else if (liquidType.startsWith("COLD")) {
+            // chilled sample; usually serum/plasma in practice
+            setLiquidType(LIQUID_TYPE_SERUM);
+
+        } else if (liquidType.startsWith("CRYO")) {
+            // cryoprecipitate / cryo-related – no dedicated constant
+            setLiquidType(LIQUID_TYPE_OTHERS);
+
+        } else if (liquidType.startsWith("CSF")) {
+            setLiquidType(LIQUID_TYPE_CSF);
+
+        } else if (liquidType.startsWith("FLU")) {
+            // generic “fluid” (often not blood) – safest is body fluid bucket
+            setLiquidType(LIQUID_TYPE_BODY_FLUID);
+
+        } else if (liquidType.startsWith("PLAS")) {
+            // plasma: best mapping in your model is serum bucket
+            setLiquidType(LIQUID_TYPE_SERUM);
+
+        } else if (liquidType.startsWith("PPD")) {
+            // PPD skin test / TB-related – not a lab liquid type here
+            setLiquidType(LIQUID_TYPE_OTHERS);
+
+        } else if (liquidType.startsWith("P-V")) {
+            // ambiguous; commonly plasma/venous naming -> treat as serum/plasma bucket
+            setLiquidType(LIQUID_TYPE_SERUM);
+
+        } else if (liquidType.startsWith("S1H")) {
+            // timed serum sample (1 hour)
+            setLiquidType(LIQUID_TYPE_SERUM);
+
+        } else if (liquidType.startsWith("S2H")) {
+            // timed serum sample (2 hour)
+            setLiquidType(LIQUID_TYPE_SERUM);
+
+        } else if (liquidType.startsWith("S30mn")) {
+            // timed serum sample (30 min)
+            setLiquidType(LIQUID_TYPE_SERUM);
+
+        } else if (liquidType.startsWith("SER")) {
+            setLiquidType(LIQUID_TYPE_SERUM);
+
+        } else if (liquidType.startsWith("S.ICE")) {
+            // serum on ice
+            setLiquidType(LIQUID_TYPE_SERUM);
+
+        } else if (liquidType.startsWith("SPRNT")) {
+            setLiquidType(LIQUID_TYPE_SUPERNATENT);
+
+        } else if (liquidType.startsWith("SPT")) {
+            // sputum/swab/etc. – no dedicated constant
+            setLiquidType(LIQUID_TYPE_OTHERS);
+
+        } else if (liquidType.startsWith("STL")) {
+            setLiquidType(LIQUID_TYPE_STOOL);
+
+        } else if (liquidType.startsWith("URIN")) {
+            setLiquidType(LIQUID_TYPE_URIN);
+
+        } else if (liquidType.startsWith("UR")) {
+            setLiquidType(LIQUID_TYPE_URIN);
+
+        } else {
+            setLiquidType(LIQUID_TYPE_OTHERS);
+        }
+    }
+
+
 
     public void setLiquidType(String liquidType) {
         switch (liquidType){
