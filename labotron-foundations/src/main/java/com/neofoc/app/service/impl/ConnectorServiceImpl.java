@@ -87,8 +87,11 @@ public class ConnectorServiceImpl implements ConnectorService {
             log.info("Instrument {} has {} tests", entry.getKey(), entry.getValue().getTests().size());
         }
 
-        FocLabSample focLabSample = saveToDB(instrumentToSampleMap);
-        sendToDrivers(instrumentToSampleMap, focLabSample);
+        FocLabSample focLabSample = newAndsaveToDB(instrumentToSampleMap);
+        if (focLabSample != null) {
+            sendToDrivers(instrumentToSampleMap, focLabSample);
+            focLabSample.dispose();
+        }
     }
 
     public void sendToDrivers(HashMap<String, SampleFromLisDTO> instrumentToSampleMap, FocLabSample focLabSample) {
@@ -119,7 +122,7 @@ public class ConnectorServiceImpl implements ConnectorService {
         }
     }
 
-    public FocLabSample saveToDB(HashMap<String, SampleFromLisDTO> instrumentToSampleMap) {
+    public FocLabSample newAndsaveToDB(HashMap<String, SampleFromLisDTO> instrumentToSampleMap) {
         FocList instrumentList = FocInstrument.getFocDesc().getFocList();
 
         FocLabSample labSample = new FocLabSample(new FocConstructor(Globals.getApp().getFocDescByName("lab_sample")));
@@ -169,7 +172,13 @@ public class ConnectorServiceImpl implements ConnectorService {
             // For demonstration, we just log the action
             // In a real implementation, you would call the appropriate DAO/service method to save the data
         }
-        labSample.validate(true);
+
+        if (sampleInitialised) {
+            labSample.validate(true);
+        } else {
+            labSample.dispose();
+            labSample = null;
+        }
         return labSample;
     }
 }
