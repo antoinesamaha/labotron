@@ -187,9 +187,8 @@ public class FocLabSample extends LabSample_FocObject {
     }
 
 
-
     public void setLiquidType(String liquidType) {
-        switch (liquidType){
+        switch (liquidType) {
             case LIQUID_TYPE_EMPTY_TITLE:
                 setLiquidType(LIQUID_TYPE_EMPTY);
                 break;
@@ -236,11 +235,11 @@ public class FocLabSample extends LabSample_FocObject {
         return getPropertyList("test_list");
     }
 
-    public String getSampleId(){
+    public String getSampleId() {
         return getPropertyString("sample_id");
     }
 
-    public void setSampleId(String sampleId){
+    public void setSampleId(String sampleId) {
         setPropertyString("sample_id", sampleId);
     }
 
