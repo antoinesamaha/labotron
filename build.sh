@@ -1,0 +1,1 @@
+docker build -t labotron-service:latest ./labotron-service/.
