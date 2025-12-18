@@ -23,7 +23,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 /**
- * @author 01Barmaja
+ * @author Antoine Samaha
  */
 public class FocLabSample extends LabSample_FocObject {
     public static final int LIQUID_TYPE_EMPTY = -1;

@@ -5,6 +5,9 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Cacheable
@@ -65,4 +68,6 @@ public class Instrument implements Serializable {
 	@Column(nullable = false, length = 10)
 	private String comPort;
 
+	@OneToMany(mappedBy = "instrument", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+	private Set<TestLabelMap> testLabMaps = new HashSet<>();
 }

@@ -92,6 +92,39 @@
           "name": "on_hold",
           "label": "On Hold",
           "required": false
+        },
+        {
+          "type": "data_table",
+          "name": "test_label_map_LIST",
+          "label": "Instruments",
+          "title": "Instruments",
+          "meta_entity": "test_label_map",
+          "columns": [
+            {
+              "key": "lis_test_label",
+              "label": "LIS Code",
+              "numeric": false
+            },        
+            {
+              "key": "instrument_test_code",
+              "label": "Inst. Code",
+              "numeric": false
+            },
+            {
+              "key": "descrip",
+              "label": "description"
+            },
+            {
+              "key": "day_priority",
+              "label": "Day Priority",
+              "numeric": true
+            },
+            {
+              "key": "on_hold",
+              "label": "On Hold",
+              "numeric": true
+            }
+          ]
         }
       ]
     }    

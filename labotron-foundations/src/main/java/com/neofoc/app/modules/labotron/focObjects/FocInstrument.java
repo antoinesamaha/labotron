@@ -631,6 +631,7 @@ public class FocInstrument extends Instrument_FocObject implements Runnable, Mes
 
             // Direct instantiation using reflection
             try {
+                System.out.println("Trying to load driver: " + driverClassName);
                 // Load the class using the class name
                 Class<?> driverClass = Class.forName(driverClassName);
 
