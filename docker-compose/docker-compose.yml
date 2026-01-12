@@ -62,6 +62,12 @@ services:
     image: ${LABOTRON_SERVICE_IMAGE}
     ports:
       - "${LABOTRON_SERVICE_PORT}:8080"
+      - "10000:10000"
+      - "10001:10001"
+      - "10002:10002"
+      - "10003:10003"
+      - "10004:10004"
+      - "10005:10005"
     environment:
 #      - SPRING_PROFILES_ACTIVE=prod   # Spring profile
       - JAVA_OPTS=-Xmx4092m -Xms256m   # JVM memory limits

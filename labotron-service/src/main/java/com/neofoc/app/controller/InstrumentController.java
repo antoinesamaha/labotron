@@ -6,6 +6,7 @@ import com.neofoc.app.modules.labotron.focObjects.FocInstrument;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,13 +38,26 @@ public class InstrumentController {
         FocList list = focDesc.getFocList();
         FocInstrument instrument = (FocInstrument) list.searchByReference(instrumentId);
 
-        try {
-            instrument.switchOn();
-        } catch (Exception e) {
-            log.error("Error starting instrument driver connect and RabbitMQ listener: {}", e.getMessage(), e);
+        if (instrument == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Instrument not found: " + instrumentId);
         }
 
-        return instrument != null && instrument.getStarted() ? ResponseEntity.ok().build() : ResponseEntity.status(500).body("Failed to connect to instrument");
+        try {
+            if (instrument.getStarted()) {
+                instrument.refreshStartedFlag();
+                // If still started after the refresh, return OK
+                if (instrument.getStarted()) {
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Instrument already started: " + instrumentId);
+                }
+            }
+
+            instrument.switchOn();
+        } catch (Exception e) {
+            log.error("Error starting instrument " + instrumentId + " : " + e.getMessage(),  e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error while starting instrument: " + instrumentId);
+        }
+
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("{instrumentId}/stop")
@@ -54,10 +68,23 @@ public class InstrumentController {
         FocList list = focDesc.getFocList();
         FocInstrument instrument = (FocInstrument) list.searchByReference(instrumentId);
 
+        if (instrument == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Instrument not found: " + instrumentId);
+        }
+
         try {
+            boolean isStarted = instrument.getStarted();
+            if (!isStarted) {
+                instrument.refreshStartedFlag();
+                isStarted = instrument.getStarted();
+            }
+            if (!isStarted) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Instrument already stopped: " + instrumentId);
+            }
             instrument.switchOff();
         } catch (Exception e) {
-            log.error("Error starting instrument driver connect and RabbitMQ listener: {}", e.getMessage(), e);
+            log.error("Error stopping instrument " + instrumentId + " : " + e.getMessage(),  e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error while starting instrument: " + instrumentId);
         }
 
         return instrument != null && !instrument.getStarted() ? ResponseEntity.ok().build() : ResponseEntity.status(500).body("Failed to connect to instrument");
