@@ -41,8 +41,8 @@ services:
     container_name: labotron-pgadmin
     image: dpage/pgadmin4:latest
     environment:
-      PGADMIN_DEFAULT_EMAIL: admin@labotron.local
-      PGADMIN_DEFAULT_PASSWORD: admin123
+      - PGADMIN_DEFAULT_EMAIL=${PG_ADMIN_USER:admin@labotron.local}
+      - PGADMIN_DEFAULT_PASSWORD=${PG_ADMIN_PASSWORD:admin123}
     ports:
       - "${PG_ADMIN_PORT}:80"
     depends_on:
