@@ -49,7 +49,7 @@ public class AlegriaSimulator extends AbstractSimulator {
                 "1L|1|N"
         };
 
-        sendingFrames(frames);
+        sendingFrames(frames, true);
     }
 
 }

@@ -35,16 +35,24 @@ public abstract class AbstractSimulator implements ISimulator, Constants {
     }
 
     public void sendingFrames(String[] frames) {
+        this.sendingFrames(frames, false);
+    }
+
+    public void sendingFrames(String[] frames, boolean oneShot) {
         socket.setSendingMode(true);
 
         try {
-            socket.send("" + ENQ);
+            String oneShotString = "";
+            if (oneShot) oneShotString = "" + ENQ;
+            else socket.send("" + ENQ);
 
             for (int i=0; i<frames.length; i++) {
                 String frame = frames[i];
                 System.out.println("Sending frame: " + frame);
                 StringBuffer sbFrameWithData = createDataWithFrame(frame);
-                socket.send(sbFrameWithData.toString());
+
+                if (oneShot) oneShotString += sbFrameWithData.toString();
+                else socket.send(sbFrameWithData.toString());
 
                 sleep(1000);
 
@@ -56,7 +64,12 @@ public abstract class AbstractSimulator implements ISimulator, Constants {
                 }
             }
 
-            socket.send("" + EOT);
+            if (oneShot) {
+                oneShotString += "" + EOT;
+                socket.send(oneShotString);
+            }
+            else socket.send("" + EOT);
+
         } catch (Exception e) {
             System.out.println("Client error: " + e.getMessage());
             e.printStackTrace();

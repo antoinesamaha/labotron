@@ -112,6 +112,8 @@ public class ConnectorServiceImpl implements ConnectorService {
                 //From the Instrument through the socket
                 if (!instrument.getDriver().isInquiryBased()) {
                     rabbitMQSendingService.sendToDriver(instrument, instrumentCode, sampleForInstrument.getSampleId(), sampleForInstrument);
+                } else {
+                    log.info("  Instrument {} is Enquiry based, test will not be sent", instrumentCode);
                 }
 
             } catch (Exception e) {
