@@ -81,6 +81,12 @@ public class RabbitMQListenerService {
             body = new String(message.getBody());
             log.info("Received: {}", body);
 
+            if (body.trim().isEmpty()) {
+                log.warn("Received empty message body");
+                channel.basicAck(deliveryTag, false);
+                return;
+            }
+
             // Parse JSON into DTO using the configured ObjectMapper
             SampleFromLisDTO sampleFromLis = objectMapper.readValue(body, SampleFromLisDTO.class);
             Globals.logString("Parse PATIENT_NAME: " + sampleFromLis.getPatientName());
