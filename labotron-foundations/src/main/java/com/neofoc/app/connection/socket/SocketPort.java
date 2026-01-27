@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Properties;
+import java.util.concurrent.CompletableFuture;
 
 public class SocketPort implements SerialPortInterface {
     private PhysicalSocket physicalSocket = null;
@@ -118,6 +119,20 @@ public class SocketPort implements SerialPortInterface {
         }
 
         Globals.logString("Socket connected successfuly");
+    }
+
+    /**
+     * Asynchronously opens the connection without blocking the calling thread.
+     * Returns a CompletableFuture that completes when the connection is established or fails.
+     */
+    public CompletableFuture<Void> openConnectionAsync() {
+        return CompletableFuture.runAsync(() -> {
+            try {
+                openConnection();
+            } catch (L3SerialPortOpeningException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     @Override

@@ -82,6 +82,7 @@ neofoc:
     dbSelect: 1
     debug: 1
     memoryUsage: 1
+    dbLogActive: 0
 
   debug:
     showStatusColumn=0

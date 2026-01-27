@@ -102,20 +102,6 @@ public class YumizenP8000Driver extends AstmDriver {
         getL3SerialPort().setAnswerFrame(answerFrame);
     }
 
-    @Override
-    public void connect() throws Exception {
-        super.connect();
-        // The Sender is transient, should connect and disconnect for every transmission
-        // if(sender != null) sender.connect();
-    }
-
-    @Override
-    public void disconnect() {
-        super.disconnect();
-        // The Sender is transient, should connect and disconnect for every transmission
-        // if(sender != null) sender.disconnect();
-    }
-
     public void sendFramesArray(boolean createDataWithFrame) throws Exception {
         getInstrument().logString("Yumizen sending frames");
         StringBuffer messageToSend = new StringBuffer();

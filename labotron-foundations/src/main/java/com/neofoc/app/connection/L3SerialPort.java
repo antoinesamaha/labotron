@@ -163,7 +163,7 @@ public class L3SerialPort {
     }
 
     public void openConnection() throws Exception {
-        serialPort.openConnection();
+        serialPort.openConnectionAsync();
         cumulationListener.setL3SerialPort(this);
         serialPort.addEventListener(cumulationListener);
         resetLastActivityTime();
