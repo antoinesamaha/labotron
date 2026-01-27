@@ -1,0 +1,40 @@
+# Production Docker Compose Example
+# This shows how production environment variables are provided
+
+version: '3.8'
+
+services:
+  labotronui:
+    build: .
+    ports:
+      - "80:80"
+    environment:
+      # Production API URLs (provided by DevOps/Infrastructure team)
+      - API_URL=https://api.production.company.com
+      - API_URL_HTTPS=https://api.production.company.com
+      - FLUTTER_BASE_HREF=/
+    # OR from external environment file:
+    # env_file:
+    #   - production.env
+
+  # Example: Different staging environment
+  labotronui-staging:
+    build: .
+    ports:
+      - "8080:80"
+    environment:
+      # Staging API URLs
+      - API_URL=https://api.staging.company.com
+      - API_URL_HTTPS=https://api.staging.company.com
+      - FLUTTER_BASE_HREF=/
+
+  # Example: Feature branch environment
+  labotronui-feature:
+    build: .
+    ports:
+      - "8081:80"
+    environment:
+      # Feature branch API URLs
+      - API_URL=https://api.feature-branch.company.com
+      - API_URL_HTTPS=https://api.feature-branch.company.com
+      - FLUTTER_BASE_HREF=/

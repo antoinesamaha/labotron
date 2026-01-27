@@ -1,0 +1,37 @@
+{
+  "layout": "column",
+  "spacing": 16,
+  "persistencePanel": true,
+  "fields": [   
+    {
+      "type": "section",
+      "name": "section",
+      "label": "section",
+      "title": "Main Information",
+      "layout": "column",
+      "spacing": 16,      
+      "fields": [
+        {
+          "type": "text",
+          "name": "lis_test_label",
+          "label": "LIS Test Label",
+          "required": true
+        },
+        {
+          "type": "text",
+          "name": "instrument_test_code",
+          "label": "Name",
+          "required": true
+        },
+        {
+          "type": "text",
+          "name": "descrip",
+          "label": "Description",
+          "required": true
+        }
+      ]
+    }    
+  ]
+}
+
+

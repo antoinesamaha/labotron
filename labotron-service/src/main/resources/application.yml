@@ -1,0 +1,110 @@
+server:
+  port: 8099
+cors:
+  allowed-origin: ${CORS_ALLOWED_ORIGIN:http://localhost:*}
+spring:
+  datasource:
+    url: ${DATASOURCE_URL:jdbc:postgresql://localhost:5432/labotron}
+    username: ${DATASOURCE_USERNAME:postgres}
+    password: ${DATASOURCE_PASSWORD:123456}
+#    url: ${DATASOURCE_URL:jdbc:oracle:thin:@//oracle-db:1521/XEPDB1}
+#    username: ${DATASOURCE_USERNAME:labotron}
+#    password: ${DATASOURCE_PASSWORD:123456}
+
+    hikari:
+      maximumPoolSize: ${DATASOURCE_MAX_POOL_SIZE:10}
+  mvc:
+    async:
+      request-timeout: -1
+  jpa:
+    properties:      
+      hibernate:
+        default_schema: public
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+#        dialect: ${DATASOURCE_DIALECT:org.hibernate.dialect.OracleDialect}
+        #physical_naming_strategy: com.focframework.application.config.FocNamingStrategy
+        jdbc.batch_size: 30
+        order_inserts: true
+      org:
+        hibernate:
+    show-sql: true
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+#    port: ${RABBITMQ_PORT:5672}
+    port: ${RABBITMQ_PORT:9056}
+    username: ${RABBITMQ_USERNAME:guest}
+    password: ${RABBITMQ_PASSWORD:guest}
+
+app:
+  name: Labotron
+security:
+  basic:
+    enabled: false   
+management:
+  security:
+    enabled: false
+
+labotron:
+  connector:
+    lis-2-connector-queue: lis-2-connector
+    connector-2-lis-queue: connector-2-lis
+    driver-2-connector-queue: driver-2-connector
+
+neofoc:
+  jdbc:
+#    drivers: ${DATASOURCE_DRIVERS:oracle.jdbc.OracleDriver}
+#    url: ${DATASOURCE_URL:jdbc:oracle:thin:@//oracle-db:1521/XEPDB1}
+#    username: ${DATASOURCE_USERNAME:labotron}
+#    password: ${DATASOURCE_PASSWORD:123456}
+  #  keepFocObjectArrayInFocDesc: 1
+
+    drivers: org.postgresql.Driver
+    url: ${DATASOURCE_URL:jdbc:postgresql://localhost:5432/labotron}
+    username: ${DATASOURCE_USERNAME:postgres}
+    password: ${DATASOURCE_PASSWORD:123456}
+
+#  focWebServerClassName: siren.fenix.ci.main.FenixCIWebServer
+#  dataSourceClass: b01.focDataSourceDB.FocDataSource_DB
+#  cloudStorageClass: com.foc.cloudStorage.FocCloudStorage_LocalDisc
+#  focDataServletURL: http://127.0.0.1:8888/focData
+
+  #unitDevMode=0
+  #unitAllowed=1
+  #devMode=1
+
+  log:
+    dir: /home/antoin/tmp/log
+    ConsoleActive: 1
+    fileActive: 1
+    popupExceptionDialog: 1
+    details: 1
+    dbRequest: 1
+    dbSelect: 1
+    debug: 1
+    memoryUsage: 1
+
+  debug:
+    showStatusColumn=0
+
+  report:
+    fileFullPath: c:kjhdfksh
+  perf:
+    active: 0
+
+  createAdminUserIfNotExist: 1
+  adaptDataModelAtStartup: 0
+  adaptEnabled: 1
+  adaptConstraints: 1
+  adaptIndexesEnabled: 1
+
+  encriptedPassword: BpBRe8tbntbFHPovSYXCCg
+
+  userLogin: FOCADMIN
+  password: FOCADMIN
+
+  reportingLayout:
+    wordExport: 1
+    emailSend: 1
+  offsetCount:
+    SejelEntry: 3
+

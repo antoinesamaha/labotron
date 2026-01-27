@@ -1,0 +1,32 @@
+{
+  "layout": "column",
+  "spacing": 1,
+  "persistencePanel": false,
+  "fields": [   
+    {
+      "type": "data_table",
+      "name": "data_table_instrument_list",
+      "label": "Instruments",
+      "title": "Instruments",
+      "columns": [
+        {
+          "key": "code",
+          "label": "Code",
+          "numeric": false
+        },
+        {
+          "key": "name",
+          "label": "Name",
+          "numeric": false
+        },
+        {
+          "key": "on_hold",
+          "label": "On Hold",
+          "checkbox": true
+        }
+      ]
+    }    
+  ]
+}
+
+
