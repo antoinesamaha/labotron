@@ -1,0 +1,40 @@
+{
+  "layout": "column",
+  "spacing": 1,
+  "persistencePanel": false,
+  "fields": [   
+    {
+      "type": "data_table",
+      "name": "data_table_instrument_list",
+      "label": "Instruments",
+      "title": "Instruments",
+      "columns": [
+        {
+          "key": "lis_test_label",
+          "label": "LIS Code",
+          "numeric": false
+        },        
+        {
+          "key": "instrument_test_code",
+          "label": "Inst. Code",
+          "numeric": false
+        },
+        {
+          "key": "descrip",
+          "label": "description"
+        },
+        {
+          "key": "day_priority",
+          "label": "Day Priority",
+          "numeric": true
+        },
+        {
+          "key": "on_hold",
+          "label": "On Hold",
+          "numeric": true
+        }
+      ]
+    }    
+  ]
+}
+

@@ -1,0 +1,37 @@
+{
+  "layout": "column",
+  "spacing": 1,
+  "persistencePanel": false,
+  "fields": [   
+    {
+      "type": "data_table",
+      "name": "data_table_test_list",
+      "label": "Tests",
+      "title": "Tests",
+      "columns": [
+        {
+          "key": "instrument_id",
+          "label": "Instrument Id",
+          "numeric": true
+        },        
+        {
+          "key": "label",
+          "label": "Label",
+          "numeric": false
+        },
+        {
+          "key": "value",
+          "label": "Value",
+          "numeric": false
+        },
+        {
+          "key": "descrip",
+          "label": "Description",
+          "numeric": false
+        }
+      ]
+    }    
+  ]
+}
+
+
