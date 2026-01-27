@@ -44,11 +44,11 @@ public class InstrumentController {
 
         try {
             if (instrument.getStarted()) {
-                instrument.refreshStartedFlag();
-                // If still started after the refresh, return OK
-                if (instrument.getStarted()) {
-                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Instrument already started: " + instrumentId);
-                }
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Instrument already started: " + instrumentId);
+            }
+            instrument.refreshConnectedFlag();
+            if (instrument.getConnected()) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Instrument still connected cannot start while connected: " + instrumentId);
             }
 
             instrument.switchOn();
@@ -75,10 +75,6 @@ public class InstrumentController {
         try {
             boolean isStarted = instrument.getStarted();
             if (!isStarted) {
-                instrument.refreshStartedFlag();
-                isStarted = instrument.getStarted();
-            }
-            if (!isStarted) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Instrument already stopped: " + instrumentId);
             }
             instrument.switchOff();
@@ -87,6 +83,6 @@ public class InstrumentController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error while starting instrument: " + instrumentId);
         }
 
-        return instrument != null && !instrument.getStarted() ? ResponseEntity.ok().build() : ResponseEntity.status(500).body("Failed to connect to instrument");
+        return !instrument.getStarted() ? ResponseEntity.ok().build() : ResponseEntity.status(500).body("Failed to connect to instrument");
     }
 }

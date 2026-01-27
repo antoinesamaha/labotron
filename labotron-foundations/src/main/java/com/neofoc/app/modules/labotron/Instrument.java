@@ -29,8 +29,8 @@ public class Instrument implements Serializable {
 	@Column(nullable = false, length = 30)
 	private String name;
 
-//	@Column(nullable = false)
-//	private Integer connected;
+	@Column(nullable = false)
+	private Boolean connected;
 
 	@Column(nullable = false, length = 120)
 	private String driverClassName;

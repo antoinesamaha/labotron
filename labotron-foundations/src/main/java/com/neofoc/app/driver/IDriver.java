@@ -7,6 +7,7 @@ import com.neofoc.app.modules.labotron.focObjects.FocInstrument;
 import com.neofoc.app.modules.labotron.focObjects.L3Message;
 
 import java.util.Properties;
+import java.util.concurrent.CompletableFuture;
 
 // Created on May 7, 2006
 public interface IDriver {
@@ -21,6 +22,8 @@ public interface IDriver {
     void release();
 
     void connect() throws Exception;
+
+    CompletableFuture<Void> connectAsync();
 
     boolean isConnected();
 

@@ -21,6 +21,7 @@ import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Properties;
+import java.util.concurrent.CompletableFuture;
 
 public class FocInstrument extends Instrument_FocObject implements Runnable, MessageListener,
         IExitListener {
@@ -137,7 +138,7 @@ public class FocInstrument extends Instrument_FocObject implements Runnable, Mes
                     if (!instrument.getOnHold()){
                         instrument.switchOn();
                     } else {
-                        instrument.refreshStartedFlag();
+                        instrument.refreshConnectedFlag();
                     }
                 }
             } catch (Exception e) {
@@ -153,7 +154,7 @@ public class FocInstrument extends Instrument_FocObject implements Runnable, Mes
         for (int i = 0; i < focDesc.getFocList().size(); i++) {
             FocInstrument instrument = (FocInstrument) focDesc.getFocList().getFocObject(i);
             try {
-                instrument.refreshStartedFlag();
+                instrument.refreshConnectedFlag();
                 //                if (instrument.getStarted()) {
                 //                    instrument.switchOn();
                 //                }
@@ -598,13 +599,22 @@ public class FocInstrument extends Instrument_FocObject implements Runnable, Mes
 //        }
     }
 
-    public void refreshStartedFlag() throws Exception{
-        if (getDriver() != null && getDriver().isConnected()) {
-            setStarted(true);
-        } else {
-            setStarted(false);
-        }
+//    public void refreshStartedFlag() throws Exception{
+//        if (getDriver() != null && getDriver().isConnected()) {
+//            setStarted(true);
+//        } else {
+//            setStarted(false);
+//        }
+//
+//        validate(false);
+//    }
 
+    public void refreshConnectedFlag() throws Exception {
+        if (getDriver() != null && getDriver().isConnected()) {
+            setConnected(true);
+        } else {
+            setConnected(false);
+        }
         validate(false);
     }
 
@@ -652,25 +662,70 @@ public class FocInstrument extends Instrument_FocObject implements Runnable, Mes
     }
 
     public void switchOn() throws Exception {
-        if (getDriver() != null) {// To create the driver if not available yet
-            // If Inquiry based we don't need the queue because the sending of the orders is triggered by the instrument itself
+        if (getDriver() != null) {
+            // Set started flag immediately (user intent)
+            setStarted(true);
+            validate(false);
+
+            // Connect asynchronously with callbacks
+            getDriver().connectAsync()
+                .thenRun(() -> onDriverConnected())
+                .exceptionally(ex -> {
+                    onDriverConnectionFailed(ex);
+                    return null;
+                });
+        }
+    }
+
+    private void onDriverConnected() {
+        try {
+            Globals.logString("Driver connected successfully for instrument: " + getCode());
+
+            // Set connected flag
+            refreshConnectedFlag();
+
+            // Add message listener
+            addMessageListener(new InstrumentReceiverListener(this));
+
+            // Start RabbitMQ listener ONLY if not inquiry-based and AFTER connection succeeds
             if (!getDriver().isInquiryBased()) {
                 RabbitMQListenerService rabbitMQListenerService = SpringContextUtil.getBean(RabbitMQListenerService.class);
                 rabbitMQListenerService.startInstrumentListener(this);
+                Globals.logString("RabbitMQ listener started for instrument: " + getCode());
             }
-            addMessageListener(new InstrumentReceiverListener(this));
-            getDriver().connect();
-            refreshStartedFlag();
+        } catch (Exception e) {
+            Globals.logException(e);
+            onDriverConnectionFailed(e);
+        }
+    }
+
+    private void onDriverConnectionFailed(Throwable ex) {
+        try {
+            Globals.logString("Driver connection failed for instrument: " + getCode());
+            Globals.logException(new Exception("Connection failed", ex));
+
+            // Set connected flag to false
+            refreshConnectedFlag();
+        } catch (Exception e) {
+            Globals.logException(e);
         }
     }
 
     public void switchOff() throws Exception {
-        if (getDriver() != null) {// To create the driver if not available yet
+        if (getDriver() != null) {
+            // Stop RabbitMQ listener
             RabbitMQListenerService rabbitMQListenerService = SpringContextUtil.getBean(RabbitMQListenerService.class);
             rabbitMQListenerService.stopInstrumentListener(this);
+
+            // Remove message listener
             removeMessageListener(new InstrumentReceiverListener(this));
+
+            // Disconnect driver
             getDriver().disconnect();
-            refreshStartedFlag();
+
+            // Update both flags
+            setStarted(false);
+            refreshConnectedFlag();
         }
     }
 

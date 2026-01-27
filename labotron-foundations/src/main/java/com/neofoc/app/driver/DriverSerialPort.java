@@ -9,6 +9,7 @@ import com.neofoc.app.modules.labotron.focObjects.FocTestLabelMap;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Properties;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * @author 01Barmaja
@@ -108,6 +109,23 @@ public abstract class DriverSerialPort extends Driver {
 			l3SerialPort.openConnection();
 			synchronizeSequenceID();
 		}
+	}
+
+	public CompletableFuture<Void> connectAsync() {
+		if (l3SerialPort != null) {
+			if (getDriverReceiver() != null) {
+				l3SerialPort.addListener(getDriverReceiver());
+			}
+			return l3SerialPort.openConnectionAsync()
+				.thenRun(() -> {
+					try {
+						synchronizeSequenceID();
+					} catch (Exception e) {
+						throw new RuntimeException("Failed to synchronize sequence ID", e);
+					}
+				});
+		}
+		return CompletableFuture.completedFuture(null);
 	}
 
 	public boolean isConnected() {
