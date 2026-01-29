@@ -50,6 +50,7 @@ public class AlegriaFrameCreator extends AstmFrameCreator {
         AstmFrame frame = new AstmFrame(instrument, sequence, AstmFrame.FRAME_TYPE_ORDER);
 
         //        O|1|SAMPLE01||^^^SS-B
+        //        O|1|SAMPLE01||^^^SS-B|R||||||N||||||||||||||QC
 
         frame.append2Data(AstmFrame.FIELD_SEPERATOR);
         frame.append2Data(String.valueOf(sequence_num));
@@ -63,6 +64,12 @@ public class AlegriaFrameCreator extends AstmFrameCreator {
             frame.append2Data(AstmFrame.COMPONENT_DELIMITER);
         }
         frame.append2Data(instrCode);
+        frame.append2Data(AstmFrame.FIELD_SEPERATOR);
+        frame.append2Data("R");
+        frame.append2Data(AstmFrame.FIELD_SEPERATOR, 6);
+        frame.append2Data("N");
+        frame.append2Data(AstmFrame.FIELD_SEPERATOR, 14);
+        frame.append2Data("QC");
 
         return frame;
     }
