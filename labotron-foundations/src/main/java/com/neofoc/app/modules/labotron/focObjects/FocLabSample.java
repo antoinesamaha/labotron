@@ -228,7 +228,12 @@ public class FocLabSample extends LabSample_FocObject {
         FocList list = new FocList(new FocLinkSimple(getFocDesc()));
         list.getFilter().putAdditionalWhere("SAMPLE_ID", "sample_id" + "='" + sampleId + "'");
         list.loadIfNotLoadedFromDB();
-        return list != null ? (FocLabSample) list.getFocObject(0) : null;
+        FocLabSample labSample = !list.isEmpty() ? (FocLabSample) list.getFocObject(0) :  null;
+        if (labSample != null) {
+            list.detach(labSample);
+        }
+        list.dispose();
+        return labSample;
     }
 
     public FocList getTestListWithoutLoad() {

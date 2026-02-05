@@ -127,34 +127,42 @@ public class ConnectorServiceImpl implements ConnectorService {
     public FocLabSample newAndsaveToDB(HashMap<String, SampleFromLisDTO> instrumentToSampleMap) {
         FocList instrumentList = FocInstrument.getFocDesc().getFocList();
 
-        FocLabSample labSample = new FocLabSample(new FocConstructor(Globals.getApp().getFocDescByName("lab_sample")));
-        labSample.setCreated(true);
-        boolean sampleInitialised = false;
+        FocLabSample labSample = null;//new FocLabSample(new FocConstructor(Globals.getApp().getFocDescByName("lab_sample")));
         // Implement database saving logic here
         for (Map.Entry<String, SampleFromLisDTO> entry : instrumentToSampleMap.entrySet()) {
             String instrumentCode = entry.getKey();
             SampleFromLisDTO sampleForInstrument = entry.getValue();
 
-            if (!sampleInitialised) {
-                labSample.setSampleId(sampleForInstrument.getSampleId());
-                labSample.setLiquidTypeFromLIS(sampleForInstrument.getSampleType());
-                //labSample.setLiquidType(sampleForInstrument.getSampleType());
-                labSample.setPatientId(sampleForInstrument.getPatientId());
-                labSample.setFirstName(sampleForInstrument.getFirstName());
-                labSample.setLastName(sampleForInstrument.getLastName());
-                labSample.setMiddleName(sampleForInstrument.getMiddleInitial());
-                labSample.setDateOfBirth(sampleForInstrument.getDateOfBirth());
-                labSample.setSex(sampleForInstrument.getSex());
-                labSample.setEntryDateTime(sampleForInstrument.getCollectionDate());
-                labSample.setOrigin(sampleForInstrument.getOrigin());
-                sampleInitialised = true;
+            if (labSample == null) {
+                labSample = FocLabSample.loadForSampleId(sampleForInstrument.getSampleId());
+                if (labSample == null) {
+                    labSample = new FocLabSample(new FocConstructor(Globals.getApp().getFocDescByName("lab_sample")));
+                    labSample.setCreated(true);
+
+                    labSample.setSampleId(sampleForInstrument.getSampleId());
+                    labSample.setLiquidTypeFromLIS(sampleForInstrument.getSampleType());
+                    //labSample.setLiquidType(sampleForInstrument.getSampleType());
+                    labSample.setPatientId(sampleForInstrument.getPatientId());
+                    labSample.setFirstName(sampleForInstrument.getFirstName());
+                    labSample.setLastName(sampleForInstrument.getLastName());
+                    labSample.setMiddleName(sampleForInstrument.getMiddleInitial());
+                    labSample.setDateOfBirth(sampleForInstrument.getDateOfBirth());
+                    labSample.setSex(sampleForInstrument.getSex());
+                    labSample.setEntryDateTime(sampleForInstrument.getCollectionDate());
+                    labSample.setOrigin(sampleForInstrument.getOrigin());
+                }
             }
 
             FocList testList = labSample.getTestList();
             for (TestFromLisDTO testFromLis : sampleForInstrument.getTests()) {
-                FocLabTest focLabTest = (FocLabTest) testList.newEmptyItem();
-                focLabTest.setCreated(true);
-                focLabTest.setLabel(testFromLis.getTestCode());
+                FocLabTest focLabTest = (FocLabTest) testList.searchByPropertyStringValue(FocLabTest.FNAME_LABEL, testFromLis.getTestCode());
+                if (focLabTest == null) {
+                    focLabTest = (FocLabTest) testList.newEmptyItem();
+                    focLabTest.setCreated(true);
+                    focLabTest.setLabel(testFromLis.getTestCode());
+                    testList.add(focLabTest);
+                }
+
                 focLabTest.setDispatchInstrument((FocInstrument) instrumentList.searchByPropertyStringValue("code", instrumentCode));
                 //focLabTest.setLabSample(labSample);
                 focLabTest.setDescrip(testFromLis.getTestDesc());
@@ -165,7 +173,6 @@ public class ConnectorServiceImpl implements ConnectorService {
                 focLabTest.setValue(0);
                 focLabTest.setUnitLabel("");
                 focLabTest.setNotes("");
-                testList.add(focLabTest);
             }
 
             // Here you would implement the actual DB saving logic
@@ -175,12 +182,10 @@ public class ConnectorServiceImpl implements ConnectorService {
             // In a real implementation, you would call the appropriate DAO/service method to save the data
         }
 
-        if (sampleInitialised) {
+        if (labSample != null) {
             labSample.validate(true);
-        } else {
-            labSample.dispose();
-            labSample = null;
         }
+
         return labSample;
     }
 }
