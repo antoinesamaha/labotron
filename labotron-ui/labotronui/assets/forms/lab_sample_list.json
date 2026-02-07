@@ -10,8 +10,30 @@
       "title": "Samples",
       "table_options": {
         "showAddButton": false,
-        "showEditButton": false,
-        "showDeleteButton": false
+        "showEditButton": true,
+        "showDeleteButton": false,
+        "filters": [
+          {
+            "key": "sample_id",
+            "label": "Sample ID",
+            "type": "string"
+          },
+          {
+            "key": "patient_id",
+            "label": "Patient ID",
+            "type": "string"
+          },
+          {
+            "key": "first_name",
+            "label": "First name",
+            "type": "string"
+          },
+          {
+            "key": "last_name",
+            "label": "Last name",
+            "type": "string"
+          }
+        ]
       },
       "columns": [
         {
