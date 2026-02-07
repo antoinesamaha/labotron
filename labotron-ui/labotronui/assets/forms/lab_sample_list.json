@@ -8,6 +8,11 @@
       "name": "data_table_sample_list",
       "label": "Samples",
       "title": "Samples",
+      "table_options": {
+        "showAddButton": false,
+        "showEditButton": false,
+        "showDeleteButton": false
+      },
       "columns": [
         {
           "key": "sample_id",
