@@ -46,7 +46,34 @@
           "name": "middle_name",
           "label": "Middle Name",
           "required": false
-        }    
+        },
+        {
+          "type": "data_table",
+          "name": "lab_test_LIST",
+          "label": "Tests",
+          "title": "Tests",
+          "meta_entity": "lab_test",
+          "columns": [
+            {
+              "key": "label",
+              "label": "Label",
+              "numeric": false
+            },        
+            {
+              "key": "descrip",
+              "label": "Description",
+              "numeric": false
+            },
+            {
+              "key": "value",
+              "label": "Value"
+            },
+            {
+              "key": "status",
+              "label": "Status"
+            }
+          ]
+        }
       ]
     }    
   ]

@@ -15,7 +15,7 @@ public class AlegriaSimulator extends AbstractSimulator {
         socket.open();
 
         sendingInquiry();
-        sleep(30000);
+        sleep(10000);
         sendingResults();
         sleep(120000);
 //        socket.close();
