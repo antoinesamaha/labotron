@@ -12,6 +12,9 @@
         "showAddButton": false,
         "showEditButton": true,
         "showDeleteButton": false,
+        "pagination": {
+          "defaultPageSize": 50
+        },
         "filters": [
           {
             "key": "sample_id",

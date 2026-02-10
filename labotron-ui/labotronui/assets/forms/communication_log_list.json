@@ -12,6 +12,9 @@
         "showAddButton": false,
         "showEditButton": true,
         "showDeleteButton": false,
+        "pagination": {
+          "defaultPageSize": 10
+        },
         "filters": [
           {
             "key": "date_time",
