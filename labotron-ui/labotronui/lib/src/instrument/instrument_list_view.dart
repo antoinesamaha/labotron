@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:focui/src/entities/foc_entity_feature/foc_list_view.dart';
 import 'package:focui/src/entities/foc_entity_feature/foc_entity.dart';
-import 'package:focui/src/entities/foc_entity_feature/foc_service.dart';
 import 'instrument_service.dart';
 
 class InstrumentListView extends FocListView {
@@ -223,9 +222,7 @@ class InstrumentListViewState extends FocListViewState {
                 // Implement actual delete logic here
                 print('Deleting instrument: ${item}');
                 // Refresh the list after deletion
-                setState(() {
-                  futureItems = FocService().fetchItems(widget.metaEntity);
-                });
+                refreshData();
               },
               style: TextButton.styleFrom(foregroundColor: Colors.red),
               child: const Text('Delete'),
