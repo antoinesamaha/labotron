@@ -57,6 +57,10 @@
               "label": "Octa Driver"
             },
             {
+              "value": "com.neofoc.app.drivers.gempremier3500.GemPremier3500Driver",
+              "label": "GEM Premier 3500 Driver"
+            },            
+            {
               "value": "b01.l3.drivers.horiba.yumizenP8000.YumizenP8000Driver",
               "label": "YumizenP8000 Driver"
             }

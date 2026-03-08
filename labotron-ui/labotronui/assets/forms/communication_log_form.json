@@ -48,9 +48,9 @@
           "required": false
         },
         {
-          "type": "text",
-          "name": "json_content",
-          "label": "Content",
+          "type": "json",
+          "name": "body",
+          "label": "Body",
           "required": false
         }
       ]

@@ -13,4 +13,12 @@ public class FocCommunicationLog extends CommunicationLog_FocObject {
         setPropertyObject("instrument", instrument);
     }
 
+    public String getBody() {
+        return getPropertyString("body");
+    }
+
+    public void setBody(String json) {
+        setPropertyString("body", json);
+    }
+
 }

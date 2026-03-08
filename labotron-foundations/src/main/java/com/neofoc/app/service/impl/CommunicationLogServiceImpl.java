@@ -62,7 +62,7 @@ public class CommunicationLogServiceImpl implements CommunicationLogService {
 
         focCommunicationLog.setInstrument(instrument);
         focCommunicationLog.setSampleId(sampleId);
-        focCommunicationLog.setJsonContent(json);
+        focCommunicationLog.setBody(json);
         focCommunicationLog.setCreated(true);
         focCommunicationLog.save();
         focList.validate(false);
