@@ -404,12 +404,15 @@ public class FocInstrument extends Instrument_FocObject implements Runnable, Mes
                         FocLabTest test = (FocLabTest) testList.getFocObject(i);
                         if (test.getDispatchInstrument() != null
                                 && test.getDispatchInstrument().getId() == getId()
-                                && test.getStatus() == FocLabTest.TEST_STATUS_AVAILABLE_IN_L3) {
+                                && (
+                                      test.getStatus() == FocLabTest.TEST_STATUS_AVAILABLE_IN_L3
+                                   || test.getStatus() == FocLabTest.TEST_STATUS_ANALYSING
+                                )) {
                             testArray.add(test);
                         }
                     }
 
-                    if (testArray.size() > 0) {
+                    if (!testArray.isEmpty()) {
                         try {
                             if (!driver.reserve()) {
                                 L3Message message = new L3Message();
