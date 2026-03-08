@@ -7,7 +7,7 @@
       "type": "section",
       "name": "section",
       "label": "section",
-      "title": "Sample",
+      "title": "Communication Log",
       "layout": "column",
       "spacing": 16,      
       "fields": [
