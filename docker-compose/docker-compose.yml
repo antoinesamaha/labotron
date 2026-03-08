@@ -134,8 +134,7 @@ services:
       - '--storage.tsdb.retention.time=30d'
       - '--web.enable-lifecycle'
     depends_on:
-      labotron-service:
-        condition: service_healthy
+      - labotron-service
 
   loki:
     container_name: labotron-loki
