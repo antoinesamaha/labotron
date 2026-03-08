@@ -43,6 +43,16 @@ security:
 management:
   security:
     enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: health,prometheus
+  endpoint:
+    prometheus:
+      enabled: true
+  metrics:
+    tags:
+      application: labotron
 
 labotron:
   connector:
