@@ -397,8 +397,13 @@ public class FocInstrument extends Instrument_FocObject implements Runnable, Mes
 
                 if (focLabSample != null) {
                     FocList testList = focLabSample.getTestList();
+                    if (testList == null) {
+                        logString("Instrument : test list null for sample : "+sampleId);
+                        return;
+                    }
                     testList.loadIfNotLoadedFromDB();
 
+                    logString("Instrument : found " + testList.size()+ " tests for sample : " + sampleId + " scanning for tests to send to instrument:" + getId());
                     ArrayList<FocLabTest> testArray = new ArrayList<>();
                     for (int i = 0; i < testList.size(); i++) {
                         FocLabTest test = (FocLabTest) testList.getFocObject(i);
@@ -408,10 +413,12 @@ public class FocInstrument extends Instrument_FocObject implements Runnable, Mes
                                       test.getStatus() == FocLabTest.TEST_STATUS_AVAILABLE_IN_L3
                                    || test.getStatus() == FocLabTest.TEST_STATUS_ANALYSING
                                 )) {
+                            logString("Instrument : test "+test.getId()+" is ready to be sent for sample : " + sampleId);
                             testArray.add(test);
                         }
                     }
 
+                    logString("Instrument : ready to send back " + testArray.size() + " tests");
                     if (!testArray.isEmpty()) {
                         try {
                             if (!driver.reserve()) {
@@ -429,6 +436,8 @@ public class FocInstrument extends Instrument_FocObject implements Runnable, Mes
                                         test.updateStatus(FocLabTest.TEST_STATUS_ANALYSING);
                                     }
                                 }
+                            } else {
+                                logString("Instrument : could not reserve to send back");
                             }
                         } catch (Exception e) {
                             Globals.logException(e);
@@ -440,6 +449,8 @@ public class FocInstrument extends Instrument_FocObject implements Runnable, Mes
                             }
                         }
                     }
+                } else {
+                    logString("No sample found for sampleId: " + sampleId);
                 }
             } catch (Exception e) {
                 Globals.logException(e);
