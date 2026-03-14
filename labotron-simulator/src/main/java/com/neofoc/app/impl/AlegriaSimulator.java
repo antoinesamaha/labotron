@@ -15,8 +15,8 @@ public class AlegriaSimulator extends AbstractSimulator {
         socket.open();
 
         sendingInquiry();
-        sleep(10000);
-        sendingResults();
+//        sleep(10000);
+//        sendingResults();
         sleep(120000);
 //        socket.close();
     }
@@ -24,7 +24,7 @@ public class AlegriaSimulator extends AbstractSimulator {
     public void sendingInquiry() {
         String[] inquiryFrames = {
             "1H|\\^&",
-            "2Q|1|^5647687||||||||||O|",
+            "2Q|1|^5647602||||||||||O|",
             "3L|1|N"};
 
         sendingFrames(inquiryFrames);

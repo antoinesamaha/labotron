@@ -404,22 +404,29 @@ public class FocInstrument extends Instrument_FocObject implements Runnable, Mes
                     testList.loadIfNotLoadedFromDB();
 
                     logString("Instrument : found " + testList.size()+ " tests for sample : " + sampleId + " scanning for tests to send to instrument:" + getId());
-                    ArrayList<FocLabTest> testArray = new ArrayList<>();
+                    ArrayList<FocLabTest> removeTestArray = new ArrayList<>();
                     for (int i = 0; i < testList.size(); i++) {
                         FocLabTest test = (FocLabTest) testList.getFocObject(i);
                         if (test.getDispatchInstrument() != null
-                                && test.getDispatchInstrument().getId() == getId()
+                                && test.getDispatchInstrument().getReferenceInt() == getReferenceInt()
                                 && (
                                       test.getStatus() == FocLabTest.TEST_STATUS_AVAILABLE_IN_L3
                                    || test.getStatus() == FocLabTest.TEST_STATUS_ANALYSING
                                 )) {
-                            logString("Instrument : test "+test.getId()+" is ready to be sent for sample : " + sampleId);
-                            testArray.add(test);
+//                            logString("Instrument : test "+test.getLabel()+" is ready to be sent for sample : " + sampleId);
+//                            testArray.add(test);
+                        } else {
+                            removeTestArray.add(test);
                         }
                     }
 
-                    logString("Instrument : ready to send back " + testArray.size() + " tests");
-                    if (!testArray.isEmpty()) {
+                    for (int i=0; i<removeTestArray.size(); i++) {
+                        FocLabTest test = removeTestArray.get(i);
+                        testList.remove(test);
+                    }
+
+                    logString("Instrument : ready to send back " + focLabSample.getTestList().size() + " tests");
+                    if (!focLabSample.getTestList().isEmpty()) {
                         try {
                             if (!driver.reserve()) {
                                 L3Message message = new L3Message();
@@ -430,8 +437,8 @@ public class FocInstrument extends Instrument_FocObject implements Runnable, Mes
 
                                 send(message);
 
-                                for (int i = 0; i < testArray.size(); i++) {
-                                    FocLabTest test = (FocLabTest) testArray.get(i);
+                                for (int i = 0; i < focLabSample.getTestList().size(); i++) {
+                                    FocLabTest test = (FocLabTest) focLabSample.getTestList().getFocObject(i);
                                     if (test != null){
                                         test.updateStatus(FocLabTest.TEST_STATUS_ANALYSING);
                                     }
@@ -449,6 +456,7 @@ public class FocInstrument extends Instrument_FocObject implements Runnable, Mes
                             }
                         }
                     }
+                    focLabSample.dispose();
                 } else {
                     logString("No sample found for sampleId: " + sampleId);
                 }
