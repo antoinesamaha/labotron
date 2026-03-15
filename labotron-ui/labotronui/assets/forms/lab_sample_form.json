@@ -71,7 +71,15 @@
             {
               "key": "status",
               "label": "Status"
-            }
+            },
+            {
+              "key": "dispatch_instrument.name",
+              "label": "Dispatch"
+            },
+            {
+              "key": "actual_instrument.name",
+              "label": "Actual"
+            }            
           ]
         }
       ]
