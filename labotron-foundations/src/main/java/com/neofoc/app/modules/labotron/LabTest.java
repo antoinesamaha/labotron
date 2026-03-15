@@ -49,8 +49,8 @@ public class LabTest {
     @JoinColumn(nullable = false)
     private Instrument dispatchInstrument;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(nullable = false)
+    @ManyToOne(optional = true)
+    @JoinColumn(nullable = true)
     private Instrument actualInstrument;
 
     @Column(nullable = false)
