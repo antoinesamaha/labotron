@@ -105,15 +105,19 @@ public class ResultLineReader extends FrameReader{
 				Double dbl = null;
 				try{
 					test.setAlarm(FocLabTest.TEST_RESULT_EMPTY_ALARM);
-					if(token.charAt(0) == '>' || token.charAt(0) == '<'){
+					int indexOfOperator = token.indexOf('>');
+					if(indexOfOperator < 0){
+						indexOfOperator = token.indexOf('<');
+					}
+					if(indexOfOperator >= 0){// token.charAt(0) == '>' || token.charAt(0) == '<'){
 						if (!driver.getAstmParams().doTreatHigherLessAlarmSeparately()){	//modular
 							test.setNotificationMessage(""+token.charAt(0));
-						}else if (token.charAt(0) == '>') { 
+						}else if (token.charAt(indexOfOperator) == '>') {
 							test.setAlarm(FocLabTest.TEST_RESULT_GREATER_THAN);
-						}else if (token.charAt(0) == '<') { 
+						}else if (token.charAt(indexOfOperator) == '<') {
 							test.setAlarm(FocLabTest.TEST_RESULT_LESS_THAN);
 						}
-						token = token.substring(1);
+						token = token.substring(indexOfOperator + 1);
 					}
 					dbl = Double.valueOf(token);
 					test.setResultOk(true);
