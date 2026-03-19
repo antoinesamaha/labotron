@@ -41,7 +41,7 @@ public class LabSample {
     @Column(nullable = true, length = 30)
     private String firstName;
 
-    @Column(nullable = true, length = 1)
+    @Column(nullable = true, length = 30)
     private String middleName;
 
     @Column(nullable = true, length = 1)
