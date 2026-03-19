@@ -243,26 +243,43 @@ public class FocInstrument extends Instrument_FocObject implements Runnable, Mes
         return logBufferDetails;
     }
 
-    public boolean sendWithDriverReservation(L3Message message)
-            throws Exception {
-        boolean error = true;
-        IDriver driver = getDriver();
-        if (!driver.reserve()) {
-            try {
-                send(message);
-                driver.release();
-                error = false;
-            } catch (Exception e) {
-                driver.release();
-                throw e;
-            }
-        }
-        return error;
-    }
+//    public boolean sendWithDriverReservation(L3Message message)
+//            throws Exception {
+//        boolean error = true;
+//        IDriver driver = getDriver();
+//        if (!driver.reserve()) {
+//            try {
+//                send(message);
+//                driver.release();
+//                error = false;
+//            } catch (Exception e) {
+//                driver.release();
+//                throw e;
+//            }
+//        }
+//        return error;
+//    }
 
     private void send(L3Message message) throws Exception {
         logString("Message before send:" + message.toStringBuffer());
-        driver.send(message);
+
+        try {
+            if (!driver.reserve()) {
+                driver.send(message);
+            } else {
+                logString("Instrument : could not reserve to send back");
+            }
+        } catch (Exception e) {
+            Globals.logException(e);
+        } finally {
+            try {
+                if (driver != null) driver.release();
+            } catch (Exception e) {
+                Globals.logException(e);
+            }
+        }
+
+        // Setting the Tests statuses
         Iterator sampleIterator = message.sampleIterator();
         while (sampleIterator.hasNext()) {
             ((FocLabSample) sampleIterator.next())
@@ -428,35 +445,18 @@ public class FocInstrument extends Instrument_FocObject implements Runnable, Mes
                     logString("Instrument : ready to send back " + focLabSample.getTestList().size() + " tests");
                     if (!focLabSample.getTestList().isEmpty()) {
                         try {
-                            if (!driver.reserve()) {
-                                L3Message message = new L3Message();
-                                // Optionally set rack/tube info on the sample if needed
-                                // focLabSample.setRackNumber(rackNumber);
-                                // focLabSample.setTubePosition(tubePosition);
-                                message.addSample(focLabSample);
+                            L3Message message = new L3Message();
+                            // Optionally set rack/tube info on the sample if needed
+                            // focLabSample.setRackNumber(rackNumber);
+                            // focLabSample.setTubePosition(tubePosition);
+                            message.addSample(focLabSample);
 
-                                send(message);
-
-                                for (int i = 0; i < focLabSample.getTestList().size(); i++) {
-                                    FocLabTest test = (FocLabTest) focLabSample.getTestList().getFocObject(i);
-                                    if (test != null){
-                                        test.updateStatus(FocLabTest.TEST_STATUS_ANALYSING);
-                                    }
-                                }
-                            } else {
-                                logString("Instrument : could not reserve to send back");
-                            }
+                            send(message);
+                            message.dispose();
                         } catch (Exception e) {
                             Globals.logException(e);
-                        } finally {
-                            try {
-                                if (driver != null) driver.release();
-                            } catch (Exception e) {
-                                Globals.logException(e);
-                            }
                         }
                     }
-                    focLabSample.dispose();
                 } else {
                     logString("No sample found for sampleId: " + sampleId);
                 }
