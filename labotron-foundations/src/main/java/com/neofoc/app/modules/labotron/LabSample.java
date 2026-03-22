@@ -64,4 +64,7 @@ public class LabSample {
 
     @OneToMany(mappedBy = "labSample", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private Set<LabTest> tests = new HashSet<>();
+
+    @OneToMany(mappedBy = "labSample", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private Set<LabMessage> labMessages = new HashSet<>();
 }

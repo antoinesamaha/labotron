@@ -4,7 +4,7 @@ import com.neofoc.app.Int2ByteConverter;
 import com.neofoc.app.Phase;
 import com.neofoc.app.SimSocket;
 
-public class InfinitySimulator extends AbstractSimulator {
+public class InfinitySimulator_old extends AbstractSimulator {
 
     public void simulate() {
         phase = Phase.OPENING_SOCKET;
@@ -31,10 +31,10 @@ public class InfinitySimulator extends AbstractSimulator {
                             // If we received data, log it
                             if (response != null && !response.isEmpty()) {
                                 System.out.println("receivingSamples received data: " + response);
-                                if (response.charAt(0) == InfinitySimulator.EOT) {
+                                if (response.charAt(0) == InfinitySimulator_old.EOT) {
                                     phase = Phase.SENDING_RESULTS;
                                 } else {
-                                    socket.send("" + InfinitySimulator.ACK);
+                                    socket.send("" + InfinitySimulator_old.ACK);
                                 }
                             } else {
                                 // Just for debugging - can be removed in production

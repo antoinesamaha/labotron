@@ -236,24 +236,27 @@ public class FocLabSample extends LabSample_FocObject {
         return labSample;
     }
 
-    public FocList getTestListWithoutLoad() {
-        return getPropertyList("test_list");
-    }
-
-    public String getSampleId() {
-        return getPropertyString("sample_id");
-    }
-
-    public void setSampleId(String sampleId) {
-        setPropertyString("sample_id", sampleId);
-    }
-
     public FocList getTestList() {
         FList list = (FList) getFocPropertyByName("lab_test_LIST");
         FocList focList = (list != null) ? list.getList() : null;
         if (focList != null) {
             focList.loadIfNotLoadedFromDB();
         }
+        return focList;
+    }
+
+    public FocList getInstrumentMessageList() {
+        FList list = (FList) getFocPropertyByName("lab_message_LIST");
+        FocList focList = (list != null) ? list.getList() : null;
+        if (focList != null) {
+            focList.loadIfNotLoadedFromDB();
+        }
+        return focList;
+    }
+
+    public FocList getInstrumentMessageListWithoutLoad() {
+        FList list = (FList) getFocPropertyByName("lab_message_LIST");
+        FocList focList = (list != null) ? list.getList() : null;
         return focList;
     }
 
@@ -493,6 +496,41 @@ public class FocLabSample extends LabSample_FocObject {
 //            date.setDate(d);
 //        }
 //    }
+
+    public void pushMessageInternal(FocInstrument instrument, boolean append, String message){
+        FocList instrumentMessageList = getInstrumentMessageList();
+        FocLabMessage foundInstrument = (FocLabMessage) instrumentMessageList.searchByPropertyObjectValue(FocLabMessage.FLD_INSTRUMENT, instrument);
+        FocLabMessage instrMessage = null;
+
+        if(foundInstrument != null){
+            instrMessage = foundInstrument;
+        }else if(message != null && message.compareTo("") != 0){
+            instrMessage = (FocLabMessage) instrumentMessageList.newEmptyItem();
+            instrMessage.setMessage("");
+        }
+        if(instrMessage != null){
+            instrMessage.setLabSample(this);
+            if(append){
+                String strToSet = instrMessage.getMessage();
+                if(strToSet.length() > 0) strToSet = strToSet + ", ";
+                strToSet += message;
+                instrMessage.setMessage(strToSet);
+            }else{
+                instrMessage.setMessage(message);
+            }
+            instrMessage.setInstrument(instrument);
+            instrMessage.setStatus(FocLabTest.TEST_STATUS_AVAILABLE_IN_L3);
+        }
+        //WE HAVE TO VALIDATE THE INSTRUMENT MESSAGE LIST
+    }
+
+    public void pushMessageByAppend(FocInstrument instrument, String message){
+        pushMessageInternal(instrument, true, message);
+    }
+
+    public void pushMessage(FocInstrument instrument, String message){
+        pushMessageInternal(instrument, false, message);
+    }
 
     //ooooooooooooooooooooooooooooooooooo
     // oooooooooooooooooooooooooooooooooo

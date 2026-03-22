@@ -1,0 +1,611 @@
+"REF","LIS_TEST_LABEL","INSTRUMENT_TEST_CODE","DESCRIP","M_REF","DAY_PRIORITY","NIGHT_PRIORITY","HOLIDAY_PRIORITY","CALCULATED","ON_HOLD","GRP_REF","REF_1","LK_USER_REF","CODE","NAME","CONNECTED","DRIVER_CLASS_NAME","PROPERTIES_FILE_PATH","MODE_O","WAIT_FOR_RESULT_CONFIRMATION","ON_HOLD_1","DLY_DB_SAMPLES_2SEND","DLY_SAMPLE_DISP_REFRESH","DLY_FOR_RESERVE_RETRY","DLY_FOR_RETRY_LATER","DLY_FOR_TIME_OUT","COM_PORT","COM_BAUDE_RATE","COM_PARITY","COM_DATA_BITS","COM_STOP_BIT","IS_EMUL","RELATED_INSTR","PORT","M_REF_1"
+229,"600","HbA2","HbA2",18,1,1,1,0,0,0,18,0,"JUNIOR24","JUNIOR24",0,"b01.l3.drivers.helena.junior24.Junior24Driver","",1,0,1,10000,10000,2000,2000,30000,"COM19",1200,0,8,2,0,"",8819,1
+230,"601","HbF","HbF",18,1,1,1,0,0,0,18,0,"JUNIOR24","JUNIOR24",0,"b01.l3.drivers.helena.junior24.Junior24Driver","",1,0,1,10000,10000,2000,2000,30000,"COM19",1200,0,8,2,0,"",8819,1
+231,"605","ALPHA 2","ALPHA 2",18,1,1,1,0,0,0,18,0,"JUNIOR24","JUNIOR24",0,"b01.l3.drivers.helena.junior24.Junior24Driver","",1,0,1,10000,10000,2000,2000,30000,"COM19",1200,0,8,2,0,"",8819,1
+232,"604","ALPHA 1","ALPHA 1",18,1,1,1,0,0,0,18,0,"JUNIOR24","JUNIOR24",0,"b01.l3.drivers.helena.junior24.Junior24Driver","",1,0,1,10000,10000,2000,2000,30000,"COM19",1200,0,8,2,0,"",8819,1
+233,"602","HbA","HbA",18,1,1,1,0,0,0,18,0,"JUNIOR24","JUNIOR24",0,"b01.l3.drivers.helena.junior24.Junior24Driver","",1,0,1,10000,10000,2000,2000,30000,"COM19",1200,0,8,2,0,"",8819,1
+234,"603","ALBUMINE","ALBUMINE",18,1,1,1,0,0,0,18,0,"JUNIOR24","JUNIOR24",0,"b01.l3.drivers.helena.junior24.Junior24Driver","",1,0,1,10000,10000,2000,2000,30000,"COM19",1200,0,8,2,0,"",8819,1
+235,"606","BETA","BETA",18,1,1,1,0,0,0,18,0,"JUNIOR24","JUNIOR24",0,"b01.l3.drivers.helena.junior24.Junior24Driver","",1,0,1,10000,10000,2000,2000,30000,"COM19",1200,0,8,2,0,"",8819,1
+236,"607","GAMMA","GAMMA",18,1,1,1,0,0,0,18,0,"JUNIOR24","JUNIOR24",0,"b01.l3.drivers.helena.junior24.Junior24Driver","",1,0,1,10000,10000,2000,2000,30000,"COM19",1200,0,8,2,0,"",8819,1
+237,"614","GAMMA(g/l)","GAMMA(g/l)",18,1,1,1,0,0,0,18,0,"JUNIOR24","JUNIOR24",0,"b01.l3.drivers.helena.junior24.Junior24Driver","",1,0,1,10000,10000,2000,2000,30000,"COM19",1200,0,8,2,0,"",8819,1
+238,"613","BETA(g/l)","BETA(g/l)",18,1,1,1,0,0,0,18,0,"JUNIOR24","JUNIOR24",0,"b01.l3.drivers.helena.junior24.Junior24Driver","",1,0,1,10000,10000,2000,2000,30000,"COM19",1200,0,8,2,0,"",8819,1
+239,"610","ALBUMINE(g/l)","ALBUMINE(g/l)",18,1,1,1,0,0,0,18,0,"JUNIOR24","JUNIOR24",0,"b01.l3.drivers.helena.junior24.Junior24Driver","",1,0,1,10000,10000,2000,2000,30000,"COM19",1200,0,8,2,0,"",8819,1
+240,"611","ALPHA 1(g/l)","ALPHA 1(g/l)",18,1,1,1,0,0,0,18,0,"JUNIOR24","JUNIOR24",0,"b01.l3.drivers.helena.junior24.Junior24Driver","",1,0,1,10000,10000,2000,2000,30000,"COM19",1200,0,8,2,0,"",8819,1
+241,"612","ALPHA 2(g/l)","ALPHA 2(g/l)",18,1,1,1,0,0,0,18,0,"JUNIOR24","JUNIOR24",0,"b01.l3.drivers.helena.junior24.Junior24Driver","",1,0,1,10000,10000,2000,2000,30000,"COM19",1200,0,8,2,0,"",8819,1
+242,"615","A/G","A/G",18,1,1,1,0,0,0,18,0,"JUNIOR24","JUNIOR24",0,"b01.l3.drivers.helena.junior24.Junior24Driver","",1,0,1,10000,10000,2000,2000,30000,"COM19",1200,0,8,2,0,"",8819,1
+243,"616","PT","PT",18,1,1,1,0,0,0,18,0,"JUNIOR24","JUNIOR24",0,"b01.l3.drivers.helena.junior24.Junior24Driver","",1,0,1,10000,10000,2000,2000,30000,"COM19",1200,0,8,2,0,"",8819,1
+244,"700","14","FIbMFU",323,1,2,1,0,0,0,323,0,"BCS2","BCS2",1,"b01.l3.drivers.dadeBehring.bcs.BCSDriver","",1,0,0,10000,10000,2000,2000,30000,"6900",9600,0,8,1,0,"",8853,1
+245,"702","12","PT1.%.TS",323,1,2,1,0,0,0,323,0,"BCS2","BCS2",1,"b01.l3.drivers.dadeBehring.bcs.BCSDriver","",1,0,0,10000,10000,2000,2000,30000,"6900",9600,0,8,1,0,"",8853,1
+246,"701","10","PT1.s.TS",323,1,2,1,0,0,0,323,0,"BCS2","BCS2",1,"b01.l3.drivers.dadeBehring.bcs.BCSDriver","",1,0,0,10000,10000,2000,2000,30000,"6900",9600,0,8,1,0,"",8853,1
+247,"703","11","PT1.INRC",323,1,2,1,0,0,0,323,0,"BCS2","BCS2",1,"b01.l3.drivers.dadeBehring.bcs.BCSDriver","",1,0,0,10000,10000,2000,2000,30000,"6900",9600,0,8,1,0,"",8853,1
+248,"707","13","aPTT.PSL",323,1,2,1,0,0,0,323,0,"BCS2","BCS2",1,"b01.l3.drivers.dadeBehring.bcs.BCSDriver","",1,0,0,10000,10000,2000,2000,30000,"6900",9600,0,8,1,0,"",8853,1
+249,"409","798","CHOL",63,2,2,2,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+250,"414","668","GLU",63,2,2,2,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+252,"401","478","NH3",63,2,2,2,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+253,"402","566","AMYL",63,2,2,2,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+254,"403","734","DBIL",63,2,2,2,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+255,"405","699","Ca",63,2,2,2,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+256,"404","711","TBIL",63,2,2,2,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+257,"407","763","CO2",63,2,2,2,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+258,"408","991","Cl",63,2,2,2,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+259,"410","57","CPK",63,2,2,2,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+260,"411","36","CK-MB",16,2,2,2,0,0,0,16,0,"HIT-912E","HITACHI 912E",0,"b01.l3.drivers.hitachi.hitachi912.Hitachi912Driver","",1,0,1,10000,10000,2000,2000,30000,"COM1799",9600,0,8,1,0,"",0,1
+261,"412","452","CREA",63,2,2,2,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+262,"415","480","GGT",63,2,2,2,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+264,"419","661","FE",63,2,2,2,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+265,"420","964","TIBC",63,2,2,2,1,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+266,"421","80","LDH",63,2,2,2,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+267,"422","733","LIPAS",63,2,2,2,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+268,"423","435","HDLC3",63,2,2,2,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+269,"424","35","LDL",16,2,2,2,0,0,0,16,0,"HIT-912E","HITACHI 912E",0,"b01.l3.drivers.hitachi.hitachi912.Hitachi912Driver","",1,0,1,10000,10000,2000,2000,30000,"COM1799",9600,0,8,1,0,"",0,1
+271,"426","45","LPA",83,2,2,2,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+272,"427","688","MG",63,2,2,2,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+273,"428","158","ALP",63,2,2,2,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+274,"429","675","PHOS",63,2,2,2,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+275,"431","679","TP",63,2,2,2,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+276,"432","413","ALB",63,2,2,2,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+277,"433","962","A/G",63,2,2,2,1,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+278,"435","587","GOT",63,2,2,2,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+279,"436","685","GPT",63,2,2,2,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+280,"437","187","TRANS",63,2,2,2,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+281,"438","781","TG",63,2,2,2,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+282,"440","419","UREA",63,2,2,2,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+283,"442","36","C3c",63,2,2,2,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+284,"443","32","C4",63,2,2,2,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+285,"444","210","CRP",63,2,2,2,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+286,"471","465","IGM",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+287,"472","674","IGG",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+288,"473","458","IGA",63,2,2,2,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+289,"475","37","ASLO",63,2,2,2,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+290,"441","700","UA",63,2,2,2,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+292,"434","989","Na",63,2,2,2,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+293,"430","990","K",63,2,2,2,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+299,"400","41","M ALB",16,3,3,3,0,0,0,16,0,"HIT-912E","HITACHI 912E",0,"b01.l3.drivers.hitachi.hitachi912.Hitachi912Driver","",1,0,1,10000,10000,2000,2000,30000,"COM1799",9600,0,8,1,0,"",0,1
+296,"480","40","TP",16,2,2,2,0,0,0,16,0,"HIT-912E","HITACHI 912E",0,"b01.l3.drivers.hitachi.hitachi912.Hitachi912Driver","",1,0,1,10000,10000,2000,2000,30000,"COM1799",9600,0,8,1,0,"",0,1
+297,"480","708","TP",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+320,"453","130","PRL",11,2,2,2,0,0,0,11,0,"ELECSYS","ELECSYS",0,"b01.l3.drivers.hitachi.elecsys2010.ElecsysDriver","",1,0,1,10000,10000,2000,2000,30000,"COM14",9600,0,8,1,0,"",8814,1
+380,"41","668","Vanco_2",1,1,1,1,0,0,0,1,0,"AXSYM","AXSYM",0,"b01.l3.drivers.horiba.pentraML.PentraMLDriver","",1,0,1,10000,10000,500,2000,30000,"COM130",9600,0,8,1,0,"",0,1
+681,"489","510","Calcitonine",11,1,1,1,0,0,0,11,0,"ELECSYS","ELECSYS",0,"b01.l3.drivers.hitachi.elecsys2010.ElecsysDriver","",1,0,1,10000,10000,2000,2000,30000,"COM14",9600,0,8,1,0,"",8814,1
+833,"463","772","RPHNY",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+868,"464","415","THEO",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+830,"800","17","RA",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+888,"462","508","PHENO",63,2,2,2,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+832,"496","222","B-MicroGlob",63,2,2,2,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+949,"42","RET#","RET#",7,1,1,1,0,0,0,7,0,"PENTRA-ML","PENTRA-ML",0,"b01.l3.drivers.horiba.yumizenP8000.YumizenP8000Driver","",1,0,1,10000,10000,500,2000,30000,"10002",9600,0,8,1,0,"",8812,1
+950,"43","RET%","RET%",7,1,1,1,0,0,0,7,0,"PENTRA-ML","PENTRA-ML",0,"b01.l3.drivers.horiba.yumizenP8000.YumizenP8000Driver","",1,0,1,10000,10000,500,2000,30000,"10002",9600,0,8,1,0,"",8812,1
+298,"107","3","AFP",10,2,2,2,0,0,0,10,0,"ARCHITECT","ARCHITECT",0,"b01.l3.drivers.abbott.architect.ArchitectDriver","",1,0,1,10000,10000,2000,2000,30000,"COM16",9600,0,8,1,0,"",8816,1
+500,"714","FreePS","Protein S",143,2,2,2,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+641,"487","890","GH",11,1,1,1,0,0,0,11,0,"ELECSYS","ELECSYS",0,"b01.l3.drivers.hitachi.elecsys2010.ElecsysDriver","",1,0,1,10000,10000,2000,2000,30000,"COM14",9600,0,8,1,0,"",8814,1
+908,"801","673","IgG - CSF",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+909,"802","965","IgG Calc -CSF",83,1,1,1,1,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+989,"498","707","Ceruloplasmin",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+1069,"118","370","EBV IgM",103,1,1,1,0,0,0,103,0,"ARCHIT_PLS","ARCHITECT PLUS",0,"b01.l3.drivers.abbott.architect.ArchitectDriver","",1,0,1,10000,10000,2000,2000,30000,"COM24",9600,0,8,1,0,"",8815,1
+1089,"119","369","EBV IgG",103,1,1,1,0,0,0,103,0,"ARCHIT_PLS","ARCHITECT PLUS",0,"b01.l3.drivers.abbott.architect.ArchitectDriver","",1,0,1,10000,10000,2000,2000,30000,"COM24",9600,0,8,1,0,"",8815,1
+1090,"120","561","TPHA",10,1,1,1,0,0,0,10,0,"ARCHITECT","ARCHITECT",0,"b01.l3.drivers.abbott.architect.ArchitectDriver","",1,0,1,10000,10000,2000,2000,30000,"COM16",9600,0,8,1,0,"",8816,1
+1109,"400","253","M ALB",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+1110,"427","688","MG",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+1129,"405","699","Ca",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+1130,"409","798","CHOL",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+1131,"407","763","CO2",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+1132,"415","480","GGT",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+1133,"414","668","GLU",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+1134,"481","47","Lactate",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+1135,"435","587","GOT",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+1136,"412","452","CREA",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+1138,"433","962","A/G",83,1,1,1,1,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+1149,"497","136","Lithium",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+1141,"502","689","MG-UR",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+1142,"502","689","MG-UR",63,2,2,2,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+1169,"496","222","B-MicroGlob",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+1170,"491","283","KAPPA",83,2,2,2,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+1171,"492","284","LAMBDA",83,2,2,2,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+1172,"493","966","KAPPA/LAMBDA",83,2,2,2,1,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+1189,"121","260","TG",62,1,1,1,0,0,0,62,0,"COBAS-E411","COBAS-E411",0,"b01.l3.drivers.roches.cobas.e411.CobasE411Driver","",1,0,1,10000,10000,2000,2000,30000,"COM25",9600,0,8,1,0,"",8825,1
+1249,"503","403","D Dimer",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+1250,"504","967","D Dimer Calc",83,1,1,1,1,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+1269,"310","639","HIV",10,1,1,1,0,0,0,10,0,"ARCHITECT","ARCHITECT",0,"b01.l3.drivers.abbott.architect.ArchitectDriver","",1,0,1,10000,10000,2000,2000,30000,"COM16",9600,0,8,1,0,"",8816,1
+1351,"118","370","EBV IgM",10,2,2,2,0,0,0,10,0,"ARCHITECT","ARCHITECT",0,"b01.l3.drivers.abbott.architect.ArchitectDriver","",1,0,1,10000,10000,2000,2000,30000,"COM16",9600,0,8,1,0,"",8816,1
+1352,"119","369","EBV IgG",10,2,2,2,0,0,0,10,0,"ARCHITECT","ARCHITECT",0,"b01.l3.drivers.abbott.architect.ArchitectDriver","",1,0,1,10000,10000,2000,2000,30000,"COM16",9600,0,8,1,0,"",8816,1
+1392,"51","10","HE4",11,1,1,1,0,0,0,11,0,"ELECSYS","ELECSYS",0,"b01.l3.drivers.hitachi.elecsys2010.ElecsysDriver","",1,0,1,10000,10000,2000,2000,30000,"COM14",9600,0,8,1,0,"",8814,1
+1393,"51","10","HE4",62,2,2,2,0,0,0,62,0,"COBAS-E411","COBAS-E411",0,"b01.l3.drivers.roches.cobas.e411.CobasE411Driver","",1,0,1,10000,10000,2000,2000,30000,"COM25",9600,0,8,1,0,"",8825,1
+1409,"124","1130","AMH",11,2,2,2,0,0,0,11,0,"ELECSYS","ELECSYS",0,"b01.l3.drivers.hitachi.elecsys2010.ElecsysDriver","",1,0,1,10000,10000,2000,2000,30000,"COM14",9600,0,8,1,0,"",8814,1
+1410,"124","130","AMH",62,1,1,1,0,0,0,62,0,"COBAS-E411","COBAS-E411",0,"b01.l3.drivers.roches.cobas.e411.CobasE411Driver","",1,0,1,10000,10000,2000,2000,30000,"COM25",9600,0,8,1,0,"",8825,1
+1429,"494","610","FolicAcid",11,2,2,2,0,0,0,11,0,"ELECSYS","ELECSYS",0,"b01.l3.drivers.hitachi.elecsys2010.ElecsysDriver","",1,0,1,10000,10000,2000,2000,30000,"COM14",9600,0,8,1,0,"",8814,1
+1451,"805","730","A-TSHR",62,1,1,1,0,0,0,62,0,"COBAS-E411","COBAS-E411",0,"b01.l3.drivers.roches.cobas.e411.CobasE411Driver","",1,0,1,10000,10000,2000,2000,30000,"COM25",9600,0,8,1,0,"",8825,1
+1452,"806","120","HE 4",62,1,1,1,0,0,0,62,0,"COBAS-E411","COBAS-E411",0,"b01.l3.drivers.roches.cobas.e411.CobasE411Driver","",1,0,1,10000,10000,2000,2000,30000,"COM25",9600,0,8,1,0,"",8825,1
+1469,"901","PRO","PRO.6",123,1,1,1,0,0,0,123,0,"COBAS-U601","COBAS-U601",1,"b01.l3.drivers.roches.cobas.u601701.CobasU601701Driver","",1,0,0,10000,10000,2000,2000,30000,"6500",9600,0,8,1,0,"",8834,1
+1470,"905","ERY","ERY.1",123,1,1,1,0,0,0,123,0,"COBAS-U601","COBAS-U601",1,"b01.l3.drivers.roches.cobas.u601701.CobasU601701Driver","",1,0,0,10000,10000,2000,2000,30000,"6500",9600,0,8,1,0,"",8834,1
+1471,"900","pH","pH.10",123,1,1,1,0,0,0,123,0,"COBAS-U601","COBAS-U601",1,"b01.l3.drivers.roches.cobas.u601701.CobasU601701Driver","",1,0,0,10000,10000,2000,2000,30000,"6500",9600,0,8,1,0,"",8834,1
+1472,"906","LEU","LEU.2",123,1,1,1,0,0,0,123,0,"COBAS-U601","COBAS-U601",1,"b01.l3.drivers.roches.cobas.u601701.CobasU601701Driver","",1,0,0,10000,10000,2000,2000,30000,"6500",9600,0,8,1,0,"",8834,1
+1473,"904","NIT","NIT.3",123,1,1,1,0,0,0,123,0,"COBAS-U601","COBAS-U601",1,"b01.l3.drivers.roches.cobas.u601701.CobasU601701Driver","",1,0,0,10000,10000,2000,2000,30000,"6500",9600,0,8,1,0,"",8834,1
+1474,"902","GLU","GLU.5",123,1,1,1,0,0,0,123,0,"COBAS-U601","COBAS-U601",1,"b01.l3.drivers.roches.cobas.u601701.CobasU601701Driver","",1,0,0,10000,10000,2000,2000,30000,"6500",9600,0,8,1,0,"",8834,1
+1475,"908","BIL","BIL.8",123,1,1,1,0,0,0,123,0,"COBAS-U601","COBAS-U601",1,"b01.l3.drivers.roches.cobas.u601701.CobasU601701Driver","",1,0,0,10000,10000,2000,2000,30000,"6500",9600,0,8,1,0,"",8834,1
+1476,"903","KET","KET.4",123,1,1,1,0,0,0,123,0,"COBAS-U601","COBAS-U601",1,"b01.l3.drivers.roches.cobas.u601701.CobasU601701Driver","",1,0,0,10000,10000,2000,2000,30000,"6500",9600,0,8,1,0,"",8834,1
+1477,"907","COL","COL.20",123,1,1,1,0,0,0,123,0,"COBAS-U601","COBAS-U601",1,"b01.l3.drivers.roches.cobas.u601701.CobasU601701Driver","",1,0,0,10000,10000,2000,2000,30000,"6500",9600,0,8,1,0,"",8834,1
+1489,"909","CLA","CLA.21",123,1,1,1,0,0,0,123,0,"COBAS-U601","COBAS-U601",1,"b01.l3.drivers.roches.cobas.u601701.CobasU601701Driver","",1,0,0,10000,10000,2000,2000,30000,"6500",9600,0,8,1,0,"",8834,1
+1490,"910","SG","SG.22",123,1,1,1,0,0,0,123,0,"COBAS-U601","COBAS-U601",1,"b01.l3.drivers.roches.cobas.u601701.CobasU601701Driver","",1,0,0,10000,10000,2000,2000,30000,"6500",9600,0,8,1,0,"",8834,1
+1509,"425","961","LDL C",83,1,1,1,1,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+1529,"42","RET#","RET#",163,2,2,2,0,0,0,163,0,"PENTRA-BUP","PENTRA-BUP",0,"b01.l3.drivers.horiba.pentraML.PentraMLDriver","",1,0,1,10000,10000,500,2000,30000,"COM28",9600,0,8,1,0,"",8828,1
+1530,"43","RET%","RET%",163,2,2,2,0,0,0,163,0,"PENTRA-BUP","PENTRA-BUP",0,"b01.l3.drivers.horiba.pentraML.PentraMLDriver","",1,0,1,10000,10000,500,2000,30000,"COM28",9600,0,8,1,0,"",8828,1
+1549,"505","410","B12",62,1,1,1,0,0,0,62,0,"COBAS-E411","COBAS-E411",0,"b01.l3.drivers.roches.cobas.e411.CobasE411Driver","",1,0,1,10000,10000,2000,2000,30000,"COM25",9600,0,8,1,0,"",8825,1
+1589,"312","370","Estradiol III",62,1,1,1,0,0,0,62,0,"COBAS-E411","COBAS-E411",0,"b01.l3.drivers.roches.cobas.e411.CobasE411Driver","",1,0,1,10000,10000,2000,2000,30000,"COM25",9600,0,8,1,0,"",8825,1
+1629,"495","228","Haptoglobin",63,2,2,2,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+1630,"499","48","Alpha1",63,2,2,2,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+1631,"498","707","Ceruloplasmin",63,2,2,2,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+1632,"723","723","Lp a",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+1633,"724","968","Lp a",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+1649,"430","990","K",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1650,"407","763","CO2",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1651,"408","991","Cl",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1652,"434","989","Na",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1655,"121","5","TG",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1654,"51","10","HE4",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1656,"124","472","AMH",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1657,"311","89","Cortisol II",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1658,"312","223","Estradiol III",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1659,"400","253","M ALB",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1660,"401","479","NH3",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1661,"402","566","AMYL",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1662,"403","734","DBIL",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1663,"404","299","TBIL",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1664,"405","699","Ca",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1665,"409","798","CHOL",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1666,"410","57","CK",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1667,"411","546","CK-MB",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1668,"412","452","CREA",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1669,"413","67","Ferritine",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1670,"414","668","GLU",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1671,"415","480","GGT",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1675,"419","661","FE",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1676,"420","964","TIBC",143,9,9,9,1,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1677,"421","80","LDH",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1678,"422","786","LIPAS",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1679,"423","435","HDLC3",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1680,"424","59","LDLC",143,3,3,3,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1681,"425","961","LDL C",143,3,3,3,1,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1682,"426","45","LPA",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1683,"427","688","MG",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1684,"428","158","ALP",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1685,"429","675","PHOS",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1686,"431","679","TP",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1687,"432","413","ALB",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1688,"433","962","A/G",143,9,9,9,1,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1689,"435","587","GOT",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1690,"436","685","GPT",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1691,"437","187","TRSF",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1692,"438","781","TG",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1693,"439","577","TN-T",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1694,"440","419","UREA",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1695,"441","700","UA",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1696,"442","36","C3c",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1697,"443","32","C4",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1698,"444","256","CRP",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1699,"445","574","PRO-BNP",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1706,"451","94","PTH",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1702,"447","142","DHEAS",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1703,"448","99","FSH",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1704,"449","20","LH",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1705,"450","120","Insulin",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1707,"452","235","Progesterone",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1708,"453","14","PRL",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1709,"454","216","TESTO",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1711,"456","477","COCAI",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1712,"457","498","OPIAT",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1713,"458","445","CANAB",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1714,"459","144","CARB",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1715,"460","115","Digoxin",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1716,"461","207","VALP",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1717,"462","508","PHENO",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1718,"463","772","RPHNY",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1719,"464","415","THEO",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1720,"107","134","AFP",143,1,1,1,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1721,"466","49","CEA",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1722,"467","600","B12",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1723,"468","127","CROSSL",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1724,"469","101","Estradiol",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1725,"470","114","Folate",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1726,"471","465","IGM",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1727,"472","674","IGG",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1728,"473","458","IGA",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1729,"475","37","ASLO",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1730,"476","52","CA15-3",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1731,"477","54","CA19-9",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1732,"478","53","CA125",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1733,"480","708","TP-UR",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1734,"481","47","Lactate",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1735,"482","97","ACTH",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1736,"483","318","KAPPA",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1737,"484","319","LAMBDA",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1738,"485","966","Free K/L",143,9,9,9,1,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1741,"488","402","TP-CSF",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1742,"489","487","PCT",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1743,"490","412","M ALB CSF",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1744,"491","283","KAPPA",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1745,"492","284","LAMBDA",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1747,"494","758","FolicAcid",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1748,"495","228","Haptoglobin",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1749,"496","93","B-MicroGlob",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1750,"497","136","Lithium",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1751,"498","707","Ceruloplasmin",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1752,"499","48","Alpha1",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1753,"502","689","MG-UR",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1754,"503","403","D Dimer",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1755,"504","967","D Dimer Calc",143,9,9,9,1,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1756,"505","224","B12",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1757,"723","723","Lp a",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1759,"800","17","RA",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1760,"801","673","IgG - CSF",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1761,"802","965","IgG Calc -CSF",143,9,9,9,1,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1762,"806","281","HE 4",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1764,"1000","453","CREA-UR",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1765,"1001","669","GLU-CSF",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1766,"1002","567","Amylase-FLU",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1767,"1003","568","Amylase-UR",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1768,"1005","712","Tbil-FLU",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1769,"1004","735","Dbil-FLU",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1770,"1007","697","Calcium-UR",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1771,"1006","698","Calcium-FLU",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1772,"1010","981","Chloride-UR",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1773,"1008","983","Chloride-CSF",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1774,"1009","982","Chloride-FLU",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1775,"1011","799","Cholesterol-FLU",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1776,"1013","672","Glucose-UR",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1777,"1012","454","Creatinine-FLU",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1789,"1015","81","LDH-FLU",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1790,"1014","670","Glucose-FLU",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1791,"1027","676","Phosphorus-FLU",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1792,"1020","420","Urea-FLU",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1793,"1019","986","Sodium-UR",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1794,"1017","984","Potassium-UR",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1795,"1036","1036","RA-FLU",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1796,"1033","783","Triglycerides-FLU",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1797,"1022","701","Uric acid-FLU",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1798,"1023","702","Uric acid-UR",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1799,"1021","421","Urea-UR",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1800,"1026","491","Lactic Acid-CSF",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1801,"1024","731","Lipase-FLU",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1803,"1034","38","C3-FLU",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1804,"1028","677","Phosphorus-UR",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1805,"1029","680","Protein Total-FLU",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1806,"1018","987","Sodium-FLU",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1807,"1025","690","Magnesium-FLU",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1808,"1035","33","C4-FLU",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1809,"1016","985","Potassium -FLU",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1810,"1031","414","Albumin-FLU",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1811,"1032","960","ALB/GLOB-FLU",143,9,9,9,1,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1813,"805","488","A-TSHR",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1814,"110","148","BHCG",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1816,"1041","380","Cortisol II-30mn",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1817,"1039","3000","CEA-FLU",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1818,"1046","323","Insulin-5H",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1819,"1042","220","Insulin-1H",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1820,"1038","54","CA19-9-FLU",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1821,"1047","575","PRO-BNP-FLU",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1822,"1040","180","Cortisol II-1H",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1823,"1044","400","Insulin-3H",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1824,"1043","320","Insulin-2H",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1825,"1045","322","Insulin-4H",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1826,"1048","223","Estradiol III-FLU",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1830,"1039","3000","CEA-FLU",11,1,1,1,0,0,0,11,0,"ELECSYS","ELECSYS",0,"b01.l3.drivers.hitachi.elecsys2010.ElecsysDriver","",1,0,1,10000,10000,2000,2000,30000,"COM14",9600,0,8,1,0,"",8814,1
+1828,"1038","3500","CA19-9-FLU",11,1,1,1,0,0,0,11,0,"ELECSYS","ELECSYS",0,"b01.l3.drivers.hitachi.elecsys2010.ElecsysDriver","",1,0,1,10000,10000,2000,2000,30000,"COM14",9600,0,8,1,0,"",8814,1
+1833,"1043","6500","Insulin-2H",11,2,2,2,0,0,0,11,0,"ELECSYS","ELECSYS",0,"b01.l3.drivers.hitachi.elecsys2010.ElecsysDriver","",1,0,1,10000,10000,2000,2000,30000,"COM14",9600,0,8,1,0,"",8814,1
+1832,"1042","6500","Insulin-1H",11,2,2,2,0,0,0,11,0,"ELECSYS","ELECSYS",0,"b01.l3.drivers.hitachi.elecsys2010.ElecsysDriver","",1,0,1,10000,10000,2000,2000,30000,"COM14",9600,0,8,1,0,"",8814,1
+1834,"1044","6500","Insulin-3H",11,2,2,2,0,0,0,11,0,"ELECSYS","ELECSYS",0,"b01.l3.drivers.hitachi.elecsys2010.ElecsysDriver","",1,0,1,10000,10000,2000,2000,30000,"COM14",9600,0,8,1,0,"",8814,1
+1835,"1045","6500","Insulin-4H",11,2,2,2,0,0,0,11,0,"ELECSYS","ELECSYS",0,"b01.l3.drivers.hitachi.elecsys2010.ElecsysDriver","",1,0,1,10000,10000,2000,2000,30000,"COM14",9600,0,8,1,0,"",8814,1
+1836,"1046","6500","Insulin-5H",11,2,2,2,0,0,0,11,0,"ELECSYS","ELECSYS",0,"b01.l3.drivers.hitachi.elecsys2010.ElecsysDriver","",1,0,1,10000,10000,2000,2000,30000,"COM14",9600,0,8,1,0,"",8814,1
+1837,"1047","2700","PRO-BNP-FLU",11,1,1,1,0,0,0,11,0,"ELECSYS","ELECSYS",0,"b01.l3.drivers.hitachi.elecsys2010.ElecsysDriver","",1,0,1,10000,10000,2000,2000,30000,"COM14",9600,0,8,1,0,"",8814,1
+2352,"1037","732","Methotrexate",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2372,"479","800","VIT-D",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1854,"1042","6500","Insulin-1H",62,1,1,1,0,0,0,62,0,"COBAS-E411","COBAS-E411",0,"b01.l3.drivers.roches.cobas.e411.CobasE411Driver","",1,0,1,10000,10000,2000,2000,30000,"COM25",9600,0,8,1,0,"",8825,1
+1855,"1043","6500","Insulin-2H",62,1,1,1,0,0,0,62,0,"COBAS-E411","COBAS-E411",0,"b01.l3.drivers.roches.cobas.e411.CobasE411Driver","",1,0,1,10000,10000,2000,2000,30000,"COM25",9600,0,8,1,0,"",8825,1
+1856,"1044","6500","Insulin-3H",62,1,1,1,0,0,0,62,0,"COBAS-E411","COBAS-E411",0,"b01.l3.drivers.roches.cobas.e411.CobasE411Driver","",1,0,1,10000,10000,2000,2000,30000,"COM25",9600,0,8,1,0,"",8825,1
+1860,"1047","2710","PRO-BNP-FLU",62,2,2,2,0,0,0,62,0,"COBAS-E411","COBAS-E411",0,"b01.l3.drivers.roches.cobas.e411.CobasE411Driver","",1,0,1,10000,10000,2000,2000,30000,"COM25",9600,0,8,1,0,"",8825,1
+1858,"1045","6500","Insulin-4H",62,1,1,1,0,0,0,62,0,"COBAS-E411","COBAS-E411",0,"b01.l3.drivers.roches.cobas.e411.CobasE411Driver","",1,0,1,10000,10000,2000,2000,30000,"COM25",9600,0,8,1,0,"",8825,1
+1859,"1046","6500","Insulin-5H",62,1,1,1,0,0,0,62,0,"COBAS-E411","COBAS-E411",0,"b01.l3.drivers.roches.cobas.e411.CobasE411Driver","",1,0,1,10000,10000,2000,2000,30000,"COM25",9600,0,8,1,0,"",8825,1
+1861,"1048","3700","ESTRADIOL III-FLU",62,1,1,1,0,0,0,62,0,"COBAS-E411","COBAS-E411",0,"b01.l3.drivers.roches.cobas.e411.CobasE411Driver","",1,0,1,10000,10000,2000,2000,30000,"COM25",9600,0,8,1,0,"",8825,1
+1912,"487","263","GH",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1873,"701","10","PT1.s.TS",183,2,1,2,0,0,0,183,0,"BCS","BCS",1,"b01.l3.drivers.dadeBehring.bcs.BCSDriver","",1,0,0,10000,10000,2000,2000,30000,"6800",9600,0,8,1,0,"",8836,1
+1874,"702","12","PT1.%.TS",183,2,1,2,0,0,0,183,0,"BCS","BCS",1,"b01.l3.drivers.dadeBehring.bcs.BCSDriver","",1,0,0,10000,10000,2000,2000,30000,"6800",9600,0,8,1,0,"",8836,1
+1875,"700","14","FIbMFU",183,2,1,2,0,0,0,183,0,"BCS","BCS",1,"b01.l3.drivers.dadeBehring.bcs.BCSDriver","",1,0,0,10000,10000,2000,2000,30000,"6800",9600,0,8,1,0,"",8836,1
+1932,"493","963","KAPPA/LAMBDA",143,9,9,9,1,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1952,"1049","317","ACE",63,9,9,9,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+1878,"703","11","PT1.INRC",183,2,1,2,0,0,0,183,0,"BCS","BCS",1,"b01.l3.drivers.dadeBehring.bcs.BCSDriver","",1,0,0,10000,10000,2000,2000,30000,"6800",9600,0,8,1,0,"",8836,1
+1879,"707","13","aPTT.PSL",183,2,1,2,0,0,0,183,0,"BCS","BCS",1,"b01.l3.drivers.dadeBehring.bcs.BCSDriver","",1,0,0,10000,10000,2000,2000,30000,"6800",9600,0,8,1,0,"",8836,1
+1880,"708","15","FVIII.PSL",183,1,1,1,0,0,0,183,0,"BCS","BCS",1,"b01.l3.drivers.dadeBehring.bcs.BCSDriver","",1,0,0,10000,10000,2000,2000,30000,"6800",9600,0,8,1,0,"",8836,1
+1881,"709","16","LA1",183,1,2,1,0,0,0,183,0,"BCS","BCS",1,"b01.l3.drivers.dadeBehring.bcs.BCSDriver","",1,0,0,10000,10000,2000,2000,30000,"6800",9600,0,8,1,0,"",8836,1
+1882,"710","17","LA2",183,1,2,1,0,0,0,183,0,"BCS","BCS",1,"b01.l3.drivers.dadeBehring.bcs.BCSDriver","",1,0,0,10000,10000,2000,2000,30000,"6800",9600,0,8,1,0,"",8836,1
+1883,"711","18","LupusR",183,1,2,1,0,0,0,183,0,"BCS","BCS",1,"b01.l3.drivers.dadeBehring.bcs.BCSDriver","",1,0,0,10000,10000,2000,2000,30000,"6800",9600,0,8,1,0,"",8836,1
+1884,"712","19","Hep.N",183,1,1,1,0,0,0,183,0,"BCS","BCS",1,"b01.l3.drivers.dadeBehring.bcs.BCSDriver","",1,0,0,10000,10000,2000,2000,30000,"6800",9600,0,8,1,0,"",8836,1
+1885,"713","20","Hep.LMW",183,1,1,1,0,0,0,183,0,"BCS","BCS",1,"b01.l3.drivers.dadeBehring.bcs.BCSDriver","",1,0,0,10000,10000,2000,2000,30000,"6800",9600,0,8,1,0,"",8836,1
+1886,"714","23","Protein S",183,1,1,1,0,0,0,183,0,"BCS","BCS",1,"b01.l3.drivers.dadeBehring.bcs.BCSDriver","",1,0,0,10000,10000,2000,2000,30000,"6800",9600,0,8,1,0,"",8836,1
+1887,"715","22","Protein C",183,1,1,1,0,0,0,183,0,"BCS","BCS",1,"b01.l3.drivers.dadeBehring.bcs.BCSDriver","",1,0,0,10000,10000,2000,2000,30000,"6800",9600,0,8,1,0,"",8836,1
+1888,"716","24","FV",183,1,1,1,0,0,0,183,0,"BCS","BCS",1,"b01.l3.drivers.dadeBehring.bcs.BCSDriver","",1,0,0,10000,10000,2000,2000,30000,"6800",9600,0,8,1,0,"",8836,1
+1889,"717","25","FVII",183,1,1,1,0,0,0,183,0,"BCS","BCS",1,"b01.l3.drivers.dadeBehring.bcs.BCSDriver","",1,0,0,10000,10000,2000,2000,30000,"6800",9600,0,8,1,0,"",8836,1
+1890,"718","29","FXI",183,1,2,1,0,0,0,183,0,"BCS","BCS",1,"b01.l3.drivers.dadeBehring.bcs.BCSDriver","",1,0,0,10000,10000,2000,2000,30000,"6800",9600,0,8,1,0,"",8836,1
+1891,"719","26","VW FAg",183,1,1,1,0,0,0,183,0,"BCS","BCS",1,"b01.l3.drivers.dadeBehring.bcs.BCSDriver","",1,0,0,10000,10000,2000,2000,30000,"6800",9600,0,8,1,0,"",8836,1
+1892,"720","27","Heparin LMW ",183,1,1,1,0,0,0,183,0,"BCS","BCS",1,"b01.l3.drivers.dadeBehring.bcs.BCSDriver","",1,0,0,10000,10000,2000,2000,30000,"6800",9600,0,8,1,0,"",8836,1
+1893,"721","28","Heparin UF",183,1,2,1,0,0,0,183,0,"BCS","BCS",1,"b01.l3.drivers.dadeBehring.bcs.BCSDriver","",1,0,0,10000,10000,2000,2000,30000,"6800",9600,0,8,1,0,"",8836,1
+1894,"722","21","AntiT3",183,1,1,1,0,0,0,183,0,"BCS","BCS",1,"b01.l3.drivers.dadeBehring.bcs.BCSDriver","",1,0,0,10000,10000,2000,2000,30000,"6800",9600,0,8,1,0,"",8836,1
+1972,"108","499","Total PSA",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1992,"1051","52","CA15-3 FLU",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+1993,"1050","53","CA125-FLU",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2076,"1059","HYA","HYA.15",123,1,1,1,0,0,0,123,0,"COBAS-U601","COBAS-U601",1,"b01.l3.drivers.roches.cobas.u601701.CobasU601701Driver","",1,0,0,10000,10000,2000,2000,30000,"6500",9600,0,8,1,0,"",8834,1
+2077,"1057","SEC","SEC.6",123,1,1,1,0,0,0,123,0,"COBAS-U601","COBAS-U601",1,"b01.l3.drivers.roches.cobas.u601701.CobasU601701Driver","",1,0,0,10000,10000,2000,2000,30000,"6500",9600,0,8,1,0,"",8834,1
+2092,"1062","1062","Albumin/Creatinine",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2079,"1053","CRY","CRY.8",123,1,1,1,0,0,0,123,0,"COBAS-U601","COBAS-U601",1,"b01.l3.drivers.roches.cobas.u601701.CobasU601701Driver","",1,0,0,10000,10000,2000,2000,30000,"6500",9600,0,8,1,0,"",8834,1
+2080,"1055","WBC","WBC.3",123,1,1,1,0,0,0,123,0,"COBAS-U601","COBAS-U601",1,"b01.l3.drivers.roches.cobas.u601701.CobasU601701Driver","",1,0,0,10000,10000,2000,2000,30000,"6500",9600,0,8,1,0,"",8834,1
+2081,"1054","RBC","RBC.1",123,1,1,1,0,0,0,123,0,"COBAS-U601","COBAS-U601",1,"b01.l3.drivers.roches.cobas.u601701.CobasU601701Driver","",1,0,0,10000,10000,2000,2000,30000,"6500",9600,0,8,1,0,"",8834,1
+2093,"1063","968","Protein/Creatinine",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2112,"106","556","Tacrolimus-C",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2132,"37","105","RubellaG*",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2133,"38","106","RubellaM*",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2152,"45","98","Toxo IgG",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2153,"122","95","Toxo IgM",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2172,"102","627","TSH",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2173,"104","813","FT3",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2174,"101","302","FT4",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2175,"111","137","Anti-TPO",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2192,"117","624","Vanco",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2212,"115","705","Cyclosporine",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2232,"112","112","F/T RATIO",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2233,"109","751","Free PSA",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2252,"36","225","HIV Ag_Ab",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2253,"44","515","HBs Ag",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2254,"33","503","HCV",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2255,"50","66","Anti HBe",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2256,"29","73","HBe Ag",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2272,"1064","116","IgE",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2292,"116","778","HCY",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2293,"123","140","Hbc Total",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2294,"49","469","HAV Total",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2295,"32","85","HAV-M",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2296,"804","149","TPHA",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2297,"48","86","Hbc IgM",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2312,"105","84","Anti-Tg",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2313,"28","765","A-Hbs",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2332,"1065","172","Acetaminophen",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2333,"1066","671","Ethanol",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2334,"1067","90","Cortisol-SAL",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2392,"46","493","CMV IgG",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2393,"47","11","CMV IgM",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2412,"803","202","Anti CCP",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2432,"1068","510","Cholinesterase",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2452,"1069","737","Anti-SARS-CoV-2",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2472,"1071","DDimer","D Dimer T",143,3,3,3,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2492,"1071","30","D Dimer B",183,2,1,2,0,0,0,183,0,"BCS","BCS",1,"b01.l3.drivers.dadeBehring.bcs.BCSDriver","",1,0,0,10000,10000,2000,2000,30000,"6800",9600,0,8,1,0,"",8836,1
+2615,"1078","146","SHBG",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2612,"1079","691","CREAJU",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2613,"10","690J","CREAJ",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2614,"1077","690J","CREAJ",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2632,"1080","317","ACEB",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2652,"701","041","PT1.s.TS",283,3,3,3,0,0,0,283,0,"CS2500","CS2500",0,"b01.l3.drivers.cs2500.CS2500Driver","",1,0,0,10000,10000,2000,2000,30000,"6000",9600,0,8,1,0,"",8851,1
+2672,"1081","1001","e-GFR",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2673,"1082","1002","Total Lipids",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2674,"1083","1003","Creatinine Clearence",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2675,"1084","1004","IgG Index",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2752,"1087","Direct Renin","Direct Renin",303,1,1,1,0,0,0,303,0,"MAGLUMI","MAGLUMI",0,"b01.l3.drivers.maglumi.MaglumiDriver","",1,0,0,10000,10000,2000,2000,30000,"6100",9600,0,8,1,0,"",8852,1
+2753,"1088","ALD","Aldosterone",303,1,1,1,0,0,0,303,0,"MAGLUMI","MAGLUMI",0,"b01.l3.drivers.maglumi.MaglumiDriver","",1,0,0,10000,10000,2000,2000,30000,"6100",9600,0,8,1,0,"",8852,1
+2714,"1086","083","PLGF",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2754,"1089","17-OH P","17-OH P",303,1,1,1,0,0,0,303,0,"MAGLUMI","MAGLUMI",0,"b01.l3.drivers.maglumi.MaglumiDriver","",1,0,0,10000,10000,2000,2000,30000,"6100",9600,0,8,1,0,"",8852,1
+2792,"1091","AMYU24","AMYU24",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2793,"1094","GLUU24","GLUU24",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2794,"1099","UREAU24","UREAU24",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2795,"1098","UAU24","UAU24",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2796,"1101","KU2424","KU24",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2797,"1096","MALBU24","MALBU24",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2798,"1100","NAU24","NAU24",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2799,"1093","CREAU24","CREAU24",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2800,"1092","CALU24","CALU24",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2801,"1097","PHOSU24","PHOSU24",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2802,"1102","CLU24","CLU24",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2803,"1103","TPU24","TPU24",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2804,"1095","MGU24","MGU24",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2812,"1104","1010","Anion Gap",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2852,"1109","314","IgG subclasses (4)",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2853,"1108","313","IgG subclasses (3)",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2854,"1107","312","IgG sucblasses (2)",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2855,"1106","311","IgG subclasses (1)",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2872,"1110","1005","Transferrin Saturation",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2892,"1071","30","D Dimer B",323,1,2,1,0,0,0,323,0,"BCS2","BCS2",1,"b01.l3.drivers.dadeBehring.bcs.BCSDriver","",1,0,0,10000,10000,2000,2000,30000,"6900",9600,0,8,1,0,"",8853,1
+2913,"1116","CA HYP","Corrected Calcium",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2932,"1118","127","Ctx Beta-CrossLaps",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2933,"1119","44","P1NP Total Procollagen 1 ",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+3032,"417","Hb1Ac%_2","HB1AC_2",363,1,1,1,0,0,0,363,0,"OCTA","OCTA",1,"b01.l3.drivers.octa.OctaDriver","",1,0,0,10000,10000,2000,2000,30000,"6901",9600,0,8,1,0,"",8855,1
+3033,"416","Hb1Ac%_3","Hb1AC_3",363,1,1,1,0,0,0,363,0,"OCTA","OCTA",1,"b01.l3.drivers.octa.OctaDriver","",1,0,0,10000,10000,2000,2000,30000,"6901",9600,0,8,1,0,"",8855,1
+2994,"418","HbA1c%","HbA1c cal",363,1,1,1,1,0,0,363,0,"OCTA","OCTA",1,"b01.l3.drivers.octa.OctaDriver","",1,0,0,10000,10000,2000,2000,30000,"6901",9600,0,8,1,0,"",8855,1
+2512,"1072","555","IgF1",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2532,"1073","304","Androstenedione",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2552,"1074","71","Anti-SARS-CoV2-S Ab",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+2572,"1076","FactorX","Factor X",143,2,2,2,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+3052,"13","LYM#","LYM#",343,2,2,2,0,0,0,343,0,"UMIZEN","UMIZEN",1,"b01.l3.drivers.horiba.yumizenP8000.YumizenP8000Driver","",1,0,0,10000,10000,2000,2000,30000,"10006",9600,0,8,1,0,"",8854,1
+2772,"1090","EPO","EPO",303,1,1,1,0,0,0,303,0,"MAGLUMI","MAGLUMI",0,"b01.l3.drivers.maglumi.MaglumiDriver","",1,0,0,10000,10000,2000,2000,30000,"6100",9600,0,8,1,0,"",8852,1
+3053,"14","MON#","MON#",343,2,2,2,0,0,0,343,0,"UMIZEN","UMIZEN",1,"b01.l3.drivers.horiba.yumizenP8000.YumizenP8000Driver","",1,0,0,10000,10000,2000,2000,30000,"10006",9600,0,8,1,0,"",8854,1
+3054,"15","NEU#","NEU#",343,2,2,2,0,0,0,343,0,"UMIZEN","UMIZEN",1,"b01.l3.drivers.horiba.yumizenP8000.YumizenP8000Driver","",1,0,0,10000,10000,2000,2000,30000,"10006",9600,0,8,1,0,"",8854,1
+3058,"8","RDW-CV","RDW",343,2,2,2,0,0,0,343,0,"UMIZEN","UMIZEN",1,"b01.l3.drivers.horiba.yumizenP8000.YumizenP8000Driver","",1,0,0,10000,10000,2000,2000,30000,"10006",9600,0,8,1,0,"",8854,1
+3056,"16","EOS#","EOS#",343,2,2,2,0,0,0,343,0,"UMIZEN","UMIZEN",1,"b01.l3.drivers.horiba.yumizenP8000.YumizenP8000Driver","",1,0,0,10000,10000,2000,2000,30000,"10006",9600,0,8,1,0,"",8854,1
+3057,"17","BAS#","BAS#",343,2,2,2,0,0,0,343,0,"UMIZEN","UMIZEN",1,"b01.l3.drivers.horiba.yumizenP8000.YumizenP8000Driver","",1,0,0,10000,10000,2000,2000,30000,"10006",9600,0,8,1,0,"",8854,1
+3059,"18","LYM%","LYM%",343,2,2,2,0,0,0,343,0,"UMIZEN","UMIZEN",1,"b01.l3.drivers.horiba.yumizenP8000.YumizenP8000Driver","",1,0,0,10000,10000,2000,2000,30000,"10006",9600,0,8,1,0,"",8854,1
+3060,"19","MON%","MON%",343,2,2,2,0,0,0,343,0,"UMIZEN","UMIZEN",1,"b01.l3.drivers.horiba.yumizenP8000.YumizenP8000Driver","",1,0,0,10000,10000,2000,2000,30000,"10006",9600,0,8,1,0,"",8854,1
+3061,"20","NEU%","NEU%",343,2,2,2,0,0,0,343,0,"UMIZEN","UMIZEN",1,"b01.l3.drivers.horiba.yumizenP8000.YumizenP8000Driver","",1,0,0,10000,10000,2000,2000,30000,"10006",9600,0,8,1,0,"",8854,1
+3062,"21","EOS%","EOS%",343,2,2,2,0,0,0,343,0,"UMIZEN","UMIZEN",1,"b01.l3.drivers.horiba.yumizenP8000.YumizenP8000Driver","",1,0,0,10000,10000,2000,2000,30000,"10006",9600,0,8,1,0,"",8854,1
+3063,"22","BAS%","BAS%",343,2,2,2,0,0,0,343,0,"UMIZEN","UMIZEN",1,"b01.l3.drivers.horiba.yumizenP8000.YumizenP8000Driver","",1,0,0,10000,10000,2000,2000,30000,"10006",9600,0,8,1,0,"",8854,1
+3092,"1159","552","LDL",143,9,9,9,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+341,"481","47","Lactate",63,2,2,2,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+480,"713","20","Hep.LMW",323,2,2,2,0,0,0,323,0,"BCS2","BCS2",1,"b01.l3.drivers.dadeBehring.bcs.BCSDriver","",1,0,0,10000,10000,2000,2000,30000,"6900",9600,0,8,1,0,"",8853,1
+481,"710","17","LA2",323,2,1,2,0,0,0,323,0,"BCS2","BCS2",1,"b01.l3.drivers.dadeBehring.bcs.BCSDriver","",1,0,0,10000,10000,2000,2000,30000,"6900",9600,0,8,1,0,"",8853,1
+482,"712","19","Hep.N",323,2,2,2,0,0,0,323,0,"BCS2","BCS2",1,"b01.l3.drivers.dadeBehring.bcs.BCSDriver","",1,0,0,10000,10000,2000,2000,30000,"6900",9600,0,8,1,0,"",8853,1
+483,"711","18","LupusR",20,2,1,2,0,0,0,20,0,"BCT","BCT",0,"b01.l3.drivers.dadeBehring.bct.BCTDriver","",1,0,1,10000,10000,2000,2000,30000,"COM18",9600,0,8,1,0,"",8818,1
+484,"708","15","FVIII.PSL",323,2,2,2,0,0,0,323,0,"BCS2","BCS2",1,"b01.l3.drivers.dadeBehring.bcs.BCSDriver","",1,0,0,10000,10000,2000,2000,30000,"6900",9600,0,8,1,0,"",8853,1
+485,"709","16","LA1",323,2,1,2,0,0,0,323,0,"BCS2","BCS2",1,"b01.l3.drivers.dadeBehring.bcs.BCSDriver","",1,0,0,10000,10000,2000,2000,30000,"6900",9600,0,8,1,0,"",8853,1
+522,"716","FV","FV",143,2,2,2,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+523,"717","FVII","FVII",143,2,2,2,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+524,"718","29","FXI",323,2,1,2,0,0,0,323,0,"BCS2","BCS2",1,"b01.l3.drivers.dadeBehring.bcs.BCSDriver","",1,0,0,10000,10000,2000,2000,30000,"6900",9600,0,8,1,0,"",8853,1
+525,"719","vWFAct","VW FAg",143,2,2,2,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+562,"470","685","FolicAcid",10,1,1,1,0,0,0,10,0,"ARCHITECT","ARCHITECT",0,"b01.l3.drivers.abbott.architect.ArchitectDriver","",1,0,1,10000,10000,2000,2000,30000,"COM16",9600,0,8,1,0,"",8816,1
+601,"722","AT","AntiT3",143,2,2,2,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+661,"488","402","TP",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+725,"491","283","KAPPA",63,1,1,1,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+726,"492","284","LAMBDA",63,1,1,1,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+727,"493","965","KAPPA/LAMBDA",63,1,1,1,1,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+728,"494","613","FolicAcid",62,1,1,1,0,0,0,62,0,"COBAS-E411","COBAS-E411",0,"b01.l3.drivers.roches.cobas.e411.CobasE411Driver","",1,0,1,10000,10000,2000,2000,30000,"COM25",9600,0,8,1,0,"",8825,1
+808,"458","445","CANAB",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+1009,"499","48","Alpha1",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+360,"482","80","ACTH",62,2,2,2,0,0,0,62,0,"COBAS-E411","COBAS-E411",0,"b01.l3.drivers.roches.cobas.e411.CobasE411Driver","",1,0,1,10000,10000,2000,2000,30000,"COM25",9600,0,8,1,0,"",8825,1
+420,"468","670","CROSSL",11,1,1,1,0,0,0,11,0,"ELECSYS","ELECSYS",0,"b01.l3.drivers.hitachi.elecsys2010.ElecsysDriver","",1,0,1,10000,10000,2000,2000,30000,"COM14",9600,0,8,1,0,"",8814,1
+440,"483","318","KAPPA",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+441,"485","966","KAPPA/LAMBDA",83,1,1,1,1,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+442,"484","319","LAMBDA",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+460,"482","80","ACTH",11,1,1,1,0,0,0,11,0,"ELECSYS","ELECSYS",0,"b01.l3.drivers.hitachi.elecsys2010.ElecsysDriver","",1,0,1,10000,10000,2000,2000,30000,"COM14",9600,0,8,1,0,"",8814,1
+521,"715","ProtCC","Protein C",143,2,2,2,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+541,"720","AntiXa","Heparin LMW ",143,2,2,2,0,0,0,143,0,"INFINITY","INFINITY",1,"b01.l3.drivers.roches.cobas.infinity.CobasInfinityDriver","",1,0,0,10000,10000,2000,2000,30000,"6600",9600,0,8,1,0,"",8846,1
+542,"721","28","Heparin UF",323,2,1,2,0,0,0,323,0,"BCS2","BCS2",1,"b01.l3.drivers.dadeBehring.bcs.BCSDriver","",1,0,0,10000,10000,2000,2000,30000,"6900",9600,0,8,1,0,"",8853,1
+702,"490","412","M ALB CSF",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+768,"495","228","Haptoglobin",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+788,"451","840","PTH",62,2,2,2,0,0,0,62,0,"COBAS-E411","COBAS-E411",0,"b01.l3.drivers.roches.cobas.e411.CobasE411Driver","",1,0,1,10000,10000,2000,2000,30000,"COM25",9600,0,8,1,0,"",8825,1
+789,"487","890","GH",62,2,2,2,0,0,0,62,0,"COBAS-E411","COBAS-E411",0,"b01.l3.drivers.roches.cobas.e411.CobasE411Driver","",1,0,1,10000,10000,2000,2000,30000,"COM25",9600,0,8,1,0,"",8825,1
+848,"461","207","VALP",63,2,2,2,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+928,"459","124","CARB",63,2,2,2,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+969,"497","136","Lithium",63,2,2,2,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+1049,"489","510","Calcitonine",62,2,2,2,0,0,0,62,0,"COBAS-E411","COBAS-E411",0,"b01.l3.drivers.roches.cobas.e411.CobasE411Driver","",1,0,1,10000,10000,2000,2000,30000,"COM25",9600,0,8,1,0,"",8825,1
+1,"40","734","TOXO-M",1,1,1,1,0,0,0,1,0,"AXSYM","AXSYM",0,"b01.l3.drivers.horiba.pentraML.PentraMLDriver","",1,0,1,10000,10000,500,2000,30000,"COM130",9600,0,8,1,0,"",0,1
+2,"39","712","TOXO-G",1,1,1,1,0,0,0,1,0,"AXSYM","AXSYM",0,"b01.l3.drivers.horiba.pentraML.PentraMLDriver","",1,0,1,10000,10000,500,2000,30000,"COM130",9600,0,8,1,0,"",0,1
+4,"4","WBC","WBC",343,2,2,2,0,0,0,343,0,"UMIZEN","UMIZEN",1,"b01.l3.drivers.horiba.yumizenP8000.YumizenP8000Driver","",1,0,0,10000,10000,2000,2000,30000,"10006",9600,0,8,1,0,"",8854,1
+5,"1","HGB","HGB",343,2,2,2,0,0,0,343,0,"UMIZEN","UMIZEN",1,"b01.l3.drivers.horiba.yumizenP8000.YumizenP8000Driver","",1,0,0,10000,10000,2000,2000,30000,"10006",9600,0,8,1,0,"",8854,1
+6,"2","HCT","HCT",343,2,2,2,0,0,0,343,0,"UMIZEN","UMIZEN",1,"b01.l3.drivers.horiba.yumizenP8000.YumizenP8000Driver","",1,0,0,10000,10000,2000,2000,30000,"10006",9600,0,8,1,0,"",8854,1
+7,"5","MCV","MCV",343,2,2,2,0,0,0,343,0,"UMIZEN","UMIZEN",1,"b01.l3.drivers.horiba.yumizenP8000.YumizenP8000Driver","",1,0,0,10000,10000,2000,2000,30000,"10006",9600,0,8,1,0,"",8854,1
+8,"6","MCH","MCH",343,2,2,2,0,0,0,343,0,"UMIZEN","UMIZEN",1,"b01.l3.drivers.horiba.yumizenP8000.YumizenP8000Driver","",1,0,0,10000,10000,2000,2000,30000,"10006",9600,0,8,1,0,"",8854,1
+9,"7","MCHC","MCHC",343,2,2,2,0,0,0,343,0,"UMIZEN","UMIZEN",1,"b01.l3.drivers.horiba.yumizenP8000.YumizenP8000Driver","",1,0,0,10000,10000,2000,2000,30000,"10006",9600,0,8,1,0,"",8854,1
+10,"8","RDW","RDW",163,3,3,3,0,0,0,163,0,"PENTRA-BUP","PENTRA-BUP",0,"b01.l3.drivers.horiba.pentraML.PentraMLDriver","",1,0,1,10000,10000,500,2000,30000,"COM28",9600,0,8,1,0,"",8828,1
+11,"9","MPV","MPV",343,2,2,2,0,0,0,343,0,"UMIZEN","UMIZEN",1,"b01.l3.drivers.horiba.yumizenP8000.YumizenP8000Driver","",1,0,0,10000,10000,2000,2000,30000,"10006",9600,0,8,1,0,"",8854,1
+12,"10","PDW","PDW",343,2,2,2,0,0,0,343,0,"UMIZEN","UMIZEN",1,"b01.l3.drivers.horiba.yumizenP8000.YumizenP8000Driver","",1,0,0,10000,10000,2000,2000,30000,"10006",9600,0,8,1,0,"",8854,1
+13,"3","RBC","RBC",343,2,2,2,0,0,0,343,0,"UMIZEN","UMIZEN",1,"b01.l3.drivers.horiba.yumizenP8000.YumizenP8000Driver","",1,0,0,10000,10000,2000,2000,30000,"10006",9600,0,8,1,0,"",8854,1
+14,"11","PCT","PCT",343,2,2,2,0,0,0,343,0,"UMIZEN","UMIZEN",1,"b01.l3.drivers.horiba.yumizenP8000.YumizenP8000Driver","",1,0,0,10000,10000,2000,2000,30000,"10006",9600,0,8,1,0,"",8854,1
+15,"12","PLT","PLT",343,2,2,2,0,0,0,343,0,"UMIZEN","UMIZEN",1,"b01.l3.drivers.horiba.yumizenP8000.YumizenP8000Driver","",1,0,0,10000,10000,2000,2000,30000,"10006",9600,0,8,1,0,"",8854,1
+17,"13","LY#","LY#",163,3,3,3,0,0,0,163,0,"PENTRA-BUP","PENTRA-BUP",0,"b01.l3.drivers.horiba.pentraML.PentraMLDriver","",1,0,1,10000,10000,500,2000,30000,"COM28",9600,0,8,1,0,"",8828,1
+18,"14","MO#","MO#",163,3,3,3,0,0,0,163,0,"PENTRA-BUP","PENTRA-BUP",0,"b01.l3.drivers.horiba.pentraML.PentraMLDriver","",1,0,1,10000,10000,500,2000,30000,"COM28",9600,0,8,1,0,"",8828,1
+19,"15","NE#","NE#",163,3,3,3,0,0,0,163,0,"PENTRA-BUP","PENTRA-BUP",0,"b01.l3.drivers.horiba.pentraML.PentraMLDriver","",1,0,1,10000,10000,500,2000,30000,"COM28",9600,0,8,1,0,"",8828,1
+20,"16","EO#","EO#",163,3,3,3,0,0,0,163,0,"PENTRA-BUP","PENTRA-BUP",0,"b01.l3.drivers.horiba.pentraML.PentraMLDriver","",1,0,1,10000,10000,500,2000,30000,"COM28",9600,0,8,1,0,"",8828,1
+21,"17","BA#","BA#",163,3,3,3,0,0,0,163,0,"PENTRA-BUP","PENTRA-BUP",0,"b01.l3.drivers.horiba.pentraML.PentraMLDriver","",1,0,1,10000,10000,500,2000,30000,"COM28",9600,0,8,1,0,"",8828,1
+22,"18","LY%","LY%",163,3,3,3,0,0,0,163,0,"PENTRA-BUP","PENTRA-BUP",0,"b01.l3.drivers.horiba.pentraML.PentraMLDriver","",1,0,1,10000,10000,500,2000,30000,"COM28",9600,0,8,1,0,"",8828,1
+23,"19","MO%","MO%",163,3,3,3,0,0,0,163,0,"PENTRA-BUP","PENTRA-BUP",0,"b01.l3.drivers.horiba.pentraML.PentraMLDriver","",1,0,1,10000,10000,500,2000,30000,"COM28",9600,0,8,1,0,"",8828,1
+24,"20","NE%","NE%",163,3,3,3,0,0,0,163,0,"PENTRA-BUP","PENTRA-BUP",0,"b01.l3.drivers.horiba.pentraML.PentraMLDriver","",1,0,1,10000,10000,500,2000,30000,"COM28",9600,0,8,1,0,"",8828,1
+25,"21","EO%","EO%",163,3,3,3,0,0,0,163,0,"PENTRA-BUP","PENTRA-BUP",0,"b01.l3.drivers.horiba.pentraML.PentraMLDriver","",1,0,1,10000,10000,500,2000,30000,"COM28",9600,0,8,1,0,"",8828,1
+26,"22","BA%","BA%",163,3,3,3,0,0,0,163,0,"PENTRA-BUP","PENTRA-BUP",0,"b01.l3.drivers.horiba.pentraML.PentraMLDriver","",1,0,1,10000,10000,500,2000,30000,"COM28",9600,0,8,1,0,"",8828,1
+27,"1","HGB","HGB",7,1,1,1,0,0,0,7,0,"PENTRA-ML","PENTRA-ML",0,"b01.l3.drivers.horiba.yumizenP8000.YumizenP8000Driver","",1,0,1,10000,10000,500,2000,30000,"10002",9600,0,8,1,0,"",8812,1
+28,"10","PDW","PDW",7,1,1,1,0,0,0,7,0,"PENTRA-ML","PENTRA-ML",0,"b01.l3.drivers.horiba.yumizenP8000.YumizenP8000Driver","",1,0,1,10000,10000,500,2000,30000,"10002",9600,0,8,1,0,"",8812,1
+29,"11","PCT","PCT",7,1,1,1,0,0,0,7,0,"PENTRA-ML","PENTRA-ML",0,"b01.l3.drivers.horiba.yumizenP8000.YumizenP8000Driver","",1,0,1,10000,10000,500,2000,30000,"10002",9600,0,8,1,0,"",8812,1
+30,"12","PLT","PLT",7,1,1,1,0,0,0,7,0,"PENTRA-ML","PENTRA-ML",0,"b01.l3.drivers.horiba.yumizenP8000.YumizenP8000Driver","",1,0,1,10000,10000,500,2000,30000,"10002",9600,0,8,1,0,"",8812,1
+31,"13","LYM#","LYM#",7,1,1,1,0,0,0,7,0,"PENTRA-ML","PENTRA-ML",0,"b01.l3.drivers.horiba.yumizenP8000.YumizenP8000Driver","",1,0,1,10000,10000,500,2000,30000,"10002",9600,0,8,1,0,"",8812,1
+32,"14","MON#","MON#",7,1,1,1,0,0,0,7,0,"PENTRA-ML","PENTRA-ML",0,"b01.l3.drivers.horiba.yumizenP8000.YumizenP8000Driver","",1,0,1,10000,10000,500,2000,30000,"10002",9600,0,8,1,0,"",8812,1
+33,"15","NEU#","NEU#",7,1,1,1,0,0,0,7,0,"PENTRA-ML","PENTRA-ML",0,"b01.l3.drivers.horiba.yumizenP8000.YumizenP8000Driver","",1,0,1,10000,10000,500,2000,30000,"10002",9600,0,8,1,0,"",8812,1
+34,"16","EOS#","EOS#",7,1,1,1,0,0,0,7,0,"PENTRA-ML","PENTRA-ML",0,"b01.l3.drivers.horiba.yumizenP8000.YumizenP8000Driver","",1,0,1,10000,10000,500,2000,30000,"10002",9600,0,8,1,0,"",8812,1
+35,"17","BAS#","BAS#",7,1,1,1,0,0,0,7,0,"PENTRA-ML","PENTRA-ML",0,"b01.l3.drivers.horiba.yumizenP8000.YumizenP8000Driver","",1,0,1,10000,10000,500,2000,30000,"10002",9600,0,8,1,0,"",8812,1
+36,"18","LYM%","LYM%",7,1,1,1,0,0,0,7,0,"PENTRA-ML","PENTRA-ML",0,"b01.l3.drivers.horiba.yumizenP8000.YumizenP8000Driver","",1,0,1,10000,10000,500,2000,30000,"10002",9600,0,8,1,0,"",8812,1
+37,"19","MON%","MON%",7,1,1,1,0,0,0,7,0,"PENTRA-ML","PENTRA-ML",0,"b01.l3.drivers.horiba.yumizenP8000.YumizenP8000Driver","",1,0,1,10000,10000,500,2000,30000,"10002",9600,0,8,1,0,"",8812,1
+38,"2","HCT","HCT",7,1,1,1,0,0,0,7,0,"PENTRA-ML","PENTRA-ML",0,"b01.l3.drivers.horiba.yumizenP8000.YumizenP8000Driver","",1,0,1,10000,10000,500,2000,30000,"10002",9600,0,8,1,0,"",8812,1
+39,"20","NEU%","NEU%",7,1,1,1,0,0,0,7,0,"PENTRA-ML","PENTRA-ML",0,"b01.l3.drivers.horiba.yumizenP8000.YumizenP8000Driver","",1,0,1,10000,10000,500,2000,30000,"10002",9600,0,8,1,0,"",8812,1
+40,"21","EOS%","EOS%",7,1,1,1,0,0,0,7,0,"PENTRA-ML","PENTRA-ML",0,"b01.l3.drivers.horiba.yumizenP8000.YumizenP8000Driver","",1,0,1,10000,10000,500,2000,30000,"10002",9600,0,8,1,0,"",8812,1
+42,"22","BAS%","BAS%",7,1,1,1,0,0,0,7,0,"PENTRA-ML","PENTRA-ML",0,"b01.l3.drivers.horiba.yumizenP8000.YumizenP8000Driver","",1,0,1,10000,10000,500,2000,30000,"10002",9600,0,8,1,0,"",8812,1
+43,"3","RBC","RBC",7,1,1,1,0,0,0,7,0,"PENTRA-ML","PENTRA-ML",0,"b01.l3.drivers.horiba.yumizenP8000.YumizenP8000Driver","",1,0,1,10000,10000,500,2000,30000,"10002",9600,0,8,1,0,"",8812,1
+44,"4","WBC","WBC",7,1,1,1,0,0,0,7,0,"PENTRA-ML","PENTRA-ML",0,"b01.l3.drivers.horiba.yumizenP8000.YumizenP8000Driver","",1,0,1,10000,10000,500,2000,30000,"10002",9600,0,8,1,0,"",8812,1
+45,"5","MCV","MCV",7,1,1,1,0,0,0,7,0,"PENTRA-ML","PENTRA-ML",0,"b01.l3.drivers.horiba.yumizenP8000.YumizenP8000Driver","",1,0,1,10000,10000,500,2000,30000,"10002",9600,0,8,1,0,"",8812,1
+46,"6","MCH","MCH",7,1,1,1,0,0,0,7,0,"PENTRA-ML","PENTRA-ML",0,"b01.l3.drivers.horiba.yumizenP8000.YumizenP8000Driver","",1,0,1,10000,10000,500,2000,30000,"10002",9600,0,8,1,0,"",8812,1
+47,"7","MCHC","MCHC",7,1,1,1,0,0,0,7,0,"PENTRA-ML","PENTRA-ML",0,"b01.l3.drivers.horiba.yumizenP8000.YumizenP8000Driver","",1,0,1,10000,10000,500,2000,30000,"10002",9600,0,8,1,0,"",8812,1
+48,"8","RDW-CV","RDW",7,1,1,1,0,0,0,7,0,"PENTRA-ML","PENTRA-ML",0,"b01.l3.drivers.horiba.yumizenP8000.YumizenP8000Driver","",1,0,1,10000,10000,500,2000,30000,"10002",9600,0,8,1,0,"",8812,1
+49,"9","MPV","MPV",7,1,1,1,0,0,0,7,0,"PENTRA-ML","PENTRA-ML",0,"b01.l3.drivers.horiba.yumizenP8000.YumizenP8000Driver","",1,0,1,10000,10000,500,2000,30000,"10002",9600,0,8,1,0,"",8812,1
+53,"26","126","CORE",1,1,1,1,0,0,0,1,0,"AXSYM","AXSYM",0,"b01.l3.drivers.horiba.pentraML.PentraMLDriver","",1,0,1,10000,10000,500,2000,30000,"COM130",9600,0,8,1,0,"",0,1
+54,"27","165","COREM",1,1,1,1,0,0,0,1,0,"AXSYM","AXSYM",0,"b01.l3.drivers.horiba.pentraML.PentraMLDriver","",1,0,1,10000,10000,500,2000,30000,"COM130",9600,0,8,1,0,"",0,1
+57,"30","186","AntiHBe_2",1,1,1,1,0,0,0,1,0,"AXSYM","AXSYM",0,"b01.l3.drivers.horiba.pentraML.PentraMLDriver","",1,0,1,10000,10000,500,2000,30000,"COM130",9600,0,8,1,0,"",0,1
+58,"31","147","HAVAB2",1,1,1,1,0,0,0,1,0,"AXSYM","AXSYM",0,"b01.l3.drivers.horiba.pentraML.PentraMLDriver","",1,0,1,10000,10000,500,2000,30000,"COM130",9600,0,8,1,0,"",0,1
+61,"34","743","CMV_G",1,1,1,1,0,0,0,1,0,"AXSYM","AXSYM",0,"b01.l3.drivers.horiba.pentraML.PentraMLDriver","",1,0,1,10000,10000,500,2000,30000,"COM130",9600,0,8,1,0,"",0,1
+62,"35","744","CMV_M",1,1,1,1,0,0,0,1,0,"AXSYM","AXSYM",0,"b01.l3.drivers.horiba.pentraML.PentraMLDriver","",1,0,1,10000,10000,500,2000,30000,"COM130",9600,0,8,1,0,"",0,1
+66,"100","261","TT4",10,1,1,1,0,0,0,10,0,"ARCHITECT","ARCHITECT",0,"b01.l3.drivers.abbott.architect.ArchitectDriver","",1,0,1,10000,10000,2000,2000,30000,"COM16",9600,0,8,1,0,"",8816,1
+68,"103","671","TT3",10,1,1,1,0,0,0,10,0,"ARCHITECT","ARCHITECT",0,"b01.l3.drivers.abbott.architect.ArchitectDriver","",1,0,1,10000,10000,2000,2000,30000,"COM16",9600,0,8,1,0,"",8816,1
+77,"107","310","AFP",11,3,3,3,0,0,0,11,0,"ELECSYS","ELECSYS",0,"b01.l3.drivers.hitachi.elecsys2010.ElecsysDriver","",1,0,1,10000,10000,2000,2000,30000,"COM14",9600,0,8,1,0,"",8814,1
+80,"450","650","Insulin",62,1,1,1,0,0,0,62,0,"COBAS-E411","COBAS-E411",0,"b01.l3.drivers.roches.cobas.e411.CobasE411Driver","",1,0,1,10000,10000,2000,2000,30000,"COM25",9600,0,8,1,0,"",8825,1
+81,"454","110","Testosterone total",11,2,2,2,0,0,0,11,0,"ELECSYS","ELECSYS",0,"b01.l3.drivers.hitachi.elecsys2010.ElecsysDriver","",1,0,1,10000,10000,2000,2000,30000,"COM14",9600,0,8,1,0,"",8814,1
+82,"413","381","Ferritine",62,1,1,1,0,0,0,62,0,"COBAS-E411","COBAS-E411",0,"b01.l3.drivers.roches.cobas.e411.CobasE411Driver","",1,0,1,10000,10000,2000,2000,30000,"COM25",9600,0,8,1,0,"",8825,1
+83,"439","90","Troponin",11,1,1,1,0,0,0,11,0,"ELECSYS","ELECSYS",0,"b01.l3.drivers.hitachi.elecsys2010.ElecsysDriver","",1,0,1,10000,10000,2000,2000,30000,"COM14",9600,0,8,1,0,"",8814,1
+84,"447","740","DHEAS",62,1,1,1,0,0,0,62,0,"COBAS-E411","COBAS-E411",0,"b01.l3.drivers.roches.cobas.e411.CobasE411Driver","",1,0,1,10000,10000,2000,2000,30000,"COM25",9600,0,8,1,0,"",8825,1
+85,"455","700","Thyroglobulin",11,2,2,2,0,0,0,11,0,"ELECSYS","ELECSYS",0,"b01.l3.drivers.hitachi.elecsys2010.ElecsysDriver","",1,0,1,10000,10000,2000,2000,30000,"COM14",9600,0,8,1,0,"",8814,1
+86,"460","620","Digoxin",11,1,1,1,0,0,0,11,0,"ELECSYS","ELECSYS",0,"b01.l3.drivers.hitachi.elecsys2010.ElecsysDriver","",1,0,1,10000,10000,2000,2000,30000,"COM14",9600,0,8,1,0,"",8814,1
+87,"445","270","BNP",11,1,1,1,0,0,0,11,0,"ELECSYS","ELECSYS",0,"b01.l3.drivers.hitachi.elecsys2010.ElecsysDriver","",1,0,1,10000,10000,2000,2000,30000,"COM14",9600,0,8,1,0,"",8814,1
+88,"448","150","FSH",62,1,1,1,0,0,0,62,0,"COBAS-E411","COBAS-E411",0,"b01.l3.drivers.roches.cobas.e411.CobasE411Driver","",1,0,1,10000,10000,2000,2000,30000,"COM25",9600,0,8,1,0,"",8825,1
+91,"466","300","CEA",11,1,1,1,0,0,0,11,0,"ELECSYS","ELECSYS",0,"b01.l3.drivers.hitachi.elecsys2010.ElecsysDriver","",1,0,1,10000,10000,2000,2000,30000,"COM14",9600,0,8,1,0,"",8814,1
+92,"469","100","Estradiol",11,2,2,2,0,0,0,11,0,"ELECSYS","ELECSYS",0,"b01.l3.drivers.hitachi.elecsys2010.ElecsysDriver","",1,0,1,10000,10000,2000,2000,30000,"COM14",9600,0,8,1,0,"",8814,1
+93,"467","600","B12",62,1,1,1,0,0,0,62,0,"COBAS-E411","COBAS-E411",0,"b01.l3.drivers.roches.cobas.e411.CobasE411Driver","",1,0,1,10000,10000,2000,2000,30000,"COM25",9600,0,8,1,0,"",8825,1
+94,"452","120","Progesterone",11,2,2,2,0,0,0,11,0,"ELECSYS","ELECSYS",0,"b01.l3.drivers.hitachi.elecsys2010.ElecsysDriver","",1,0,1,10000,10000,2000,2000,30000,"COM14",9600,0,8,1,0,"",8814,1
+95,"449","140","LH",11,2,2,2,0,0,0,11,0,"ELECSYS","ELECSYS",0,"b01.l3.drivers.hitachi.elecsys2010.ElecsysDriver","",1,0,1,10000,10000,2000,2000,30000,"COM14",9600,0,8,1,0,"",8814,1
+138,"402","566","AMYL",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+140,"403","734","DBIL",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+144,"404","711","TBIL",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+146,"401","478","NH3",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+148,"409","433","CHOL",12,3,3,3,0,0,0,12,0,"MODULAR","MODULAR",0,"b01.l3.drivers.abbott.modular.ModularDriver","",1,0,1,10000,10000,2000,2000,30000,"COM155",9600,0,8,1,0,"",0,1
+149,"412","690","CREA",12,3,3,3,0,0,0,12,0,"MODULAR","MODULAR",0,"b01.l3.drivers.abbott.modular.ModularDriver","",1,0,1,10000,10000,2000,2000,30000,"COM155",9600,0,8,1,0,"",0,1
+151,"423","435","HDLC3",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+152,"422","733","LIPAS",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+153,"405","706","Ca",12,3,3,3,0,0,0,12,0,"MODULAR","MODULAR",0,"b01.l3.drivers.abbott.modular.ModularDriver","",1,0,1,10000,10000,2000,2000,30000,"COM155",9600,0,8,1,0,"",0,1
+154,"414","767","GLU",12,3,3,3,0,0,0,12,0,"MODULAR","MODULAR",0,"b01.l3.drivers.abbott.modular.ModularDriver","",1,0,1,10000,10000,2000,2000,30000,"COM155",9600,0,8,1,0,"",0,1
+155,"410","57","CK",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+156,"420","964","TIBC",83,1,1,1,1,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+157,"419","661","FE",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+159,"411","60","CK-MB",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+160,"415","479","GGT",12,3,3,3,0,0,0,12,0,"MODULAR","MODULAR",0,"b01.l3.drivers.abbott.modular.ModularDriver","",1,0,1,10000,10000,2000,2000,30000,"COM155",9600,0,8,1,0,"",0,1
+161,"408","991","Cl",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+163,"413","380","FERR",11,2,2,2,0,0,0,11,0,"ELECSYS","ELECSYS",0,"b01.l3.drivers.hitachi.elecsys2010.ElecsysDriver","",1,0,1,10000,10000,2000,2000,30000,"COM14",9600,0,8,1,0,"",8814,1
+165,"421","80","LDH",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+167,"432","413","ALB",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+168,"435","687","GOT",12,3,3,3,0,0,0,12,0,"MODULAR","MODULAR",0,"b01.l3.drivers.abbott.modular.ModularDriver","",1,0,1,10000,10000,2000,2000,30000,"COM155",9600,0,8,1,0,"",0,1
+169,"440","419","UREA",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+172,"445","271","PRO-BNP",62,2,2,2,0,0,0,62,0,"COBAS-E411","COBAS-E411",0,"b01.l3.drivers.roches.cobas.e411.CobasE411Driver","",1,0,1,10000,10000,2000,2000,30000,"COM25",9600,0,8,1,0,"",8825,1
+173,"427","770","MG",12,3,3,3,0,0,0,12,0,"MODULAR","MODULAR",0,"b01.l3.drivers.abbott.modular.ModularDriver","",1,0,1,10000,10000,2000,2000,30000,"COM155",9600,0,8,1,0,"",0,1
+174,"424","59","LDLC",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+175,"436","685","GPT",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+176,"428","158","ALP",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+177,"434","989","Na",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+178,"438","781","TG",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+179,"442","36","C3c",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+180,"447","740","DHEA-S",11,2,2,2,0,0,0,11,0,"ELECSYS","ELECSYS",0,"b01.l3.drivers.hitachi.elecsys2010.ElecsysDriver","",1,0,1,10000,10000,2000,2000,30000,"COM14",9600,0,8,1,0,"",8814,1
+181,"441","700","UA",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+182,"429","675","PHOS",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+183,"444","210","CRP",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+184,"439","90","TN-T",62,2,2,2,0,0,0,62,0,"COBAS-E411","COBAS-E411",0,"b01.l3.drivers.roches.cobas.e411.CobasE411Driver","",1,0,1,10000,10000,2000,2000,30000,"COM25",9600,0,8,1,0,"",8825,1
+185,"431","679","TP",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+186,"430","990","K",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+187,"437","187","TRSF",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+188,"425","968","LDL C",12,2,2,2,1,0,0,12,0,"MODULAR","MODULAR",0,"b01.l3.drivers.abbott.modular.ModularDriver","",1,0,1,10000,10000,2000,2000,30000,"COM155",9600,0,8,1,0,"",0,1
+189,"426","45","LPA",63,1,1,1,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+190,"443","32","C4",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+191,"407","452","CO2-L",12,3,3,3,0,0,0,12,0,"MODULAR","MODULAR",0,"b01.l3.drivers.abbott.modular.ModularDriver","",1,0,1,10000,10000,2000,2000,30000,"COM155",9600,0,8,1,0,"",0,1
+192,"459","124","CARB",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+193,"461","207","VALP",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+194,"454","111","TESTO",62,1,1,1,0,0,0,62,0,"COBAS-E411","COBAS-E411",0,"b01.l3.drivers.roches.cobas.e411.CobasE411Driver","",1,0,1,10000,10000,2000,2000,30000,"COM25",9600,0,8,1,0,"",8825,1
+195,"451","840","PTH",11,1,1,1,0,0,0,11,0,"ELECSYS","ELECSYS",0,"b01.l3.drivers.hitachi.elecsys2010.ElecsysDriver","",1,0,1,10000,10000,2000,2000,30000,"COM14",9600,0,8,1,0,"",8814,1
+196,"464","411","THEO",63,2,2,2,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+197,"450","650","INSULIN",11,2,2,2,0,0,0,11,0,"ELECSYS","ELECSYS",0,"b01.l3.drivers.hitachi.elecsys2010.ElecsysDriver","",1,0,1,10000,10000,2000,2000,30000,"COM14",9600,0,8,1,0,"",8814,1
+198,"468","127","CROSSL",83,2,2,2,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+199,"462","508","PHENO",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+200,"463","772","RPHNY",63,2,2,2,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+201,"467","600","B12",11,2,2,2,0,0,0,11,0,"ELECSYS","ELECSYS",0,"b01.l3.drivers.hitachi.elecsys2010.ElecsysDriver","",1,0,1,10000,10000,2000,2000,30000,"COM14",9600,0,8,1,0,"",8814,1
+202,"448","150","FSH",11,2,2,2,0,0,0,11,0,"ELECSYS","ELECSYS",0,"b01.l3.drivers.hitachi.elecsys2010.ElecsysDriver","",1,0,1,10000,10000,2000,2000,30000,"COM14",9600,0,8,1,0,"",8814,1
+203,"460","620","Digoxin",62,2,2,2,0,0,0,62,0,"COBAS-E411","COBAS-E411",0,"b01.l3.drivers.roches.cobas.e411.CobasE411Driver","",1,0,1,10000,10000,2000,2000,30000,"COM25",9600,0,8,1,0,"",8825,1
+204,"466","301","CEA",62,2,2,2,0,0,0,62,0,"COBAS-E411","COBAS-E411",0,"b01.l3.drivers.roches.cobas.e411.CobasE411Driver","",1,0,1,10000,10000,2000,2000,30000,"COM25",9600,0,8,1,0,"",8825,1
+206,"469","101","Estradiol",62,1,1,1,0,0,0,62,0,"COBAS-E411","COBAS-E411",0,"b01.l3.drivers.roches.cobas.e411.CobasE411Driver","",1,0,1,10000,10000,2000,2000,30000,"COM25",9600,0,8,1,0,"",8825,1
+207,"452","16","Progesterone",62,1,1,1,0,0,0,62,0,"COBAS-E411","COBAS-E411",0,"b01.l3.drivers.roches.cobas.e411.CobasE411Driver","",1,0,1,10000,10000,2000,2000,30000,"COM25",9600,0,8,1,0,"",8825,1
+208,"453","131","PRL",62,1,1,1,0,0,0,62,0,"COBAS-E411","COBAS-E411",0,"b01.l3.drivers.roches.cobas.e411.CobasE411Driver","",1,0,1,10000,10000,2000,2000,30000,"COM25",9600,0,8,1,0,"",8825,1
+209,"455","700","TG",62,1,1,1,0,0,0,62,0,"COBAS-E411","COBAS-E411",0,"b01.l3.drivers.roches.cobas.e411.CobasE411Driver","",1,0,1,10000,10000,2000,2000,30000,"COM25",9600,0,8,1,0,"",8825,1
+211,"457","498","OPIAT",83,1,2,2,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+212,"456","477","COCAI",83,1,2,2,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+213,"449","140","LH",62,1,1,1,0,0,0,62,0,"COBAS-E411","COBAS-E411",0,"b01.l3.drivers.roches.cobas.e411.CobasE411Driver","",1,0,1,10000,10000,2000,2000,30000,"COM25",9600,0,8,1,0,"",8825,1
+214,"473","458","IGA",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+215,"476","332","CA15-3",62,2,2,2,0,0,0,62,0,"COBAS-E411","COBAS-E411",0,"b01.l3.drivers.roches.cobas.e411.CobasE411Driver","",1,0,1,10000,10000,2000,2000,30000,"COM25",9600,0,8,1,0,"",8825,1
+217,"472","674","IGG",63,2,2,2,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+218,"475","37","ASLO",83,1,1,1,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+219,"478","341","CA125",62,2,2,2,0,0,0,62,0,"COBAS-E411","COBAS-E411",0,"b01.l3.drivers.roches.cobas.e411.CobasE411Driver","",1,0,1,10000,10000,2000,2000,30000,"COM25",9600,0,8,1,0,"",8825,1
+220,"477","351","CA19-9",62,2,2,2,0,0,0,62,0,"COBAS-E411","COBAS-E411",0,"b01.l3.drivers.roches.cobas.e411.CobasE411Driver","",1,0,1,10000,10000,2000,2000,30000,"COM25",9600,0,8,1,0,"",8825,1
+221,"471","465","IGM",63,2,2,2,0,0,0,63,0,"COBAS-C311","COBAS-C311",0,"b01.l3.drivers.roches.cobas.c311.CobasC311Driver","",1,0,1,10000,10000,2000,2000,30000,"COM170",9600,0,8,1,0,"",0,1
+222,"470","114","Folate",83,2,2,2,0,0,0,83,0,"COBAS-C501","COBAS-C501",0,"b01.l3.drivers.roches.cobas.cobas501.Cobas501Driver","",1,0,1,10000,10000,2000,2000,30000,"COM27",9600,0,8,1,0,"",8827,1
+224,"476","330","CA.15.3",11,1,1,1,0,0,0,11,0,"ELECSYS","ELECSYS",0,"b01.l3.drivers.hitachi.elecsys2010.ElecsysDriver","",1,0,1,10000,10000,2000,2000,30000,"COM14",9600,0,8,1,0,"",8814,1
+225,"477","350","CA.19.9",11,1,1,1,0,0,0,11,0,"ELECSYS","ELECSYS",0,"b01.l3.drivers.hitachi.elecsys2010.ElecsysDriver","",1,0,1,10000,10000,2000,2000,30000,"COM14",9600,0,8,1,0,"",8814,1
+226,"478","340","CA.125",11,1,1,1,0,0,0,11,0,"ELECSYS","ELECSYS",0,"b01.l3.drivers.hitachi.elecsys2010.ElecsysDriver","",1,0,1,10000,10000,2000,2000,30000,"COM14",9600,0,8,1,0,"",8814,1
+228,"500","ESR","ESR1",19,1,1,1,0,0,0,19,0,"SEDI-15","ISED",1,"b01.l3.drivers.alcor.ised.ISEDDriver","",1,0,0,10000,10000,2000,2000,30000,"COM20",9600,0,8,1,0,"",8820,1
