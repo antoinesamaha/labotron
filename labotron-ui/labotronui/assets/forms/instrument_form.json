@@ -29,7 +29,7 @@
               "label": "Cobas Infinity Driver"
             },
             {
-              "value": "com.neofoc.app.drivers.dadeBehring.bcs.BCSDriver",
+              "value": "com.neofoc.app.drivers.bcs.BCSDriver",
               "label": "BCS Driver"
             },
             {
