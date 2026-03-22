@@ -29,6 +29,10 @@
               "label": "Cobas Infinity Driver"
             },
             {
+              "value": "com.neofoc.app.drivers.cs2500.CS2500Driver",
+              "label": "CS2500 Driver"
+            },
+            {
               "value": "com.neofoc.app.drivers.bcs.BCSDriver",
               "label": "BCS Driver"
             },
