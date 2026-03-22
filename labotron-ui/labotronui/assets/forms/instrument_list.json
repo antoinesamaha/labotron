@@ -20,6 +20,11 @@
           "numeric": false
         },
         {
+          "key": "com_port",
+          "label": "Port",
+          "numeric": false
+        },
+        {
           "key": "on_hold",
           "label": "On Hold",
           "checkbox": true
