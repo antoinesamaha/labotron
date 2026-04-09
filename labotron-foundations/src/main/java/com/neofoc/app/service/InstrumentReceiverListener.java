@@ -49,13 +49,13 @@ public class InstrumentReceiverListener implements MessageListener {
             for (SampleResultDTO sampleResult : allSampleResults) {
                 // Log this sample result
                 String json = convertToJson(sampleResult);
-                communicationLogService.log(
-                        CommunicationLogService.SENT_CONNECTOR_2_LIS,
-                        null,
-                        instrument,
-                        sampleResult.getSampleId(),
-                        json
-                );
+//                communicationLogService.log(
+//                        CommunicationLogService.SENT_CONNECTOR_2_LIS,
+//                        null,
+//                        instrument,
+//                        sampleResult.getSampleId(),
+//                        json
+//                );
 
                 RabbitMQSendingService rmqSendingService = SpringContextUtil.getBean(RabbitMQSendingService.class);
                 rmqSendingService.sendToConnector(sampleResult.getSampleId(), json);
@@ -164,6 +164,7 @@ public class InstrumentReceiverListener implements MessageListener {
                 testDB.setActualInstrument(instrument);
                 test.setActualInstrument(instrument);
                 testDB.setUnitLabel(test.getUnitLabel());
+                testDB.setNotificationMessage(test.getNotificationMessage());
             }
         }
 

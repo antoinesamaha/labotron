@@ -42,8 +42,8 @@ public class LabTest {
     @Column(nullable = false)
     private Boolean blocked;
 
-    @Column(nullable = false)
-    private Integer iSuggRef;
+//    @Column(nullable = false)
+//    private Integer iSuggRef;
 
     @ManyToOne(optional = false)
     @JoinColumn(nullable = false)
@@ -53,8 +53,8 @@ public class LabTest {
     @JoinColumn(nullable = true)
     private Instrument actualInstrument;
 
-    @Column(nullable = false)
-    private Integer iRecRef;
+//    @Column(nullable = false)
+//    private Integer iRecRef;
 
     @ManyToOne(optional = false)
     @JoinColumn(nullable = false)

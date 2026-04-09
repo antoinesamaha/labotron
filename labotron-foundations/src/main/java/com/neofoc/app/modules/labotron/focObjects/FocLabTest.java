@@ -93,10 +93,7 @@ public class FocLabTest extends LabTest_FocObject {
 	}
 
 	public void setNotificationMessage(String message) {
-//		if (message.length() > FocLabTestDesc.LEN_MESSAGE) {
-//			message = message.substring(0, L3TestDesc.LEN_MESSAGE - 1);
-//		}
-//		setPropertyString(L3TestDesc.FLD_MESSAGE, message);
+		setPropertyString(FNAME_MESSAGE, message);
 	}
 
 	public String getNotificationMessage() {
