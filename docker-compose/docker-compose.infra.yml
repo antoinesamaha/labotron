@@ -19,6 +19,7 @@ services:
       - POSTGRES_DB=${DATASOURCE_DBNAME}
       - POSTGRES_USER=${DATASOURCE_USERNAME}
       - POSTGRES_PASSWORD=${DATASOURCE_PASSWORD}
+      - TZ=Asia/Beirut
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres -d aid_card -h 127.0.0.1 -p 5432"]
       interval: 10s

@@ -41,6 +41,7 @@ services:
       - RABBITMQ_USERNAME
       - RABBITMQ_PASSWORD
       - CORS_ALLOWED_ORIGIN
+      - TZ=Asia/Beirut
     restart: unless-stopped
     volumes:
       - ./logs:/usr/local/tomcat/logs
