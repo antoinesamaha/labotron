@@ -23,6 +23,7 @@ void main() async {
     Menu(Icons.grade, "Groups", "/test_groups", "test_group"),
     Menu(Icons.flag, "Entities", "/entities", "Entity"),
     Menu(Icons.flag, "Sample Json", "/samplejson", "Sample JSON"),
+    Menu(Icons.people, "Users", "/users", "FUSER")
   ];
 
   Config.widgetClassRegistry = {

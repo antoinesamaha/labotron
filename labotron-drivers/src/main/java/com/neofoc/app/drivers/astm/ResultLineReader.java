@@ -71,12 +71,16 @@ public class ResultLineReader extends FrameReader{
 			doRead = doRead && resultType == 'F';
 		}else if(fieldPos == FLD_UNIVERSAL_TEST_ID && compPos == CMP_ASSAY_NUMBER){
 			if(doRead){
-				if(token.length() > 0){
-					int indexOfSlash = token.indexOf('/');
-					if(indexOfSlash > 0){
-						token = token.substring(0, indexOfSlash);	
-					}
-				}
+// WE STOPED READING THE TEST CODE AT THE FIRST SLASH, BECAUSE ALEGRIA HAS TEST RNP/Sm
+// IF LATER WE WANT TO ADD THIS SECTION AGAIN WE NEED TO MAKE EXCEPTION OF ALEGRIA
+// -----------------------------------------------------------------------------------
+//				if(token.length() > 0){
+//					int indexOfSlash = token.indexOf('/');
+//					if(indexOfSlash > 0){
+//						token = token.substring(0, indexOfSlash);
+//					}
+//				}
+// -----------------------------------------------------------------------------------
 				
 				if(driver.getAstmParams().isIgnoreLastTestCodeDigit()){
 					int codeLength = token.length();

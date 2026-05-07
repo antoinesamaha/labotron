@@ -186,12 +186,11 @@ public class FocLabTest extends LabTest_FocObject {
 	}
 
 	public void setAlarm(int alarm) {
-		//setPropertyMultiChoiceByName(getThisFocDesc().getFieldByName("alarm"), alarm);
+		setPropertyInteger("alarm", alarm);
 	}
 
 	public int getAlarm() {
-//		return getPropertyMultiChoice(L3TestDesc.FLD_ALARM);
-		return 0;
+		return getPropertyInteger("alarm");
 	}
 
 	public void setPriority(String priority) {
