@@ -161,6 +161,7 @@ public class InstrumentReceiverListener implements MessageListener {
                 }
                 testDB.setResultOk(test.getResultOk());
                 testDB.setValue(test.getValue());
+                testDB.setAlarm(test.getAlarm());
                 testDB.setActualInstrument(instrument);
                 test.setActualInstrument(instrument);
                 testDB.setUnitLabel(test.getUnitLabel());
@@ -194,7 +195,7 @@ public class InstrumentReceiverListener implements MessageListener {
                         .testId(test.getLabel())
                         .status(getStatusString(test.getStatus()))
                         .actualAnalyzerCode(instrument.getCode())
-                        .alarm(test.getAlarm() == 1 ? Boolean.TRUE : Boolean.FALSE)
+                        .alarm(test.getAlarm())
                         .result(test.getValue())
                         .notes(test.getValueNotes())
                         .unit(test.getUnitLabel())

@@ -9,8 +9,8 @@ public class SimulatorMain implements Constants {
         // Choose which simulator to run:
 
         //InfinitySimulator_old simulator = new InfinitySimulator_old();
-        //AlegriaSimulator simulator = new AlegriaSimulator();
-        InfinitySimulator simulator = new InfinitySimulator();
+        AlegriaSimulator simulator = new AlegriaSimulator();
+        //InfinitySimulator simulator = new InfinitySimulator();
         //GemPremier3500Simulator simulator = new GemPremier3500Simulator();
         //Abl9Simulator simulator = new Abl9Simulator();
 

@@ -33,9 +33,9 @@ public class TestResultDTO {
     private String actualAnalyzerCode;
     
     /**
-     * Flag indicating if there's an alarm/warning for this test result
+     * Alarm indicator: -1 = less than, 0 = none, 1 = greater than
      */
-    private Boolean alarm;
+    private Integer alarm;
     
     /**
      * The result value, can be numeric or string
