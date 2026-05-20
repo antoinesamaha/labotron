@@ -80,25 +80,37 @@ public class PhysicalSocket extends BServer {
                 while (true) {
                     StringBuffer incrementalBuffer = new StringBuffer();
 
-//                    Globals.logString("Physical Socket - Before Read at Port " + getPort());
                     int nbrOfCharacters = streamReader.read(cArray);
-//                    Globals.logString("Physical Socket - After Read at Port " + getPort());
+                    if (nbrOfCharacters < 0) {
+                        // EOF: remote side closed the connection cleanly
+                        break;
+                    }
                     for (int i = 0; i < nbrOfCharacters; i++) {
                         incrementalBuffer.append(cArray[i]);
                     }
-                    //String message = ASCII.convertNonCharactersToDescriptions(incrementalBuffer.toString());
-                    //Globals.logString("Buffer:"+message);
 
-//                    Globals.logString("Physical Socket - Before NotifyListeners at Port " + getPort());
                     notifyListenersOfReceivedMessage(incrementalBuffer);
-//                    Globals.logString("Physical Socket - After NotifyListeners at Port " + getPort());
-
-//					OutputStream out = clientSocket.getOutputStream();
-//					out.write(ASCII.ACK);
                 }
 
             } catch (Exception e) {
                 logString("At " + getPort() + " EXCEPTION");
+                logException(e);
+            }
+
+            // Connection lost (EOF or broken pipe) — close the dead socket and
+            // wait for the instrument to reconnect without restarting the server.
+            try {
+                logString("At " + getPort() + " connection lost, waiting for reconnection...");
+                if (clientSocket != null && !clientSocket.isClosed()) {
+                    clientSocket.close();
+                }
+                clientSocket = null;
+                if (getSocket() != null) {
+                    clientSocket = getSocket().accept();
+                    logString("At " + getPort() + " reconnected successfully");
+                }
+            } catch (Exception e) {
+                logString("At " + getPort() + " reconnection accept failed");
                 logException(e);
             }
         }
