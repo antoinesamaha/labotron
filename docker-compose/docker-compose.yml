@@ -30,6 +30,8 @@ services:
       - "6100:6100"
       - "6500:6500"
       - "6600:6600"
+      - "1182:1182"
+      - "1183:1183"
     environment:
       - JAVA_OPTS=-Xmx4092m -Xms256m
       - DATASOURCE_URL
