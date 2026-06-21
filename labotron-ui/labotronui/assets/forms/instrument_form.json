@@ -83,6 +83,13 @@
                 },
                 {
                     "type": "text",
+                    "name": "remote_host",
+                    "label": "Remote Host (IP)",
+                    "hint": "Only required when the instrument is the ASTM master (e.g. GEM Premier 3500)",
+                    "required": false
+                },
+                {
+                    "type": "text",
                     "name": "wait_for_resultConfirmation",
                     "label": "Wait For Result Confirmation",
                     "required": false
