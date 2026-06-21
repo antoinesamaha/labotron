@@ -25,7 +25,7 @@ public class Abl9Driver extends AstmDriver {
     public Abl9Driver() {
         super();
         getAstmParams().setResultFrame_ComponentPositionForResultType(-1);
-        getAstmParams().setSlaveBehaviour(true);
+        getAstmParams().setYieldOnEnqCollision(true);
         getAstmParams().setReleaseWhenReceivedENQ(true);
         getAstmParams().setReadComment3(true);
         getAstmParams().setReadResultComment(true);

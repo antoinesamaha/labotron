@@ -12,8 +12,9 @@ import java.util.Properties;
 import java.util.concurrent.CompletableFuture;
 
 public class SocketPort implements SerialPortInterface {
-    private PhysicalSocket physicalSocket = null;
-    private PhysicalSocket physicalSocketReceptionOnly = null;//Some Drivers require separate ports for Send Receive
+    private PhysicalSocket       physicalSocket             = null;
+    private PhysicalSocket       physicalSocketReceptionOnly = null;//Some Drivers require separate ports for Send Receive
+    private PhysicalClientSocket physicalClientSocket       = null;
 
     public SocketPort(Properties props) throws Exception {
         setParametersFromProperties(props);
@@ -29,6 +30,14 @@ public class SocketPort implements SerialPortInterface {
             physicalSocketReceptionOnly.dispose();
             physicalSocketReceptionOnly = null;
         }
+        if (physicalClientSocket != null) {
+            physicalClientSocket.dispose();
+            physicalClientSocket = null;
+        }
+    }
+
+    public boolean isClientMode() {
+        return physicalClientSocket != null;
     }
 
     public PhysicalSocket getPhysicalSocket() {
@@ -36,10 +45,12 @@ public class SocketPort implements SerialPortInterface {
     }
 
     public boolean isConnected() {
+        if (isClientMode()) {
+            return physicalClientSocket.isConnected();
+        }
         if (physicalSocket == null) {
             return false;
         }
-
         return physicalSocket.isConnected();
     }
 
@@ -60,6 +71,9 @@ public class SocketPort implements SerialPortInterface {
 
     @Override
     public OutputStream getOutputStream() throws IOException {
+        if (isClientMode()) {
+            return physicalClientSocket.getOutputStream();
+        }
         OutputStream out = null;
         if (getPhysicalSocket() != null) {
             out = getPhysicalSocket().getOutputStream();
@@ -76,35 +90,50 @@ public class SocketPort implements SerialPortInterface {
                 portNbtInt = Integer.valueOf(portNbr);
             }
 
-            physicalSocket = new PhysicalSocket(portNbtInt);
+            boolean instrumentIsAstmMaster = "true".equals(props.getProperty("instrumentIsAstmMaster"));
+            if (instrumentIsAstmMaster) {
+                String remoteHost = props.getProperty("tcpip.remoteHost");
+                Globals.logString("Client mode: connecting to instrument at " + remoteHost + ":" + portNbtInt);
+                physicalClientSocket = new PhysicalClientSocket(remoteHost, portNbtInt);
+            } else {
+                physicalSocket = new PhysicalSocket(portNbtInt);
 
-            //Checking if 2 separate ports for send/receive
-            //---------------------------------------------
-            Globals.logString("Checking if we need 2 TCPIP ports");
-            if (props.get("tcpip") != null && props.get("tcpip").equals("2")) {
-                portNbtInt = portNbtInt + 1;
-                Globals.logString("Opening additional port at : " + (portNbtInt));
-                physicalSocketReceptionOnly = new PhysicalSocket(portNbtInt);
+                //Checking if 2 separate ports for send/receive
+                //---------------------------------------------
+                Globals.logString("Checking if we need 2 TCPIP ports");
+                if (props.get("tcpip") != null && props.get("tcpip").equals("2")) {
+                    portNbtInt = portNbtInt + 1;
+                    Globals.logString("Opening additional port at : " + (portNbtInt));
+                    physicalSocketReceptionOnly = new PhysicalSocket(portNbtInt);
+                }
+                //---------------------------------------------
             }
-            //---------------------------------------------
         }
     }
 
     @Override
     public void closeConnection() {
+        if (physicalClientSocket != null) {
+            physicalClientSocket.closeSocket();
+        }
         if (physicalSocket != null) {
             physicalSocket.closeSocket();
-            //physicalSocket = null;
         }
         if (physicalSocketReceptionOnly != null) {
             physicalSocketReceptionOnly.closeSocket();
-            //physicalSocketReceptionOnly = null;
         }
     }
 
     @Override
     public void openConnection() throws L3SerialPortOpeningException {
-        if (getPhysicalSocket() != null) {
+        if (isClientMode()) {
+            Globals.logString("Socket connecting to instrument (client mode)...");
+            boolean error = physicalClientSocket.connect();
+            if (error) {
+                throw new L3SerialPortOpeningException("L3X - Could not connect to " + physicalClientSocket.getRemoteHost() + ":" + physicalClientSocket.getPort());
+            }
+            Globals.logString("Socket connected to instrument successfully");
+        } else if (getPhysicalSocket() != null) {
             Globals.logString("Socket connecting...");
             Globals.logString("    starting to pool on port = " + getPhysicalSocket().getPort());
 
@@ -114,11 +143,10 @@ public class SocketPort implements SerialPortInterface {
             if (error) {
                 throw new L3SerialPortOpeningException("L3X - Port " + physicalSocket.getPort() + " Error opening Socket");
             }
+            Globals.logString("Socket connected successfuly");
         } else {
             throw new L3SerialPortOpeningException("Physical Socket is Null");
         }
-
-        Globals.logString("Socket connected successfuly");
     }
 
     /**
@@ -137,14 +165,18 @@ public class SocketPort implements SerialPortInterface {
 
     @Override
     public void addEventListener(SerialPortEventListener cumulationListener) throws Exception {
-        if (getPhysicalSocket() != null) {
+        if (isClientMode()) {
+            physicalClientSocket.addEventListener(cumulationListener);
+        } else if (getPhysicalSocket() != null) {
             getPhysicalSocket().addEventListener(cumulationListener);
         }
     }
 
     @Override
     public void removeEventListener() {
-        if (getPhysicalSocket() != null) {
+        if (isClientMode()) {
+            physicalClientSocket.removeEventListener();
+        } else if (getPhysicalSocket() != null) {
             getPhysicalSocket().removeEventListener();
         }
     }

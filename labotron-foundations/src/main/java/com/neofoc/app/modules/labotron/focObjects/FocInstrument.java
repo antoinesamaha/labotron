@@ -575,6 +575,14 @@ public class FocInstrument extends Instrument_FocObject implements Runnable, Mes
     // oooooooooooooooooooooooooooooooooo
     // oooooooooooooooooooooooooooooooooo
 
+    public String getRemoteHost() {
+        return getPropertyString("remote_host");
+    }
+
+    public void setRemoteHost(String remoteHost) {
+        setPropertyString("remote_host", remoteHost);
+    }
+
     public String getCode() {
         return getPropertyString("code");
     }

@@ -14,8 +14,8 @@ public class AlegriaSimulator extends AbstractSimulator {
         //These 3 calls will run in 3 parallel threads
         socket.open();
 
-        //sendingInquiry();
-        //sleep(10000);
+        sendingInquiry();
+        sleep(10000);
         sendingResults();
         sleep(120000);
 //        socket.close();
@@ -24,7 +24,7 @@ public class AlegriaSimulator extends AbstractSimulator {
     public void sendingInquiry() {
         String[] inquiryFrames = {
             "1H|\\^&",
-            "2Q|1|^5710429||||||||||O|",
+            "2Q|1|^5710430||||||||||O|",
             "3L|1|N"};
 
         sendingFrames(inquiryFrames);
@@ -41,7 +41,7 @@ public class AlegriaSimulator extends AbstractSimulator {
         String[] frames = {
                 "1H|\\^&",
                 "2P|1|SAMPLE01|123123123",
-                "3O|2|5710429||^^^SS-B|R|||||||||N||||||||||||||F|",
+                "3O|2|5710430||^^^SS-B|R|||||||||N||||||||||||||F|",
                 "4R|3|^^^Cardiolip M|< 5|U/ml|3.5 to 4.5|||F||admin|20230208093130|20230208162848||",
                 "5R|3|^^^GBM|< 6|U/ml|3.5 to 4.5|||F||admin|20230208093130|20230208162848||",
                 "6R|3|^^^ssDNA|< 7|U/ml|3.5 to 4.5|||F||admin|20230208093130|20230208162848||",

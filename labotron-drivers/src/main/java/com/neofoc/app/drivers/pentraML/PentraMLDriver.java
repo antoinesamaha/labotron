@@ -71,7 +71,7 @@ public class PentraMLDriver extends AstmDriver {
         getAstmParams().setSendPatientAgeAndSex(true);
         getAstmParams().setSendPatientDateOfBirth(true);
         getAstmParams().setReadComment1(true);
-        getAstmParams().setSlaveBehaviour(true);
+        getAstmParams().setYieldOnEnqCollision(true);
         getAstmParams().setTakeAllFramesFromBufferNotJustTheLast(true);
         getAstmParams().setReleaseWhenReceivedENQ(true);
 //  		getAstmParams().setAcceptToStartAtFrame1Directly(true);

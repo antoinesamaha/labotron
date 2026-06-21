@@ -68,6 +68,9 @@ public class Instrument implements Serializable {
 	@Column(nullable = false, length = 10)
 	private String comPort;
 
+	@Column(nullable = true, length = 50)
+	private String remoteHost;
+
 	@OneToMany(mappedBy = "instrument", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
 	private Set<TestLabelMap> testLabMaps = new HashSet<>();
 }

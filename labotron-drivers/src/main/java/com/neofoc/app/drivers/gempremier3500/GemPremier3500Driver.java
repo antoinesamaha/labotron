@@ -24,9 +24,10 @@ public class GemPremier3500Driver extends AstmDriver {
         getAstmParams().setConcatenatedFrames(true);
         getAstmParams().setReadComment3(true);
         getAstmParams().setReadResultComment(true);
-        getAstmParams().setSendPatientIdToInstrument(true);
         getAstmParams().setTreatHigherLessAlarmSeparately(false);
         getAstmParams().setTakeAllFramesFromBufferNotJustTheLast(true);
+        getAstmParams().setInstrumentIsAstmMaster(true);
+        getAstmParams().setDoNotSendOrdersBecauseOneWay(true);
     }
 
     @Override
@@ -34,8 +35,9 @@ public class GemPremier3500Driver extends AstmDriver {
         // GEM Premier 3500 uses TCP/IP communication
         if (props != null) {
             props.put("tcpip", "1");
+            props.put("instrumentIsAstmMaster", "true");
+            props.put("tcpip.remoteHost", instrument.getRemoteHost());
         }
-
         super.init(instrument, props);
     }
 }
