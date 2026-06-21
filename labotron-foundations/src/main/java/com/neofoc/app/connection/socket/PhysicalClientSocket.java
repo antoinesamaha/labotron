@@ -46,18 +46,9 @@ public class PhysicalClientSocket implements Runnable {
     }
 
     public boolean connect() {
-        boolean error = false;
-        try {
-            clientSocket = new Socket(remoteHost, remotePort);
-            Globals.logString("PhysicalClientSocket connected to " + remoteHost + ":" + remotePort);
-            thread = new Thread(this);
-            thread.start();
-        } catch (Exception e) {
-            Globals.logString("PhysicalClientSocket failed to connect to " + remoteHost + ":" + remotePort);
-            Globals.logException(e);
-            error = true;
-        }
-        return error;
+        thread = new Thread(this);
+        thread.start();
+        return false;
     }
 
     public void closeSocket() {
