@@ -20,24 +20,30 @@ public class GemPremier3500Simulator extends AbstractSimulator {
 
     public static final int GEM_TCP_PORT = 1182;
 
+    // Frames modeled on GEM Premier 3500 Interface Protocol doc (section 3.5.11 patient sample example).
+    // H: F2=delimiters, F5=6-component instrument info, F6-F13=null, F14=datetime
+    // P: F4=patient_id, F6=last^first, F8=dob, F9=sex
+    // O: F3=specimen_id, F4-F15=null, F16=A (arterial sample type)
+    // R1: F11=operator, F12=null, F13=datetime (only on first R record; subsequent Rs are minimal)
+    // Parameter names per GEM spec: Na+, K+, Ca++, HCO3-, BEecf, SO2c
+    // L: only F1 and F2 per spec
     String[] GEM_PREMIER_3500_RESULT_FRAMES = {
-        "1H|\\^&|||GEM Premier 3500^IL^1.0||||||TSDWN^BATCH|P|1|20260210120000",
-        "2P|1|||12345||Doe^John^M||19850315|M",
-        "3O|1|SAMPLE001||^^^pH^\\^^^pCO2^\\^^^pO2^\\^^^HCO3^\\^^^BE^|R||||||N||||WB|||||||O",
-        "4R|1|^^^pH||7.38||7.35^7.45|N||F||admin|20260210120100|GEM3500",
-        "5R|2|^^^pCO2||42|mmHg|35^45|N||F||admin|20260210120100|GEM3500",
-        "6R|3|^^^pO2||95|mmHg|80^100|N||F||admin|20260210120100|GEM3500",
-        "7R|4|^^^HCO3||24.5|mmol/L|22^26|N||F||admin|20260210120100|GEM3500",
-        "0R|5|^^^BE||0.5|mmol/L|-2^2|N||F||admin|20260210120100|GEM3500",
-        "1R|6|^^^SO2||98.2|%|95^100|N||F||admin|20260210120100|GEM3500",
-        "2R|7|^^^Na||142|mmol/L|136^145|N||F||admin|20260210120100|GEM3500",
-        "3R|8|^^^K||4.2|mmol/L|3.5^5.0|N||F||admin|20260210120100|GEM3500",
-        "4R|9|^^^Ca||1.25|mmol/L|1.12^1.32|N||F||admin|20260210120100|GEM3500",
-        "5R|10|^^^Glu||95|mg/dL|70^110|N||F||admin|20260210120100|GEM3500",
-        "6R|11|^^^Lac||1.5|mmol/L|0.5^2.2|N||F||admin|20260210120100|GEM3500",
-        "7R|12|^^^Hct||42|%|36^46|N||F||admin|20260210120100|GEM3500",
-        "0C|1|I|Quality Control: OK|G",
-        "1L|1|N"
+        "1H|\\^&|||GEM 3500^V1.0^12345^^^1.00|||||||||20260210120000",
+        "2P|1||12345||Doe^John||19850315|M",
+        "3O|1|SAMPLE001|||||||||||||A",
+        "4R|1|^^^pH|7.38|||||||admin||20260210120100",
+        "5R|2|^^^pCO2|42|mmHg",
+        "6R|3|^^^pO2|95|mmHg",
+        "7R|4|^^^HCO3-|24.5|mmol/L",
+        "0R|5|^^^BEecf|0.5|mmol/L",
+        "1R|6|^^^SO2c|98.2|%",
+        "2R|7|^^^Na+|142|mmol/L",
+        "3R|8|^^^K+|4.2|mmol/L",
+        "4R|9|^^^Ca++|1.25|mmol/L",
+        "5R|10|^^^Glu|95|mg/dL",
+        "6R|11|^^^Lac|1.5|mmol/L",
+        "7R|12|^^^Hct|42|%",
+        "0L|1"
     };
 
     @Override

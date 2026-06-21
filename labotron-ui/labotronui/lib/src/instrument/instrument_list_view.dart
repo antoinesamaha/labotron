@@ -91,9 +91,10 @@ class InstrumentListViewState extends FocListViewState {
     final newStatus = !currentStatus;
 
     // Show a confirmation dialog
+    final messenger = ScaffoldMessenger.of(context);
     showDialog(
       context: context,
-      builder: (BuildContext context) {
+      builder: (BuildContext dialogContext) {
         return AlertDialog(
           title: Text('${newStatus ? 'Start' : 'Stop'} Instrument'),
           content: Column(
@@ -112,16 +113,14 @@ class InstrumentListViewState extends FocListViewState {
           ),
           actions: [
             TextButton(
-              onPressed: () => Navigator.of(context).pop(),
+              onPressed: () => Navigator.of(dialogContext).pop(),
               child: const Text('Cancel'),
             ),
             ElevatedButton(
               onPressed: () async {
-                // Close the dialog first
-                Navigator.of(context).pop();
+                Navigator.of(dialogContext).pop();
 
-                // Show a loading indicator
-                ScaffoldMessenger.of(context).showSnackBar(
+                messenger.showSnackBar(
                   SnackBar(
                     content: Text(
                         '${newStatus ? 'Starting' : 'Stopping'} instrument...'),
@@ -130,22 +129,12 @@ class InstrumentListViewState extends FocListViewState {
                 );
 
                 try {
-                  // Make the API call
-                  print(
-                      'Calling API to ${newStatus ? 'start' : 'stop'} instrument ${item['id']}');
                   await InstrumentService()
                       .toggleInstrumentStatus(item['id'], newStatus);
 
-                  print('API call successful');
-
-                  // Update the UI state
                   if (mounted) {
-                    setState(() {
-                      item.properties['started'] = newStatus;
-                    });
-
-                    // Show success message
-                    ScaffoldMessenger.of(context).showSnackBar(
+                    refreshData();
+                    messenger.showSnackBar(
                       SnackBar(
                         content: Text(
                             'Instrument ${newStatus ? 'started' : 'stopped'} successfully'),
@@ -156,14 +145,11 @@ class InstrumentListViewState extends FocListViewState {
                     );
                   }
                 } catch (error) {
-                  print('Error updating instrument status: $error');
-
-                  // Show error message
                   if (mounted) {
-                    ScaffoldMessenger.of(context).showSnackBar(
+                    messenger.showSnackBar(
                       SnackBar(
                         content: Text(
-                            'Failed to update instrument status: ${error.toString()}'),
+                            'Failed to update instrument status: $error'),
                         backgroundColor: Colors.red,
                         duration: const Duration(seconds: 4),
                       ),

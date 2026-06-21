@@ -98,6 +98,10 @@ public class PhysicalClientSocket implements Runnable {
     @Override
     public void run() {
         while (true) {
+            if (clientSocket == null) {
+                reconnect();
+                continue;
+            }
             try {
                 InputStreamReader streamReader = new InputStreamReader(clientSocket.getInputStream());
                 char[] cArray = new char[1000];
@@ -106,7 +110,7 @@ public class PhysicalClientSocket implements Runnable {
                     StringBuffer incrementalBuffer = new StringBuffer();
                     int nbrOfCharacters = streamReader.read(cArray);
                     if (nbrOfCharacters < 0) {
-                        break;
+                        break; // EOF: GEM closed after this batch
                     }
                     for (int i = 0; i < nbrOfCharacters; i++) {
                         incrementalBuffer.append(cArray[i]);
@@ -114,24 +118,29 @@ public class PhysicalClientSocket implements Runnable {
                     notifyListeners(incrementalBuffer);
                 }
 
+                Globals.logString("PhysicalClientSocket: GEM closed connection, will reconnect");
             } catch (Exception e) {
                 Globals.logString("PhysicalClientSocket at " + remoteHost + ":" + remotePort + " connection lost");
                 Globals.logException(e);
             }
 
-            // Connection lost — close and reconnect
+            closeSocket();
+            clientSocket = null;
+            reconnect();
+        }
+    }
+
+    private void reconnect() {
+        while (clientSocket == null) {
             try {
-                if (clientSocket != null && !clientSocket.isClosed()) {
-                    clientSocket.close();
-                }
-                clientSocket = null;
                 Globals.logString("PhysicalClientSocket reconnecting to " + remoteHost + ":" + remotePort + "...");
                 Thread.sleep(5000);
                 clientSocket = new Socket(remoteHost, remotePort);
                 Globals.logString("PhysicalClientSocket reconnected to " + remoteHost + ":" + remotePort);
             } catch (Exception e) {
-                Globals.logString("PhysicalClientSocket reconnection failed, retrying in 5s...");
+                Globals.logString("PhysicalClientSocket reconnection failed, will retry in 5s...");
                 Globals.logException(e);
+                clientSocket = null;
             }
         }
     }

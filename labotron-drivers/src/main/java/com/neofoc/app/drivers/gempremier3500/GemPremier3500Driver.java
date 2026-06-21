@@ -20,10 +20,10 @@ public class GemPremier3500Driver extends AstmDriver {
         // Configure ASTM parameters based on GEM Premier 3500 specifications
         getAstmParams().setResultFrame_ComponentPositionForResultType(-1);
         getAstmParams().setTestCodeLength(4); // GEM uses 4-character test codes
-        getAstmParams().setCheckResultFrameTestCodeWithOrderFrameTestCode(true);
+        getAstmParams().setCheckResultFrameTestCodeWithOrderFrameTestCode(false);
         getAstmParams().setConcatenatedFrames(true);
-        getAstmParams().setReadComment3(true);
-        getAstmParams().setReadResultComment(true);
+        getAstmParams().setReadComment3(false);
+        getAstmParams().setReadResultComment(false);
         getAstmParams().setTreatHigherLessAlarmSeparately(false);
         getAstmParams().setTakeAllFramesFromBufferNotJustTheLast(true);
         getAstmParams().setInstrumentIsAstmMaster(true);

@@ -10,9 +10,9 @@ public class SimulatorMain implements Constants {
         // Choose which simulator to run:
 
         //InfinitySimulator_old simulator = new InfinitySimulator_old();
-        AlegriaSimulator simulator = new AlegriaSimulator();
+//        AlegriaSimulator simulator = new AlegriaSimulator();
         //InfinitySimulator simulator = new InfinitySimulator();
-        //GemPremier3500Simulator simulator = new GemPremier3500Simulator(); // binds port 1182, Labotron connects out
+        GemPremier3500Simulator simulator = new GemPremier3500Simulator(); // binds port 1182, Labotron connects out
         //Abl9Simulator simulator = new Abl9Simulator();
 
         simulator.simulate();
