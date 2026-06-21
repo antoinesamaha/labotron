@@ -128,13 +128,14 @@ public class SocketPort implements SerialPortInterface {
     public void openConnection() throws L3SerialPortOpeningException {
         if (isClientMode()) {
             Globals.logString("Socket connecting to instrument (client mode)...");
+            Globals.logString("  connecting to " + physicalClientSocket.getRemoteHost() + ":" + physicalClientSocket.getPort());
             boolean error = physicalClientSocket.connect();
             if (error) {
                 throw new L3SerialPortOpeningException("L3X - Could not connect to " + physicalClientSocket.getRemoteHost() + ":" + physicalClientSocket.getPort());
             }
             Globals.logString("Socket connected to instrument successfully");
         } else if (getPhysicalSocket() != null) {
-            Globals.logString("Socket connecting...");
+            Globals.logString("Socket connecting (server mode)...");
             Globals.logString("    starting to pool on port = " + getPhysicalSocket().getPort());
 
             boolean error = getPhysicalSocket().startPolling();
