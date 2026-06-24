@@ -1,6 +1,10 @@
 package com.neofoc.app.drivers.gempremier3500;
 
+import com.foc.Globals;
 import com.neofoc.app.drivers.astm.AstmDriver;
+import com.neofoc.app.drivers.astm.AstmReceiver;
+import com.neofoc.app.drivers.astm.InformationInquiryReader;
+import com.neofoc.app.drivers.astm.PatientLineReader;
 import com.neofoc.app.modules.labotron.focObjects.FocInstrument;
 
 import java.util.Properties;
@@ -27,7 +31,8 @@ public class GemPremier3500Driver extends AstmDriver {
         getAstmParams().setTreatHigherLessAlarmSeparately(false);
         getAstmParams().setTakeAllFramesFromBufferNotJustTheLast(true);
         getAstmParams().setInstrumentIsAstmMaster(true);
-        getAstmParams().setDoNotSendOrdersBecauseOneWay(true);
+        getAstmParams().setUsePatientIdAsSampleId(true);
+        //getAstmParams().setDoNotSendOrdersBecauseOneWay(true);
     }
 
     @Override
@@ -39,5 +44,20 @@ public class GemPremier3500Driver extends AstmDriver {
             props.put("tcpip.remoteHost", instrument.getRemoteHost());
         }
         super.init(instrument, props);
+    }
+
+    public boolean isInquiryBased() {
+        return true;
+    }
+
+    protected void initDriverReceiver() {
+        Globals.logString("GEM3500 initDriverReceiver");
+        super.initDriverReceiver();
+        AstmReceiver receiver = (AstmReceiver) getDriverReceiver();
+        receiver.setInformationEnquiryReader(new Gem3500_InformationInquiryReader());
+
+//        PatientLineReader patientLineReader = receiver.getPatientLineReader();
+//        patientLineReader.setPOS_PATIENT_NAME(2);
+//        patientLineReader.setPOS_PATIENT_ID(0);
     }
 }

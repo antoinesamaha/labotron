@@ -29,6 +29,7 @@ public class AstmParams {
 	//20160129-B
 	private boolean doNotSendOrdersBecauseOneWay = false;
 	//20160129-E
+	private boolean usePatientIdAsSampleId = false;
 	
 	//20160129-B
 	public boolean isDoNotSendOrdersBecauseOneWay() {
@@ -224,6 +225,14 @@ public class AstmParams {
 		this.takeAllFramesFromBufferNotJustTheLast = readReceivedFramesFromFirstToEnd;
 	}
 	
+	public boolean isUsePatientIdAsSampleId() {
+		return usePatientIdAsSampleId;
+	}
+
+	public void setUsePatientIdAsSampleId(boolean usePatientIdAsSampleId) {
+		this.usePatientIdAsSampleId = usePatientIdAsSampleId;
+	}
+
 	public boolean isPutYForAGE() {
 		return putYForAGE;
 	}

@@ -224,7 +224,10 @@ public class AstmReceiver implements L3SerialPortListener {
 			}
 		}
 		if (sample == null) {
-			sample = new FocLabSample(orderLineReader.getSampleId());
+			String sampleId = driver.getAstmParams().isUsePatientIdAsSampleId()
+					? patientLineReader.getPatientId()
+					: orderLineReader.getSampleId();
+			sample = new FocLabSample(sampleId);
 			sample.setPatientId(patientLineReader.getPatientId());
 			sample.setFirstName(patientLineReader.getFirstName());
 			sample.setLastName(patientLineReader.getLastName());
