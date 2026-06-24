@@ -55,6 +55,7 @@ public class GemPremier3500Driver extends AstmDriver {
         super.initDriverReceiver();
         AstmReceiver receiver = (AstmReceiver) getDriverReceiver();
         receiver.setInformationEnquiryReader(new Gem3500_InformationInquiryReader());
+        receiver.setPatientLineReader(new Gem3500_PatientLineReader());
 
 //        PatientLineReader patientLineReader = receiver.getPatientLineReader();
 //        patientLineReader.setPOS_PATIENT_NAME(2);
