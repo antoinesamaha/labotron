@@ -1,6 +1,7 @@
 package com.neofoc.app.drivers.gempremier3500;
 
 import com.foc.Globals;
+import com.neofoc.app.drivers.alegria.AlegriaFrameCreator;
 import com.neofoc.app.drivers.astm.AstmDriver;
 import com.neofoc.app.drivers.astm.AstmReceiver;
 import com.neofoc.app.drivers.astm.InformationInquiryReader;
@@ -20,6 +21,11 @@ public class GemPremier3500Driver extends AstmDriver {
 
     public GemPremier3500Driver() {
         super();
+
+        if(frameCreator != null){
+            frameCreator.dispose();
+        }
+        frameCreator = new Gem3500FrameCreator();
 
         // Configure ASTM parameters based on GEM Premier 3500 specifications
         getAstmParams().setResultFrame_ComponentPositionForResultType(-1);
