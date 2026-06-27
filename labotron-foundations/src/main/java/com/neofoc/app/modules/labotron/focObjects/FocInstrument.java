@@ -692,11 +692,13 @@ public class FocInstrument extends Instrument_FocObject implements Runnable, Mes
     }
 
     public synchronized void switchOn() throws Exception {
-        if (getStarted()) return;
+        if (getDriver() != null && getDriver().isConnected()) return;
         if (getDriver() != null) {
             // Set started flag immediately (user intent)
-            setStarted(true);
-            validate(false);
+            if (!getStarted()) {
+                setStarted(true);
+                validate(false);
+            }
 
             // Connect asynchronously with callbacks
             getDriver().connectAsync()
