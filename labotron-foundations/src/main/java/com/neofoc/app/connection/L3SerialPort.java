@@ -113,7 +113,9 @@ public class L3SerialPort {
         if (listenerList == null) {
             listenerList = new ArrayList<L3SerialPortListener>();
         }
-        listenerList.add(listener);
+        if (!listenerList.contains(listener)) {
+            listenerList.add(listener);
+        }
     }
 
     public void removeListener(L3SerialPortListener listener) {

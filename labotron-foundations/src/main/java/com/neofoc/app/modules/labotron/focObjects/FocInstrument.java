@@ -691,7 +691,8 @@ public class FocInstrument extends Instrument_FocObject implements Runnable, Mes
         return driver;
     }
 
-    public void switchOn() throws Exception {
+    public synchronized void switchOn() throws Exception {
+        if (getStarted()) return;
         if (getDriver() != null) {
             // Set started flag immediately (user intent)
             setStarted(true);

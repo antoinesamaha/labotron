@@ -436,7 +436,9 @@ public class AstmReceiver implements L3SerialPortListener {
 						treatResultFrame(concatFrame);
 					}
 				}
-				sendMessageBackToInstrument();
+				if (message != null) {
+					sendMessageBackToInstrument();
+				}
 				disposeMessage();
 				disposeConcatenationBuffer();
 

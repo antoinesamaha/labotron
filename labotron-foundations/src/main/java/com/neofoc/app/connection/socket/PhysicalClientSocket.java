@@ -46,6 +46,10 @@ public class PhysicalClientSocket implements Runnable {
     }
 
     public boolean connect() {
+        if (thread != null && thread.isAlive()) {
+            Globals.logString("PhysicalClientSocket: connect() called but reader thread already running — ignoring");
+            return false;
+        }
         thread = new Thread(this);
         thread.start();
         return false;
