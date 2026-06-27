@@ -16,7 +16,7 @@ RUN flutter pub get
 RUN flutter build web --release
 
 # Production stage with nginx
-FROM nginx:1.32.2-alpine
+FROM nginx:1.27.4-alpine
 
 # Install gettext for envsubst
 RUN apk add --no-cache gettext
