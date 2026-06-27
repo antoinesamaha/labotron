@@ -6,7 +6,14 @@ import lombok.Data;
 
 @Entity
 @Cacheable
-@Table(name = "lab_test")
+@Table(name = "lab_test",
+		uniqueConstraints = {
+				@UniqueConstraint(name = "uq_labtest_sample_label", columnNames = {"lab_sample_id", "label"})
+		},
+		indexes = {
+				@Index(name = "idx_labtest_status", columnList = "status")
+		}
+)
 @Data
 @FocData
 public class LabTest {

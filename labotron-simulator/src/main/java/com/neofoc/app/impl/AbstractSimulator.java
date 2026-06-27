@@ -94,7 +94,7 @@ public abstract class AbstractSimulator implements ISimulator, Constants {
                         System.out.println("Received NACK from server");
                     } else {
                         keepLooping = true;
-                        System.out.println("Need to wait mode reveived: " + responseChar);
+                        //System.out.println("Need to wait mode reveived: " + responseChar);
                     }
                 }
             }
@@ -156,8 +156,8 @@ public abstract class AbstractSimulator implements ISimulator, Constants {
     public char readResponseChar() {
         String response = socket.receive();
         if (response != null && !response.isEmpty()) {
-            System.out.println("Client received data: " + response);
-            socket.writeToFile(response, "socket_log.txt");
+            // System.out.println("Client received data: " + response);
+            // socket.writeToFile(response, "socket_log.txt");
             return response.charAt(0);
         }
         return SINGLE_CHAR_NOT_FOUND;

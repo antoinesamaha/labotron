@@ -23,6 +23,27 @@ public class SimSocket {
         this.sim = sim;
     }
 
+    public void setHost(String host) {
+        this.host = host;
+    }
+
+    /** Establishes the TCP connection without starting the background auto-respond thread. */
+    public void connect() {
+        while (!connected) {
+            try {
+                if (socket == null || !socket.isConnected()) {
+                    socket = new Socket(host, port);
+                    connected = true;
+                    System.out.println("Socket connected");
+                }
+            } catch (Exception e) {
+                connected = false;
+                System.out.println("Error connecting socket: " + e.getMessage());
+            }
+            sim.sleep(500);
+        }
+    }
+
     public void setSendingMode(boolean sendingMode) {
         this.sendingMode = sendingMode;
     }
@@ -146,15 +167,15 @@ public class SimSocket {
 
     public void writeToFile(String message, String fileName) {
         try {
-            FileWriter fileWriter = new FileWriter(fileName, true); // true for append mode
-            java.io.BufferedWriter bufferedWriter = new java.io.BufferedWriter(fileWriter);
-            PrintWriter printWriter = new PrintWriter(bufferedWriter);
+            // FileWriter fileWriter = new FileWriter(fileName, true); // true for append mode
+            // java.io.BufferedWriter bufferedWriter = new java.io.BufferedWriter(fileWriter);
+            // PrintWriter printWriter = new PrintWriter(bufferedWriter);
 
-            printWriter.println(message);
-            printWriter.println("-----------------------------------");
+            // printWriter.println(message);
+            // printWriter.println("-----------------------------------");
 
-            printWriter.close();
-            System.out.println("Message logged to file: " + fileName);
+            // printWriter.close();
+            // System.out.println("Message logged to file: " + fileName);
         } catch (Exception e) {
             e.printStackTrace();
         }

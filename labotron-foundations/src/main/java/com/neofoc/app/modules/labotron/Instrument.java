@@ -11,7 +11,10 @@ import java.util.Set;
 
 @Entity
 @Cacheable
-@Table(name = "instrument")
+@Table(name = "instrument", uniqueConstraints = {
+		@UniqueConstraint(name = "uq_instrument_code", columnNames = {"code"}),
+		@UniqueConstraint(name = "uq_instrument_name", columnNames = {"name"})
+})
 @Data
 @FocData
 public class Instrument implements Serializable {
@@ -23,7 +26,7 @@ public class Instrument implements Serializable {
 //	@Column(nullable = false)
 //	private Integer lkUserRef;
 
-	@Column(nullable = false, length = 10, unique = true)
+	@Column(nullable = false, length = 10)
 	private String code;
 
 	@Column(nullable = false, length = 30)

@@ -15,15 +15,16 @@ void main() async {
         widgetClassName: "InstrumentListView"),
     Menu(Icons.science, "TestLabelMaps", "/test_label_maps", "test_label_map"),
     Menu(Icons.flutter_dash, "Samples", "/lab_samples", "lab_sample"),
-    Menu(Icons.label, "Tests", "/lab_tests", "lab_test"),
+    // Menu(Icons.label, "Tests", "/lab_tests", "lab_test"),
     Menu(Icons.label, "Communication Logs", "/communication_logs",
         "communication_log"),
     Menu(Icons.group, "App Groups", "/app_groups", "app_group"),
-    Menu(Icons.message, "Messages", "/lab_messages", "lab_message"),
+    // Menu(Icons.message, "Messages", "/lab_messages", "lab_message"),
     Menu(Icons.grade, "Groups", "/test_groups", "test_group"),
-    Menu(Icons.flag, "Entities", "/entities", "Entity"),
-    Menu(Icons.flag, "Sample Json", "/samplejson", "Sample JSON"),
-    Menu(Icons.people, "Users", "/users", "FUSER")
+    // Menu(Icons.flag, "Entities", "/entities", "Entity"),
+    // Menu(Icons.flag, "Sample Json", "/samplejson", "Sample JSON"),
+    Menu(Icons.people, "Users", "/users", "FUSER"),
+    Menu(Icons.memory_rounded, "Object Monitor", "/monitor/objects", ""),
   ];
 
   Config.widgetClassRegistry = {

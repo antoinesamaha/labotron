@@ -11,7 +11,12 @@ import java.util.Set;
 
 @Entity
 //@Cacheable
-@Table(name = "lab_sample")
+@Table(name = "lab_sample",
+		indexes = {
+				@Index(name = "idx_labsample_patientid", columnList = "patient_id"),
+				@Index(name = "idx_labsample_entrydt", columnList = "entry_date_time")
+		}
+)
 @Data
 @FocData
 public class LabSample {

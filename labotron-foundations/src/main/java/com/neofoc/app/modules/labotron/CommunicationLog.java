@@ -11,7 +11,15 @@ import java.util.Map;
 import java.util.UUID;
 
 @Entity
-@Table(name = "communication_log")
+@Table(name = "communication_log",
+		uniqueConstraints = {
+				@UniqueConstraint(name = "uq_commlog_uuid", columnNames = {"uuid"})
+		},
+		indexes = {
+				@Index(name = "idx_commlog_inst_dt", columnList = "instrument_id, date_time"),
+				@Index(name = "idx_commlog_sampleid", columnList = "sample_id")
+		}
+)
 @Data
 @FocData
 public class CommunicationLog {

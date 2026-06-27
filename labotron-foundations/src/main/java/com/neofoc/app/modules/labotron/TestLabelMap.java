@@ -6,7 +6,10 @@ import lombok.Data;
 
 @Entity
 @Cacheable
-@Table(name = "test_label_map")
+@Table(name = "test_label_map", uniqueConstraints = {
+		@UniqueConstraint(name = "uq_tlm_inst_lis", columnNames = {"instrument_id", "lis_test_label"}),
+		@UniqueConstraint(name = "uq_tlm_inst_code", columnNames = {"instrument_id", "instrument_test_code"})
+})
 @Data
 @FocData
 public class TestLabelMap {

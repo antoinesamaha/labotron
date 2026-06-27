@@ -1,7 +1,10 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:focui/src/entities/foc_entity_feature/foc_details_view.dart';
 import 'package:focui/src/entities/foc_entity_feature/foc_list_view.dart';
 import 'package:focui/src/entities/foc_entity_feature/foc_entity.dart';
 import 'instrument_service.dart';
+import 'instrument_status_widget.dart';
 
 class InstrumentListView extends FocListView {
   const InstrumentListView({super.key, required super.metaEntity});
@@ -11,10 +14,53 @@ class InstrumentListView extends FocListView {
 }
 
 class InstrumentListViewState extends FocListViewState {
+  Timer? _refreshTimer;
+
+  @override
+  void initState() {
+    super.initState();
+    _refreshTimer = Timer.periodic(const Duration(seconds: 5), (_) {
+      if (mounted) refreshData();
+    });
+  }
+
+  @override
+  void dispose() {
+    _refreshTimer?.cancel();
+    super.dispose();
+  }
+
+  @override
+  void editItem(FocEntity item) {
+    final rawId = item.id;
+    final instrumentId =
+        rawId is int ? rawId : int.tryParse(rawId.toString()) ?? 0;
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => FocDetailsView(
+          metaEntity: widget.metaEntity,
+          itemId: instrumentId.toString(),
+          statusWidget: InstrumentStatusWidget(
+            metaEntity: widget.metaEntity,
+            instrumentId: instrumentId,
+          ),
+        ),
+      ),
+    ).then((updatedItem) {
+      if (updatedItem != null) refreshData();
+    });
+  }
+
   @override
   List<String> getDisplayFieldNames() {
     // Show additional fields specific to instruments
     return ['code', 'name', 'type', 'status'];
+  }
+
+  bool _getBool(dynamic item, String key) {
+    final v = item.properties[key];
+    return v == true || v == 1 || v?.toString().toLowerCase() == 'true';
   }
 
   @override
@@ -25,11 +71,17 @@ class InstrumentListViewState extends FocListViewState {
         label: Text('Status'),
         tooltip: 'Driver On/Off Status',
       ),
+      const DataColumn(
+        label: Text('Conn'),
+        tooltip: 'Socket connection state',
+      ),
     ];
   }
 
   @override
   List<DataCell> getCustomDataCells(dynamic item) {
+    final started = _getBool(item, 'started');
+    final connected = _getBool(item, 'connected');
     // Add custom data cells for each instrument row
     return [
       DataCell(
@@ -43,14 +95,12 @@ class InstrumentListViewState extends FocListViewState {
               margin: const EdgeInsets.all(2),
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               decoration: BoxDecoration(
-                color: item.properties['started'] ?? false
-                    ? Colors.green
-                    : Colors.red,
+                color: started ? Colors.green : Colors.red,
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Center(
                 child: Text(
-                  item.properties['started'] ?? false ? 'On' : 'Off',
+                  started ? 'On' : 'Off',
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 12,
@@ -59,6 +109,17 @@ class InstrumentListViewState extends FocListViewState {
                 ),
               ),
             ),
+          ),
+        ),
+      ),
+      DataCell(
+        Container(
+          width: 12,
+          height: 12,
+          margin: const EdgeInsets.symmetric(horizontal: 8),
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: connected ? Colors.green : (started ? Colors.orange : Colors.grey.shade400),
           ),
         ),
       ),
@@ -167,13 +228,6 @@ class InstrumentListViewState extends FocListViewState {
         );
       },
     );
-  }
-
-  @override
-  void editItem(FocEntity item) {
-    // Custom edit behavior for instruments
-    print('Editing instrument: ${item['name']}');
-    super.editItem(item);
   }
 
   @override

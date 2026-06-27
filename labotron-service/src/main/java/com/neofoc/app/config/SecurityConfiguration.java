@@ -67,6 +67,7 @@ public class SecurityConfiguration {
                                 mvc.pattern("/swagger-resources/**"),
                                 mvc.pattern("/configuration/security"),
                                 mvc.pattern("/foc/auth/login"),
+                                mvc.pattern("/meta/monitor/objects"),
                                 mvc.pattern("/meta/entities"),
                                 mvc.pattern("/foc/obj/**"),
                                 mvc.pattern("/api/**")

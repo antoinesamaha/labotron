@@ -27,12 +27,8 @@
         {
           "key": "on_hold",
           "label": "On Hold",
-          "checkbox": true
-        },
-        {
-          "key": "connected",
-          "label": "Connected",
-          "checkbox": true
+          "checkbox": true,
+          "hide_when_false": true
         }
       ]
     }    

@@ -1,19 +1,30 @@
 package com.neofoc.app;
 
-import com.neofoc.app.impl.AlegriaSimulator;
-import com.neofoc.app.impl.GemPremier3500Simulator;
-import com.neofoc.app.impl.InfinitySimulator;
+import com.neofoc.app.impl.GenericSimulator;
 
 public class SimulatorMain implements Constants {
 
     public static void main(String[] args) {
-        // Choose which simulator to run:
+        // --- GenericSimulator (pick one) ---
+        // Server, pure receive — Labotron connects in, simulator just ACKs
+        //GenericSimulator simulator = new GenericSimulator(9000, GenericSimulator.SocketRole.SERVER, (String[]) null);
 
-        //InfinitySimulator_old simulator = new InfinitySimulator_old();
-//        AlegriaSimulator simulator = new AlegriaSimulator();
+        // Server, push results on each connection
+        //GenericSimulator simulator = new GenericSimulator(9000, GenericSimulator.SocketRole.SERVER, GenericSimulator.GENERIC_RESULT_FRAMES);
+
+        // Server, send inquiry → receive orders → send results
+        //GenericSimulator simulator = new GenericSimulator(9000, GenericSimulator.SocketRole.SERVER, GenericSimulator.GENERIC_INQUIRY_THEN_RESULT_FRAMES);
+
+        // Client, pure receive — simulator dials out, ACKs everything
+        //GenericSimulator simulator = new GenericSimulator(9000, GenericSimulator.SocketRole.CLIENT, (String[]) null);
+
+        // GEM3500 Server
+        GenericSimulator simulator = new GenericSimulator(1182, GenericSimulator.SocketRole.SERVER, GenericSimulator.GEM_PREMIER_3500_FRAMES);
+
+        // --- Legacy simulators ---
+        //AlegriaSimulator simulator = new AlegriaSimulator();
         //InfinitySimulator simulator = new InfinitySimulator();
-        GemPremier3500Simulator simulator = new GemPremier3500Simulator(); // binds port 1182, Labotron connects out
-        //Abl9Simulator simulator = new Abl9Simulator();
+        //GemPremier3500Simulator simulator = new GemPremier3500Simulator();
 
         simulator.simulate();
     }
