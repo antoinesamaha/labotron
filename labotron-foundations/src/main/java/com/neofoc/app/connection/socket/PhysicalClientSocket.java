@@ -15,8 +15,9 @@ public class PhysicalClientSocket implements Runnable {
     private final String remoteHost;
     private final int    remotePort;
 
-    private Socket clientSocket = null;
-    private Thread thread       = null;
+    private Socket clientSocket        = null;
+    private Thread thread              = null;
+    private volatile boolean running   = false;
     private ArrayList<L3SerialPortReceptionCumulationBuffer> listenerArray = new ArrayList<>();
 
     public PhysicalClientSocket(String remoteHost, int remotePort) {
@@ -50,12 +51,14 @@ public class PhysicalClientSocket implements Runnable {
             Globals.logString("PhysicalClientSocket: connect() called but reader thread already running — ignoring");
             return false;
         }
+        running = true;
         thread = new Thread(this);
         thread.start();
         return false;
     }
 
     public void closeSocket() {
+        running = false;
         if (clientSocket != null) {
             try {
                 clientSocket.close();
@@ -92,7 +95,7 @@ public class PhysicalClientSocket implements Runnable {
 
     @Override
     public void run() {
-        while (true) {
+        while (running) {
             if (clientSocket == null) {
                 reconnect();
                 continue;
@@ -123,10 +126,11 @@ public class PhysicalClientSocket implements Runnable {
             clientSocket = null;
             reconnect();
         }
+        Globals.logString("PhysicalClientSocket: reader thread stopped (running=false)");
     }
 
     private void reconnect() {
-        while (clientSocket == null) {
+        while (running && clientSocket == null) {
             try {
                 Globals.logString("PhysicalClientSocket reconnecting to " + remoteHost + ":" + remotePort + "...");
                 Thread.sleep(5000);
