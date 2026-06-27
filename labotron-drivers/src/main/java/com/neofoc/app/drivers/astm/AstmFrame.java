@@ -217,8 +217,13 @@ public class AstmFrame extends L3Frame {
 				if (keepTheLastChar)
 					minus = 5;
 
-				StringBuffer data = new StringBuffer(dataWithFrame.substring(3, dataWithFrame.length() - minus));
-				setData(data);
+				if (dataWithFrame.length() > (3 + minus)) {
+					StringBuffer data = new StringBuffer(dataWithFrame.substring(3, dataWithFrame.length() - minus));
+					setData(data);
+				} else {
+					//The Frame is empty maybe sent for connectivity testing. Seen in the case of GEM Premier 3500. We will not throw an exception but we will log it.
+				}
+
 
 				sequence = Integer.valueOf((String) dataWithFrame.substring(1, 2)).intValue();
 				type = dataWithFrame.charAt(2);
