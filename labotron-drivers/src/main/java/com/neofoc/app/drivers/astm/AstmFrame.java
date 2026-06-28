@@ -22,6 +22,7 @@ public class AstmFrame extends L3Frame {
 	public static final char EOT = 4;
 	public static final char SINGLE_CHAR_NOT_FOUND = 0;
 
+	public static final char SOH = 1;
 	public static final char STX = 2;
 	public static final char ETB = 23;
 	public static final char ETX = 3;

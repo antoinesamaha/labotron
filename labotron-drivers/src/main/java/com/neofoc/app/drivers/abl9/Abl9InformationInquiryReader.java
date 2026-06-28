@@ -28,9 +28,10 @@ public class Abl9InformationInquiryReader extends InformationInquiryReader {
         if (fieldPos == FLD_STARTING_RANGE) {
             if (compPos == CMP_PATIENT_ID && token.startsWith(PID_PREFIX)) {
                 // Patient ID - strip "PID" prefix (not used for sample lookup)
+                setSampleId(token.substring(PID_PREFIX.length()));
             } else if (compPos == CMP_ACCESSION_NBR && token.startsWith(ACN_PREFIX)) {
                 // Accession number - strip "ACN" prefix, use as sampleId for LIS lookup
-                setSampleId(token.substring(ACN_PREFIX.length()));
+                //setSampleId(token.substring(ACN_PREFIX.length()));
             }
         }
     }

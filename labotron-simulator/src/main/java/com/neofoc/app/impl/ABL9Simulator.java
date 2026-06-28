@@ -3,12 +3,16 @@ package com.neofoc.app.impl;
 import com.neofoc.app.SimSocket;
 
 public class ABL9Simulator extends AbstractSimulator {
-    
+
+    String[] ENQUIRY_FRAMES = {
+            "Q=Q|1|PID201910236^ACN2233445609||||||||||D"
+    };
+
     //[SOH]
     String[] RESULT_FRAMES = {
     "H|\\^&|||ABL9^402843|||||NC2L||1|20260627193917",
-    "P|1||201910236||Ahmad[.]Baydoun^Khadijeh||19380804|F|||||87|years",
-    "O|1||Sample[.]#^28258|||||||ANONYMOUS|||||Arterial^|||||||||F",
+    "P|1||201910236||Ahmad Baydoun^Khadijeh||19380804|F|||||87|years",
+    "O|1||Sample #^28258|||||||ANONYMOUS|||||Arterial^|||||||||F",
     "R|1|^^^T|37.0|Cel|||F||ANONYMOUS|20260627082914|20260627082914",
     "R|2|^^^FIO2^I|28|%||N||F",
     "R|3|^^^Age^I|87|years||N||F",
@@ -32,25 +36,25 @@ public class ABL9Simulator extends AbstractSimulator {
     "R|21|^^^sO2^C|99.3|%||N||F",
     "R|22|^^^pO2(T)^C|149|mmHg||N||F",
     "R|23|^^^pO2(A)^C|.....|mmHg||N||F",
-    "C|1|I|1009^1009:[.]Unable[.]to[.]calculate[.]-[.]missing[.]Baro|I",
+    "C|1|I|1009^1009: Unable to calculate - missing Baro|I",
     "R|24|^^^pO2(A),T^C|.....|mmHg||N||F",
-    "C|1|I|1009^1009:[.]Unable[.]to[.]calculate[.]-[.]missing[.]Baro|I",
+    "C|1|I|1009^1009: Unable to calculate - missing Baro|I",
     "R|25|^^^AaDpO2^C|.....|mmHg||N||F",
-    "C|1|I|1009^1009:[.]Unable[.]to[.]calculate[.]-[.]missing[.]Baro|I",
+    "C|1|I|1009^1009: Unable to calculate - missing Baro|I",
     "R|26|^^^AaDpO2,T^C|.....|mmHg||N||F",
-    "C|1|I|1009^1009:[.]Unable[.]to[.]calculate[.]-[.]missing[.]Baro|I",
+    "C|1|I|1009^1009: Unable to calculate - missing Baro|I",
     "R|27|^^^a/ApO2^C|.....|%||N||F",
-    "C|1|I|1009^1009:[.]Unable[.]to[.]calculate[.]-[.]missing[.]Baro|I",
+    "C|1|I|1009^1009: Unable to calculate - missing Baro|I",
     "R|28|^^^a/ApO2,T^C|.....|%||N||F",
-    "C|1|I|1009^1009:[.]Unable[.]to[.]calculate[.]-[.]missing[.]Baro|I",
+    "C|1|I|1009^1009: Unable to calculate - missing Baro|I",
     "R|29|^^^tO2^C|3.1|mmol/L||N||F",
     "R|30|^^^RI^C|.....|%||N||F",
-    "C|1|I|1009^1009:[.]Unable[.]to[.]calculate[.]-[.]missing[.]Baro|I",
+    "C|1|I|1009^1009: Unable to calculate - missing Baro|I",
     "R|31|^^^RI,T^C|.....|%||N||F",
-    "C|1|I|1009^1009:[.]Unable[.]to[.]calculate[.]-[.]missing[.]Baro|I",
+    "C|1|I|1009^1009: Unable to calculate - missing Baro|I",
     "R|32|^^^Ca(7.4)^C|1.17|mmol/L||N||F",
-    "R|33|^^^Anion[.]gap[.](K+)^C|4.9|mmol/L||N||F",
-    "R|34|^^^Anion[.]gap^C|1.3|mmol/L||N||F",
+    "R|33|^^^Anion gap (K+)^C|4.9|mmol/L||N||F",
+    "R|34|^^^Anion gap^C|1.3|mmol/L||N||F",
     "R|35|^^^cH+^C|29.7|nmol/L||N||F",
     "R|36|^^^cH+(T)^C|29.7|nmol/L||N||F",
     "R|37|^^^pO2(a)/FIO2^C|532|mmHg||N||F",
@@ -64,16 +68,21 @@ public class ABL9Simulator extends AbstractSimulator {
     public void simulate() {
         socket = new SimSocket(this, 10020);
         socket.open();
-        sendResults();
+        sendFrames(ENQUIRY_FRAMES);
+        try {
+            Thread.sleep(100000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         socket.close();
     }
 
-    public void sendResults() {
+    public void sendFrames(String[] frames) {
         StringBuffer buffer = new StringBuffer();
 
         buffer.append(SOH);
 
-        for (String frame : RESULT_FRAMES) {
+        for (String frame : frames) {
             buffer.append(frame);
             buffer.append(CR);
         }

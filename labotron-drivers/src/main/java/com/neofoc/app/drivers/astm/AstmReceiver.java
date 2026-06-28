@@ -140,7 +140,7 @@ public class AstmReceiver implements L3SerialPortListener {
 		this.commentResultReader = commentResultReader;
 	}
 
-	private StringBuffer getConcatenationBuffer() {
+	protected StringBuffer getConcatenationBuffer() {
 		if (concatenationBuffer == null) {
 			concatenationBuffer = new StringBuffer();
 		}

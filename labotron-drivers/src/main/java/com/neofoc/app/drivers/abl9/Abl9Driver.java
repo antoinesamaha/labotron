@@ -1,7 +1,6 @@
 package com.neofoc.app.drivers.abl9;
 
 import com.neofoc.app.drivers.astm.AstmDriver;
-import com.neofoc.app.drivers.astm.AstmReceiver;
 import com.neofoc.app.modules.labotron.focObjects.FocInstrument;
 
 import java.util.Properties;
@@ -32,6 +31,8 @@ public class Abl9Driver extends AstmDriver {
         getAstmParams().setConcatenatedFrames(false);
         getAstmParams().setSendPatientIdToInstrument(true);
         getAstmParams().setTakeAllFramesFromBufferNotJustTheLast(true);
+        getAstmParams().setCheckResultFrameTestCodeWithOrderFrameTestCode(false);
+        getAstmParams().setUsePatientIdAsSampleId(true);
     }
 
     @Override
@@ -41,8 +42,13 @@ public class Abl9Driver extends AstmDriver {
 
     @Override
     protected void initDriverReceiver() {
-        AstmReceiver receiver = new AstmReceiver(this);
+        Abl9Receiver receiver = new Abl9Receiver(this);
+
         receiver.setInformationEnquiryReader(new Abl9InformationInquiryReader());
+        receiver.setPatientLineReader(new Abl9PatientLineReader());
+        receiver.setOrderLineReader(new Abl9OrderLineReader());
+        receiver.setResultLineReader(new Abl9ResultLineReader(this));
+
         setDriverReceiver(receiver);
     }
 
@@ -52,5 +58,8 @@ public class Abl9Driver extends AstmDriver {
             props.put("tcpip", "1");
         }
         super.init(instrument, props);
+
+        Abl9Frame answerFrame = new Abl9Frame(instrument);
+        getL3SerialPort().setAnswerFrame(answerFrame);
     }
 }
