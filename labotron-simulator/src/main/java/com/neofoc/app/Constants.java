@@ -8,6 +8,7 @@ public interface Constants {
     char EOT = 4;
     char SINGLE_CHAR_NOT_FOUND = 0;
 
+    char SOH = 1;
     char STX = 2;
     char ETB = 23;
     char ETX = 3;
