@@ -7,7 +7,6 @@
             "type": "section",
             "name": "section",
             "label": "section",
-            "title": "Main Information",
             "layout": "column",
             "spacing": 16,
             "fields": [
@@ -64,42 +63,69 @@
                     "required": true
                 },
                 {
-                    "type": "text",
-                    "name": "code",
-                    "label": "Code",
-                    "required": true
+                    "type": "section",
+                    "name": "section",
+                    "label": "section",
+                    "layout": "row",
+                    "spacing": 16,
+                    "fields": [
+                        {
+                            "type": "text",
+                            "name": "code",
+                            "label": "Code",
+                            "required": true
+                        },
+                        {
+                            "type": "text",
+                            "name": "name",
+                            "label": "Name",
+                            "required": true
+                        }
+                    ]
                 },
                 {
-                    "type": "text",
-                    "name": "name",
-                    "label": "Name",
-                    "required": true
+                    "type": "section",
+                    "name": "section",
+                    "label": "section",
+                    "layout": "row",
+                    "spacing": 16,
+                    "fields": [
+                        {
+                            "type": "text",
+                            "name": "com_port",
+                            "label": "Port",
+                            "required": true
+                        },
+                        {
+                            "type": "text",
+                            "name": "remote_host",
+                            "label": "Remote Host (IP)",
+                            "hint": "Only required when the instrument is the ASTM master (e.g. GEM Premier 3500)",
+                            "required": false
+                        }
+                    ]
                 },
                 {
-                    "type": "text",
-                    "name": "com_port",
-                    "label": "Port",
-                    "required": true
-                },
-                {
-                    "type": "text",
-                    "name": "remote_host",
-                    "label": "Remote Host (IP)",
-                    "hint": "Only required when the instrument is the ASTM master (e.g. GEM Premier 3500)",
-                    "required": false
-                },
-                {
-                    "type": "text",
-                    "name": "wait_for_resultConfirmation",
-                    "label": "Wait For Result Confirmation",
-                    "required": false
-                },
-                {
-                    "type": "checkbox",
-                    "name": "on_hold",
-                    "label": "On Hold",
-                    "required": false
-                },
+                    "type": "section",
+                    "name": "section",
+                    "label": "section",
+                    "layout": "row",
+                    "spacing": 16,
+                    "fields": [
+                    {
+                        "type": "checkbox",
+                        "name": "on_hold",
+                        "label": "On Hold",
+                        "required": false
+                    },                        
+                    {
+                        "type": "text",
+                        "name": "wait_for_resultConfirmation",
+                        "label": "Wait For Result Confirmation",
+                        "required": false
+                    }
+                    ]
+                },            
                 {
                     "type": "data_table",
                     "name": "test_label_map_LIST",
