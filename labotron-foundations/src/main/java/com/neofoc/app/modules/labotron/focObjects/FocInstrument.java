@@ -424,8 +424,8 @@ public class FocInstrument extends Instrument_FocObject implements Runnable, Mes
                     ArrayList<FocLabTest> removeTestArray = new ArrayList<>();
                     for (int i = 0; i < testList.size(); i++) {
                         FocLabTest test = (FocLabTest) testList.getFocObject(i);
-                        if (test.getDispatchInstrument() != null
-                                && test.getDispatchInstrument().getReferenceInt() == getReferenceInt()
+                        if ((test.getDispatchInstrument() != null && test.getDispatchInstrument().getReferenceInt() == getReferenceInt()
+                                        || hasLabelMapping(test.getLabel()))
                                 && (
                                       test.getStatus() == FocLabTest.TEST_STATUS_AVAILABLE_IN_L3
                                    || test.getStatus() == FocLabTest.TEST_STATUS_ANALYSING
@@ -810,6 +810,18 @@ public class FocInstrument extends Instrument_FocObject implements Runnable, Mes
         supportedTestList.loadIfNotLoadedFromDB();
 
         return supportedTestList;
+    }
+
+    public boolean hasLabelMapping(String lisTestLabel) {
+        if (lisTestLabel == null) return false;
+        FocList list = getSupportedTestList();
+        for (int i = 0; i < list.size(); i++) {
+            FocTestLabelMap map = (FocTestLabelMap) list.getFocObject(i);
+            if (lisTestLabel.equals(map.getLisTestLabel())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     // For archive
