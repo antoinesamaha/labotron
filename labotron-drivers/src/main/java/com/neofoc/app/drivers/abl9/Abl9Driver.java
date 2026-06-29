@@ -1,6 +1,7 @@
 package com.neofoc.app.drivers.abl9;
 
 import com.neofoc.app.drivers.astm.AstmDriver;
+import com.neofoc.app.drivers.astm.AstmFrame;
 import com.neofoc.app.modules.labotron.focObjects.FocInstrument;
 
 import java.util.Properties;
@@ -23,12 +24,16 @@ public class Abl9Driver extends AstmDriver {
 
     public Abl9Driver() {
         super();
+        if (frameCreator != null) {
+            frameCreator.dispose();
+        }
+        frameCreator = new Abl9FrameCreator();
         getAstmParams().setResultFrame_ComponentPositionForResultType(-1);
         getAstmParams().setYieldOnEnqCollision(true);
         getAstmParams().setReleaseWhenReceivedENQ(true);
         getAstmParams().setReadComment3(true);
         getAstmParams().setReadResultComment(true);
-        getAstmParams().setConcatenatedFrames(false);
+        getAstmParams().setConcatenatedFrames(true);
         getAstmParams().setSendPatientIdToInstrument(true);
         getAstmParams().setTakeAllFramesFromBufferNotJustTheLast(true);
         getAstmParams().setCheckResultFrameTestCodeWithOrderFrameTestCode(false);
@@ -61,5 +66,30 @@ public class Abl9Driver extends AstmDriver {
 
         Abl9Frame answerFrame = new Abl9Frame(instrument);
         getL3SerialPort().setAnswerFrame(answerFrame);
+    }
+
+    @Override
+    public void sendFramesArray(boolean createDataWithFrame) throws Exception {
+        StringBuilder block = new StringBuilder();
+        block.append(AstmFrame.SOH);
+
+        for (int i = 0; i < getFrameCount(); i++) {
+            AstmFrame frame = (AstmFrame) getFrameAt(i);
+            if (frame == null) continue;
+            char type = frame.getType();
+            if (type == AstmFrame.FRAME_TYPE_HEADER  ||
+                type == AstmFrame.FRAME_TYPE_PATIENT  ||
+                type == AstmFrame.FRAME_TYPE_ORDER    ||
+                type == AstmFrame.FRAME_TYPE_COMMENT  ||
+                type == AstmFrame.FRAME_TYPE_LAST) {
+                block.append(type);
+                block.append(frame.getData());
+                block.append(AstmFrame.CR);
+            }
+        }
+
+        block.append(AstmFrame.EOT);
+        getInstrument().logString("ABL9 sending SOH block, length=" + block.length());
+        getL3SerialPort().send(block.toString());
     }
 }

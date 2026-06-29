@@ -15,6 +15,16 @@ import com.neofoc.app.drivers.astm.InformationInquiryReader;
  * Component 1: ACN{accessionId} - accession number with "ACN" prefix (used as sampleId)
  */
 public class Abl9InformationInquiryReader extends InformationInquiryReader {
+    /*
+    //[SOH]
+    String[] RESULT_FRAMES = {
+    "H|\\^&|||ABL9^402843|||||NC2L||1|20260627193917",
+    "P|1||201910236||Ahmad Baydoun^Khadijeh||19380804|F|||||87|years",
+    "O|1||Sample #^28258|||||||ANONYMOUS|||||Arterial^|||||||||F",
+    "L|1|N"
+    };
+    //[EOT]
+    */
 
     private static final int FLD_STARTING_RANGE = 2;
     private static final int CMP_PATIENT_ID     = 0;

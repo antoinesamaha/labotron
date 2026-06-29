@@ -4,12 +4,48 @@ import com.foc.Globals;
 import com.neofoc.app.drivers.astm.AstmDriver;
 import com.neofoc.app.drivers.astm.AstmFrame;
 import com.neofoc.app.drivers.astm.AstmReceiver;
+import com.neofoc.app.drivers.octa.OctaFrame;
+import com.neofoc.app.modules.labotron.focObjects.FocInstrument;
 
 public class Abl9Receiver extends AstmReceiver {
 
     public Abl9Receiver(AstmDriver driver) {
         super(driver);
     }
+
+    public void respondToInquiryIfNecessary(OctaFrame frame) {
+        boolean error = false;
+
+        final FocInstrument instrument = driver.getInstrument();
+        StringBuffer data = frame.getData();
+        // String sampleId = readString(data, INQUIRY__PATIENT_ID);
+
+        // Globals.logString("Calling sendASampleAnsweringInquiry : "+sampleId);
+        
+        if (instrument != null && !driver.reserve()) {
+//            try {
+//                AlegriaFrameCreator creator = new AlegriaFrameCreator();
+//                driver.getL3SerialPort().send(creator.buildAckFrame());
+//
+//                //Loading the L3Message to send
+//                L3SampleTestJoinFilter filter = instrument.getSampleListToSendAfterEnquiry(sampleId);
+//                filter.setActive(true);
+//                instrument.logString("Loading FocLabSample to Send : " + sampleId);
+//                messageSentAsOrderToInstrument = filter.convertToMessage();
+//
+//                String orderFrame = creator.buildOrderFrame(instrument, messageSentAsOrderToInstrument);
+//                driver.getL3SerialPort().send(orderFrame);
+//
+//                driver.release();
+//            } catch (Exception e) {
+//                messageSentAsOrderToInstrument = null;
+//                Globals.logString("Exception while answering inquiry");
+//                Globals.logException(e);
+//            }
+        }
+
+    }
+
 
     /**
      * Intercepts the SOH block before extractDataFromFrame is called.
