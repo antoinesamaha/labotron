@@ -170,6 +170,7 @@ public class InstrumentReceiverListener implements MessageListener {
         }
 
         sampleDBList.validate(false);
+        sampleDBList.dispose();
     }
 
     private List<SampleResultDTO> convertL3MessagetoDTOs(L3Message message) {

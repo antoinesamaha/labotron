@@ -54,7 +54,7 @@ public class Gem3500FrameCreator extends AstmFrameCreator {
         frame.append2Data(lastName);
         frame.append2Data(AstmFrame.FIELD_SEPERATOR);
         frame.append2Data(AstmFrame.FIELD_SEPERATOR);
-        if (dob != null && dob.getTime() > Globals.DAY_TIME) {
+        if (dob != null) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
             frame.append2Data(sdf.format(dob));
         }
