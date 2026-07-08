@@ -184,7 +184,10 @@ public class AstmFrame extends L3Frame {
 	public void extractDataFromConcatenatedFrame() {
 		StringBuffer dataWithFrame = getDataWithFrame();
 		if (dataWithFrame.length() > 1) {
-			StringBuffer data = new StringBuffer(dataWithFrame.substring(1, dataWithFrame.length() - 1));
+			// Only the leading record-type character (captured below) belongs to the
+			// frame header. Concatenated records are already split on CR with no
+			// trailing overhead byte, so nothing should be trimmed off the end here.
+			StringBuffer data = new StringBuffer(dataWithFrame.substring(1));
 			setData(data);
 		}
 		type = dataWithFrame.charAt(0);
