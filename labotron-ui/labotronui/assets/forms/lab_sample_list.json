@@ -2,6 +2,7 @@
   "layout": "column",
   "spacing": 1,
   "persistencePanel": false,
+  "title":"Samples",
   "fields": [   
     {
       "type": "data_table",

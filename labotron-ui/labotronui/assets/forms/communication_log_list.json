@@ -2,6 +2,7 @@
   "layout": "column",
   "spacing": 1,
   "persistencePanel": false,
+  "title":"Communication Log",
   "fields": [   
     {
       "type": "data_table",

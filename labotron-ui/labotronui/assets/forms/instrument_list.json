@@ -2,6 +2,7 @@
   "layout": "column",
   "spacing": 1,
   "persistencePanel": false,
+  "title":"Instruments",  
   "fields": [   
     {
       "type": "data_table",

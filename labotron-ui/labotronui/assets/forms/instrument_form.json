@@ -2,6 +2,7 @@
     "layout": "column",
     "spacing": 16,
     "persistencePanel": true,
+    "title":"Instrument",
     "fields": [
         {
             "type": "section",
@@ -133,9 +134,9 @@
                     "title": "Instruments",
                     "meta_entity": "test_label_map",
                     "table_options": {
-                        "showAddButton": true,
-                        "showEditButton": true,
-                        "showDeleteButton": true,
+                        "showAddButton": false,
+                        "showEditButton": false,
+                        "showDeleteButton": false,
                         "parent_key": "instrument"
                     },
                     "columns": [
@@ -158,6 +159,16 @@
                             "label": "Day Priority",
                             "numeric": true
                         },
+                        {
+                            "key": "night_priority",
+                            "label": "Night Priority",
+                            "numeric": true
+                        },                 
+                        {
+                            "key": "holiday_priority",
+                            "label": "Holiday Priority",
+                            "numeric": true
+                        }, 
                         {
                             "key": "on_hold",
                             "label": "On Hold",

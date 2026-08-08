@@ -2,6 +2,7 @@
   "layout": "column",
   "spacing": 16,
   "persistencePanel": true,
+  "title":"Sample",  
   "fields": [   
     {
       "type": "section",

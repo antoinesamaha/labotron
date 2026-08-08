@@ -2,6 +2,7 @@
   "title": "Sample Form",
   "layout": "column",
   "spacing": 16,
+  "title":"Test Group",
   "fields": [    
     {
       "type": "section",

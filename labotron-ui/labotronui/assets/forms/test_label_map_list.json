@@ -2,6 +2,7 @@
     "layout": "column",
     "spacing": 1,
     "persistencePanel": false,
+    "title":"Test Mapping",
     "fields": [
         {
             "type": "data_table",
@@ -11,9 +12,17 @@
             "table_options": {
                 "showAddButton": true,
                 "showEditButton": true,
-                "showDeleteButton": true
+                "showDeleteButton": true,
+                "pagination": {
+                    "defaultPageSize": 10
+                }
             },
             "columns": [
+                {
+                    "key": "instrument.name",
+                    "label": "Instrument",
+                    "numeric": false
+                },
                 {
                     "key": "lis_test_label",
                     "label": "LIS Code",
@@ -33,6 +42,16 @@
                     "label": "Day Priority",
                     "numeric": true
                 },
+                {
+                    "key": "night_priority",
+                    "label": "Night Priority",
+                    "numeric": true
+                },
+                {
+                    "key": "holiday_priority",
+                    "label": "Day Priority",
+                    "numeric": true
+                },                                
                 {
                     "key": "on_hold",
                     "label": "On Hold",
