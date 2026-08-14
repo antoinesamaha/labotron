@@ -154,7 +154,7 @@ public class AstmDriver extends DriverSerialPort {
 							numberOfFailures = 0;
 							break;
 						} else {
-							if (getAstmParams().isSlaveBehaviour()) {
+							if (getAstmParams().isYieldOnEnqCollision()) {
 								setReceivedENQWhileSendingENQ(true);
 							}
 							throw new L3TryLaterException();// This is only thrown
@@ -171,7 +171,7 @@ public class AstmDriver extends DriverSerialPort {
 						break;
 					/*
 					 * case AstmFrame.FRAME_TYPE_HEADER:
-					 * if(getAstmParams().isSlaveBehaviour()){
+					 * if(getAstmParams().isYieldOnEnqCollision()){
 					 * setReceivedENQWhileSendingENQ(true); break;//The break is
 					 * inside the if because otherwise we want the Default to
 					 * hapen }

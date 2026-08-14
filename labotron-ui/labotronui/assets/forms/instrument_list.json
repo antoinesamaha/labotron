@@ -2,6 +2,7 @@
   "layout": "column",
   "spacing": 1,
   "persistencePanel": false,
+  "title":"Instruments",  
   "fields": [   
     {
       "type": "data_table",
@@ -20,9 +21,15 @@
           "numeric": false
         },
         {
+          "key": "com_port",
+          "label": "Port",
+          "numeric": false
+        },
+        {
           "key": "on_hold",
           "label": "On Hold",
-          "checkbox": true
+          "checkbox": true,
+          "hide_when_false": true
         }
       ]
     }    

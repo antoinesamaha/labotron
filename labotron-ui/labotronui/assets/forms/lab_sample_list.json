@@ -2,12 +2,43 @@
   "layout": "column",
   "spacing": 1,
   "persistencePanel": false,
+  "title":"Samples",
   "fields": [   
     {
       "type": "data_table",
       "name": "data_table_sample_list",
       "label": "Samples",
       "title": "Samples",
+      "table_options": {
+        "showAddButton": false,
+        "showEditButton": true,
+        "showDeleteButton": false,
+        "pagination": {
+          "defaultPageSize": 50
+        },
+        "filters": [
+          {
+            "key": "sample_id",
+            "label": "Sample ID",
+            "type": "string"
+          },
+          {
+            "key": "patient_id",
+            "label": "Patient ID",
+            "type": "string"
+          },
+          {
+            "key": "first_name",
+            "label": "First name",
+            "type": "string"
+          },
+          {
+            "key": "last_name",
+            "label": "Last name",
+            "type": "string"
+          }
+        ]
+      },
       "columns": [
         {
           "key": "sample_id",

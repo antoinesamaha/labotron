@@ -192,3 +192,42 @@ docker ps
     "verificationPending": "<boolean>"
 }
 ```
+
+# New release deployment
+
+Pull the new code for both projects. each project contains the BE and FE code.
+
+```sh
+cd /opt/labotron/git/neofoc
+git pull
+
+cd /opt/labotron/git/labotron
+git pull
+```
+
+Compile the code 
+
+```sh
+cd /opt/labotron/git/neofoc
+mvn clean 
+mvn install
+
+cd /opt/labotron/git/labotron
+mvn clean 
+mvn install
+mvn package
+
+cd /opt/labotron/git/labotron
+./build.sh
+
+cd /opt/labotron/git
+./build-ui.sh
+```
+
+Run docker compose
+
+```sh
+cd /opt/labotron/git/labotron/docker-compose
+docker compose down 
+docker compose up -d
+```

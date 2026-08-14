@@ -6,8 +6,11 @@ import com.foc.desc.FocConstructor;
 import com.foc.desc.FocObjectGeneral;
 import com.neofoc.app.driver.MessageListener;
 import com.neofoc.app.modules.labotron.LabMessage;
+import com.neofoc.app.modules.labotron.LabMessage_FocObject;
 
-public class FocLabMessage extends FocObjectGeneral implements MessageListener {
+public class FocLabMessage extends LabMessage_FocObject implements MessageListener {
+
+    public static final String FLD_INSTRUMENT = "instrument";
 
     public FocLabMessage(FocConstructor constr) {
         super(constr);

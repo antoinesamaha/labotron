@@ -1,147 +1,169 @@
 package com.neofoc.app.impl;
 
-import com.neofoc.app.Int2ByteConverter;
 import com.neofoc.app.Phase;
 import com.neofoc.app.SimSocket;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+
 public class InfinitySimulator extends AbstractSimulator {
 
+    // Loaded from src/main/resources/infinity_result_frames.txt
+    // Contains all 45,977 result frames extracted from the real log
+    // (2026-02-11 Cobas Infinity full-day session)
+    private String[] resultFrames;
+
     public void simulate() {
+        //resultFrames = loadFrames("infinity_result_frames_all.txt");
+        resultFrames = loadFrames("infinity_result_frames_small.txt");
         phase = Phase.OPENING_SOCKET;
 
         socket = new SimSocket(this, 9000);
 
         //These 3 calls will run in 3 parallel threads
         socket.open();
-        receivingSamples();
-        sendingResults();
 
-        socket.close();
+//        receivingOrders();
+//        sleep(10000);
+        sendingResults();
+        sleep(120000);
+//        socket.close();
     }
 
-    public void receivingSamples() {
-
-        new Thread(new Runnable() {
-            public void run() {
-                try {
-                    while (phase.compareTo(Phase.RECEIVING_SAMPLES) <= 0) {
-                        if (socket.socket != null && socket.socket.isConnected()) {
-                            String response = socket.receive();
-
-                            // If we received data, log it
-                            if (response != null && !response.isEmpty()) {
-                                System.out.println("receivingSamples received data: " + response);
-                                if (response.charAt(0) == InfinitySimulator.EOT) {
-                                    phase = Phase.SENDING_RESULTS;
-                                } else {
-                                    socket.send("" + InfinitySimulator.ACK);
-                                }
-                            } else {
-                                // Just for debugging - can be removed in production
-                                System.out.println("receivingSamples: No data available at this poll interval");
-                            }
+    public void receivingOrders() {
+        socket.setSendingMode(true);
+        phase = Phase.RECEIVING_SAMPLES;
+        System.out.println("INFINITY: waiting for orders...");
+        try {
+            while (phase == Phase.RECEIVING_SAMPLES) {
+                if (socket.socket != null && socket.socket.isConnected()) {
+                    String data = socket.receive();
+                    if (data != null && !data.isEmpty()) {
+                        char first = data.charAt(0);
+                        if (first == EOT) {
+                            System.out.println("INFINITY: orders complete, preparing results...");
+                            phase = Phase.SENDING_RESULTS;
+                        } else {
+                            socket.send("" + ACK);
                         }
-
-                        // Wait 2 seconds before polling again
-                        sleep(2000);
                     }
-                } catch (Exception e) {
-                    System.out.println("Client error: " + e.getMessage());
-                    e.printStackTrace();
                 }
+                sleep(200);
             }
-        }).start();
+        } catch (Exception e) {
+            System.out.println("INFINITY receivingOrders error: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     public void sendingResults() {
+        sendingFrames(resultFrames, false);
+    }
 
-        // Start the client in a separate thread
-        new Thread(new Runnable() {
-            public void run() {
-                try {
-                    int frameAt = -1;
-                    while (phase.compareTo(Phase.SENDING_RESULTS) <= 0) {
-                        if (phase.compareTo(Phase.SENDING_RESULTS) == 0) {
-                            if (frameAt == -1) {
-                                socket.send("" + ENQ);
-                            } else if (frameAt < ASTM_TEST_DATA.length) {
-                                String frame = ASTM_TEST_DATA[frameAt];
-                                System.out.println("Sending frame: " + frame);
-                                StringBuffer sbFrameWithData = createDataWithFrame(frame);
-                                socket.send(sbFrameWithData.toString());
-                            } else {
-                                socket.send("" + EOT);
-                                phase = Phase.DONE;
-                            }
-                            sleep(1000);
-                            char responseChar = readResponseChar();
-                            if (responseChar == ACK) {
-                                System.out.println("Received ACK from server");
-                                frameAt++;
-                            } else if (responseChar == NACK) {
-                                System.out.println("Received NACK from server");
-                                // Resend the same frame
-                            }
-                        } else {
-                            sleep(1000);
-                        }
+    // ---------------------------------------------------------------------------
+    // Entry point
+    // ---------------------------------------------------------------------------
+
+//    @Override
+//    public void simulate() {
+//        resultFrames = loadFrames("infinity_result_frames.txt");
+//        System.out.println("INFINITY: loaded " + resultFrames.length + " result frames");
+//
+//        phase = Phase.OPENING_SOCKET;
+//        socket = new SimSocket(this, 9000);
+//        socket.open();
+//        receivingOrders();
+//        sendingResults();
+//        while (phase != Phase.DONE) {
+//            sleep(1000);
+//        }
+//        socket.close();
+//    }
+
+    // ---------------------------------------------------------------------------
+    // Phase 1 – Receive orders from driver
+    // Driver sends: ENQ → H → P → O (all tests) → C → EOT
+    // We ACK every frame and wait for EOT to transition.
+    // ---------------------------------------------------------------------------
+
+//    private void receivingOrders() {
+//        new Thread(() -> {
+//            // Disable SimSocket auto-ACK thread so this thread owns the receive loop
+//            socket.setSendingMode(true);
+//            phase = Phase.RECEIVING_SAMPLES;
+//            System.out.println("INFINITY: waiting for orders...");
+//            try {
+//                while (phase == Phase.RECEIVING_SAMPLES) {
+//                    if (socket.socket != null && socket.socket.isConnected()) {
+//                        String data = socket.receive();
+//                        if (data != null && !data.isEmpty()) {
+//                            char first = data.charAt(0);
+//                            if (first == EOT) {
+//                                System.out.println("INFINITY: orders complete, preparing results...");
+//                                phase = Phase.SENDING_RESULTS;
+//                            } else {
+//                                socket.send("" + ACK);
+//                            }
+//                        }
+//                    }
+//                    sleep(200);
+//                }
+//            } catch (Exception e) {
+//                System.out.println("INFINITY receivingOrders error: " + e.getMessage());
+//                e.printStackTrace();
+//            }
+//        }).start();
+//    }
+
+    // ---------------------------------------------------------------------------
+    // Phase 2 – Send results to driver
+    // Sends all 45,977 frames from the real log in one transmission.
+    // ---------------------------------------------------------------------------
+
+//    private void sendingResults() {
+//        new Thread(() -> {
+//            try {
+//                while (phase != Phase.SENDING_RESULTS) {
+//                    sleep(500);
+//                }
+//                // Simulate instrument processing time
+//                sleep(3000);
+//                sendingFrames(resultFrames);
+//                phase = Phase.DONE;
+//            } catch (Exception e) {
+//                System.out.println("INFINITY sendingResults error: " + e.getMessage());
+//                e.printStackTrace();
+//            }
+//        }).start();
+//    }
+
+    // ---------------------------------------------------------------------------
+    // Helpers
+    // ---------------------------------------------------------------------------
+
+    private String[] loadFrames(String resourceName) {
+        List<String> frames = new ArrayList<>();
+        try {
+            InputStream is = getClass().getClassLoader().getResourceAsStream(resourceName);
+            if (is == null) {
+                System.err.println("INFINITY: resource not found: " + resourceName);
+                return new String[0];
+            }
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(is))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    if (!line.isEmpty()) {
+                        frames.add(line);
                     }
-                } catch (Exception e) {
-                    System.out.println("Client error: " + e.getMessage());
-                    e.printStackTrace();
                 }
             }
-        }).start();
-    }
-
-    public StringBuffer createDataWithFrame(String data) {
-        StringBuffer buffer = new StringBuffer();
-
-        buffer.append(STX);
-
-        StringBuffer bufferForChecksum = new StringBuffer(data);
-        bufferForChecksum.append(CR);
-        bufferForChecksum.append(ETX);
-        char[] checkSum = computeChecksum(bufferForChecksum);
-
-        buffer.append(bufferForChecksum);
-        buffer.append(checkSum[0]);
-        buffer.append(checkSum[1]);
-        buffer.append(CR);
-        buffer.append(LF);
-
-        return buffer;
-    }
-
-    public char[] computeChecksum(StringBuffer strBuffer) {
-        char parity[] = new char[2];
-
-        byte bt[] = strBuffer.toString().getBytes();
-
-        int sum = 0;
-        for (int i = 0; i < bt.length; i++) {
-            // Globals.logString("byte ="+bt[i]+" char="+ct[i]);
-            sum += bt[i];
-            // Globals.logString(i+" "+c+" "+bt[i]);
+        } catch (Exception e) {
+            System.err.println("INFINITY: error loading frames: " + e.getMessage());
+            e.printStackTrace();
         }
-        int mod = sum % 256;
-
-        Int2ByteConverter conv = new Int2ByteConverter(mod);
-        parity[0] = conv.getHighByte();
-        parity[1] = conv.getLowByte();
-
-        // Globals.logString("parity: " + mod+" -> "+strBuffer);
-        return parity;
+        return frames.toArray(new String[0]);
     }
-
-    public char readResponseChar() {
-        String response = socket.receive();
-        if (response != null && !response.isEmpty()) {
-            System.out.println("Client received data: " + response);
-            socket.writeToFile(response, "socket_log.txt");
-            return response.charAt(0);
-        }
-        return SINGLE_CHAR_NOT_FOUND;
-    }
-
 }

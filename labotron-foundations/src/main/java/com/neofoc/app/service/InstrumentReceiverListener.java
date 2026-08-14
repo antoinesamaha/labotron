@@ -13,6 +13,7 @@ import com.neofoc.app.modules.labotron.focObjects.FocLabTest;
 import com.neofoc.app.modules.labotron.focObjects.L3Message;
 import com.neofoc.app.utils.SpringContextUtil;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -40,29 +41,28 @@ public class InstrumentReceiverListener implements MessageListener {
                 return;
             }
 
+            // Process the sample results further as needed
+            writeReceivedSamplesToDB(message);
+
             List<SampleResultDTO> allSampleResults = convertL3MessagetoDTOs(message);
 
             for (SampleResultDTO sampleResult : allSampleResults) {
                 // Log this sample result
                 String json = convertToJson(sampleResult);
-                communicationLogService.log(
-                        CommunicationLogService.RECEIVED_INSTRUMENT_2_DRIVER,
-                        null,
-                        instrument,
-                        sampleResult.getSampleId(),
-                        json
-                );
+//                communicationLogService.log(
+//                        CommunicationLogService.SENT_CONNECTOR_2_LIS,
+//                        null,
+//                        instrument,
+//                        sampleResult.getSampleId(),
+//                        json
+//                );
 
                 RabbitMQSendingService rmqSendingService = SpringContextUtil.getBean(RabbitMQSendingService.class);
                 rmqSendingService.sendToConnector(sampleResult.getSampleId(), json);
             }
 
-            // Process the sample results further as needed
-            writeReceivedSamplesToDB(message);
-
         } catch (Exception e) {
             Globals.logException(e);
-            e.printStackTrace();
         }
     }
 
@@ -72,12 +72,22 @@ public class InstrumentReceiverListener implements MessageListener {
     private String getStatusString(int status) {
         // Map status codes to strings based on your system's definitions
         switch (status) {
-            case 1:
-                return "COMPLETED";
-            case 2:
-                return "PENDING";
-            case 3:
-                return "ERROR";
+            case FocLabTest.TEST_STATUS_ANALYSING:
+                return "ANALYSING";
+            case FocLabTest.TEST_STATUS_AVAILABLE_IN_L3:
+                return "AVAILABLE IN LABOTRON";
+            case FocLabTest.TEST_STATUS_SENDING_TO_INSTRUMENT:
+                return "SENDING_TO_INSTRUMENT";
+            case FocLabTest.TEST_STATUS_COMMITED_TO_LIS:
+                return "COMMITED_TO_LIS";
+            case FocLabTest.TEST_STATUS_ERROR_WIHLE_COMMIT_TO_LIS:
+                return "ERROR_WIHLE_COMMIT_TO_LIS";
+            case FocLabTest.TEST_STATUS_NOT_IN_L3_WHEN_RESULT_RECEIVED:
+                return "NOT_IN_LABOTRON_WHEN_RESULT_RECEIVED";
+            case FocLabTest.TEST_STATUS_NOT_IN_LIS_WHEN_COMMITING_RESULT:
+                return "NOT_IN_LIS_WHEN_COMMITING_RESULT";
+            case FocLabTest.TEST_STATUS_RESULT_AVAILABLE:
+                return "RESULT_AVAILABLE";
             default:
                 return "UNKNOWN";
         }
@@ -144,17 +154,23 @@ public class InstrumentReceiverListener implements MessageListener {
                     testDB.setCreated(true);
                     testDB.setLabel(test.getLabel());
                     testDB.setStatus(FocLabTest.TEST_STATUS_NOT_IN_L3_WHEN_RESULT_RECEIVED);
+                    test.setStatus(FocLabTest.TEST_STATUS_NOT_IN_L3_WHEN_RESULT_RECEIVED);
                 } else {
                     testDB.setStatus(FocLabTest.TEST_STATUS_RESULT_AVAILABLE);
+                    test.setStatus(FocLabTest.TEST_STATUS_RESULT_AVAILABLE);
                 }
                 testDB.setResultOk(test.getResultOk());
                 testDB.setValue(test.getValue());
+                testDB.setAlarm(test.getAlarm());
                 testDB.setActualInstrument(instrument);
+                test.setActualInstrument(instrument);
                 testDB.setUnitLabel(test.getUnitLabel());
+                testDB.setNotificationMessage(test.getNotificationMessage());
             }
         }
 
         sampleDBList.validate(false);
+        sampleDBList.dispose();
     }
 
     private List<SampleResultDTO> convertL3MessagetoDTOs(L3Message message) {
@@ -179,13 +195,14 @@ public class InstrumentReceiverListener implements MessageListener {
                 TestResultDTO testResult = TestResultDTO.builder()
                         .testId(test.getLabel())
                         .status(getStatusString(test.getStatus()))
-                        .actualAnalyzerCode(message.getInstrumentCode())
-                        .alarm(test.getAlarm() == 1 ? Boolean.TRUE : Boolean.FALSE)
+                        .actualAnalyzerCode(instrument.getCode())
+                        .alarm(test.getAlarm())
                         .result(test.getValue())
                         .notes(test.getValueNotes())
                         .unit(test.getUnitLabel())
                         .message(test.getNotificationMessage())
                         .verificationPending(test.isVerificationPendingFlag())
+                        .dateTime(LocalDateTime.now())
                         .build();
 
                 // Add the test result to the list

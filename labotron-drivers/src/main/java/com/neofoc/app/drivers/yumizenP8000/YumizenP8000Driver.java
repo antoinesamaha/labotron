@@ -69,7 +69,7 @@ public class YumizenP8000Driver extends AstmDriver {
         getAstmParams().setSendPatientAgeAndSex(true);
         getAstmParams().setSendPatientDateOfBirth(true);
         getAstmParams().setReadComment1(true);
-        getAstmParams().setSlaveBehaviour(true);
+        getAstmParams().setYieldOnEnqCollision(true);
         getAstmParams().setTakeAllFramesFromBufferNotJustTheLast(true);
         getAstmParams().setReleaseWhenReceivedENQ(true);
 
@@ -100,20 +100,6 @@ public class YumizenP8000Driver extends AstmDriver {
     protected void initAnswerFrame() {
         YumizenP8000Frame answerFrame = new YumizenP8000Frame(getInstrument(), 0);
         getL3SerialPort().setAnswerFrame(answerFrame);
-    }
-
-    @Override
-    public void connect() throws Exception {
-        super.connect();
-        // The Sender is transient, should connect and disconnect for every transmission
-        // if(sender != null) sender.connect();
-    }
-
-    @Override
-    public void disconnect() {
-        super.disconnect();
-        // The Sender is transient, should connect and disconnect for every transmission
-        // if(sender != null) sender.disconnect();
     }
 
     public void sendFramesArray(boolean createDataWithFrame) throws Exception {

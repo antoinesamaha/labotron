@@ -5,8 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
+@EnableScheduling
 @ComponentScan(basePackages = {"com.neofoc.app", "com.neofoc.app.controller", "com.neofoc.springboot", "com.neofoc.app.modules.labotron"})
 public class LabotronApplication extends SpringBootServletInitializer {
 	@Override

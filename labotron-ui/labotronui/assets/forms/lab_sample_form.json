@@ -2,6 +2,7 @@
   "layout": "column",
   "spacing": 16,
   "persistencePanel": true,
+  "title":"Sample",  
   "fields": [   
     {
       "type": "section",
@@ -12,41 +13,109 @@
       "spacing": 16,      
       "fields": [
         {
-          "type": "text",
-          "name": "sample_id",
-          "label": "Sample ID",
-          "required": true
+            "type": "section",
+            "name": "section",
+            "label": "section",
+            "layout": "row",
+            "spacing": 16,
+            "fields": [
+                {
+                  "type": "text",
+                  "name": "sample_id",
+                  "label": "Sample ID",
+                  "required": true
+                },
+                {
+                  "type": "text",
+                  "name": "patient_id",
+                  "label": "Patient ID",
+                  "required": true
+                }
+            ]
         },
         {
-          "type": "text",
-          "name": "patient_id",
-          "label": "Patient ID",
-          "required": true
+            "type": "section",
+            "name": "section",
+            "label": "section",
+            "layout": "row",
+            "spacing": 16,
+            "fields": [
+                {
+                  "type": "text",
+                  "name": "first_name",
+                  "label": "First Name",
+                  "required": false
+                },
+                {
+                  "type": "text",
+                  "name": "last_name",
+                  "label": "Last Name",
+                  "required": false
+                }
+            ]
         },
         {
-          "type": "text",
-          "name": "sex",
-          "label": "Gender",
-          "required": false
+            "type": "section",
+            "name": "section",
+            "label": "section",
+            "layout": "row",
+            "spacing": 16,
+            "fields": [        
+                {
+                  "type": "text",
+                  "name": "middle_name",
+                  "label": "Middle Name",
+                  "required": false
+                },              
+                {
+                  "type": "text",
+                  "name": "sex",
+                  "label": "Gender",
+                  "required": false
+                },
+                {
+                  "type": "date",
+                  "name": "date_of_birth",
+                  "label": "Date Of Birth",
+                  "required": false
+                }
+            ]
         },
         {
-          "type": "text",
-          "name": "first_name",
-          "label": "First Name",
-          "required": false
-        },
-        {
-          "type": "text",
-          "name": "last_name",
-          "label": "Last Name",
-          "required": false
-        },
-        {
-          "type": "text",
-          "name": "middle_name",
-          "label": "Middle Name",
-          "required": false
-        }    
+          "type": "data_table",
+          "name": "lab_test_LIST",
+          "label": "Tests",
+          "title": "Tests",
+          "meta_entity": "lab_test",
+          "columns": [
+            {
+              "key": "label",
+              "label": "Label",
+              "numeric": false
+            },        
+            {
+              "key": "descrip",
+              "label": "Description",
+              "numeric": false
+            },
+            {
+              "key": "value",
+              "label": "Value"
+            },
+            {
+              "key": "status",
+              "label": "Status"
+            },
+            {
+              "key": "dispatch_instrument.name",
+              "label": "Dispatch"
+            },
+            {
+              "key": "actual_instrument.name",
+              "label": "Actual"
+            }            
+          ]
+        }
       ]
     }    
   ]

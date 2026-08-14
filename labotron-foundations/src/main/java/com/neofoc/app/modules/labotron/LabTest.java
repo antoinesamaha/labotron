@@ -6,7 +6,14 @@ import lombok.Data;
 
 @Entity
 @Cacheable
-@Table(name = "lab_test")
+@Table(name = "lab_test",
+		uniqueConstraints = {
+				@UniqueConstraint(name = "uq_labtest_sample_label", columnNames = {"lab_sample_id", "label"})
+		},
+		indexes = {
+				@Index(name = "idx_labtest_status", columnList = "status")
+		}
+)
 @Data
 @FocData
 public class LabTest {
@@ -42,19 +49,19 @@ public class LabTest {
     @Column(nullable = false)
     private Boolean blocked;
 
-    @Column(nullable = false)
-    private Integer iSuggRef;
+//    @Column(nullable = false)
+//    private Integer iSuggRef;
 
     @ManyToOne(optional = false)
     @JoinColumn(nullable = false)
     private Instrument dispatchInstrument;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(nullable = false)
+    @ManyToOne(optional = true)
+    @JoinColumn(nullable = true)
     private Instrument actualInstrument;
 
-    @Column(nullable = false)
-    private Integer iRecRef;
+//    @Column(nullable = false)
+//    private Integer iRecRef;
 
     @ManyToOne(optional = false)
     @JoinColumn(nullable = false)

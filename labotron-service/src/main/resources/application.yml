@@ -43,6 +43,16 @@ security:
 management:
   security:
     enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: health,prometheus
+  endpoint:
+    prometheus:
+      enabled: true
+  metrics:
+    tags:
+      application: labotron
 
 labotron:
   connector:
@@ -56,12 +66,13 @@ neofoc:
 #    url: ${DATASOURCE_URL:jdbc:oracle:thin:@//oracle-db:1521/XEPDB1}
 #    username: ${DATASOURCE_USERNAME:labotron}
 #    password: ${DATASOURCE_PASSWORD:123456}
-  #  keepFocObjectArrayInFocDesc: 1
 
     drivers: org.postgresql.Driver
     url: ${DATASOURCE_URL:jdbc:postgresql://localhost:5432/labotron}
     username: ${DATASOURCE_USERNAME:postgres}
     password: ${DATASOURCE_PASSWORD:123456}
+
+  keepFocObjectArrayInFocDesc: 1
 
 #  focWebServerClassName: siren.fenix.ci.main.FenixCIWebServer
 #  dataSourceClass: b01.focDataSourceDB.FocDataSource_DB
@@ -82,6 +93,7 @@ neofoc:
     dbSelect: 1
     debug: 1
     memoryUsage: 1
+    dbLogActive: 0
 
   debug:
     showStatusColumn=0

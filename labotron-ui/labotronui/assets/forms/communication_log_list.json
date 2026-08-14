@@ -2,12 +2,33 @@
   "layout": "column",
   "spacing": 1,
   "persistencePanel": false,
+  "title":"Communication Log",
   "fields": [   
     {
       "type": "data_table",
       "name": "data_table_communication_log_list",
       "label": "Communication Logs",
       "title": "Communication Logs",
+      "table_options": {
+        "showAddButton": false,
+        "showEditButton": true,
+        "showDeleteButton": false,
+        "pagination": {
+          "defaultPageSize": 10
+        },
+        "filters": [
+          {
+            "key": "date_time",
+            "label": "Timestamp",
+            "type": "date"
+          },
+          {
+            "key": "sample_id",
+            "label": "Sample",
+            "type": "string"
+          }
+        ]
+      },      
       "columns": [
         {
           "key": "date_time",

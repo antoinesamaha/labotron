@@ -1,0 +1,41 @@
+{
+    "layout": "column",
+    "spacing": 1,
+    "persistencePanel": false,
+    "title":"Users",
+    "fields": [
+        {
+            "type": "data_table",
+            "name": "fuser",
+            "label": "Users",
+            "title": "Users",
+            "table_options": {
+                "meta_entity": "FUSER",
+                "showAddButton": true,
+                "showEditButton": true,
+                "showDeleteButton": true,
+                "showQuickSearch": false
+            },
+            "columns": [
+                {
+                    "label": "Name",
+                    "key": "NAME"
+                },
+                {
+                    "label": "Full Name",
+                    "key": "FULL_NAME"
+                },
+                {
+                    "label": "Suspended",
+                    "key": "SUSPENDED",
+                    "checkbox": true
+                },
+                {
+                    "label": "Locked",
+                    "key": "LOCKED",
+                    "checkbox": true
+                }
+            ]
+        }
+    ]
+}

@@ -2,6 +2,7 @@
   "layout": "column",
   "spacing": 16,
   "persistencePanel": true,
+  "title":"Test Mapping",
   "fields": [   
     {
       "type": "section",
@@ -12,6 +13,13 @@
       "spacing": 16,      
       "fields": [
         {
+          "type": "foc_dropdown",
+          "name": "instrument",
+          "label": "Instrument",
+          "display_field": "name",
+          "required": true
+        },        
+        {
           "type": "text",
           "name": "lis_test_label",
           "label": "LIS Test Label",
@@ -20,7 +28,7 @@
         {
           "type": "text",
           "name": "instrument_test_code",
-          "label": "Name",
+          "label": "Inst. Code",
           "required": true
         },
         {
@@ -28,6 +36,27 @@
           "name": "descrip",
           "label": "Description",
           "required": true
+        },
+        {
+          "type": "integer",
+          "name": "day_priority",
+          "label": "Day Priority",
+          "required": false,
+          "enabled": true
+        },
+        {
+          "type": "integer",
+          "name": "night_priority",
+          "label": "Night Priority",
+          "required": false,
+          "enabled": true
+        },
+        {
+          "type": "integer",
+          "name": "holiday_priority",
+          "label": "Holiday Priority",
+          "required": false,
+          "enabled": true
         }
       ]
     }    

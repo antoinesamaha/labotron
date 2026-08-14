@@ -21,13 +21,15 @@ public class AstmParams {
 	private boolean sendProfileInsteadOfTestID = false;//Good for Pentra - CBC and DIFF...
 	private boolean sendPatientAgeAndSex       = false;//Good for Pentra - CBC and DIFF...
 	private boolean sendPatientDateOfBirth     = false;
-	private boolean slaveBehaviour             = false;
+	private boolean yieldOnEnqCollision           = false;
+	private boolean instrumentIsAstmMaster        = false;
 	private boolean acceptToStartAtFrame1Directly = false;
 	private boolean takeAllFramesFromBufferNotJustTheLast = false;
 	private boolean releaseWhenReceivedENQ = false;
 	//20160129-B
 	private boolean doNotSendOrdersBecauseOneWay = false;
 	//20160129-E
+	private boolean usePatientIdAsSampleId = false;
 	
 	//20160129-B
 	public boolean isDoNotSendOrdersBecauseOneWay() {
@@ -47,12 +49,20 @@ public class AstmParams {
 		this.releaseWhenReceivedENQ = releaseWhenReceivedENQ;
 	}
 	
-	public boolean isSlaveBehaviour() {
-		return slaveBehaviour;
+	public boolean isYieldOnEnqCollision() {
+		return yieldOnEnqCollision;
 	}
 
-	public void setSlaveBehaviour(boolean slaveBehaviour) {
-		this.slaveBehaviour = slaveBehaviour;
+	public void setYieldOnEnqCollision(boolean yieldOnEnqCollision) {
+		this.yieldOnEnqCollision = yieldOnEnqCollision;
+	}
+
+	public boolean isInstrumentIsAstmMaster() {
+		return instrumentIsAstmMaster;
+	}
+
+	public void setInstrumentIsAstmMaster(boolean instrumentIsAstmMaster) {
+		this.instrumentIsAstmMaster = instrumentIsAstmMaster;
 	}
 
 	public boolean isSendPatientAgeAndSex() {
@@ -215,6 +225,14 @@ public class AstmParams {
 		this.takeAllFramesFromBufferNotJustTheLast = readReceivedFramesFromFirstToEnd;
 	}
 	
+	public boolean isUsePatientIdAsSampleId() {
+		return usePatientIdAsSampleId;
+	}
+
+	public void setUsePatientIdAsSampleId(boolean usePatientIdAsSampleId) {
+		this.usePatientIdAsSampleId = usePatientIdAsSampleId;
+	}
+
 	public boolean isPutYForAGE() {
 		return putYForAGE;
 	}

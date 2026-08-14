@@ -2,12 +2,13 @@
   "layout": "column",
   "spacing": 16,
   "persistencePanel": true,
+  "title":"Communication Log",
   "fields": [   
     {
       "type": "section",
       "name": "section",
       "label": "section",
-      "title": "Sample",
+      "title": "Communication Log",
       "layout": "column",
       "spacing": 16,      
       "fields": [
@@ -48,9 +49,9 @@
           "required": false
         },
         {
-          "type": "text",
-          "name": "json_content",
-          "label": "Content",
+          "type": "json",
+          "name": "body",
+          "label": "Body",
           "required": false
         }
       ]

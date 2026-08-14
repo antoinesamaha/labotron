@@ -3,12 +3,23 @@ package com.neofoc.app.modules.labotron;
 import com.foc.annotations.model.FocData;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 import java.util.UUID;
 
 @Entity
-@Table(name = "communication_log")
+@Table(name = "communication_log",
+		uniqueConstraints = {
+				@UniqueConstraint(name = "uq_commlog_uuid", columnNames = {"uuid"})
+		},
+		indexes = {
+				@Index(name = "idx_commlog_inst_dt", columnList = "instrument_id, date_time"),
+				@Index(name = "idx_commlog_sampleid", columnList = "sample_id")
+		}
+)
 @Data
 @FocData
 public class CommunicationLog {
@@ -51,6 +62,10 @@ public class CommunicationLog {
     @Lob
     @Column(nullable = false, length = 10000)
     private String jsonContent;
+
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(columnDefinition = "jsonb")
+    private Map<String, Object> body;
 
 //    private boolean hasError;
 

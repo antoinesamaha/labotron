@@ -1,0 +1,79 @@
+networks:
+  labotron_network:
+    name: labotron_network
+    driver: bridge
+
+services:
+
+  postgres:
+    container_name: labotron-postgres
+    image: postgres:17.6
+    networks:
+      - labotron_network
+    ports:
+      - "0.0.0.0:${DATASOURCE_PORT}:5432"
+    restart: unless-stopped
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=${DATASOURCE_DBNAME}
+      - POSTGRES_USER=${DATASOURCE_USERNAME}
+      - POSTGRES_PASSWORD=${DATASOURCE_PASSWORD}
+      - TZ=Asia/Beirut
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d aid_card -h 127.0.0.1 -p 5432"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  pgadmin:
+    container_name: labotron-pgadmin
+    image: dpage/pgadmin4:latest
+    networks:
+      - labotron_network
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PG_ADMIN_USER}
+      PGADMIN_DEFAULT_PASSWORD: ${PG_ADMIN_PASSWORD}
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    ports:
+      - "${PG_ADMIN_PORT}:80"
+    depends_on:
+      - postgres
+    restart: unless-stopped
+
+  rabbitmq:
+    container_name: labotron-rabbitmq
+    image: rabbitmq:3-management
+    networks:
+      labotron_network:
+        aliases:
+          - rabbitmq
+    restart: always
+    ports:
+      - "${RABBITMQ_PORT}:5672"
+      - "${RABBITMQ_MGMT_PORT}:15672"
+    environment:
+      RABBITMQ_NODENAME: rabbit@rabbitmq
+      RABBITMQ_ERLANG_COOKIE: "RABBITMQ_COOKIE"
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER:-guest}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASS:-guest}
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
+    name: labotron_postgres_data
+    driver: local
+  rabbitmq_data:
+    name: labotron_rabbitmq_data
+    driver: local
+  pgadmin_data:
+    name: labotron_pgadmin_data
+    driver: local

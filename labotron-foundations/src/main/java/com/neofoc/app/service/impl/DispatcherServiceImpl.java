@@ -123,7 +123,7 @@ public class DispatcherServiceImpl implements DispatcherService {
         Map<String, OneTestDispatcher> map = getTestToDispatecherMap();
         OneTestDispatcher oneTestDispatcher = map.get(lisTest);
 
-        if (suggestedInstrumentCode != null) {
+        if (suggestedInstrumentCode != null && oneTestDispatcher != null) {
             testMap = oneTestDispatcher.findTestLabelMapForInstrument(suggestedInstrumentCode);
             if (testMap != null && !testMap.getInstrument().getOnHold()) {
                 return testMap;

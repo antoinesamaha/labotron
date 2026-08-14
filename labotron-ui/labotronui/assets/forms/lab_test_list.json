@@ -1,37 +1,60 @@
 {
-  "layout": "column",
-  "spacing": 1,
-  "persistencePanel": false,
-  "fields": [   
-    {
-      "type": "data_table",
-      "name": "data_table_test_list",
-      "label": "Tests",
-      "title": "Tests",
-      "columns": [
+    "layout": "column",
+    "spacing": 1,
+    "persistencePanel": false,
+    "fields": [
         {
-          "key": "instrument_id",
-          "label": "Instrument Id",
-          "numeric": true
-        },        
-        {
-          "key": "label",
-          "label": "Label",
-          "numeric": false
-        },
-        {
-          "key": "value",
-          "label": "Value",
-          "numeric": false
-        },
-        {
-          "key": "descrip",
-          "label": "Description",
-          "numeric": false
+            "type": "data_table",
+            "name": "data_table_test_list",
+            "label": "Tests",
+            "title": "Tests",
+            "table_options": {
+                "showAddButton": true,
+                "showEditButton": true,
+                "showDeleteButton": true,
+                "pagination": {
+                    "defaultPageSize": 50
+                },
+                "filters": [
+                    {
+                        "key": "instrument_test_code",
+                        "label": "Instrument Test Code",
+                        "type": "string"
+                    },
+                    {
+                        "key": "lis_test_label",
+                        "label": "LIS Test Label",
+                        "type": "string"
+                    },
+                    {
+                        "key": "descrip",
+                        "label": "Description",
+                        "type": "string"
+                    }
+                ]
+            },
+            "columns": [
+                {
+                    "key": "instrument_id",
+                    "label": "Instrument Id",
+                    "numeric": true
+                },
+                {
+                    "key": "label",
+                    "label": "Label",
+                    "numeric": false
+                },
+                {
+                    "key": "value",
+                    "label": "Value",
+                    "numeric": false
+                },
+                {
+                    "key": "descrip",
+                    "label": "Description",
+                    "numeric": false
+                }
+            ]
         }
-      ]
-    }    
-  ]
+    ]
 }
-
-

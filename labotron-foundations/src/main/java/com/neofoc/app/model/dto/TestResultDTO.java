@@ -1,9 +1,12 @@
 package com.neofoc.app.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
 
 /**
  * Data Transfer Object representing the result of a single test.
@@ -30,9 +33,9 @@ public class TestResultDTO {
     private String actualAnalyzerCode;
     
     /**
-     * Flag indicating if there's an alarm/warning for this test result
+     * Alarm indicator: -1 = less than, 0 = none, 1 = greater than
      */
-    private Boolean alarm;
+    private Integer alarm;
     
     /**
      * The result value, can be numeric or string
@@ -58,4 +61,12 @@ public class TestResultDTO {
      * Flag indicating if the result requires verification
      */
     private Boolean verificationPending;
+
+    /**
+     * The date and time of the test result
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    private LocalDateTime dateTime;
+
+
 }

@@ -44,23 +44,58 @@ public abstract class AbstractSimulator implements ISimulator, Constants {
         try {
             String oneShotString = "";
             if (oneShot) oneShotString = "" + ENQ;
-            else socket.send("" + ENQ);
+            else {
+                socket.send("" + ENQ);
+                boolean waitingForEnqAck = true;
+                while (waitingForEnqAck) {
+                    char resp = readResponseChar();
+                    if (resp == ACK || resp == NACK) {
+                        waitingForEnqAck = false;
+                        System.out.println("Initial ENQ response: " + resp);
+                    }
+                }
+            }
 
             for (int i=0; i<frames.length; i++) {
                 String frame = frames[i];
+
+                // New ASTM session detected: end current session, sleep, start new one
+                if (i > 0 && frame.startsWith("1H|")) {
+                    socket.send("" + EOT);
+                    sleep(500);
+                    socket.send("" + ENQ);
+                    // Block until ACK/NACK for ENQ before sending any frames
+                    boolean waitingForEnqAck = true;
+                    while (waitingForEnqAck) {
+                        char resp = readResponseChar();
+                        if (resp == ACK || resp == NACK) {
+                            waitingForEnqAck = false;
+                            System.out.println("New session ENQ response: " + resp);
+                        }
+                    }
+                }
+
                 System.out.println("Sending frame: " + frame);
                 StringBuffer sbFrameWithData = createDataWithFrame(frame);
 
                 if (oneShot) oneShotString += sbFrameWithData.toString();
                 else socket.send(sbFrameWithData.toString());
 
-                sleep(1000);
+                sleep(100);
 
-                char responseChar = readResponseChar();
-                if (responseChar == ACK) {
-                    System.out.println("Received ACK from server");
-                } else if (responseChar == NACK) {
-                    System.out.println("Received NACK from server");
+                boolean keepLooping = true;
+                while(keepLooping) {
+                    char responseChar = readResponseChar();
+                    if (responseChar == ACK) {
+                        keepLooping = false;
+                        System.out.println("Received ACK from server");
+                    } else if (responseChar == NACK) {
+                        keepLooping = false;
+                        System.out.println("Received NACK from server");
+                    } else {
+                        keepLooping = true;
+                        //System.out.println("Need to wait mode reveived: " + responseChar);
+                    }
                 }
             }
 
@@ -121,8 +156,8 @@ public abstract class AbstractSimulator implements ISimulator, Constants {
     public char readResponseChar() {
         String response = socket.receive();
         if (response != null && !response.isEmpty()) {
-            System.out.println("Client received data: " + response);
-            socket.writeToFile(response, "socket_log.txt");
+            // System.out.println("Client received data: " + response);
+            // socket.writeToFile(response, "socket_log.txt");
             return response.charAt(0);
         }
         return SINGLE_CHAR_NOT_FOUND;

@@ -22,6 +22,7 @@ public class AstmFrame extends L3Frame {
 	public static final char EOT = 4;
 	public static final char SINGLE_CHAR_NOT_FOUND = 0;
 
+	public static final char SOH = 1;
 	public static final char STX = 2;
 	public static final char ETB = 23;
 	public static final char ETX = 3;
@@ -183,7 +184,10 @@ public class AstmFrame extends L3Frame {
 	public void extractDataFromConcatenatedFrame() {
 		StringBuffer dataWithFrame = getDataWithFrame();
 		if (dataWithFrame.length() > 1) {
-			StringBuffer data = new StringBuffer(dataWithFrame.substring(1, dataWithFrame.length() - 1));
+			// Only the leading record-type character (captured below) belongs to the
+			// frame header. Concatenated records are already split on CR with no
+			// trailing overhead byte, so nothing should be trimmed off the end here.
+			StringBuffer data = new StringBuffer(dataWithFrame.substring(1));
 			setData(data);
 		}
 		type = dataWithFrame.charAt(0);
@@ -217,8 +221,13 @@ public class AstmFrame extends L3Frame {
 				if (keepTheLastChar)
 					minus = 5;
 
-				StringBuffer data = new StringBuffer(dataWithFrame.substring(3, dataWithFrame.length() - minus));
-				setData(data);
+				if (dataWithFrame.length() > (3 + minus)) {
+					StringBuffer data = new StringBuffer(dataWithFrame.substring(3, dataWithFrame.length() - minus));
+					setData(data);
+				} else {
+					//The Frame is empty maybe sent for connectivity testing. Seen in the case of GEM Premier 3500. We will not throw an exception but we will log it.
+				}
+
 
 				sequence = Integer.valueOf((String) dataWithFrame.substring(1, 2)).intValue();
 				type = dataWithFrame.charAt(2);

@@ -20,7 +20,7 @@ public class CommunicationLogServiceImpl implements CommunicationLogService {
         Application app = Globals.getApp();
         FocDesc focDesc = app.getFocDescByName("communication_log");
 
-         FocList focList = focDesc.newFocList();
+        FocList focList = focDesc.newFocList();
 
         FocCommunicationLog focCommunicationLog = (FocCommunicationLog) focList.newEmptyItem();
         focCommunicationLog.setDateTime(LocalDateTime.now());
@@ -62,10 +62,11 @@ public class CommunicationLogServiceImpl implements CommunicationLogService {
 
         focCommunicationLog.setInstrument(instrument);
         focCommunicationLog.setSampleId(sampleId);
-        focCommunicationLog.setJsonContent(json);
+        focCommunicationLog.setBody(json);
         focCommunicationLog.setCreated(true);
         focCommunicationLog.save();
         focList.validate(false);
+        focList.dispose();
     }
 
     @Override

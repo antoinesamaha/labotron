@@ -118,13 +118,15 @@ public class CommentResultReader extends FrameReader{
 
 	public void readToken(String token, int fieldPos, int compPos) {
 		com.foc.Globals.logDetail(" fieldPos:"+fieldPos+" compPos:"+compPos+" token:"+token);
-		
+
 		if(fieldPos == FLD_COMMENT_TEXT){
 			try{
 				int alarmIndex = Integer.parseInt(token.trim());
-				alarmCode = alarmArrayCode[alarmIndex];
-			}catch(Exception e){
-				com.foc.Globals.logException(e);
+				if (alarmIndex >= 0 && alarmIndex < alarmArrayCode.length) {
+					alarmCode = alarmArrayCode[alarmIndex];
+				}
+			}catch(NumberFormatException e){
+				// Comment field contains text rather than a numeric alarm code index — ignore
 			}
 		}
 	}

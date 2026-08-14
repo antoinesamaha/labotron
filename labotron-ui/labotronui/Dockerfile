@@ -1,5 +1,5 @@
 # Use latest Flutter which includes Dart SDK 3.6.0+
-FROM ghcr.io/cirruslabs/flutter:latest AS build
+FROM ghcr.io/cirruslabs/flutter:3.35.7 AS build
 
 WORKDIR /workspace
 
@@ -16,7 +16,7 @@ RUN flutter pub get
 RUN flutter build web --release
 
 # Production stage with nginx
-FROM nginx:alpine
+FROM nginx:1.27.4-alpine
 
 # Install gettext for envsubst
 RUN apk add --no-cache gettext

@@ -21,6 +21,7 @@ import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Properties;
+import java.util.concurrent.CompletableFuture;
 
 public class FocInstrument extends Instrument_FocObject implements Runnable, MessageListener,
         IExitListener {
@@ -137,7 +138,7 @@ public class FocInstrument extends Instrument_FocObject implements Runnable, Mes
                     if (!instrument.getOnHold()){
                         instrument.switchOn();
                     } else {
-                        instrument.refreshStartedFlag();
+                        instrument.refreshConnectedFlag();
                     }
                 }
             } catch (Exception e) {
@@ -153,7 +154,7 @@ public class FocInstrument extends Instrument_FocObject implements Runnable, Mes
         for (int i = 0; i < focDesc.getFocList().size(); i++) {
             FocInstrument instrument = (FocInstrument) focDesc.getFocList().getFocObject(i);
             try {
-                instrument.refreshStartedFlag();
+                instrument.refreshConnectedFlag();
                 //                if (instrument.getStarted()) {
                 //                    instrument.switchOn();
                 //                }
@@ -242,26 +243,43 @@ public class FocInstrument extends Instrument_FocObject implements Runnable, Mes
         return logBufferDetails;
     }
 
-    public boolean sendWithDriverReservation(L3Message message)
-            throws Exception {
-        boolean error = true;
-        IDriver driver = getDriver();
-        if (!driver.reserve()) {
-            try {
-                send(message);
-                driver.release();
-                error = false;
-            } catch (Exception e) {
-                driver.release();
-                throw e;
-            }
-        }
-        return error;
-    }
+//    public boolean sendWithDriverReservation(L3Message message)
+//            throws Exception {
+//        boolean error = true;
+//        IDriver driver = getDriver();
+//        if (!driver.reserve()) {
+//            try {
+//                send(message);
+//                driver.release();
+//                error = false;
+//            } catch (Exception e) {
+//                driver.release();
+//                throw e;
+//            }
+//        }
+//        return error;
+//    }
 
     private void send(L3Message message) throws Exception {
         logString("Message before send:" + message.toStringBuffer());
-        driver.send(message);
+
+        try {
+            if (!driver.reserve()) {
+                driver.send(message);
+            } else {
+                logString("Instrument : could not reserve to send back");
+            }
+        } catch (Exception e) {
+            Globals.logException(e);
+        } finally {
+            try {
+                if (driver != null) driver.release();
+            } catch (Exception e) {
+                Globals.logException(e);
+            }
+        }
+
+        // Setting the Tests statuses
         Iterator sampleIterator = message.sampleIterator();
         while (sampleIterator.hasNext()) {
             ((FocLabSample) sampleIterator.next())
@@ -396,46 +414,51 @@ public class FocInstrument extends Instrument_FocObject implements Runnable, Mes
 
                 if (focLabSample != null) {
                     FocList testList = focLabSample.getTestList();
+                    if (testList == null) {
+                        logString("Instrument : test list null for sample : "+sampleId);
+                        return;
+                    }
                     testList.loadIfNotLoadedFromDB();
 
-                    ArrayList<FocLabTest> testArray = new ArrayList<>();
+                    logString("Instrument : found " + testList.size()+ " tests for sample : " + sampleId + " scanning for tests to send to instrument:" + getId());
+                    ArrayList<FocLabTest> removeTestArray = new ArrayList<>();
                     for (int i = 0; i < testList.size(); i++) {
                         FocLabTest test = (FocLabTest) testList.getFocObject(i);
-                        if (test.getDispatchInstrument() != null
-                                && test.getDispatchInstrument().getId() == getId()
-                                && test.getStatus() == FocLabTest.TEST_STATUS_AVAILABLE_IN_L3) {
-                            testArray.add(test);
+                        if ((test.getDispatchInstrument() != null && test.getDispatchInstrument().getReferenceInt() == getReferenceInt()
+                                        || hasLabelMapping(test.getLabel()))
+                                && (
+                                      test.getStatus() == FocLabTest.TEST_STATUS_AVAILABLE_IN_L3
+                                   || test.getStatus() == FocLabTest.TEST_STATUS_ANALYSING
+                                )) {
+//                            logString("Instrument : test "+test.getLabel()+" is ready to be sent for sample : " + sampleId);
+//                            testArray.add(test);
+                        } else {
+                            removeTestArray.add(test);
                         }
                     }
 
-                    if (testArray.size() > 0) {
+                    for (int i=0; i<removeTestArray.size(); i++) {
+                        FocLabTest test = removeTestArray.get(i);
+                        testList.remove(test);
+                    }
+
+                    logString("Instrument : ready to send back " + focLabSample.getTestList().size() + " tests");
+                    if (!focLabSample.getTestList().isEmpty()) {
                         try {
-                            if (!driver.reserve()) {
-                                L3Message message = new L3Message();
-                                // Optionally set rack/tube info on the sample if needed
-                                // focLabSample.setRackNumber(rackNumber);
-                                // focLabSample.setTubePosition(tubePosition);
-                                message.addSample(focLabSample);
+                            L3Message message = new L3Message();
+                            // Optionally set rack/tube info on the sample if needed
+                            // focLabSample.setRackNumber(rackNumber);
+                            // focLabSample.setTubePosition(tubePosition);
+                            message.addSample(focLabSample);
 
-                                send(message);
-
-                                for (int i = 0; i < testArray.size(); i++) {
-                                    FocLabTest test = (FocLabTest) testArray.get(i);
-                                    if (test != null){
-                                        test.updateStatus(FocLabTest.TEST_STATUS_ANALYSING);
-                                    }
-                                }
-                            }
+                            send(message);
+                            message.dispose();
                         } catch (Exception e) {
                             Globals.logException(e);
-                        } finally {
-                            try {
-                                if (driver != null) driver.release();
-                            } catch (Exception e) {
-                                Globals.logException(e);
-                            }
                         }
                     }
+                } else {
+                    logString("No sample found for sampleId: " + sampleId);
                 }
             } catch (Exception e) {
                 Globals.logException(e);
@@ -552,6 +575,14 @@ public class FocInstrument extends Instrument_FocObject implements Runnable, Mes
     // oooooooooooooooooooooooooooooooooo
     // oooooooooooooooooooooooooooooooooo
 
+    public String getRemoteHost() {
+        return getPropertyString("remote_host");
+    }
+
+    public void setRemoteHost(String remoteHost) {
+        setPropertyString("remote_host", remoteHost);
+    }
+
     public String getCode() {
         return getPropertyString("code");
     }
@@ -598,13 +629,22 @@ public class FocInstrument extends Instrument_FocObject implements Runnable, Mes
 //        }
     }
 
-    public void refreshStartedFlag() throws Exception{
-        if (getDriver() != null && getDriver().isConnected()) {
-            setStarted(true);
-        } else {
-            setStarted(false);
-        }
+//    public void refreshStartedFlag() throws Exception{
+//        if (getDriver() != null && getDriver().isConnected()) {
+//            setStarted(true);
+//        } else {
+//            setStarted(false);
+//        }
+//
+//        validate(false);
+//    }
 
+    public void refreshConnectedFlag() throws Exception {
+        if (getDriver() != null && getDriver().isConnected()) {
+            setConnected(true);
+        } else {
+            setConnected(false);
+        }
         validate(false);
     }
 
@@ -651,26 +691,74 @@ public class FocInstrument extends Instrument_FocObject implements Runnable, Mes
         return driver;
     }
 
-    public void switchOn() throws Exception {
-        if (getDriver() != null) {// To create the driver if not available yet
-            // If Inquiry based we don't need the queue because the sending of the orders is triggered by the instrument itself
+    public synchronized void switchOn() throws Exception {
+        if (getDriver() != null && getDriver().isConnected()) return;
+        if (getDriver() != null) {
+            // Set started flag immediately (user intent)
+            if (!getStarted()) {
+                setStarted(true);
+                validate(false);
+            }
+
+            // Connect asynchronously with callbacks
+            getDriver().connectAsync()
+                .thenRun(() -> onDriverConnected())
+                .exceptionally(ex -> {
+                    onDriverConnectionFailed(ex);
+                    return null;
+                });
+        }
+    }
+
+    private void onDriverConnected() {
+        try {
+            Globals.logString("Driver connected successfully for instrument: " + getCode());
+
+            // Set connected flag
+            refreshConnectedFlag();
+
+            // Add message listener
+            addMessageListener(new InstrumentReceiverListener(this));
+
+            // Start RabbitMQ listener ONLY if not inquiry-based and AFTER connection succeeds
             if (!getDriver().isInquiryBased()) {
                 RabbitMQListenerService rabbitMQListenerService = SpringContextUtil.getBean(RabbitMQListenerService.class);
                 rabbitMQListenerService.startInstrumentListener(this);
+                Globals.logString("RabbitMQ listener started for instrument: " + getCode());
             }
-            addMessageListener(new InstrumentReceiverListener(this));
-            getDriver().connect();
-            refreshStartedFlag();
+        } catch (Exception e) {
+            Globals.logException(e);
+            onDriverConnectionFailed(e);
+        }
+    }
+
+    private void onDriverConnectionFailed(Throwable ex) {
+        try {
+            Globals.logString("Driver connection failed for instrument: " + getCode());
+            Globals.logException(new Exception("Connection failed", ex));
+
+            // Set connected flag to false
+            refreshConnectedFlag();
+        } catch (Exception e) {
+            Globals.logException(e);
         }
     }
 
     public void switchOff() throws Exception {
-        if (getDriver() != null) {// To create the driver if not available yet
+        if (getDriver() != null) {
+            // Stop RabbitMQ listener
             RabbitMQListenerService rabbitMQListenerService = SpringContextUtil.getBean(RabbitMQListenerService.class);
             rabbitMQListenerService.stopInstrumentListener(this);
+
+            // Remove message listener
             removeMessageListener(new InstrumentReceiverListener(this));
+
+            // Disconnect driver
             getDriver().disconnect();
-            refreshStartedFlag();
+
+            // Update both flags
+            setStarted(false);
+            refreshConnectedFlag();
         }
     }
 
@@ -722,6 +810,18 @@ public class FocInstrument extends Instrument_FocObject implements Runnable, Mes
         supportedTestList.loadIfNotLoadedFromDB();
 
         return supportedTestList;
+    }
+
+    public boolean hasLabelMapping(String lisTestLabel) {
+        if (lisTestLabel == null) return false;
+        FocList list = getSupportedTestList();
+        for (int i = 0; i < list.size(); i++) {
+            FocTestLabelMap map = (FocTestLabelMap) list.getFocObject(i);
+            if (lisTestLabel.equals(map.getLisTestLabel())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     // For archive

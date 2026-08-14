@@ -7,7 +7,9 @@ import lombok.*;
 
 @Entity
 @Cacheable
-@Table(name = "app_group")
+@Table(name = "app_group", uniqueConstraints = {
+		@UniqueConstraint(name = "uq_appgroup_focgroupid", columnNames = {"foc_group_id"})
+})
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

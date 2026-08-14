@@ -12,6 +12,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Properties;
+import java.util.concurrent.CompletableFuture;
 
 public class L3SerialPort {
     private SerialPortInterface serialPort = null;
@@ -112,7 +113,9 @@ public class L3SerialPort {
         if (listenerList == null) {
             listenerList = new ArrayList<L3SerialPortListener>();
         }
-        listenerList.add(listener);
+        if (!listenerList.contains(listener)) {
+            listenerList.add(listener);
+        }
     }
 
     public void removeListener(L3SerialPortListener listener) {
@@ -167,6 +170,19 @@ public class L3SerialPort {
         cumulationListener.setL3SerialPort(this);
         serialPort.addEventListener(cumulationListener);
         resetLastActivityTime();
+    }
+
+    public CompletableFuture<Void> openConnectionAsync() {
+        return serialPort.openConnectionAsync()
+            .thenRun(() -> {
+                try {
+                    cumulationListener.setL3SerialPort(this);
+                    serialPort.addEventListener(cumulationListener);
+                    resetLastActivityTime();
+                } catch (Exception e) {
+                    throw new RuntimeException("Failed to set up event listeners", e);
+                }
+            });
     }
 
     public void closeConnection() {

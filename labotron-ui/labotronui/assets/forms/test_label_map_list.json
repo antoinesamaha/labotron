@@ -1,40 +1,63 @@
 {
-  "layout": "column",
-  "spacing": 1,
-  "persistencePanel": false,
-  "fields": [   
-    {
-      "type": "data_table",
-      "name": "data_table_instrument_list",
-      "label": "Instruments",
-      "title": "Instruments",
-      "columns": [
+    "layout": "column",
+    "spacing": 1,
+    "persistencePanel": false,
+    "title":"Test Mapping",
+    "fields": [
         {
-          "key": "lis_test_label",
-          "label": "LIS Code",
-          "numeric": false
-        },        
-        {
-          "key": "instrument_test_code",
-          "label": "Inst. Code",
-          "numeric": false
-        },
-        {
-          "key": "descrip",
-          "label": "description"
-        },
-        {
-          "key": "day_priority",
-          "label": "Day Priority",
-          "numeric": true
-        },
-        {
-          "key": "on_hold",
-          "label": "On Hold",
-          "numeric": true
+            "type": "data_table",
+            "name": "data_table_instrument_list",
+            "label": "Instruments",
+            "title": "Instruments",
+            "table_options": {
+                "showAddButton": true,
+                "showEditButton": true,
+                "showDeleteButton": true,
+                "pagination": {
+                    "defaultPageSize": 10
+                }
+            },
+            "columns": [
+                {
+                    "key": "instrument.name",
+                    "label": "Instrument",
+                    "numeric": false
+                },
+                {
+                    "key": "lis_test_label",
+                    "label": "LIS Code",
+                    "numeric": false
+                },
+                {
+                    "key": "instrument_test_code",
+                    "label": "Inst. Code",
+                    "numeric": false
+                },
+                {
+                    "key": "descrip",
+                    "label": "description"
+                },
+                {
+                    "key": "day_priority",
+                    "label": "Day Priority",
+                    "numeric": true
+                },
+                {
+                    "key": "night_priority",
+                    "label": "Night Priority",
+                    "numeric": true
+                },
+                {
+                    "key": "holiday_priority",
+                    "label": "Day Priority",
+                    "numeric": true
+                },                                
+                {
+                    "key": "on_hold",
+                    "label": "On Hold",
+                    "numeric": true
+                }
+            ]
         }
-      ]
-    }    
-  ]
+    ]
 }
-

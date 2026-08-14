@@ -1,13 +1,21 @@
 package com.neofoc.app;
 
-import com.neofoc.app.impl.AlegriaSimulator;
-import com.neofoc.app.impl.InfinitySimulator;
+import com.neofoc.app.impl.ABL9Simulator;
+import com.neofoc.app.impl.GenericSimulator;
 
 public class SimulatorMain implements Constants {
 
     public static void main(String[] args) {
+        // GEM3500 Server
+        //GenericSimulator simulator = new GenericSimulator(1182, GenericSimulator.SocketRole.SERVER, GenericSimulator.GEM_PREMIER_3500_FRAMES);
+
+        ABL9Simulator simulator = new ABL9Simulator();
+
+        // --- Legacy simulators ---
+        //AlegriaSimulator simulator = new AlegriaSimulator();
         //InfinitySimulator simulator = new InfinitySimulator();
-        AlegriaSimulator simulator = new AlegriaSimulator();
+        //GemPremier3500Simulator simulator = new GemPremier3500Simulator();
+
         simulator.simulate();
     }
 

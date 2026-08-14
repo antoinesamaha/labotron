@@ -140,7 +140,7 @@ public class AstmReceiver implements L3SerialPortListener {
 		this.commentResultReader = commentResultReader;
 	}
 
-	private StringBuffer getConcatenationBuffer() {
+	protected StringBuffer getConcatenationBuffer() {
 		if (concatenationBuffer == null) {
 			concatenationBuffer = new StringBuffer();
 		}
@@ -224,7 +224,10 @@ public class AstmReceiver implements L3SerialPortListener {
 			}
 		}
 		if (sample == null) {
-			sample = new FocLabSample(orderLineReader.getSampleId());
+			String sampleId = driver.getAstmParams().isUsePatientIdAsSampleId()
+					? patientLineReader.getPatientId()
+					: orderLineReader.getSampleId();
+			sample = new FocLabSample(sampleId);
 			sample.setPatientId(patientLineReader.getPatientId());
 			sample.setFirstName(patientLineReader.getFirstName());
 			sample.setLastName(patientLineReader.getLastName());
@@ -433,7 +436,9 @@ public class AstmReceiver implements L3SerialPortListener {
 						treatResultFrame(concatFrame);
 					}
 				}
-				sendMessageBackToInstrument();
+				if (message != null) {
+					sendMessageBackToInstrument();
+				}
 				disposeMessage();
 				disposeConcatenationBuffer();
 

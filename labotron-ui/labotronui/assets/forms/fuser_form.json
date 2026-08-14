@@ -1,0 +1,73 @@
+{
+  "layout": "column",
+  "spacing": 16,
+  "persistencePanel": true,
+  "title":"Users",
+  "fields": [
+    {
+      "type": "section",
+      "name": "identity",
+      "label": "identity",
+      "title": "Identity",
+      "layout": "column",
+      "spacing": 16,
+      "fields": [
+        {
+          "type": "text",
+          "name": "NAME",
+          "label": "Username",
+          "required": true
+        },
+        {
+          "type": "text",
+          "name": "FULL_NAME",
+          "label": "Full Name",
+          "required": false
+        },
+        {
+          "type": "foc_dropdown",
+          "name": "UGROUP",
+          "label": "Group",
+          "display_field": "NAME",
+          "required": false
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "name": "account_status",
+      "label": "account_status",
+      "title": "Account Status",
+      "layout": "column",
+      "spacing": 16,
+      "fields": [
+        {
+          "type": "boolean",
+          "name": "SUSPENDED",
+          "label": "Suspended",
+          "required": false
+        },
+        {
+          "type": "boolean",
+          "name": "LOCKED",
+          "label": "Account Locked",
+          "required": false
+        },
+        {
+          "type": "integer",
+          "name": "FAILED_LOGIN_ATTEMPTS",
+          "label": "Failed Login Attempts",
+          "required": false,
+          "enabled": false
+        },
+        {
+          "type": "text",
+          "name": "LOCK_DATETIME",
+          "label": "Locked Since",
+          "required": false,
+          "enabled": false
+        }
+      ]
+    }
+  ]
+}

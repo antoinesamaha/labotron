@@ -4,21 +4,16 @@
 package com.neofoc.app.modules.labotron.focObjects;
 
 import com.foc.Globals;
-import com.foc.db.SQLFilter;
 import com.foc.desc.FocConstructor;
 import com.foc.desc.FocDesc;
-import com.foc.desc.FocObject;
 import com.foc.focDataSourceDB.db.SQLUpdate;
-import com.foc.gui.FPanel;
-import com.foc.list.FocList;
-import com.foc.property.FBoolean;
 import com.foc.property.FDouble;
 import com.foc.property.FString;
 import com.foc.util.FocMath;
 import com.neofoc.app.modules.labotron.LabTest_FocObject;
 
 /**
- * @author 01Barmaja
+ * @author Antoine Samaha
  */
 public class FocLabTest extends LabTest_FocObject {
 
@@ -93,10 +88,7 @@ public class FocLabTest extends LabTest_FocObject {
 	}
 
 	public void setNotificationMessage(String message) {
-//		if (message.length() > FocLabTestDesc.LEN_MESSAGE) {
-//			message = message.substring(0, L3TestDesc.LEN_MESSAGE - 1);
-//		}
-//		setPropertyString(L3TestDesc.FLD_MESSAGE, message);
+		setPropertyString(FNAME_MESSAGE, message);
 	}
 
 	public String getNotificationMessage() {
@@ -189,12 +181,11 @@ public class FocLabTest extends LabTest_FocObject {
 	}
 
 	public void setAlarm(int alarm) {
-		//setPropertyMultiChoiceByName(getThisFocDesc().getFieldByName("alarm"), alarm);
+		setPropertyInteger("alarm", alarm);
 	}
 
 	public int getAlarm() {
-//		return getPropertyMultiChoice(L3TestDesc.FLD_ALARM);
-		return 0;
+		return getPropertyInteger("alarm");
 	}
 
 	public void setPriority(String priority) {

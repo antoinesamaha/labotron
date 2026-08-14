@@ -11,7 +11,12 @@ import java.util.Set;
 
 @Entity
 //@Cacheable
-@Table(name = "lab_sample")
+@Table(name = "lab_sample",
+		indexes = {
+				@Index(name = "idx_labsample_patientid", columnList = "patient_id"),
+				@Index(name = "idx_labsample_entrydt", columnList = "entry_date_time")
+		}
+)
 @Data
 @FocData
 public class LabSample {
@@ -41,7 +46,7 @@ public class LabSample {
     @Column(nullable = true, length = 30)
     private String firstName;
 
-    @Column(nullable = true, length = 1)
+    @Column(nullable = true, length = 30)
     private String middleName;
 
     @Column(nullable = true, length = 1)
@@ -64,4 +69,7 @@ public class LabSample {
 
     @OneToMany(mappedBy = "labSample", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private Set<LabTest> tests = new HashSet<>();
+
+    @OneToMany(mappedBy = "labSample", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private Set<LabMessage> labMessages = new HashSet<>();
 }

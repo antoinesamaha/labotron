@@ -1,5 +1,6 @@
 package com.neofoc.app.modules.labotron;
 
+import com.foc.annotations.model.FocData;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -7,6 +8,7 @@ import lombok.Data;
 @Cacheable
 @Table(name = "lab_message")
 @Data
+@FocData
 public class LabMessage {
 
     @Id

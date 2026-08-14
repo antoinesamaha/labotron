@@ -23,7 +23,7 @@ public class AlegriaDriver extends AstmDriver {
         getAstmParams().setConcatenatedFrames(true);
         getAstmParams().setReadComment3(true);
         getAstmParams().setReadResultComment(true);
-        getAstmParams().setTreatHigherLessAlarmSeparately(false);
+        getAstmParams().setTreatHigherLessAlarmSeparately(true);
         getAstmParams().setTakeAllFramesFromBufferNotJustTheLast(true);
     }
 

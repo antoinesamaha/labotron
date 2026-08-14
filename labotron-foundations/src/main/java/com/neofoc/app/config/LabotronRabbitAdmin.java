@@ -41,20 +41,24 @@ public class LabotronRabbitAdmin extends RabbitAdmin {
         instruments.loadIfNotLoadedFromDB();
 
         for (int i=0; i<instruments.size(); i++) {
-            FocInstrument instrument = (FocInstrument) instruments.getFocObject(i);
+            try {
+                FocInstrument instrument = (FocInstrument) instruments.getFocObject(i);
 
-            if (doCreateQueue(instrument)) {
-                String instrumentCode = instrument.getCode();
+                if (doCreateQueue(instrument)) {
+                    String instrumentCode = instrument.getCode();
 
-                // Create send queue (Labotron to Instrument)
-                Queue sendQueue = new Queue(
-                        "connector-2-" + instrumentCode,
-                        true,   // durable
-                        false,  // not exclusive
-                        false   // not auto-delete
-                );
-                driver2InstrumentQueues.put(instrumentCode, sendQueue);
-                declareQueue(sendQueue);
+                    // Create send queue (Labotron to Instrument)
+                    Queue sendQueue = new Queue(
+                            "connector-2-" + instrumentCode,
+                            true,   // durable
+                            false,  // not exclusive
+                            false   // not auto-delete
+                    );
+                    driver2InstrumentQueues.put(instrumentCode, sendQueue);
+                    declareQueue(sendQueue);
+                }
+            } catch (Exception e) {
+                Globals.logException(e);
             }
         }
 

@@ -11,7 +11,10 @@ import java.util.Set;
 
 @Entity
 @Cacheable
-@Table(name = "instrument")
+@Table(name = "instrument", uniqueConstraints = {
+		@UniqueConstraint(name = "uq_instrument_code", columnNames = {"code"}),
+		@UniqueConstraint(name = "uq_instrument_name", columnNames = {"name"})
+})
 @Data
 @FocData
 public class Instrument implements Serializable {
@@ -23,14 +26,14 @@ public class Instrument implements Serializable {
 //	@Column(nullable = false)
 //	private Integer lkUserRef;
 
-	@Column(nullable = false, length = 10, unique = true)
+	@Column(nullable = false, length = 10)
 	private String code;
 
 	@Column(nullable = false, length = 30)
 	private String name;
 
-//	@Column(nullable = false)
-//	private Integer connected;
+	@Column(nullable = false)
+	private Boolean connected;
 
 	@Column(nullable = false, length = 120)
 	private String driverClassName;
@@ -67,6 +70,9 @@ public class Instrument implements Serializable {
 
 	@Column(nullable = false, length = 10)
 	private String comPort;
+
+	@Column(nullable = true, length = 50)
+	private String remoteHost;
 
 	@OneToMany(mappedBy = "instrument", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
 	private Set<TestLabelMap> testLabMaps = new HashSet<>();

@@ -1,134 +1,182 @@
 {
-  "layout": "column",
-  "spacing": 16,
-  "persistencePanel": true,
-  "fields": [   
-    {
-      "type": "section",
-      "name": "section",
-      "label": "section",
-      "title": "Main Information",
-      "layout": "column",
-      "spacing": 16,      
-      "fields": [
+    "layout": "column",
+    "spacing": 16,
+    "persistencePanel": true,
+    "title":"Instrument",
+    "fields": [
         {
-          "type": "dropdown",
-          "name": "driver_class_name",
-          "label": "Driver",
-          "options": [
-            {
-              "value": "com.neofoc.app.drivers.alegria.AlegriaDriver",
-              "label": "Alegria Driver"
-            },            
-            {
-              "value": "b01.l3.drivers.horiba.pentraML.PentraMLDriver",
-              "label": "PentraML Driver"
-            },
-            {
-              "value": "b01.l3.drivers.abbott.architect.ArchitectDriver",
-              "label": "Architect Driver"
-            },
-            {
-              "value": "b01.l3.drivers.coulter.CoulterDriver",
-              "label": "Coulter Driver"
-            },
-            {
-              "value": "b01.l3.drivers.hitachi.elecsys2010.ElecsysDriver",
-              "label": "Elecsys Driver"
-            },
-            {
-              "value": "b01.l3.drivers.abbott.modular.ModularDriver",
-              "label": "Modular Driver"
-            },
-            {
-              "value": "com.neofoc.app.drivers.infinity.CobasInfinityDriver",
-              "label": "Cobas Infinity Driver"
-            },
-            {
-              "value": "com.neofoc.app.drivers.dadeBehring.bcs.BCSDriver",
-              "label": "BCS Driver"
-            },
-            {
-              "value": "com.neofoc.app.drivers.maglumi.MaglumiDriver",
-              "label": "Maglumi Driver"
-            },
-            {
-              "value": "com.neofoc.app.drivers.octa.OctaDriver",
-              "label": "Octa Driver"
-            },
-            {
-              "value": "b01.l3.drivers.horiba.yumizenP8000.YumizenP8000Driver",
-              "label": "YumizenP8000 Driver"
-            }
-          ],
-          "required": true
-        },
-        {
-          "type": "text",
-          "name": "code",
-          "label": "Code",
-          "required": true
-        },
-        {
-          "type": "text",
-          "name": "name",
-          "label": "Name",
-          "required": true
-        },
-        {
-          "type": "text",
-          "name": "com_port",
-          "label": "Port",
-          "required": true
-        },
-        {
-          "type": "text",
-          "name": "wait_for_resultConfirmation",
-          "label": "Wait For Result Confirmation",
-          "required": false
-        },
-        {
-          "type": "checkbox",
-          "name": "on_hold",
-          "label": "On Hold",
-          "required": false
-        },
-        {
-          "type": "data_table",
-          "name": "test_label_map_LIST",
-          "label": "Instruments",
-          "title": "Instruments",
-          "meta_entity": "test_label_map",
-          "columns": [
-            {
-              "key": "lis_test_label",
-              "label": "LIS Code",
-              "numeric": false
-            },        
-            {
-              "key": "instrument_test_code",
-              "label": "Inst. Code",
-              "numeric": false
-            },
-            {
-              "key": "descrip",
-              "label": "description"
-            },
-            {
-              "key": "day_priority",
-              "label": "Day Priority",
-              "numeric": true
-            },
-            {
-              "key": "on_hold",
-              "label": "On Hold",
-              "numeric": true
-            }
-          ]
+            "type": "section",
+            "name": "section",
+            "label": "section",
+            "layout": "column",
+            "spacing": 16,
+            "fields": [
+                {
+                    "type": "dropdown",
+                    "name": "driver_class_name",
+                    "label": "Driver",
+                    "options": [
+                        {
+                            "value": "com.neofoc.app.drivers.alegria.AlegriaDriver",
+                            "label": "Alegria Driver"
+                        },
+                        {
+                            "value": "com.neofoc.app.drivers.pentraML.PentraMLDriver",
+                            "label": "PentraML Driver"
+                        },
+                        {
+                            "value": "com.neofoc.app.drivers.infinity.CobasInfinityDriver",
+                            "label": "Cobas Infinity Driver"
+                        },
+                        {
+                            "value": "com.neofoc.app.drivers.cs2500.CS2500Driver",
+                            "label": "CS2500 Driver"
+                        },
+                        {
+                            "value": "com.neofoc.app.drivers.bcs.BCSDriver",
+                            "label": "BCS Driver"
+                        },
+                        {
+                            "value": "com.neofoc.app.drivers.maglumi.MaglumiDriver",
+                            "label": "Maglumi Driver"
+                        },
+                        {
+                            "value": "com.neofoc.app.drivers.octa.OctaDriver",
+                            "label": "Octa Driver"
+                        },
+                        {
+                            "value": "com.neofoc.app.drivers.gempremier3500.GemPremier3500Driver",
+                            "label": "GEM Premier 3500 Driver"
+                        },
+                        {
+                            "value": "com.neofoc.app.drivers.abl9.Abl9Driver",
+                            "label": "ABL9 Driver"
+                        },
+                        {
+                            "value": "com.neofoc.app.drivers.yumizenP8000.YumizenP8000Driver",
+                            "label": "YumizenP8000 Driver"
+                        },
+                        {
+                            "value": "com.neofoc.app.drivers.vitekbci.VitekBCIDriver",
+                            "label": "Vitek Driver"
+                        }
+                    ],
+                    "required": true
+                },
+                {
+                    "type": "section",
+                    "name": "section",
+                    "label": "section",
+                    "layout": "row",
+                    "spacing": 16,
+                    "fields": [
+                        {
+                            "type": "text",
+                            "name": "code",
+                            "label": "Code",
+                            "required": true
+                        },
+                        {
+                            "type": "text",
+                            "name": "name",
+                            "label": "Name",
+                            "required": true
+                        }
+                    ]
+                },
+                {
+                    "type": "section",
+                    "name": "section",
+                    "label": "section",
+                    "layout": "row",
+                    "spacing": 16,
+                    "fields": [
+                        {
+                            "type": "text",
+                            "name": "com_port",
+                            "label": "Port",
+                            "required": true
+                        },
+                        {
+                            "type": "text",
+                            "name": "remote_host",
+                            "label": "Remote Host (IP)",
+                            "hint": "Only required when the instrument is the ASTM master (e.g. GEM Premier 3500)",
+                            "required": false
+                        }
+                    ]
+                },
+                {
+                    "type": "section",
+                    "name": "section",
+                    "label": "section",
+                    "layout": "row",
+                    "spacing": 16,
+                    "fields": [
+                    {
+                        "type": "checkbox",
+                        "name": "on_hold",
+                        "label": "On Hold",
+                        "required": false
+                    },                        
+                    {
+                        "type": "text",
+                        "name": "wait_for_resultConfirmation",
+                        "label": "Wait For Result Confirmation",
+                        "required": false
+                    }
+                    ]
+                },            
+                {
+                    "type": "data_table",
+                    "name": "test_label_map_LIST",
+                    "label": "Instruments",
+                    "title": "Instruments",
+                    "meta_entity": "test_label_map",
+                    "table_options": {
+                        "showAddButton": false,
+                        "showEditButton": false,
+                        "showDeleteButton": false,
+                        "parent_key": "instrument"
+                    },
+                    "columns": [
+                        {
+                            "key": "lis_test_label",
+                            "label": "LIS Code",
+                            "numeric": false
+                        },
+                        {
+                            "key": "instrument_test_code",
+                            "label": "Inst. Code",
+                            "numeric": false
+                        },
+                        {
+                            "key": "descrip",
+                            "label": "description"
+                        },
+                        {
+                            "key": "day_priority",
+                            "label": "Day Priority",
+                            "numeric": true
+                        },
+                        {
+                            "key": "night_priority",
+                            "label": "Night Priority",
+                            "numeric": true
+                        },                 
+                        {
+                            "key": "holiday_priority",
+                            "label": "Holiday Priority",
+                            "numeric": true
+                        }, 
+                        {
+                            "key": "on_hold",
+                            "label": "On Hold",
+                            "numeric": true
+                        }
+                    ]
+                }
+            ]
         }
-      ]
-    }    
-  ]
+    ]
 }
-
-
