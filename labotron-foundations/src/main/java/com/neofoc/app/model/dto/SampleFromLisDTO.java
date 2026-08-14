@@ -99,9 +99,11 @@ public class SampleFromLisDTO {
                 for (int i = 1; i < parts.length - 1; i++) {
                     String middlePart = parts[i].trim();
                     if (!middlePart.isEmpty()) {
-                        middleInitial += " " + middlePart;
-                    } else {
-                        middleInitial = middlePart;
+                        if (i > 1) {
+                            middleInitial += " " + middlePart;
+                        } else {
+                            middleInitial = middlePart;
+                        }
                     }
                 }
             }
