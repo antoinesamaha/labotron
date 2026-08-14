@@ -82,7 +82,11 @@ public class OneTestDispatcher {
 		for(int i=0; i<testLabelArray.size(); i++){
 			FocTestLabelMap map = testLabelArray.get(i);
 			FocInstrument instr = (FocInstrument) map.getPropertyObject("instrument");
-			Globals.logDetail("Instr in order ("+i+"): "+instr.getPropertyString("code"));
+			if (instr != null) {
+				Globals.logDetail("Instr in order (" + i + "): " + instr.getPropertyString("code"));
+			} else {
+				Globals.logDetail("Instr in order (" + i + "): IS NULL !!" );
+			}
 		}
 	}
 }

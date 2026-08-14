@@ -10,10 +10,11 @@ void main() async {
   // Initialize the instrument service with authentication
   Config.appName = "Labotron";
   Config.appIcon = Icons.local_hospital;
+  Config.seedColor = const Color(0xFF00695C); // clinical teal brand color
   Config.menuItems = const [
     Menu(Icons.science, "Instruments", "/instruments", "instrument",
         widgetClassName: "InstrumentListView"),
-    Menu(Icons.science, "TestLabelMaps", "/test_label_maps", "test_label_map"),
+    Menu(Icons.science, "Test Mapping", "/test_label_maps", "test_label_map"),
     Menu(Icons.flutter_dash, "Samples", "/lab_samples", "lab_sample"),
     // Menu(Icons.label, "Tests", "/lab_tests", "lab_test"),
     Menu(Icons.label, "Communication Logs", "/communication_logs",

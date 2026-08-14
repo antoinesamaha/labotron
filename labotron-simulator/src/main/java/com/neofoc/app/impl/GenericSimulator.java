@@ -95,7 +95,21 @@ public class GenericSimulator extends AbstractSimulator {
         "6R|11|^^^Lac|1.5|mmol/L",
         "7R|12|^^^Hct|42|%",
         "0L|1"
-    };    
+    };
+
+    // Maglumi: instrument is TCP server on port 6100. It sits idle until Labotron
+    // connects and sends ENQ with the sample order, then pushes back the results.
+    // Test codes are 3 chars (MaglumiDriver.setTestCodeLength(3)).
+    public final static String[] MAGLUMI_FRAMES = {
+        RECEIVE,
+        "1H|\\^&|||MAGLUMI^V1.0^12345^^^1.00|||||||||20260809120000",
+        "2P|1||123123||Doe^John||19850315|M",
+        "3O|1|123123|123123^^^^S1^SC|||||||||||||SERUM||||||||F",
+        "4R|1|^^^001|12.5|IU/mL|||N||admin||20260809120100",
+        "5R|2|^^^002|3.4|ng/mL|||N||admin||20260809120100",
+        "6R|3|^^^003|45.6|mIU/mL|||N||admin||20260809120100",
+        "0L|1|N"
+    };
 
     // ---------------------------------------------------------------
 

@@ -62,6 +62,7 @@ public class ConnectorServiceImpl implements ConnectorService {
                         instrumentSample.setFirstName(sampleFromLis.getFirstName());
                         instrumentSample.setLastName(sampleFromLis.getLastName());
                         instrumentSample.setMiddleInitial(sampleFromLis.getMiddleInitial());
+                        instrumentSample.getFormattedPatientName();
                         instrumentSample.setDateOfBirth(sampleFromLis.getDateOfBirth());
                         instrumentSample.setSex(sampleFromLis.getSex());
                         instrumentSample.setCurrentDateTime(sampleFromLis.getCurrentDateTime());

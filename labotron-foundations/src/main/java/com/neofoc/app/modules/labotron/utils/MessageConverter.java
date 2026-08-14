@@ -2,6 +2,7 @@ package com.neofoc.app.modules.labotron.utils;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.foc.Globals;
 import com.foc.list.FocList;
 import com.neofoc.app.modules.labotron.focObjects.FocLabSample;
 import com.neofoc.app.modules.labotron.focObjects.FocLabTest;
@@ -34,90 +35,105 @@ public class MessageConverter {
             L3Message l3Message = new L3Message();
 
             // Create and add sample
-            String sampleId = rootNode.has("sampleId") ? rootNode.get("sampleId").asText() : "";
+            String sampleId = rootNode.has("P_SAMPLE_ID") ? rootNode.get("P_SAMPLE_ID").asText() : "";
             FocLabSample sample = new FocLabSample(sampleId);
             l3Message.addSample(sample);
 
             // Set sample type
-            if (rootNode.has("sampleType")) {
-                String sampleType = rootNode.get("sampleType").asText();
+            if (rootNode.has("SAMPLE_TYPE")) {
+                String sampleType = rootNode.get("SAMPLE_TYPE").asText();
                 int liquidType = mapSampleTypeToLiquidType(sampleType);
                 sample.setPropertyMultiChoice("liquid_type", liquidType);
             }
 
             // Set patient information
-            if (rootNode.has("patientId")) {
-                sample.setPropertyString("patient_id", rootNode.get("patientId").asText());
+            if (rootNode.has("PATIENT_ID")) {
+                sample.setPropertyString("patient_id", rootNode.get("PATIENT_ID").asText());
             }
 
-            if (rootNode.has("firstName")) {
-                sample.setPropertyString("first_name", rootNode.get("firstName").asText());
+            if (rootNode.has("FIRST_NAME")) {
+                sample.setPropertyString("first_name", rootNode.get("FIRST_NAME").asText());
             }
 
-            if (rootNode.has("lastName")) {
-                sample.setPropertyString("last_name", rootNode.get("lastName").asText());
+            if (rootNode.has("LAST_NAME")) {
+                sample.setPropertyString("last_name", rootNode.get("LAST_NAME").asText());
             }
 
-            if (rootNode.has("middleInitial")) {
-                sample.setPropertyString("middle_name", rootNode.get("middleInitial").asText());
+            if (rootNode.has("MIDDLE_INITIAL")) {
+                sample.setPropertyString("middle_name", rootNode.get("MIDDLE_INITIAL").asText());
             }
 
             // Set dates
-            if (rootNode.has("dateOfBirth")) {
+            if (rootNode.has("DATE_OF_BIRTH")) {
+                String dobString = null;
                 try {
-                    String dobString = rootNode.get("dateOfBirth").asText();
+                    dobString = rootNode.get("DATE_OF_BIRTH").asText();
                     Date dob = parseDate(dobString);
                     sample.setPropertyDate("date_of_birth", new java.sql.Date(dob.getTime()));
                 } catch (ParseException e) {
-                    // Handle date parsing error
+                    if (dobString != null) {
+                        Globals.logString("Could not parse DATE_OF_BIRTH " + dobString);
+                    } else {
+                        Globals.logString("Could not parse DATE_OF_BIRTH Null");
+                    }
                 }
             }
 
-            if (rootNode.has("currentDateTime")) {
+            if (rootNode.has("CURRENT_DATE_TIME")) {
+                String dateTimeString = null;
                 try {
-                    String dateTimeString = rootNode.get("currentDateTime").asText();
+                    dateTimeString = rootNode.get("CURRENT_DATE_TIME").asText();
                     Date currentDate = parseDateWithTime(dateTimeString);
                     sample.setPropertyDate("entry_date", new java.sql.Date(currentDate.getTime()));
                 } catch (ParseException e) {
-                    // Handle date parsing error
+                    if (dateTimeString != null) {
+                        Globals.logString("Could not parse CURRENT_DATE_TIME " + dateTimeString);
+                    } else {
+                        Globals.logString("Could not parse CURRENT_DATE_TIME Null");
+                    }
                 }
             }
 
-            if (rootNode.has("collectionDate")) {
+            if (rootNode.has("COLLECTION_DATE")) {
+                String collectionDateString = null;
                 try {
-                    String collectionDateString = rootNode.get("collectionDate").asText();
+                    collectionDateString = rootNode.get("COLLECTION_DATE").asText();
                     Date collectionDate = parseDate(collectionDateString);
                     sample.setPropertyDate("collection_date", new java.sql.Date(collectionDate.getTime()));
                 } catch (ParseException e) {
-                    // Handle date parsing error
+                    if (collectionDateString != null) {
+                        Globals.logString("Could not parse COLLECTION_DATE " + collectionDateString);
+                    } else {
+                        Globals.logString("Could not parse COLLECTION_DATE Null");
+                    }
                 }
             }
 
             // Set gender/sex
-            if (rootNode.has("sex")) {
-                String sex = rootNode.get("sex").asText();
+            if (rootNode.has("GENDER")) {
+                String sex = rootNode.get("GENDER").asText();
                 sample.setPropertyString("sex", sex);
             }
 
             // Set origin
-            if (rootNode.has("origin")) {
-                sample.setPropertyString("origin", rootNode.get("origin").asText());
+            if (rootNode.has("ORIGIN")) {
+                sample.setPropertyString("origin", rootNode.get("ORIGIN").asText());
             }
 
             // Add the test to the sample
             FocList testList = sample.getTestList();
 
             // Add tests
-            if (rootNode.has("tests") && rootNode.get("tests").isArray()) {
-                for (JsonNode testNode : rootNode.get("tests")) {
+            if (rootNode.has("LISTEST") && rootNode.get("LISTEST").isArray()) {
+                for (JsonNode testNode : rootNode.get("LISTEST")) {
                     String testCode = null;
-                    if (testNode.has("testCode")) {
-                        testCode = testNode.get("testCode").asText();
+                    if (testNode.has("TEST_CODE")) {
+                        testCode = testNode.get("TEST_CODE").asText();
                     }
                     FocLabTest test = new FocLabTest(testCode);
 
-                    if (testNode.has("testDesc")) {
-                        test.setPropertyString("test_label", testNode.get("testDesc").asText());
+                    if (testNode.has("TEST_DESC")) {
+                        test.setPropertyString("test_label", testNode.get("TEST_DESC").asText());
                     }
                     
                     // Add the test to the sample
@@ -161,19 +177,25 @@ public class MessageConverter {
     }
     
     /**
-     * Parse date string in format DD/MM/YYYY
+     * Parse date string in format DD/MM/YYYY, falling back to ISO (yyyy-MM-dd)
      */
     private static Date parseDate(String dateString) throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        return sdf.parse(dateString);
+        try {
+            return new SimpleDateFormat("dd/MM/yyyy").parse(dateString);
+        } catch (ParseException e) {
+            return new SimpleDateFormat("yyyy-MM-dd").parse(dateString);
+        }
     }
-    
+
     /**
-     * Parse date and time string in format DD/MM/YYYY HH:mm:ss
+     * Parse date and time string in format DD/MM/YYYY HH:mm:ss, falling back to ISO (yyyy-MM-dd'T'HH:mm:ss)
      */
     private static Date parseDateWithTime(String dateTimeString) throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        return sdf.parse(dateTimeString);
+        try {
+            return new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(dateTimeString);
+        } catch (ParseException e) {
+            return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(dateTimeString);
+        }
     }
 
     /**

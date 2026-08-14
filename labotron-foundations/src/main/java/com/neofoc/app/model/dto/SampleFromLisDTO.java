@@ -1,7 +1,6 @@
 package com.neofoc.app.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -27,13 +26,13 @@ public class SampleFromLisDTO {
     @JsonProperty("PATIENT_NAME")
     private String patientName;
 
-    @JsonIgnore
+    @JsonProperty("FIRST_NAME")
     private String firstName;
 
-    @JsonIgnore
+    @JsonProperty("LAST_NAME")
     private String lastName;
 
-    @JsonIgnore
+    @JsonProperty("MIDDLE_INITIAL")
     private String middleInitial;
 
     //@JsonFormat(pattern = "yyyy-MM-dd")

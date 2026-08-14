@@ -1,3 +1,38 @@
+Maglumi Sample
+```
+{
+    "AGE":"79",
+    "GENDER": "F",
+    "ORIGIN": "OUT",
+    "LISTEST": [
+        {
+            "UNIT":"",
+            "ALARM":"",
+            "NOTES":"",
+            "RESULT":"",
+            "SEQ_ID":"41078230",
+            "STATUS":"0",
+            "MESSAGE":"",
+            "PRIORITY":"R",
+            "DATE_READ":"23/03/2026",
+            "SAMPLE_ID":"5746971",
+            "TEST_CODE": "1088",
+            "TEST_DESC": "Aldosterone, serum:",
+            "ANALYZER_CODE": "",
+            "ACTUAL_ANALYZER_CODE":"",
+            "VERIFICATION_PENDING": ""
+        }
+    ],        
+    "PATIENT_ID": "471575",
+    "P_SAMPLE_ID": "5746971",        
+    "SAMPLE_TYPE": "SER",    
+    "PATIENT_NAME": "Dora H Jelissian",
+    "DATE_OF_BIRTH": "19/03/1946",
+    "COLLECTION_DATE": "23/03/2026",        
+    "CURRENT_DATE_TIME": "23/03/2026"
+}
+```
+
 ```
 {
     "P_SAMPLE_ID": "5647687",
