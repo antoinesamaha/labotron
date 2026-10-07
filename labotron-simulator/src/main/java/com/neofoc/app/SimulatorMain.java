@@ -7,7 +7,7 @@ public class SimulatorMain implements Constants {
 
     public static void main(String[] args) {
         // MAGLUMI Server
-        GenericSimulator simulator = new GenericSimulator(6100, GenericSimulator.SocketRole.CLIENT, GenericSimulator.MAGLUMI_FRAMES);
+        GenericSimulator simulator = new GenericSimulator(6100, GenericSimulator.SocketRole.CLIENT, GenericSimulator.MAGLUMI_FRAMES, true);
 
         // GEM3500 Server
         //GenericSimulator simulator = new GenericSimulator(1182, GenericSimulator.SocketRole.SERVER, GenericSimulator.GEM_PREMIER_3500_FRAMES);

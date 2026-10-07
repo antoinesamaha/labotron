@@ -113,7 +113,61 @@ public abstract class AbstractSimulator implements ISimulator, Constants {
         socket.setSendingMode(false);
     }
 
+    /**
+     * Sends the whole message as ONE ASTM frame: every record concatenated and
+     * separated by CR inside a single [STX]...[ETX] envelope.
+     *
+     *   ENQ -> [STX]1H|...[CR]P|1[CR]O|...[CR]R|...[CR]L|1|N[CR][ETX][CS][CS][CR][LF] -> EOT
+     *
+     * Some analyzers (Maglumi) answer this way instead of one frame per record.
+     * The frame strings passed here must NOT carry a leading sequence digit:
+     * the single frame is always sequence 1.
+     */
+    public void sendingConcatenatedFrame(String[] frames, boolean addChecksum) {
+        socket.setSendingMode(true);
+
+        try {
+            socket.send("" + ENQ);
+            waitForAckOrNack("Initial ENQ response: ");
+
+            StringBuffer concatenated = new StringBuffer("");
+            for (int i = 0; i < frames.length; i++) {
+                if (i > 0) concatenated.append(CR);
+                concatenated.append(frames[i]);
+            }
+
+            System.out.println("Sending concatenated frame: " + concatenated);
+            socket.send(createDataWithFrame(concatenated.toString(), addChecksum).toString());
+            sleep(100);
+            waitForAckOrNack("Concatenated frame response: ");
+
+            socket.send("" + EOT);
+
+        } catch (Exception e) {
+            System.out.println("Client error: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        socket.setSendingMode(false);
+    }
+
+    /** Blocks until the peer answers ACK or NACK. */
+    private void waitForAckOrNack(String logPrefix) {
+        boolean waiting = true;
+        while (waiting) {
+            char resp = readResponseChar();
+            if (resp == ACK || resp == NACK) {
+                waiting = false;
+                System.out.println(logPrefix + resp);
+            }
+        }
+    }
+
     public StringBuffer createDataWithFrame(String data) {
+        return createDataWithFrame(data, true);
+    }
+
+    public StringBuffer createDataWithFrame(String data, boolean addChecksum) {
         StringBuffer buffer = new StringBuffer();
 
         buffer.append(STX);
@@ -124,10 +178,13 @@ public abstract class AbstractSimulator implements ISimulator, Constants {
         char[] checkSum = computeChecksum(bufferForChecksum);
 
         buffer.append(bufferForChecksum);
-        buffer.append(checkSum[0]);
-        buffer.append(checkSum[1]);
-        buffer.append(CR);
-        buffer.append(LF);
+        if (addChecksum) {
+            buffer.append(checkSum[0]);
+            buffer.append(checkSum[1]);
+            buffer.append(CR);
+            buffer.append(LF);
+        }
+        // else: bare frame [STX]...[CR][ETX] as the real Maglumi sends it
 
         return buffer;
     }

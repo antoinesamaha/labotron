@@ -24,6 +24,16 @@ import java.util.List;
  *
  * Pass null (or empty array) for frames to operate as a pure slave (ACK everything).
  *
+ * Concatenated mode
+ * -----------------
+ * Pass concatenateFrames = true for analyzers (Maglumi) that answer with the whole
+ * message inside a SINGLE ASTM frame instead of one frame per record:
+ *
+ *   ENQ -> [STX]1H|...[CR]P|1[CR]O|...[CR]R|...[CR]L|1|N[CR][ETX][CS][CS][CR][LF] -> EOT
+ *
+ * In that mode the frame strings must NOT start with a sequence digit — the whole
+ * block is sequence 1. Driver side this matches AstmParams.setConcatenatedFrames(true).
+ *
  * Example — inquiry then receive orders then send results:
  *
  *   String[] frames = {
@@ -97,36 +107,54 @@ public class GenericSimulator extends AbstractSimulator {
         "0L|1"
     };
 
-    // Maglumi: instrument is TCP server on port 6100. It sits idle until Labotron
-    // connects and sends ENQ with the sample order, then pushes back the results.
+    // Maglumi: instrument is TCP server on port 6100. It pushes its results without
+    // waiting for an order (as seen on site). Put RECEIVE first to test the order flow.
     // Test codes are 3 chars (MaglumiDriver.setTestCodeLength(3)).
+    // Results come back as ONE concatenated frame -> run with concatenateFrames = true,
+    // hence no leading sequence digit on the records below.
     public final static String[] MAGLUMI_FRAMES = {
-        RECEIVE,
-        "1H|\\^&|||MAGLUMI^V1.0^12345^^^1.00|||||||||20260809120000",
-        "2P|1||123123||Doe^John||19850315|M",
-        "3O|1|123123|123123^^^^S1^SC|||||||||||||SERUM||||||||F",
-        "4R|1|^^^001|12.5|IU/mL|||N||admin||20260809120100",
-        "5R|2|^^^002|3.4|ng/mL|||N||admin||20260809120100",
-        "6R|3|^^^003|45.6|mIU/mL|||N||admin||20260809120100",
-        "0L|1|N"
+//        "1H|\\^&|||MAGLUMI^V1.0^12345^^^1.00|||||||||20260809120000",
+//        "2P|1||123123||Doe^John||19850315|M",
+//        "3O|1|123123|123123^^^^S1^SC|||||||||||||SERUM||||||||F",
+//        "4R|1|^^^001|12.5|IU/mL|||N||admin||20260809120100",
+//        "5R|2|^^^002|3.4|ng/mL|||N||admin||20260809120100",
+//        "6R|3|^^^003|45.6|mIU/mL|||N||admin||20260809120100",
+//        "0L|1|N",
+        "H|\\^&||PSWD|Maglumi User|||||Lis||P|E1394-97|20260814",
+        "P|1",
+        "O|1|NAELISALLEMMOUS||^^^17a-OH P",
+        "R|1|^^^17a-OH P|2.01|ng/mL|0 to 16.71|N||||||20260717110707",
+        "L|1|N"
     };
 
+    // [STX]H|\^&||PSWD|Maglumi[.]User|||||Lis||P|E1394-97|20260814[CR]P|1[CR]O|1|NAELISALLEMMOUS||^^^17a-OH[.]P[CR]R|1|^^^17a-OH[.]P|2.01|ng/mL|0[.]to[.]16.71|N||||||20260717110707[CR]L|1|N[CR][ETX][EOT]
+    //[STX]1H|\^&||PSWD|Maglumi[.]User|||||Lis||P|E1394-97|20260814[CR]P|1[CR]O|1|NAELISALLEMMOUS||^^^17a-OH[.]P[CR]R|1|^^^17a-OH[.]P|2.01|ng/mL|0[.]to[.]16.71|N||||||20260717110707[CR]L|1|N[CR][ETX]75[CR][LF]
     // ---------------------------------------------------------------
 
     private final int port;
     private final SocketRole role;
     private final String host;
     private final String[] frames;
+    private final boolean concatenateFrames;
 
     public GenericSimulator(int port, SocketRole role, String[] frames) {
-        this(port, role, "localhost", frames);
+        this(port, role, "localhost", frames, false);
     }
 
     public GenericSimulator(int port, SocketRole role, String host, String[] frames) {
+        this(port, role, host, frames, false);
+    }
+
+    public GenericSimulator(int port, SocketRole role, String[] frames, boolean concatenateFrames) {
+        this(port, role, "localhost", frames, concatenateFrames);
+    }
+
+    public GenericSimulator(int port, SocketRole role, String host, String[] frames, boolean concatenateFrames) {
         this.port = port;
         this.role = role;
         this.host = host;
         this.frames = frames;
+        this.concatenateFrames = concatenateFrames;
     }
 
     @Override
@@ -217,6 +245,8 @@ public class GenericSimulator extends AbstractSimulator {
             if (!isConnected()) break;
             if (RECEIVE.equals(action)) {
                 receiveOneSession();
+            } else if (concatenateFrames) {
+                sendingConcatenatedFrame((String[]) action, false);//For Maglumi
             } else {
                 sendingFrames((String[]) action);
             }
@@ -242,8 +272,8 @@ public class GenericSimulator extends AbstractSimulator {
                 sleep(100);
                 continue;
             }
-            char first = received.charAt(0);
-            if (first == Constants.EOT) {
+            // EOT may arrive in the same read as the last frame
+            if (received.indexOf(Constants.EOT) >= 0) {
                 System.out.println("GenericSimulator: received EOT — Labotron session ended");
                 return;
             }

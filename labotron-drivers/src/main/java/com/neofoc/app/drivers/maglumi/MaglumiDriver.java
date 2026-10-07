@@ -31,5 +31,10 @@ public class MaglumiDriver extends AstmDriver {
         super.init(instrument, props);
     }
 
+    @Override
+    protected void initAnswerFrame() {
+        getL3SerialPort().setAnswerFrame(new MaglumiFrame(getInstrument()));
+    }
+
 }
 
