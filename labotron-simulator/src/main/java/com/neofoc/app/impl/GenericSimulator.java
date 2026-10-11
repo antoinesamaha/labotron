@@ -275,6 +275,9 @@ public class GenericSimulator extends AbstractSimulator {
             // EOT may arrive in the same read as the last frame
             if (received.indexOf(Constants.EOT) >= 0) {
                 System.out.println("GenericSimulator: received EOT — Labotron session ended");
+                if (concatenateFrames) {
+                    socket.send("" + Constants.ACK);// Maglumi ACKs the EOT too
+                }
                 return;
             }
             sleep(100);

@@ -3,10 +3,111 @@ package com.neofoc.app.drivers.maglumi;
 import com.neofoc.app.drivers.astm.AstmDriver;
 import com.neofoc.app.drivers.astm.AstmFrame;
 import com.neofoc.app.drivers.astm.AstmFrameCreator;
+import com.neofoc.app.modules.labotron.focObjects.FocInstrument;
+import com.neofoc.app.modules.labotron.focObjects.FocLabSample;
+import com.neofoc.app.modules.labotron.focObjects.FocLabTest;
+import com.neofoc.app.modules.labotron.focObjects.L3Message;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Iterator;
+
+/**
+ * Builds the records as described in the Maglumi "Specification of LIS interface" (B.5, B.6.2):
+ *
+ *   H|\^&||PSWD|Maglumi 4000 Plus|||||Lis||P|E1394-97|20100319
+ *   P|1||||Last^First^M|||F
+ *   O|1|1234567||^^^CA125|R
+ *   O|2|1234567||^^^CA153|R
+ *   L|1|N
+ *
+ * Only the records are built here (no ENQ / EOT), MaglumiDriver.sendFramesArray() sends them.
+ */
 public class MaglumiFrameCreator extends AstmFrameCreator {
 
     private static final int FRAME_SIZE = 240;
+
+    @Override
+    public void buildFrameArray(AstmDriver driver, L3Message message, boolean fromDriver) throws Exception {
+        resetSequence();
+        FocInstrument instrument = driver.getInstrument();
+
+        driver.addFrame(newHeaderFrame(instrument, getNextSequence()));
+
+        int sampleSequence = 1;
+        Iterator sIter = message.sampleIterator();
+        while (sIter != null && sIter.hasNext()) {
+            FocLabSample sam = (FocLabSample) sIter.next();
+            if (sam != null) {
+                driver.addFrame(newMaglumiPatientFrame(instrument, sampleSequence, sam));
+
+                int testSequence = 1;
+                Iterator tIter = sam.testIterator();
+                while (tIter != null && tIter.hasNext()) {
+                    FocLabTest test = (FocLabTest) tIter.next();
+                    if (test != null) {
+                        String instrCode = driver.testMaps_getInstCode(test.getLabel());
+                        driver.addFrame(newMaglumiOrderFrame(instrument, testSequence, sam.getSampleId(), instrCode, test.getPriority()));
+                        testSequence++;
+                    }
+                }
+                sampleSequence++;
+            }
+        }
+
+        AstmFrame frame = newLastFrame(instrument, getNextSequence(), 1);
+        frame.append2Data(AstmFrame.FIELD_SEPERATOR);
+        frame.append2Data('N');
+        driver.addFrame(frame);
+    }
+
+    @Override
+    public AstmFrame newHeaderFrame(FocInstrument instrument, int sequence) {
+        AstmFrame frame = new AstmFrame(instrument, sequence, AstmFrame.FRAME_TYPE_HEADER);
+        frame.append2Data("|\\^&||PSWD|Maglumi 4000 Plus|||||Lis||P|E1394-97|");
+        frame.append2Data(new SimpleDateFormat("yyyyMMdd").format(new Date()));
+        return frame;
+    }
+
+    protected AstmFrame newMaglumiPatientFrame(FocInstrument instrument, int sequenceNum, FocLabSample sam) {
+        AstmFrame frame = new AstmFrame(instrument, 0, AstmFrame.FRAME_TYPE_PATIENT);
+        frame.append2Data(AstmFrame.FIELD_SEPERATOR);
+        frame.append2Data(String.valueOf(sequenceNum));
+        // Field 6: patient name (max 30)
+        frame.append2Data("||||");
+        StringBuffer name = new StringBuffer();
+        if (sam.getLastName() != null) name.append(sam.getLastName());
+        name.append(AstmFrame.COMPONENT_DELIMITER);
+        if (sam.getFirstName() != null) name.append(sam.getFirstName());
+        if (sam.getMiddleName() != null && !sam.getMiddleName().isEmpty()) {
+            name.append(AstmFrame.COMPONENT_DELIMITER);
+            name.append(sam.getMiddleName());
+        }
+        frame.append2Data(name.toString(), 30);
+        // Field 9: sex M, F, U
+        frame.append2Data("|||");
+        String sex = sam.getSex();
+        if (sex != null && (sex.equals("M") || sex.equals("F"))) {
+            frame.append2Data(sex);
+        } else {
+            frame.append2Data('U');
+        }
+        return frame;
+    }
+
+    protected AstmFrame newMaglumiOrderFrame(FocInstrument instrument, int sequenceNum, String sampleId, String instrCode, String priority) throws Exception {
+        AstmFrame frame = new AstmFrame(instrument, 0, AstmFrame.FRAME_TYPE_ORDER);
+        frame.append2Data(AstmFrame.FIELD_SEPERATOR);
+        frame.append2Data(String.valueOf(sequenceNum));
+        frame.append2Data(AstmFrame.FIELD_SEPERATOR);
+        frame.append2Data(sampleId, 22);
+        frame.append2Data("||");
+        appendASingleTest(frame, instrCode, getTestCodeLength(instrument));
+        frame.append2Data(AstmFrame.FIELD_SEPERATOR);
+        // Priority is required: S = emergency, R = routine
+        frame.append2Data("S".equals(priority) ? "S" : "R");
+        return frame;
+    }
 
     protected void addAndSplitDataFrame(AstmDriver driver, AstmFrame frame) {
         AstmFrame remainingFrame = frame;

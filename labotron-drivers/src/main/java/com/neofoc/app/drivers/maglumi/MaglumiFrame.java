@@ -1,18 +1,28 @@
 package com.neofoc.app.drivers.maglumi;
 
+import com.foc.Globals;
 import com.neofoc.app.drivers.astm.AstmFrame;
 import com.neofoc.app.modules.labotron.focObjects.FocInstrument;
 
 /**
- * The Maglumi sends its results as one bare frame, without frame number, checksum nor CR LF:
+ * The Maglumi does not use the ASTM E1381 framing (no frame number, checksum nor CR LF).
+ * Per its "Specification of LIS interface" (B.3, B.6) a message is:
  *
- *   [STX]H|...[CR]P|1[CR]O|...[CR]R|...[CR]L|1|N[CR][ETX][EOT]
+ *   <ENQ>  ACK
+ *   <STX>  ACK
+ *   H|...<CR>P|1<CR>O|...<CR>R|...<CR>L|1|N<CR>  ACK
+ *   <ETX>  ACK
+ *   <EOT>  ACK
  *
- * The base AstmFrame only extracts STX...LF frames and, on EOT, drops the whole buffer,
- * so the results were lost. This frame accepts STX...ETX (or ETB) and delegates every
- * other case (ENQ, ACK, NACK, EOT, standard frames) to AstmFrame.
+ * Each step is extracted here as its own frame so that it gets ACKed. Some instruments send
+ * the whole [STX]...[ETX] in one go: that case is extracted as a single frame.
+ * The STX / ETX / content frames are all FRAME_TYPE_CONTINUITY: the AstmReceiver concatenates
+ * their data and parses the records on EOT.
  */
 public class MaglumiFrame extends AstmFrame {
+
+    // Set when the extracted frame is the records block (H...L) received without STX / ETX
+    private boolean contentBlock = false;
 
     public MaglumiFrame(FocInstrument instrument) {
         super(instrument);
@@ -21,49 +31,111 @@ public class MaglumiFrame extends AstmFrame {
     @Override
     public boolean extractAnswerFromBuffer(StringBuffer buffer) {
         setDoNotAnswerThatFrameBecauseReceivedAnotherMessage(false);
+        contentBlock = false;
+        if (buffer.length() == 0) {
+            return false;
+        }
         String str = buffer.toString();
+        char first = str.charAt(0);
 
-        int sIdx = str.indexOf(STX);
-        if (sIdx >= 0 && !hasControlCharBefore(str, sIdx)) {
-            int eIdx = indexOfFrameEnd(str, sIdx);
-            if (eIdx > sIdx) {
-                // If a standard trailer [CS][CS][CR][LF] follows, consume it too
+        boolean extracted = false;
+        if (first == STX) {
+            int eIdx = indexOfFrameEnd(str, 0);
+            if (eIdx > 0 && !hasControlCharBetween(str, 1, eIdx)) {
+                // Whole [STX]...[ETX] in the buffer. If a standard trailer [CS][CS][CR][LF] follows, consume it too
                 int consumeTo = eIdx;
                 int lfIdx = str.indexOf(LF, eIdx);
                 if (lfIdx > 0 && lfIdx <= eIdx + 4) {
                     consumeTo = lfIdx;
                 }
-                setDataWithFrame(new StringBuffer(str.substring(sIdx, eIdx + 1)));
+                setDataWithFrame(new StringBuffer(str.substring(0, eIdx + 1)));
                 buffer.replace(0, consumeTo + 1, "");
-                // e.g. [ETX][EOT] in the same read: do not ACK, the EOT will be handled next
-                setDoNotAnswerThatFrameBecauseReceivedAnotherMessage(buffer.length() > 0);
-                return true;
+            } else {
+                // Lone STX: the Maglumi waits for an ACK before sending the records
+                setDataWithFrame(new StringBuffer(String.valueOf(STX)));
+                buffer.replace(0, 1, "");
+            }
+            extracted = true;
+        } else if (first == ETX || first == ENQ || first == ACK || first == NACK || first == EOT) {
+            setDataWithFrame(new StringBuffer(String.valueOf(first)));
+            buffer.replace(0, 1, "");
+            if (first == ENQ) {
+                while (buffer.length() > 0 && buffer.charAt(0) == ENQ) {
+                    buffer.replace(0, 1, "");
+                }
+            }
+            extracted = true;
+        } else {
+            // Records block: complete when the L record is terminated by CR, or when ETX arrives
+            int ctrlIdx = indexOfControlChar(str);
+            int endIdx = indexOfLastRecordEnd(str);
+            if (endIdx >= 0 && (ctrlIdx < 0 || endIdx < ctrlIdx)) {
+                setDataWithFrame(new StringBuffer(str.substring(0, endIdx + 1)));
+                buffer.replace(0, endIdx + 1, "");
+                contentBlock = true;
+                extracted = true;
+            } else if (ctrlIdx >= 0 && str.charAt(ctrlIdx) == ETX && ctrlIdx > 0) {
+                setDataWithFrame(new StringBuffer(str.substring(0, ctrlIdx)));
+                buffer.replace(0, ctrlIdx, "");
+                contentBlock = true;
+                extracted = true;
+            } else if (ctrlIdx > 0) {
+                // Text that does not belong to a message (ex: checksum trailer), drop it
+                Globals.logString("Maglumi dropping unexpected characters: " + str.substring(0, ctrlIdx));
+                buffer.replace(0, ctrlIdx, "");
+                return extractAnswerFromBuffer(buffer);
             }
         }
 
-        if (str.isEmpty()) {
-            return false;
+        if (extracted && buffer.length() > 0) {
+            // Something else is already in the buffer: do not answer this one, the next is handled right after
+            setDoNotAnswerThatFrameBecauseReceivedAnotherMessage(true);
         }
-        return super.extractAnswerFromBuffer(buffer);
+        return extracted;
     }
 
     @Override
     public void extractDataFromFrame() throws Exception {
         StringBuffer dataWithFrame = getDataWithFrame();
         String str = dataWithFrame != null ? dataWithFrame.toString() : "";
-        int eIdx = str.startsWith(String.valueOf(STX)) ? indexOfFrameEnd(str, 0) : -1;
-        if (eIdx > 0) {
+
+        if (contentBlock) {
+            setBareData(str);
+        } else if (str.equals(String.valueOf(STX)) || str.equals(String.valueOf(ETX))) {
+            setBareData("");
+        } else if (str.length() > 1 && str.charAt(0) == STX) {
+            int eIdx = indexOfFrameEnd(str, 0);
             int start = 1;
             // Tolerate a frame number if the instrument ever sends one
             if (str.length() > 2 && Character.isDigit(str.charAt(1))) {
                 start = 2;
             }
-            setData(new StringBuffer(str.substring(start, eIdx)));
-            setType(FRAME_TYPE_CONTINUITY);
-            setSequence(SEQUENCE_IRRELEVANT);
+            setBareData(eIdx > start ? str.substring(start, eIdx) : "");
         } else {
             super.extractDataFromFrame();
         }
+    }
+
+    private void setBareData(String data) {
+        setData(new StringBuffer(data));
+        setType(FRAME_TYPE_CONTINUITY);
+        setSequence(SEQUENCE_IRRELEVANT);
+    }
+
+    // Index of the CR ending the L record, -1 if not received yet
+    private int indexOfLastRecordEnd(String str) {
+        int lineStart = 0;
+        while (lineStart < str.length()) {
+            int cr = str.indexOf(CR, lineStart);
+            if (cr < 0) {
+                return -1;
+            }
+            if (str.charAt(lineStart) == 'L' && lineStart + 1 < str.length() && str.charAt(lineStart + 1) == FIELD_SEPERATOR) {
+                return cr;
+            }
+            lineStart = cr + 1;
+        }
+        return -1;
     }
 
     private int indexOfFrameEnd(String str, int fromIdx) {
@@ -74,13 +146,26 @@ public class MaglumiFrame extends AstmFrame {
         return Math.min(etx, etb);
     }
 
-    private boolean hasControlCharBefore(String str, int idx) {
-        for (int i = 0; i < idx; i++) {
+    private int indexOfControlChar(String str) {
+        for (int i = 0; i < str.length(); i++) {
+            if (isControlChar(str.charAt(i))) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private boolean hasControlCharBetween(String str, int from, int to) {
+        for (int i = from; i < to; i++) {
             char c = str.charAt(i);
-            if (c == ENQ || c == ACK || c == NACK || c == EOT) {
+            if (c == ENQ || c == ACK || c == NACK || c == EOT || c == STX) {
                 return true;
             }
         }
         return false;
+    }
+
+    private boolean isControlChar(char c) {
+        return c == STX || c == ETX || c == ETB || c == ENQ || c == ACK || c == NACK || c == EOT;
     }
 }

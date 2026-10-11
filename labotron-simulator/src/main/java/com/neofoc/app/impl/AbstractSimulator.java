@@ -136,12 +136,26 @@ public abstract class AbstractSimulator implements ISimulator, Constants {
                 concatenated.append(frames[i]);
             }
 
-            System.out.println("Sending concatenated frame: " + concatenated);
-            socket.send(createDataWithFrame(concatenated.toString(), addChecksum).toString());
-            sleep(100);
-            waitForAckOrNack("Concatenated frame response: ");
+            if (addChecksum) {
+                System.out.println("Sending concatenated frame: " + concatenated);
+                socket.send(createDataWithFrame(concatenated.toString(), addChecksum).toString());
+                sleep(100);
+                waitForAckOrNack("Concatenated frame response: ");
 
-            socket.send("" + EOT);
+                socket.send("" + EOT);
+            } else {
+                // Maglumi specification (B.6.3): STX, records, ETX and EOT are each ACKed
+                socket.send("" + STX);
+                waitForAckOrNack("STX response: ");
+                concatenated.append(CR);
+                System.out.println("Sending records: " + concatenated);
+                socket.send(concatenated.toString());
+                waitForAckOrNack("Records response: ");
+                socket.send("" + ETX);
+                waitForAckOrNack("ETX response: ");
+                socket.send("" + EOT);
+                waitForAckOrNack("EOT response: ");
+            }
 
         } catch (Exception e) {
             System.out.println("Client error: " + e.getMessage());
