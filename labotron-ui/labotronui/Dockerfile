@@ -12,8 +12,8 @@ WORKDIR /workspace/labotron/labotron-ui/labotronui
 # Install dependencies
 RUN flutter pub get
 
-# Build the web app
-RUN flutter build web --release
+# Build the web app (serve CanvasKit locally instead of from www.gstatic.com - target network has no internet)
+RUN flutter build web --release --no-web-resources-cdn
 
 # Production stage with nginx
 FROM nginx:1.27.4-alpine

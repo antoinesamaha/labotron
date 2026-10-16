@@ -35,3 +35,17 @@ flutter:
     - assets/images/
     - assets/images/logo.png    
     - assets/forms/
+
+  # Bundle Roboto so Flutter web does not fetch it from fonts.gstatic.com (offline LAN deployments)
+  fonts:
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Roboto-Regular.ttf
+        - asset: assets/fonts/Roboto-Italic.ttf
+          style: italic
+        - asset: assets/fonts/Roboto-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Roboto-Bold.ttf
+          weight: 700
